@@ -1,0 +1,62 @@
+[
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\dialog_reset_pin.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-main-55:\\layout\\dialog_reset_pin.xml"
+    },
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\fragment_settings.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-main-55:\\layout\\fragment_settings.xml"
+    },
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\fragment_splash.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-main-55:\\layout\\fragment_splash.xml"
+    },
+    {
+        "merged": "com.example.spendwise.app-mergeDebugResources-52:/layout/widget_quick_add.xml",
+        "source": "com.example.spendwise.app-main-55:/layout/widget_quick_add.xml"
+    },
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\fragment_add_expense.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-main-55:\\layout\\fragment_add_expense.xml"
+    },
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\fragment_home.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-main-55:\\layout\\fragment_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\item_category.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-main-55:\\layout\\item_category.xml"
+    },
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\fragment_history.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-main-55:\\layout\\fragment_history.xml"
+    },
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\activity_main.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-main-55:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\widget_quick_add.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-main-55:\\layout\\widget_quick_add.xml"
+    },
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\fragment_setup_pin.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-main-55:\\layout\\fragment_setup_pin.xml"
+    },
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\item_expense.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-main-55:\\layout\\item_expense.xml"
+    },
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\item_month_summary.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-main-55:\\layout\\item_month_summary.xml"
+    },
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\fragment_categories.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-main-55:\\layout\\fragment_categories.xml"
+    },
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\fragment_login.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.7\\com.example.spendwise.app-main-55:\\layout\\fragment_login.xml"
+    }
+]

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#006B75</color>
+    <color name="onPrimary">#FFFFFF</color>
+    <color name="primaryContainer">#9BF0FB</color>
+    <color name="onPrimaryContainer">#002023</color>
+
+    <color name="secondary">#4A6267</color>
+    <color name="onSecondary">#FFFFFF</color>
+    <color name="secondaryContainer">#CDE7EC</color>
+    <color name="onSecondaryContainer">#051F23</color>
+
+    <color name="tertiary">#EF875B</color>
+    <color name="onTertiary">#FFFFFF</color>
+    <color name="tertiaryContainer">#FFDBCC</color>
+    <color name="onTertiaryContainer">#351000</color>
+
+    <color name="background">#FAFCFC</color>
+    <color name="onBackground">#191C1D</color>
+    <color name="surface">#FAFCFC</color>
+    <color name="onSurface">#191C1D</color>
+    <color name="surfaceVariant">#DBE4E6</color>
+    <color name="onSurfaceVariant">#3F484A</color>
+    <color name="outline">#6F797A</color>
+    <color name="outlineVariant">#BFC8CA</color>
+    <color name="surfaceContainerLowest">#FFFFFF</color>
+    <color name="surfaceContainerLow">#F3F5F5</color>
+    <color name="surfaceContainer">#EDF0F0</color>
+    <color name="surfaceContainerHigh">#E8EAEA</color>
+
+    <color name="error">#BA1A1A</color>
+    <color name="onError">#FFFFFF</color>
+    <color name="errorContainer">#FFDAD6</color>
+
+    <!-- Category colors -->
+    <color name="cat_food">#FF6B35</color>
+    <color name="cat_transport">#1B98E0</color>
+    <color name="cat_shopping">#E84393</color>
+    <color name="cat_entertainment">#A855F7</color>
+    <color name="cat_health">#10B981</color>
+    <color name="cat_others">#64748B</color>
+
+    <!-- Chart colors -->
+    <color name="chart_1">#006B75</color>
+    <color name="chart_2">#EF875B</color>
+    <color name="chart_3">#E84393</color>
+    <color name="chart_4">#A855F7</color>
+    <color name="chart_5">#10B981</color>
+    <color name="chart_6">#1B98E0</color>
+</resources>
