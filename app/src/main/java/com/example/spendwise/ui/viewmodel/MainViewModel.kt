@@ -13,6 +13,9 @@ import com.example.spendwise.data.CategoryTotal
 import com.example.spendwise.data.Expense
 import com.example.spendwise.data.ExpenseRepository
 import com.example.spendwise.data.RecurringExpense
+import com.example.spendwise.data.SavingsGoal
+import com.example.spendwise.data.SplitGroup
+import com.example.spendwise.data.SplitMember
 import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.util.Calendar
@@ -26,6 +29,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val allCategories: LiveData<List<Category>>
     val totalExpense: LiveData<Double?>
     val allRecurringExpenses: LiveData<List<RecurringExpense>>
+    val allSavingsGoals: LiveData<List<SavingsGoal>>
+    val allSplitGroups: LiveData<List<SplitGroup>>
 
     private val _filterDateRange = MutableLiveData<Pair<Long, Long>>()
     val filterDateRange: LiveData<Pair<Long, Long>> = _filterDateRange
@@ -52,11 +57,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         val expenseDao = db.expenseDao()
         val categoryDao = db.categoryDao()
         val recurringDao = db.recurringExpenseDao()
-        repository = ExpenseRepository(expenseDao, categoryDao, recurringDao)
+        val savingsGoalDao = db.savingsGoalDao()
+        val splitDao = db.splitDao()
+        repository = ExpenseRepository(expenseDao, categoryDao, recurringDao, savingsGoalDao, splitDao)
         allExpenses = repository.allExpenses
         allCategories = repository.allCategories
         totalExpense = repository.totalExpense
         allRecurringExpenses = repository.allRecurringExpenses
+        allSavingsGoals = repository.allSavingsGoals
+        allSplitGroups = repository.allSplitGroups
 
         setMonthFilter(Calendar.getInstance())
 
@@ -227,5 +236,63 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         val prefs = getApplication<android.app.Application>()
             .getSharedPreferences("SpendWisePrefs", Context.MODE_PRIVATE)
         return prefs.getFloat("monthly_budget", 0f)
+    }
+
+    // ── Savings Goals ──
+    fun insertGoal(goal: SavingsGoal) = viewModelScope.launch {
+        repository.insertGoal(goal)
+    }
+
+    fun updateGoal(goal: SavingsGoal) = viewModelScope.launch {
+        repository.updateGoal(goal)
+    }
+
+    fun deleteGoal(goal: SavingsGoal) = viewModelScope.launch {
+        repository.deleteGoal(goal)
+    }
+
+    // ── Split Expenses ──
+    fun insertSplitGroup(group: SplitGroup, callback: (Long) -> Unit) {
+        viewModelScope.launch {
+            val id = repository.insertSplitGroup(group)
+            callback(id)
+        }
+    }
+
+    fun deleteSplitGroup(group: SplitGroup) = viewModelScope.launch {
+        repository.deleteAllMembersForGroup(group.id)
+        repository.deleteSplitGroup(group)
+    }
+
+    fun getSplitGroupByExpenseId(expenseId: Int, callback: (SplitGroup?) -> Unit) {
+        viewModelScope.launch {
+            callback(repository.getSplitGroupByExpenseId(expenseId))
+        }
+    }
+
+    fun getSplitMembersByGroupId(groupId: Int): LiveData<List<SplitMember>> {
+        return repository.getSplitMembersByGroupId(groupId)
+    }
+
+    fun insertSplitMember(member: SplitMember) = viewModelScope.launch {
+        repository.insertSplitMember(member)
+    }
+
+    fun updateSplitMember(member: SplitMember) = viewModelScope.launch {
+        repository.updateSplitMember(member)
+    }
+
+    fun deleteSplitMember(member: SplitMember) = viewModelScope.launch {
+        repository.deleteSplitMember(member)
+    }
+
+    // ── Duplicate Expense ──
+    fun duplicateExpense(expense: Expense) = viewModelScope.launch {
+        repository.insertExpense(
+            expense.copy(
+                id = 0,
+                date = System.currentTimeMillis()
+            )
+        )
     }
 }

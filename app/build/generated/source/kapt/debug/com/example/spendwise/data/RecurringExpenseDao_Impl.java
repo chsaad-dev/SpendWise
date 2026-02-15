@@ -131,7 +131,7 @@ public final class RecurringExpenseDao_Impl implements RecurringExpenseDao {
 
   @Override
   public Object insert(final RecurringExpense recurringExpense,
-      final Continuation<? super Unit> $completion) {
+      final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -145,12 +145,12 @@ public final class RecurringExpenseDao_Impl implements RecurringExpenseDao {
           __db.endTransaction();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
   public Object delete(final RecurringExpense recurringExpense,
-      final Continuation<? super Unit> $completion) {
+      final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -164,12 +164,12 @@ public final class RecurringExpenseDao_Impl implements RecurringExpenseDao {
           __db.endTransaction();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
   public Object update(final RecurringExpense recurringExpense,
-      final Continuation<? super Unit> $completion) {
+      final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -183,11 +183,11 @@ public final class RecurringExpenseDao_Impl implements RecurringExpenseDao {
           __db.endTransaction();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
-  public Object deleteAll(final Continuation<? super Unit> $completion) {
+  public Object deleteAll(final Continuation<? super Unit> arg0) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -206,7 +206,7 @@ public final class RecurringExpenseDao_Impl implements RecurringExpenseDao {
           __preparedStmtOfDeleteAll.release(_stmt);
         }
       }
-    }, $completion);
+    }, arg0);
   }
 
   @Override
@@ -274,7 +274,7 @@ public final class RecurringExpenseDao_Impl implements RecurringExpenseDao {
   }
 
   @Override
-  public Object getAllActiveSync(final Continuation<? super List<RecurringExpense>> $completion) {
+  public Object getAllActiveSync(final Continuation<? super List<RecurringExpense>> arg0) {
     final String _sql = "SELECT * FROM recurring_expenses WHERE isActive = 1";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
@@ -331,7 +331,7 @@ public final class RecurringExpenseDao_Impl implements RecurringExpenseDao {
           _statement.release();
         }
       }
-    }, $completion);
+    }, arg0);
   }
 
   @NonNull

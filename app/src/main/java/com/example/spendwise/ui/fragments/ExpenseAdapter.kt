@@ -18,7 +18,8 @@ import java.util.Date
 import java.util.Locale
 
 class ExpenseAdapter(
-    private val onItemClick: (Expense) -> Unit
+    private val onItemClick: (Expense) -> Unit,
+    private val onItemLongClick: ((Expense) -> Unit)? = null
 ) : ListAdapter<Expense, ExpenseAdapter.ExpenseViewHolder>(DiffCallback()) {
 
     private val categoryColors = mapOf(
@@ -49,9 +50,17 @@ class ExpenseAdapter(
         private val categoryDot: View = itemView.findViewById(R.id.view_category_dot)
 
         fun bind(expense: Expense) {
-            tvCategory.text = expense.category
+            val catText = if (!expense.receiptPath.isNullOrBlank()) "\uD83D\uDCCE ${expense.category}" else expense.category
+            tvCategory.text = catText
             tvAmount.text = currencyFormat.format(expense.amount)
-            tvNote.text = if (expense.note.isBlank()) "—" else expense.note
+
+            val noteText = StringBuilder()
+            if (expense.note.isNotBlank()) noteText.append(expense.note)
+            if (!expense.tags.isNullOrBlank()) {
+                if (noteText.isNotEmpty()) noteText.append("  ")
+                noteText.append(expense.tags.split(",").joinToString(" ") { "\uD83C\uDFF7$it" })
+            }
+            tvNote.text = if (noteText.isEmpty()) "\u2014" else noteText.toString()
 
             val dateFormat = SimpleDateFormat("MMM dd", Locale.getDefault())
             tvDate.text = dateFormat.format(Date(expense.date))
@@ -63,6 +72,10 @@ class ExpenseAdapter(
             categoryDot.background = drawable
 
             itemView.setOnClickListener { onItemClick(expense) }
+            itemView.setOnLongClickListener {
+                onItemLongClick?.invoke(expense)
+                true
+            }
         }
     }
 

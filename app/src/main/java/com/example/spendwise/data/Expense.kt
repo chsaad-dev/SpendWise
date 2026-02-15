@@ -10,5 +10,7 @@ data class Expense(
     val amount: Double,
     val category: String,
     val date: Long,
-    val note: String
+    val note: String,
+    val receiptPath: String? = null,
+    val tags: String? = null
 )

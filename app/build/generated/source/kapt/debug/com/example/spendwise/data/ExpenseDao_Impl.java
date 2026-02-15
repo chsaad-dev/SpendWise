@@ -46,7 +46,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "INSERT OR REPLACE INTO `expenses` (`id`,`amount`,`category`,`date`,`note`) VALUES (nullif(?, 0),?,?,?,?)";
+        return "INSERT OR REPLACE INTO `expenses` (`id`,`amount`,`category`,`date`,`note`,`receiptPath`,`tags`) VALUES (nullif(?, 0),?,?,?,?,?,?)";
       }
 
       @Override
@@ -64,6 +64,16 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           statement.bindNull(5);
         } else {
           statement.bindString(5, entity.getNote());
+        }
+        if (entity.getReceiptPath() == null) {
+          statement.bindNull(6);
+        } else {
+          statement.bindString(6, entity.getReceiptPath());
+        }
+        if (entity.getTags() == null) {
+          statement.bindNull(7);
+        } else {
+          statement.bindString(7, entity.getTags());
         }
       }
     };
@@ -84,7 +94,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "UPDATE OR ABORT `expenses` SET `id` = ?,`amount` = ?,`category` = ?,`date` = ?,`note` = ? WHERE `id` = ?";
+        return "UPDATE OR ABORT `expenses` SET `id` = ?,`amount` = ?,`category` = ?,`date` = ?,`note` = ?,`receiptPath` = ?,`tags` = ? WHERE `id` = ?";
       }
 
       @Override
@@ -103,7 +113,17 @@ public final class ExpenseDao_Impl implements ExpenseDao {
         } else {
           statement.bindString(5, entity.getNote());
         }
-        statement.bindLong(6, entity.getId());
+        if (entity.getReceiptPath() == null) {
+          statement.bindNull(6);
+        } else {
+          statement.bindString(6, entity.getReceiptPath());
+        }
+        if (entity.getTags() == null) {
+          statement.bindNull(7);
+        } else {
+          statement.bindString(7, entity.getTags());
+        }
+        statement.bindLong(8, entity.getId());
       }
     };
     this.__preparedStmtOfDeleteAllExpenses = new SharedSQLiteStatement(__db) {
@@ -208,6 +228,8 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
           final int _cursorIndexOfDate = CursorUtil.getColumnIndexOrThrow(_cursor, "date");
           final int _cursorIndexOfNote = CursorUtil.getColumnIndexOrThrow(_cursor, "note");
+          final int _cursorIndexOfReceiptPath = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptPath");
+          final int _cursorIndexOfTags = CursorUtil.getColumnIndexOrThrow(_cursor, "tags");
           final List<Expense> _result = new ArrayList<Expense>(_cursor.getCount());
           while (_cursor.moveToNext()) {
             final Expense _item;
@@ -229,7 +251,19 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpNote = _cursor.getString(_cursorIndexOfNote);
             }
-            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote);
+            final String _tmpReceiptPath;
+            if (_cursor.isNull(_cursorIndexOfReceiptPath)) {
+              _tmpReceiptPath = null;
+            } else {
+              _tmpReceiptPath = _cursor.getString(_cursorIndexOfReceiptPath);
+            }
+            final String _tmpTags;
+            if (_cursor.isNull(_cursorIndexOfTags)) {
+              _tmpTags = null;
+            } else {
+              _tmpTags = _cursor.getString(_cursorIndexOfTags);
+            }
+            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote,_tmpReceiptPath,_tmpTags);
             _result.add(_item);
           }
           return _result;
@@ -261,6 +295,8 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
           final int _cursorIndexOfDate = CursorUtil.getColumnIndexOrThrow(_cursor, "date");
           final int _cursorIndexOfNote = CursorUtil.getColumnIndexOrThrow(_cursor, "note");
+          final int _cursorIndexOfReceiptPath = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptPath");
+          final int _cursorIndexOfTags = CursorUtil.getColumnIndexOrThrow(_cursor, "tags");
           final List<Expense> _result = new ArrayList<Expense>(_cursor.getCount());
           while (_cursor.moveToNext()) {
             final Expense _item;
@@ -282,7 +318,19 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpNote = _cursor.getString(_cursorIndexOfNote);
             }
-            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote);
+            final String _tmpReceiptPath;
+            if (_cursor.isNull(_cursorIndexOfReceiptPath)) {
+              _tmpReceiptPath = null;
+            } else {
+              _tmpReceiptPath = _cursor.getString(_cursorIndexOfReceiptPath);
+            }
+            final String _tmpTags;
+            if (_cursor.isNull(_cursorIndexOfTags)) {
+              _tmpTags = null;
+            } else {
+              _tmpTags = _cursor.getString(_cursorIndexOfTags);
+            }
+            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote,_tmpReceiptPath,_tmpTags);
             _result.add(_item);
           }
           return _result;
@@ -321,6 +369,8 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
           final int _cursorIndexOfDate = CursorUtil.getColumnIndexOrThrow(_cursor, "date");
           final int _cursorIndexOfNote = CursorUtil.getColumnIndexOrThrow(_cursor, "note");
+          final int _cursorIndexOfReceiptPath = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptPath");
+          final int _cursorIndexOfTags = CursorUtil.getColumnIndexOrThrow(_cursor, "tags");
           final List<Expense> _result = new ArrayList<Expense>(_cursor.getCount());
           while (_cursor.moveToNext()) {
             final Expense _item;
@@ -342,7 +392,19 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpNote = _cursor.getString(_cursorIndexOfNote);
             }
-            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote);
+            final String _tmpReceiptPath;
+            if (_cursor.isNull(_cursorIndexOfReceiptPath)) {
+              _tmpReceiptPath = null;
+            } else {
+              _tmpReceiptPath = _cursor.getString(_cursorIndexOfReceiptPath);
+            }
+            final String _tmpTags;
+            if (_cursor.isNull(_cursorIndexOfTags)) {
+              _tmpTags = null;
+            } else {
+              _tmpTags = _cursor.getString(_cursorIndexOfTags);
+            }
+            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote,_tmpReceiptPath,_tmpTags);
             _result.add(_item);
           }
           return _result;
@@ -379,6 +441,8 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
           final int _cursorIndexOfDate = CursorUtil.getColumnIndexOrThrow(_cursor, "date");
           final int _cursorIndexOfNote = CursorUtil.getColumnIndexOrThrow(_cursor, "note");
+          final int _cursorIndexOfReceiptPath = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptPath");
+          final int _cursorIndexOfTags = CursorUtil.getColumnIndexOrThrow(_cursor, "tags");
           final List<Expense> _result = new ArrayList<Expense>(_cursor.getCount());
           while (_cursor.moveToNext()) {
             final Expense _item;
@@ -400,7 +464,19 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpNote = _cursor.getString(_cursorIndexOfNote);
             }
-            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote);
+            final String _tmpReceiptPath;
+            if (_cursor.isNull(_cursorIndexOfReceiptPath)) {
+              _tmpReceiptPath = null;
+            } else {
+              _tmpReceiptPath = _cursor.getString(_cursorIndexOfReceiptPath);
+            }
+            final String _tmpTags;
+            if (_cursor.isNull(_cursorIndexOfTags)) {
+              _tmpTags = null;
+            } else {
+              _tmpTags = _cursor.getString(_cursorIndexOfTags);
+            }
+            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote,_tmpReceiptPath,_tmpTags);
             _result.add(_item);
           }
           return _result;
@@ -431,6 +507,8 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
           final int _cursorIndexOfDate = CursorUtil.getColumnIndexOrThrow(_cursor, "date");
           final int _cursorIndexOfNote = CursorUtil.getColumnIndexOrThrow(_cursor, "note");
+          final int _cursorIndexOfReceiptPath = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptPath");
+          final int _cursorIndexOfTags = CursorUtil.getColumnIndexOrThrow(_cursor, "tags");
           final List<Expense> _result = new ArrayList<Expense>(_cursor.getCount());
           while (_cursor.moveToNext()) {
             final Expense _item;
@@ -452,7 +530,19 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpNote = _cursor.getString(_cursorIndexOfNote);
             }
-            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote);
+            final String _tmpReceiptPath;
+            if (_cursor.isNull(_cursorIndexOfReceiptPath)) {
+              _tmpReceiptPath = null;
+            } else {
+              _tmpReceiptPath = _cursor.getString(_cursorIndexOfReceiptPath);
+            }
+            final String _tmpTags;
+            if (_cursor.isNull(_cursorIndexOfTags)) {
+              _tmpTags = null;
+            } else {
+              _tmpTags = _cursor.getString(_cursorIndexOfTags);
+            }
+            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote,_tmpReceiptPath,_tmpTags);
             _result.add(_item);
           }
           return _result;
@@ -489,6 +579,8 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
           final int _cursorIndexOfDate = CursorUtil.getColumnIndexOrThrow(_cursor, "date");
           final int _cursorIndexOfNote = CursorUtil.getColumnIndexOrThrow(_cursor, "note");
+          final int _cursorIndexOfReceiptPath = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptPath");
+          final int _cursorIndexOfTags = CursorUtil.getColumnIndexOrThrow(_cursor, "tags");
           final List<Expense> _result = new ArrayList<Expense>(_cursor.getCount());
           while (_cursor.moveToNext()) {
             final Expense _item;
@@ -510,7 +602,19 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpNote = _cursor.getString(_cursorIndexOfNote);
             }
-            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote);
+            final String _tmpReceiptPath;
+            if (_cursor.isNull(_cursorIndexOfReceiptPath)) {
+              _tmpReceiptPath = null;
+            } else {
+              _tmpReceiptPath = _cursor.getString(_cursorIndexOfReceiptPath);
+            }
+            final String _tmpTags;
+            if (_cursor.isNull(_cursorIndexOfTags)) {
+              _tmpTags = null;
+            } else {
+              _tmpTags = _cursor.getString(_cursorIndexOfTags);
+            }
+            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote,_tmpReceiptPath,_tmpTags);
             _result.add(_item);
           }
           return _result;
@@ -552,6 +656,8 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
           final int _cursorIndexOfDate = CursorUtil.getColumnIndexOrThrow(_cursor, "date");
           final int _cursorIndexOfNote = CursorUtil.getColumnIndexOrThrow(_cursor, "note");
+          final int _cursorIndexOfReceiptPath = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptPath");
+          final int _cursorIndexOfTags = CursorUtil.getColumnIndexOrThrow(_cursor, "tags");
           final List<Expense> _result = new ArrayList<Expense>(_cursor.getCount());
           while (_cursor.moveToNext()) {
             final Expense _item;
@@ -573,7 +679,19 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpNote = _cursor.getString(_cursorIndexOfNote);
             }
-            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote);
+            final String _tmpReceiptPath;
+            if (_cursor.isNull(_cursorIndexOfReceiptPath)) {
+              _tmpReceiptPath = null;
+            } else {
+              _tmpReceiptPath = _cursor.getString(_cursorIndexOfReceiptPath);
+            }
+            final String _tmpTags;
+            if (_cursor.isNull(_cursorIndexOfTags)) {
+              _tmpTags = null;
+            } else {
+              _tmpTags = _cursor.getString(_cursorIndexOfTags);
+            }
+            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote,_tmpReceiptPath,_tmpTags);
             _result.add(_item);
           }
           return _result;
@@ -722,6 +840,8 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           final int _cursorIndexOfCategory = CursorUtil.getColumnIndexOrThrow(_cursor, "category");
           final int _cursorIndexOfDate = CursorUtil.getColumnIndexOrThrow(_cursor, "date");
           final int _cursorIndexOfNote = CursorUtil.getColumnIndexOrThrow(_cursor, "note");
+          final int _cursorIndexOfReceiptPath = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptPath");
+          final int _cursorIndexOfTags = CursorUtil.getColumnIndexOrThrow(_cursor, "tags");
           final Expense _result;
           if (_cursor.moveToFirst()) {
             final int _tmpId;
@@ -742,7 +862,19 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpNote = _cursor.getString(_cursorIndexOfNote);
             }
-            _result = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote);
+            final String _tmpReceiptPath;
+            if (_cursor.isNull(_cursorIndexOfReceiptPath)) {
+              _tmpReceiptPath = null;
+            } else {
+              _tmpReceiptPath = _cursor.getString(_cursorIndexOfReceiptPath);
+            }
+            final String _tmpTags;
+            if (_cursor.isNull(_cursorIndexOfTags)) {
+              _tmpTags = null;
+            } else {
+              _tmpTags = _cursor.getString(_cursorIndexOfTags);
+            }
+            _result = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote,_tmpReceiptPath,_tmpTags);
           } else {
             _result = null;
           }

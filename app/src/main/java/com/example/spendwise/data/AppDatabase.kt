@@ -9,8 +9,15 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Database(
-    entities = [Expense::class, Category::class, RecurringExpense::class],
-    version = 2,
+    entities = [
+        Expense::class,
+        Category::class,
+        RecurringExpense::class,
+        SavingsGoal::class,
+        SplitGroup::class,
+        SplitMember::class
+    ],
+    version = 4,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -18,6 +25,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun expenseDao(): ExpenseDao
     abstract fun categoryDao(): CategoryDao
     abstract fun recurringExpenseDao(): RecurringExpenseDao
+    abstract fun savingsGoalDao(): SavingsGoalDao
+    abstract fun splitDao(): SplitDao
 
     companion object {
         @Volatile

@@ -62,6 +62,9 @@ public final class FragmentSettingsBinding implements ViewBinding {
   @NonNull
   public final MaterialSwitch switchReminder;
 
+  @NonNull
+  public final MaterialSwitch switchWeeklySummary;
+
   private FragmentSettingsBinding(@NonNull ScrollView rootView, @NonNull MaterialButton btnAbout,
       @NonNull MaterialButton btnBackup, @NonNull MaterialButton btnBudget,
       @NonNull MaterialButton btnClearCategories, @NonNull MaterialButton btnClearData,
@@ -69,7 +72,7 @@ public final class FragmentSettingsBinding implements ViewBinding {
       @NonNull MaterialButton btnLanguage, @NonNull MaterialButton btnPrivacy,
       @NonNull MaterialButton btnRate, @NonNull MaterialButton btnResetPin,
       @NonNull MaterialButton btnRestore, @NonNull MaterialSwitch switchDarkMode,
-      @NonNull MaterialSwitch switchReminder) {
+      @NonNull MaterialSwitch switchReminder, @NonNull MaterialSwitch switchWeeklySummary) {
     this.rootView = rootView;
     this.btnAbout = btnAbout;
     this.btnBackup = btnBackup;
@@ -85,6 +88,7 @@ public final class FragmentSettingsBinding implements ViewBinding {
     this.btnRestore = btnRestore;
     this.switchDarkMode = switchDarkMode;
     this.switchReminder = switchReminder;
+    this.switchWeeklySummary = switchWeeklySummary;
   }
 
   @Override
@@ -198,9 +202,15 @@ public final class FragmentSettingsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.switch_weekly_summary;
+      MaterialSwitch switchWeeklySummary = ViewBindings.findChildViewById(rootView, id);
+      if (switchWeeklySummary == null) {
+        break missingId;
+      }
+
       return new FragmentSettingsBinding((ScrollView) rootView, btnAbout, btnBackup, btnBudget,
           btnClearCategories, btnClearData, btnCurrency, btnExportCsv, btnLanguage, btnPrivacy,
-          btnRate, btnResetPin, btnRestore, switchDarkMode, switchReminder);
+          btnRate, btnResetPin, btnRestore, switchDarkMode, switchReminder, switchWeeklySummary);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

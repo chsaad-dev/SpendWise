@@ -15,6 +15,7 @@ import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.spendwise.R;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -38,7 +39,13 @@ public final class FragmentHomeBinding implements ViewBinding {
   public final MaterialCardView cardInsight;
 
   @NonNull
+  public final MaterialCardView cardPieChart;
+
+  @NonNull
   public final HorizontalBarChart chartCategories;
+
+  @NonNull
+  public final PieChart chartPie;
 
   @NonNull
   public final ChipGroup chipGroupCategories;
@@ -81,7 +88,8 @@ public final class FragmentHomeBinding implements ViewBinding {
 
   private FragmentHomeBinding(@NonNull CoordinatorLayout rootView,
       @NonNull ImageButton btnNextMonth, @NonNull ImageButton btnPrevMonth,
-      @NonNull MaterialCardView cardInsight, @NonNull HorizontalBarChart chartCategories,
+      @NonNull MaterialCardView cardInsight, @NonNull MaterialCardView cardPieChart,
+      @NonNull HorizontalBarChart chartCategories, @NonNull PieChart chartPie,
       @NonNull ChipGroup chipGroupCategories, @NonNull TextInputEditText etSearch,
       @NonNull FloatingActionButton fabAdd, @NonNull LinearLayout layoutBudget,
       @NonNull LinearLayout layoutChartEmpty, @NonNull LinearLayout layoutEmpty,
@@ -93,7 +101,9 @@ public final class FragmentHomeBinding implements ViewBinding {
     this.btnNextMonth = btnNextMonth;
     this.btnPrevMonth = btnPrevMonth;
     this.cardInsight = cardInsight;
+    this.cardPieChart = cardPieChart;
     this.chartCategories = chartCategories;
+    this.chartPie = chartPie;
     this.chipGroupCategories = chipGroupCategories;
     this.etSearch = etSearch;
     this.fabAdd = fabAdd;
@@ -154,9 +164,21 @@ public final class FragmentHomeBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.card_pie_chart;
+      MaterialCardView cardPieChart = ViewBindings.findChildViewById(rootView, id);
+      if (cardPieChart == null) {
+        break missingId;
+      }
+
       id = R.id.chart_categories;
       HorizontalBarChart chartCategories = ViewBindings.findChildViewById(rootView, id);
       if (chartCategories == null) {
+        break missingId;
+      }
+
+      id = R.id.chart_pie;
+      PieChart chartPie = ViewBindings.findChildViewById(rootView, id);
+      if (chartPie == null) {
         break missingId;
       }
 
@@ -239,9 +261,9 @@ public final class FragmentHomeBinding implements ViewBinding {
       }
 
       return new FragmentHomeBinding((CoordinatorLayout) rootView, btnNextMonth, btnPrevMonth,
-          cardInsight, chartCategories, chipGroupCategories, etSearch, fabAdd, layoutBudget,
-          layoutChartEmpty, layoutEmpty, progressBudget, rvExpenses, tvBudgetLabel, tvMonthLabel,
-          tvTopCategory, tvTotalExpense, tvTransactionCount);
+          cardInsight, cardPieChart, chartCategories, chartPie, chipGroupCategories, etSearch,
+          fabAdd, layoutBudget, layoutChartEmpty, layoutEmpty, progressBudget, rvExpenses,
+          tvBudgetLabel, tvMonthLabel, tvTopCategory, tvTotalExpense, tvTransactionCount);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

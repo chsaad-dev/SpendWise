@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -22,14 +23,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.spendwise.R
 import com.example.spendwise.ui.viewmodel.MainViewModel
 import com.github.mikephil.charting.charts.HorizontalBarChart
+import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.formatter.PercentFormatter
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.google.android.material.snackbar.Snackbar
@@ -100,13 +107,26 @@ class HomeFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        // Adapter with click to edit
-        adapter = ExpenseAdapter { expense ->
-            val bundle = Bundle().apply {
-                putInt("expenseId", expense.id)
+        // Adapter with click to edit + long-press to duplicate
+        adapter = ExpenseAdapter(
+            onItemClick = { expense ->
+                val bundle = Bundle().apply {
+                    putInt("expenseId", expense.id)
+                }
+                findNavController().navigate(R.id.action_home_to_addExpense, bundle)
+            },
+            onItemLongClick = { expense ->
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Duplicate Expense")
+                    .setMessage("Create a copy of this ${expense.category} expense (${viewModel.formatCurrency(expense.amount)})?")
+                    .setPositiveButton("Duplicate") { _, _ ->
+                        viewModel.duplicateExpense(expense)
+                        Toast.makeText(context, "Expense duplicated", Toast.LENGTH_SHORT).show()
+                    }
+                    .setNegativeButton("Cancel", null)
+                    .show()
             }
-            findNavController().navigate(R.id.action_home_to_addExpense, bundle)
-        }
+        )
 
         rvExpenses.layoutManager = LinearLayoutManager(context)
         rvExpenses.adapter = adapter
@@ -208,15 +228,22 @@ class HomeFragment : Fragment() {
 
         // Top category insight + Chart
         setupChart(chart)
+        val pieChart = view.findViewById<PieChart>(R.id.chart_pie)
+        val cardPieChart = view.findViewById<MaterialCardView>(R.id.card_pie_chart)
+        setupPieChart(pieChart)
+
         viewModel.categoryTotals.observe(viewLifecycleOwner) { totals ->
             if (totals.isNullOrEmpty()) {
                 chart.visibility = View.GONE
                 layoutChartEmpty.visibility = View.VISIBLE
                 cardInsight.visibility = View.GONE
+                cardPieChart.visibility = View.GONE
             } else {
                 chart.visibility = View.VISIBLE
                 layoutChartEmpty.visibility = View.GONE
+                cardPieChart.visibility = View.VISIBLE
                 updateChart(chart, totals.map { it.category }, totals.map { it.total.toFloat() })
+                updatePieChart(pieChart, totals.map { it.category }, totals.map { it.total.toFloat() })
 
                 // Top category insight
                 val top = totals.maxByOrNull { it.total }
@@ -286,6 +313,56 @@ class HomeFragment : Fragment() {
 
         chart.xAxis.valueFormatter = IndexAxisValueFormatter(labels)
         chart.xAxis.labelCount = labels.size
+        chart.invalidate()
+    }
+
+    private fun setupPieChart(chart: PieChart) {
+        chart.description.isEnabled = false
+        chart.setUsePercentValues(true)
+        chart.setDrawEntryLabels(true)
+        chart.setEntryLabelColor(Color.parseColor("#3F484A"))
+        chart.setEntryLabelTextSize(11f)
+        chart.isDrawHoleEnabled = true
+        chart.holeRadius = 50f
+        chart.transparentCircleRadius = 55f
+        chart.setHoleColor(Color.TRANSPARENT)
+        chart.setCenterTextSize(14f)
+        chart.setCenterTextColor(Color.parseColor("#3F484A"))
+        chart.legend.isEnabled = false
+        chart.setTouchEnabled(true)
+        chart.isRotationEnabled = true
+        chart.animateY(800)
+    }
+
+    private fun updatePieChart(chart: PieChart, labels: List<String>, values: List<Float>) {
+        val pieColors = listOf(
+            Color.parseColor("#006B75"),
+            Color.parseColor("#A855F7"),
+            Color.parseColor("#F59E0B"),
+            Color.parseColor("#EF4444"),
+            Color.parseColor("#3B82F6"),
+            Color.parseColor("#10B981"),
+            Color.parseColor("#EC4899"),
+            Color.parseColor("#6366F1")
+        )
+
+        val entries = labels.zip(values).map { (label, value) ->
+            PieEntry(value, label)
+        }
+
+        val dataSet = PieDataSet(entries, "").apply {
+            colors = pieColors.take(values.size)
+            sliceSpace = 2f
+            selectionShift = 5f
+            setDrawValues(true)
+            valueTextSize = 10f
+            valueTextColor = Color.WHITE
+            valueFormatter = PercentFormatter(chart)
+        }
+
+        chart.data = PieData(dataSet)
+        val total = values.sum()
+        chart.centerText = viewModel.formatCurrency(total.toDouble())
         chart.invalidate()
     }
 }

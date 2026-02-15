@@ -121,6 +121,18 @@ class SettingsFragment : Fragment() {
             }
         }
 
+        // ── 6b. Weekly Summary ──
+        val switchWeekly = view.findViewById<MaterialSwitch>(R.id.switch_weekly_summary)
+        switchWeekly.isChecked = prefs.getBoolean("weekly_summary_enabled", false)
+        switchWeekly.setOnCheckedChangeListener { _, isChecked ->
+            prefs.edit().putBoolean("weekly_summary_enabled", isChecked).apply()
+            if (isChecked) {
+                enableWeeklySummary()
+            } else {
+                disableWeeklySummary()
+            }
+        }
+
         // ── 7. Export CSV ──
         view.findViewById<MaterialButton>(R.id.btn_export_csv).setOnClickListener {
             exportCsv()
@@ -351,6 +363,44 @@ class SettingsFragment : Fragment() {
         )
         alarmManager.cancel(pendingIntent)
         Toast.makeText(context, "Daily reminder disabled", Toast.LENGTH_SHORT).show()
+    }
+
+    // ── Weekly Summary ──
+    private fun enableWeeklySummary() {
+        val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(requireContext(), com.example.spendwise.WeeklySummaryReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(
+            requireContext(), 1001, intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        // Schedule every Sunday at 6 PM
+        val calendar = Calendar.getInstance().apply {
+            set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY)
+            set(Calendar.HOUR_OF_DAY, 18)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            if (before(Calendar.getInstance())) add(Calendar.WEEK_OF_YEAR, 1)
+        }
+
+        alarmManager.setRepeating(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            AlarmManager.INTERVAL_DAY * 7,
+            pendingIntent
+        )
+        Toast.makeText(context, "Weekly summary set for Sundays at 6 PM", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun disableWeeklySummary() {
+        val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(requireContext(), com.example.spendwise.WeeklySummaryReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(
+            requireContext(), 1001, intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+        alarmManager.cancel(pendingIntent)
+        Toast.makeText(context, "Weekly summary disabled", Toast.LENGTH_SHORT).show()
     }
 
     // ── Export CSV ──

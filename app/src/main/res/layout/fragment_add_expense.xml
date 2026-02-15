@@ -91,6 +91,58 @@
                 android:textAppearance="?attr/textAppearanceBodyLarge"/>
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Receipt Photo -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_attach_receipt"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="📎  Attach Receipt Photo"
+                app:cornerRadius="12dp"/>
+
+            <ImageView
+                android:id="@+id/iv_receipt_preview"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_marginTop="8dp"
+                android:scaleType="centerCrop"
+                android:visibility="gone"
+                android:contentDescription="Receipt preview"
+                android:background="@android:color/transparent"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_remove_receipt"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remove receipt"
+                android:textColor="?attr/colorError"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+        <!-- Tags -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Tags (comma-separated)"
+            app:helperText="e.g. lunch, team, client"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_tags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textAppearance="?attr/textAppearanceBodyLarge"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
         <!-- Recurring Toggle -->
         <LinearLayout
             android:id="@+id/layout_recurring"
@@ -145,6 +197,17 @@
             android:layout_marginTop="32dp"
             android:text="Save Expense"
             android:textAppearance="?attr/textAppearanceLabelLarge"
+            app:cornerRadius="12dp"/>
+
+        <!-- Split Expense Button (visible in edit mode) -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_split"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:text="👥  Split this Expense"
+            android:visibility="gone"
             app:cornerRadius="12dp"/>
 
         <!-- Delete Button (visible only in edit mode) -->

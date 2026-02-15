@@ -50,6 +50,9 @@
             android:name="com.example.spendwise.ReminderReceiver"
             android:exported="false" />
         <receiver
+            android:name="com.example.spendwise.WeeklySummaryReceiver"
+            android:exported="false" />
+        <receiver
             android:name="com.example.spendwise.QuickAddWidgetProvider"
             android:exported="false" >
             <intent-filter>
