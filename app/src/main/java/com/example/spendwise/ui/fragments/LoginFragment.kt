@@ -77,14 +77,15 @@ class LoginFragment : Fragment() {
 
     private fun tryBiometricAuth() {
         val biometricManager = BiometricManager.from(requireContext())
-        when (biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG or BiometricManager.Authenticators.BIOMETRIC_WEAK)) {
-            BiometricManager.BIOMETRIC_SUCCESS -> {
-                showBiometricPrompt()
-            }
-            else -> {
-                // Biometrics not available, fall back to PIN
-            }
+
+        // Check for any biometric (strong OR weak — covers fingerprint AND face unlock)
+        val authenticators = BiometricManager.Authenticators.BIOMETRIC_WEAK
+        val canAuth = biometricManager.canAuthenticate(authenticators)
+
+        if (canAuth == BiometricManager.BIOMETRIC_SUCCESS) {
+            showBiometricPrompt()
         }
+        // else: biometrics not available, user uses PIN
     }
 
     private fun showBiometricPrompt() {
@@ -103,15 +104,16 @@ class LoginFragment : Fragment() {
 
             override fun onAuthenticationFailed() {
                 super.onAuthenticationFailed()
-                Toast.makeText(context, "Authentication failed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Authentication failed, try again", Toast.LENGTH_SHORT).show()
             }
         }
 
         val biometricPrompt = BiometricPrompt(this, executor, callback)
-
+        
         val promptInfo = BiometricPrompt.PromptInfo.Builder()
             .setTitle("SpendWise")
             .setSubtitle("Use fingerprint or face to unlock")
+            .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_WEAK)
             .setNegativeButtonText("Use PIN instead")
             .build()
 

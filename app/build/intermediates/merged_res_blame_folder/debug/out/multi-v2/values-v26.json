@@ -4,7 +4,7 @@
             "outputFile": "com.example.spendwise.app-mergeDebugResources-51:/values-v26/values-v26.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\chsaa\\.gradle\\caches\\transforms-4\\2640a990d6323eba241a489531f44373\\transformed\\appcompat-1.6.1\\res\\values-v26\\values-v26.xml",
+                    "source": "C:\\Users\\chsaa\\.gradle\\caches\\transforms-3\\826b3ef135ec5a3cd2cd20c53e2b22ee\\transformed\\appcompat-1.6.1\\res\\values-v26\\values-v26.xml",
                     "from": {
                         "startLines": "2,3,4,8,12,16",
                         "startColumns": "4,4,4,4,4,4",

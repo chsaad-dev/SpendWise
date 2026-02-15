@@ -66,8 +66,10 @@ dependencies {
     // Charts
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
-    // Biometric
-    implementation("androidx.biometric:biometric:1.1.0")
+    // Biometric (exclude biometric-ktx which was never published to Maven)
+    implementation("androidx.biometric:biometric:1.1.0") {
+        exclude(group = "androidx.biometric", module = "biometric-ktx")
+    }
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

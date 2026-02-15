@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background">#FAFCFC</color>
+    <color name="cat_entertainment">#A855F7</color>
+    <color name="cat_food">#FF6B35</color>
+    <color name="cat_health">#10B981</color>
+    <color name="cat_others">#64748B</color>
+    <color name="cat_shopping">#E84393</color>
+    <color name="cat_transport">#1B98E0</color>
+    <color name="chart_1">#006B75</color>
+    <color name="chart_2">#EF875B</color>
+    <color name="chart_3">#E84393</color>
+    <color name="chart_4">#A855F7</color>
+    <color name="chart_5">#10B981</color>
+    <color name="chart_6">#1B98E0</color>
+    <color name="error">#BA1A1A</color>
+    <color name="errorContainer">#FFDAD6</color>
+    <color name="onBackground">#191C1D</color>
+    <color name="onError">#FFFFFF</color>
+    <color name="onPrimary">#FFFFFF</color>
+    <color name="onPrimaryContainer">#002023</color>
+    <color name="onSecondary">#FFFFFF</color>
+    <color name="onSecondaryContainer">#051F23</color>
+    <color name="onSurface">#191C1D</color>
+    <color name="onSurfaceVariant">#3F484A</color>
+    <color name="onTertiary">#FFFFFF</color>
+    <color name="onTertiaryContainer">#351000</color>
+    <color name="outline">#6F797A</color>
+    <color name="outlineVariant">#BFC8CA</color>
+    <color name="primary">#006B75</color>
+    <color name="primaryContainer">#9BF0FB</color>
+    <color name="secondary">#4A6267</color>
+    <color name="secondaryContainer">#CDE7EC</color>
+    <color name="surface">#FAFCFC</color>
+    <color name="surfaceContainer">#EDF0F0</color>
+    <color name="surfaceContainerHigh">#E8EAEA</color>
+    <color name="surfaceContainerLow">#F3F5F5</color>
+    <color name="surfaceContainerLowest">#FFFFFF</color>
+    <color name="surfaceVariant">#DBE4E6</color>
+    <color name="tertiary">#EF875B</color>
+    <color name="tertiaryContainer">#FFDBCC</color>
+    <string name="app_name">SpendWise</string>
+    <style name="ShapeAppearanceOverlay.FAB" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+    <style name="Theme.SpendWise" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/onPrimary</item>
+        <item name="colorPrimaryContainer">@color/primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/onPrimaryContainer</item>
+
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/onSecondary</item>
+        <item name="colorSecondaryContainer">@color/secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/onSecondaryContainer</item>
+
+        <item name="colorTertiary">@color/tertiary</item>
+        <item name="colorOnTertiary">@color/onTertiary</item>
+        <item name="colorTertiaryContainer">@color/tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/onTertiaryContainer</item>
+
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorOnBackground">@color/onBackground</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/onSurface</item>
+        <item name="colorSurfaceVariant">@color/surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/onSurfaceVariant</item>
+        <item name="colorOutline">@color/outline</item>
+        <item name="colorOutlineVariant">@color/outlineVariant</item>
+
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/onError</item>
+
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>
