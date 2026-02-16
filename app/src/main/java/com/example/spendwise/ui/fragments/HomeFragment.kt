@@ -107,7 +107,6 @@ class HomeFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        // Adapter with click to edit + long-press to duplicate
         adapter = ExpenseAdapter(
             onItemClick = { expense ->
                 val bundle = Bundle().apply {
