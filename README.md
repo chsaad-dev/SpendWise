@@ -133,9 +133,7 @@ The app uses a relational database structure powered by Room.
 
 ## Future Improvements
 *   [ ] **Biometric Authentication**: Fingerprint unlock for faster access.
-*   [ ] **Dark Mode Support**: Full system-wide dark theme implementation.
 *   [ ] **Cloud Backup**: Optional Google Drive sync for data redundancy.
-*   [ ] **Export to CSV/PDF**: Generate monthly reports for external use.
 *   [ ] **Multi-Currency Support**: Real-time currency conversion APIs.
 
 ---
