@@ -1,4 +1,4 @@
-# SpendWise 💰
+# SpendWise
 **Smart. Secure. Simple.**  
 *Your personal finance companion in the pocket.*
 
@@ -6,40 +6,40 @@
 
 ---
 
-## 📱 Overview
+## Overview
 **SpendWise** is a modern, offline-first Android expense tracker built to give users complete control over their financial data. Designed with the latest **Material Design 3** guidelines, it offers a seamless and aesthetically pleasing user experience without ensuring any data leaves the device.
 
 Whether you're tracking daily coffee runs, managing monthly bills, or splitting costs with friends, SpendWise makes it effortless.
 
 ---
 
-## 📷 Screenshots
+## Screenshots
 | Dashboard | Add Expense | Monthly Analysis | Settings |
 |:---:|:---:|:---:|:---:|
 | ![Dashboard Placehoder](docs/screenshots/dashboard.png) | ![Add Expense Placeholder](docs/screenshots/add_expense.png) | ![Analysis Placeholder](docs/screenshots/analysis.png) | ![Settings Placeholder](docs/screenshots/settings.png) |
 
 ---
 
-## ✨ Key Features
+## Key Features
 
 ### Core Functionality
-- **💸 Expense Tracking**: Quickly add, edit, and delete daily expenses.
-- **📊 Interactive Dashboard**: Visualize monthly spending with beautiful bar charts and summaries.
-- **📂 Category Management**: Create and manage custom categories with colorful icons.
-- **📅 Smart Filtering**: Filter transaction history by date range or specific categories.
-- **🔍 Search & History**: View detailed transaction logs with swipe-to-delete gestures.
+- ** Expense Tracking**: Quickly add, edit, and delete daily expenses.
+- ** Interactive Dashboard**: Visualize monthly spending with beautiful bar charts and summaries.
+- ** Category Management**: Create and manage custom categories with colorful icons.
+- ** Smart Filtering**: Filter transaction history by date range or specific categories.
+- ** Search & History**: View detailed transaction logs with swipe-to-delete gestures.
 
 ### Advanced Tools
-- **💰 Split Expenses**: Easily divide bills among friends or groups and track who owes what.
-- **🎯 Savings Goals**: Set financial targets and track your progress visually.
-- **🔄 Recurring Transactions**: Automate regular payments like rent or subscriptions.
-- **🔒 Secure Login**: Protect your data with a local PIN-based authentication system.
-- **🌑 Offline First**: No internet required. Your data stays on your device, always.
-- **⚙️ Customization**: Native Light Theme support with dynamic colors.
+- ** Split Expenses**: Easily divide bills among friends or groups and track who owes what.
+- ** Savings Goals**: Set financial targets and track your progress visually.
+- ** Recurring Transactions**: Automate regular payments like rent or subscriptions.
+- ** Secure Login**: Protect your data with a local PIN-based authentication system.
+- ** Offline First**: No internet required. Your data stays on your device, always.
+- ** Customization**: Native Light Theme support with dynamic colors.
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 This project adheres to modern Android development best practices.
 
 *   **Language**: [Kotlin](https://kotlinlang.org/)
@@ -53,7 +53,7 @@ This project adheres to modern Android development best practices.
 
 ---
 
-## 🏗 Architecture
+## Architecture
 SpendWise follows the **MVVM (Model-View-ViewModel)** architectural pattern to ensure separation of concerns and testability.
 
 *   **Model (Data Layer)**:
@@ -69,7 +69,7 @@ SpendWise follows the **MVVM (Model-View-ViewModel)** architectural pattern to e
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 ```
 com.example.spendwise
 ├── data                  # Data layer (Room entities, DAOs, Repo)
@@ -88,7 +88,7 @@ com.example.spendwise
 
 ---
 
-## 🗄 Database Design
+## Database Design
 The app uses a relational database structure powered by Room.
 
 *   **Expense Entity**: Stores transaction amount, date, description, and category ID.
@@ -99,7 +99,7 @@ The app uses a relational database structure powered by Room.
 
 ---
 
-## 🎨 UI & Design Principles
+## UI & Design Principles
 *   **Material Design 3**: Utilizes the latest Android design language for a cohesive look.
 *   **Single Activity Architecture**: Uses one `MainActivity` hosting multiple `Fragments`.
 *   **Responsive**: Layouts adapt to different screen sizes and orientations.
@@ -107,7 +107,7 @@ The app uses a relational database structure powered by Room.
 
 ---
 
-## 🚀 How to Build & Run
+## How to Build & Run
 1.  **Clone the Repository**:
     ```bash
     git clone https://github.com/chsaad-dev/SpendWise.git
@@ -123,7 +123,7 @@ The app uses a relational database structure powered by Room.
 
 ---
 
-## ✅ Requirements
+## Requirements
 *   **Android Studio**: Iguana (2023.2.1) or newer recommended.
 *   **Android SDK**: API Level 34 (UpsideDownCake).
 *   **Min SDK**: API Level 24 (Android 7.0 Nougat).
@@ -131,7 +131,7 @@ The app uses a relational database structure powered by Room.
 
 ---
 
-## 🔮 Future Improvements
+## Future Improvements
 *   [ ] **Biometric Authentication**: Fingerprint unlock for faster access.
 *   [ ] **Dark Mode Support**: Full system-wide dark theme implementation.
 *   [ ] **Cloud Backup**: Optional Google Drive sync for data redundancy.
@@ -140,12 +140,12 @@ The app uses a relational database structure powered by Room.
 
 ---
 
-## 📄 License
+## License
 This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-## 👨‍💻 Author
+## Author
 **Android Developer**  
 *Passionate about building clean, efficient, and user-friendly mobile applications.*
 
