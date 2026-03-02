@@ -3182,6 +3182,7 @@ drawable notify_panel_notification_icon_bg
 drawable shape_dot
 drawable shape_frosted_card
 drawable shape_splash_circle
+drawable spendwise_logo
 drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
@@ -4041,6 +4042,7 @@ layout support_simple_spinner_dropdown_item
 layout widget_quick_add
 menu bottom_nav_menu
 mipmap ic_launcher
+mipmap ic_launcher_foreground
 mipmap ic_launcher_round
 navigation nav_graph
 plurals mtrl_badge_content_description

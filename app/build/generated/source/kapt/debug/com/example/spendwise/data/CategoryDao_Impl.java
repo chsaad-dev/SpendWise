@@ -86,7 +86,8 @@ public final class CategoryDao_Impl implements CategoryDao {
   }
 
   @Override
-  public Object insertCategory(final Category category, final Continuation<? super Unit> arg1) {
+  public Object insertCategory(final Category category,
+      final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -100,11 +101,12 @@ public final class CategoryDao_Impl implements CategoryDao {
           __db.endTransaction();
         }
       }
-    }, arg1);
+    }, $completion);
   }
 
   @Override
-  public Object deleteCategory(final Category category, final Continuation<? super Unit> arg1) {
+  public Object deleteCategory(final Category category,
+      final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -118,11 +120,11 @@ public final class CategoryDao_Impl implements CategoryDao {
           __db.endTransaction();
         }
       }
-    }, arg1);
+    }, $completion);
   }
 
   @Override
-  public Object deleteAllCategories(final Continuation<? super Unit> arg0) {
+  public Object deleteAllCategories(final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -141,7 +143,7 @@ public final class CategoryDao_Impl implements CategoryDao {
           __preparedStmtOfDeleteAllCategories.release(_stmt);
         }
       }
-    }, arg0);
+    }, $completion);
   }
 
   @Override

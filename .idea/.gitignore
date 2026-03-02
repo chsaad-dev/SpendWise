@@ -1,3 +1,14 @@
-# Default ignored files
-/shelf/
+# Antigravity IDE files
+.antigravity/
+*.iml
+*.log
 /workspace.xml
+/shelf/
+
+# Build folders
+build/
+.gradle/
+
+# OS/system files
+.DS_Store
+Thumbs.db

@@ -47,10 +47,10 @@ com.example.spendwise.app-navigation-common-2.7.7-45 C:\Users\chsaa\.gradle\cach
 com.example.spendwise.app-activity-ktx-1.8.0-46 C:\Users\chsaa\.gradle\caches\transforms-3\e4971470091211fa0d88381cb4f56f83\transformed\activity-ktx-1.8.0\res
 com.example.spendwise.app-lifecycle-livedata-2.7.0-47 C:\Users\chsaa\.gradle\caches\transforms-3\ec09df457e3e7ce7eed8d3ca4094fdd4\transformed\lifecycle-livedata-2.7.0\res
 com.example.spendwise.app-lifecycle-runtime-2.7.0-48 C:\Users\chsaa\.gradle\caches\transforms-3\ee8c1bebeed0ca32a12e7fced93e9914\transformed\lifecycle-runtime-2.7.0\res
-com.example.spendwise.app-pngs-49 E:\AntiGravity\SpendWise\app\build\generated\res\pngs\debug
-com.example.spendwise.app-resValues-50 E:\AntiGravity\SpendWise\app\build\generated\res\resValues\debug
-com.example.spendwise.app-packageDebugResources-51 E:\AntiGravity\SpendWise\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
-com.example.spendwise.app-packageDebugResources-52 E:\AntiGravity\SpendWise\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
-com.example.spendwise.app-merged_res-53 E:\AntiGravity\SpendWise\app\build\intermediates\merged_res\debug
-com.example.spendwise.app-debug-54 E:\AntiGravity\SpendWise\app\src\debug\res
-com.example.spendwise.app-main-55 E:\AntiGravity\SpendWise\app\src\main\res
+com.example.spendwise.app-pngs-49 C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\build\generated\res\pngs\debug
+com.example.spendwise.app-resValues-50 C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\build\generated\res\resValues\debug
+com.example.spendwise.app-packageDebugResources-51 C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+com.example.spendwise.app-packageDebugResources-52 C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+com.example.spendwise.app-merged_res-53 C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\build\intermediates\merged_res\debug
+com.example.spendwise.app-debug-54 C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\debug\res
+com.example.spendwise.app-main-55 C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\res

@@ -1,20 +1,20 @@
 -- Merging decision tree log ---
 provider#androidx.core.content.FileProvider
-INJECTED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:50:9-58:20
+INJECTED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:50:9-58:20
 	android:grantUriPermissions
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:54:13-47
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:54:13-47
 	android:authorities
-		INJECTED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:52:13-64
+		INJECTED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:52:13-64
 	android:exported
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:53:13-37
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:53:13-37
 	android:name
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:51:13-62
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:51:13-62
 manifest
-ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:2:1-61:12
-INJECTED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:2:1-61:12
-INJECTED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:2:1-61:12
-INJECTED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:2:1-61:12
+ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:2:1-61:12
+INJECTED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:2:1-61:12
+INJECTED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:2:1-61:12
+INJECTED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:2:1-61:12
 MERGED from [androidx.databinding:viewbinding:8.2.2] C:\Users\chsaa\.gradle\caches\transforms-3\4a43aea4a1efec6a331cd6b11eec36a0\transformed\viewbinding-8.2.2\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.navigation:navigation-common:2.7.7] C:\Users\chsaa\.gradle\caches\transforms-3\de280b97c0ebe2781ef57ea2c7f46eda\transformed\navigation-common-2.7.7\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-common-ktx:2.7.7] C:\Users\chsaa\.gradle\caches\transforms-3\0fe6821a733e05f9474f8a879b4d2015\transformed\navigation-common-ktx-2.7.7\AndroidManifest.xml:2:1-7:12
@@ -81,32 +81,32 @@ MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\chsaa\.gradle\ca
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\chsaa\.gradle\caches\transforms-3\5b8db532be1827d39034df5a1c902612\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] C:\Users\chsaa\.gradle\caches\transforms-3\0d327ffa6a2bc046094cc60d87110a50\transformed\print-1.0.0\AndroidManifest.xml:17:1-22:12
 	package
-		INJECTED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml
 	android:versionName
-		INJECTED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml
 	xmlns:tools
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:3:5-51
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:3:5-51
 	android:versionCode
-		INJECTED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:2:11-69
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:2:11-69
 uses-permission#android.permission.POST_NOTIFICATIONS
-ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:5:5-76
+ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:5:5-76
 	android:name
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:5:22-74
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:5:22-74
 uses-permission#android.permission.SCHEDULE_EXACT_ALARM
-ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:6:5-78
+ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:6:5-78
 	android:name
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:6:22-76
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:6:22-76
 uses-permission#android.permission.USE_BIOMETRIC
-ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:7:5-71
+ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:7:5-71
 MERGED from [androidx.biometric:biometric:1.1.0] C:\Users\chsaa\.gradle\caches\transforms-3\42de5b0c326d9f857a50584ef294d1e9\transformed\biometric-1.1.0\AndroidManifest.xml:24:5-72
 MERGED from [androidx.biometric:biometric:1.1.0] C:\Users\chsaa\.gradle\caches\transforms-3\42de5b0c326d9f857a50584ef294d1e9\transformed\biometric-1.1.0\AndroidManifest.xml:24:5-72
 	android:name
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:7:22-69
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:7:22-69
 application
-ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:9:5-59:19
-INJECTED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:9:5-59:19
+ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:9:5-59:19
+INJECTED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:9:5-59:19
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\chsaa\.gradle\caches\transforms-3\3d94f2ddae9f2b16b5782a896b77f7e7\transformed\material-1.11.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\chsaa\.gradle\caches\transforms-3\3d94f2ddae9f2b16b5782a896b77f7e7\transformed\material-1.11.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\chsaa\.gradle\caches\transforms-3\1680cd33057ba3fcb3501eefaa77ac77\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
@@ -128,87 +128,87 @@ MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.g
 MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\chsaa\.gradle\caches\transforms-3\1c3a9f29f4ff3068c1e0a6fb89cc8774\transformed\startup-runtime-1.1.1\AndroidManifest.xml:25:5-31:19
 MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\chsaa\.gradle\caches\transforms-3\1c3a9f29f4ff3068c1e0a6fb89cc8774\transformed\startup-runtime-1.1.1\AndroidManifest.xml:25:5-31:19
 	android:extractNativeLibs
-		INJECTED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.12.0] C:\Users\chsaa\.gradle\caches\transforms-3\9660a9cb54f7bbc4e28308efb4763ad7\transformed\core-1.12.0\AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:17:9-35
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:17:9-35
 	android:label
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:15:9-41
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:15:9-41
 	android:fullBackupContent
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:13:9-54
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:13:9-54
 	android:roundIcon
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:16:9-54
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:16:9-54
 	tools:targetApi
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:19:9-29
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:19:9-29
 	android:icon
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:14:9-43
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:14:9-43
 	android:allowBackup
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:11:9-35
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:11:9-35
 	android:theme
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:18:9-47
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:18:9-47
 	android:dataExtractionRules
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:12:9-65
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:12:9-65
 	android:name
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:10:9-37
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:10:9-37
 activity#com.example.spendwise.MainActivity
-ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:21:9-29:20
+ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:21:9-29:20
 	android:windowSoftInputMode
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:24:13-52
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:24:13-52
 	android:exported
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:23:13-36
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:23:13-36
 	android:name
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:22:13-41
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:22:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:25:13-28:29
+ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:25:13-28:29
 action#android.intent.action.MAIN
-ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:26:17-69
+ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:26:17-69
 	android:name
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:26:25-66
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:26:25-66
 category#android.intent.category.LAUNCHER
-ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:27:17-77
+ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:27:17-77
 	android:name
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:27:27-74
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:27:27-74
 receiver#com.example.spendwise.ReminderReceiver
-ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:31:9-33:39
+ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:31:9-33:39
 	android:exported
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:33:13-37
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:33:13-37
 	android:name
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:32:13-45
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:32:13-45
 receiver#com.example.spendwise.WeeklySummaryReceiver
-ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:35:9-37:39
+ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:35:9-37:39
 	android:exported
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:37:13-37
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:37:13-37
 	android:name
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:36:13-50
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:36:13-50
 receiver#com.example.spendwise.QuickAddWidgetProvider
-ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:39:9-48:20
+ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:39:9-48:20
 	android:exported
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:41:13-37
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:41:13-37
 	android:name
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:40:13-51
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:40:13-51
 intent-filter#action:name:android.appwidget.action.APPWIDGET_UPDATE
-ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:42:13-44:29
+ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:42:13-44:29
 action#android.appwidget.action.APPWIDGET_UPDATE
-ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:43:17-83
+ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:43:17-83
 	android:name
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:43:25-81
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:43:25-81
 meta-data#android.appwidget.provider
-ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:45:13-47:64
+ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:45:13-47:64
 	android:resource
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:47:17-62
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:47:17-62
 	android:name
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:46:17-58
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:46:17-58
 meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:55:13-57:53
+ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:55:13-57:53
 	android:resource
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:57:17-51
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:57:17-51
 	android:name
-		ADDED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml:56:17-67
+		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:56:17-67
 uses-sdk
-INJECTED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml
-INJECTED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml
 MERGED from [androidx.databinding:viewbinding:8.2.2] C:\Users\chsaa\.gradle\caches\transforms-3\4a43aea4a1efec6a331cd6b11eec36a0\transformed\viewbinding-8.2.2\AndroidManifest.xml:5:5-44
 MERGED from [androidx.databinding:viewbinding:8.2.2] C:\Users\chsaa\.gradle\caches\transforms-3\4a43aea4a1efec6a331cd6b11eec36a0\transformed\viewbinding-8.2.2\AndroidManifest.xml:5:5-44
 MERGED from [androidx.navigation:navigation-common:2.7.7] C:\Users\chsaa\.gradle\caches\transforms-3\de280b97c0ebe2781ef57ea2c7f46eda\transformed\navigation-common-2.7.7\AndroidManifest.xml:20:5-44
@@ -340,9 +340,9 @@ MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\User
 MERGED from [androidx.print:print:1.0.0] C:\Users\chsaa\.gradle\caches\transforms-3\0d327ffa6a2bc046094cc60d87110a50\transformed\print-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.print:print:1.0.0] C:\Users\chsaa\.gradle\caches\transforms-3\0d327ffa6a2bc046094cc60d87110a50\transformed\print-1.0.0\AndroidManifest.xml:20:5-44
 	android:targetSdkVersion
-		INJECTED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from E:\AntiGravity\SpendWise\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml
 uses-permission#android.permission.USE_FINGERPRINT
 ADDED from [androidx.biometric:biometric:1.1.0] C:\Users\chsaa\.gradle\caches\transforms-3\42de5b0c326d9f857a50584ef294d1e9\transformed\biometric-1.1.0\AndroidManifest.xml:27:5-74
 	android:name

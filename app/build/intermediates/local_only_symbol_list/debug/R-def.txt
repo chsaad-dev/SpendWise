@@ -56,6 +56,7 @@ drawable ic_settings
 drawable shape_dot
 drawable shape_frosted_card
 drawable shape_splash_circle
+drawable spendwise_logo
 id action_addExpense_to_split
 id action_home_to_addExpense
 id action_login_to_home
@@ -209,6 +210,7 @@ layout item_split_member
 layout widget_quick_add
 menu bottom_nav_menu
 mipmap ic_launcher
+mipmap ic_launcher_foreground
 mipmap ic_launcher_round
 navigation nav_graph
 string app_name

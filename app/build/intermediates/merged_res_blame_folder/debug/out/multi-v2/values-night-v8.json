@@ -4,7 +4,7 @@
             "outputFile": "com.example.spendwise.app-mergeDebugResources-51:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "E:\\AntiGravity\\SpendWise\\app\\src\\main\\res\\values-night\\themes.xml",
+                    "source": "C:\\Users\\chsaa\\AndroidStudioProjects\\SpendWise\\app\\src\\main\\res\\values-night\\themes.xml",
                     "from": {
                         "startLines": "6,2",
                         "startColumns": "4,4",

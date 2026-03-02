@@ -1,7 +1,11 @@
 [
     {
-        "merged": "com.example.spendwise.app-merged_res-53:/navigation_nav_graph.xml.flat",
-        "source": "com.example.spendwise.app-main-55:/navigation/nav_graph.xml"
+        "merged": "com.example.spendwise.app-merged_res-53:/drawable_spendwise_logo.png.flat",
+        "source": "com.example.spendwise.app-main-55:/drawable/spendwise_logo.png"
+    },
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\mipmap-xxxhdpi\\ic_launcher_foreground.webp"
     },
     {
         "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\drawable_ic_logo.xml.flat",
@@ -12,6 +16,18 @@
         "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\drawable\\ic_home.xml"
     },
     {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
         "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\layout_fragment_home.xml.flat",
         "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\fragment_home.xml"
     },
@@ -20,40 +36,64 @@
         "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\anim\\slide_in_left.xml"
     },
     {
+        "merged": "com.example.spendwise.app-merged_res-53:/layout_fragment_history.xml.flat",
+        "source": "com.example.spendwise.app-main-55:/layout/fragment_history.xml"
+    },
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\mipmap-xhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\mipmap-xhdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
         "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\drawable_shape_dot.xml.flat",
         "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\drawable\\shape_dot.xml"
+    },
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\layout_item_split_member.xml.flat",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\item_split_member.xml"
     },
     {
         "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\navigation_nav_graph.xml.flat",
         "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\navigation\\nav_graph.xml"
     },
     {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\drawable_ic_goals.xml.flat",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\drawable\\ic_goals.xml"
+    },
+    {
         "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\drawable_ic_history.xml.flat",
         "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\drawable\\ic_history.xml"
     },
     {
-        "merged": "com.example.spendwise.app-merged_res-53:/drawable_ic_goals.xml.flat",
-        "source": "com.example.spendwise.app-main-55:/drawable/ic_goals.xml"
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\mipmap-xhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "com.example.spendwise.app-merged_res-53:/layout_dialog_add_goal.xml.flat",
-        "source": "com.example.spendwise.app-main-55:/layout/dialog_add_goal.xml"
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\mipmap-xxhdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\mipmap-xhdpi\\ic_launcher_round.webp"
     },
     {
         "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\menu_bottom_nav_menu.xml.flat",
         "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\menu\\bottom_nav_menu.xml"
     },
     {
-        "merged": "com.example.spendwise.app-merged_res-53:/layout_item_split_member.xml.flat",
-        "source": "com.example.spendwise.app-main-55:/layout/item_split_member.xml"
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\layout_fragment_categories.xml.flat",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\fragment_categories.xml"
     },
     {
         "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\drawable_shape_splash_circle.xml.flat",
         "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\drawable\\shape_splash_circle.xml"
-    },
-    {
-        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\layout_fragment_categories.xml.flat",
-        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\fragment_categories.xml"
     },
     {
         "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\drawable_ic_launcher_background.xml.flat",
@@ -66,6 +106,10 @@
     {
         "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\drawable_ic_category.xml.flat",
         "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\drawable\\ic_category.xml"
+    },
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\mipmap-mdpi\\ic_launcher_round.webp"
     },
     {
         "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\layout_fragment_login.xml.flat",
@@ -100,8 +144,12 @@
         "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\drawable\\shape_frosted_card.xml"
     },
     {
-        "merged": "com.example.spendwise.app-merged_res-53:/menu_bottom_nav_menu.xml.flat",
-        "source": "com.example.spendwise.app-main-55:/menu/bottom_nav_menu.xml"
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\mipmap-mdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\mipmap-mdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\layout_dialog_add_goal.xml.flat",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\dialog_add_goal.xml"
     },
     {
         "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\layout_fragment_splash.xml.flat",
@@ -112,10 +160,6 @@
         "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\xml\\quick_add_widget_info.xml"
     },
     {
-        "merged": "com.example.spendwise.app-merged_res-53:/layout_fragment_savings_goals.xml.flat",
-        "source": "com.example.spendwise.app-main-55:/layout/fragment_savings_goals.xml"
-    },
-    {
         "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\drawable_ic_settings.xml.flat",
         "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\drawable\\ic_settings.xml"
     },
@@ -124,12 +168,12 @@
         "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\fragment_add_expense.xml"
     },
     {
-        "merged": "com.example.spendwise.app-merged_res-53:/layout_fragment_split_expense.xml.flat",
-        "source": "com.example.spendwise.app-main-55:/layout/fragment_split_expense.xml"
-    },
-    {
         "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\layout_widget_quick_add.xml.flat",
         "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\widget_quick_add.xml"
+    },
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\mipmap-hdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\mipmap-hdpi\\ic_launcher_foreground.webp"
     },
     {
         "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\layout_dialog_reset_pin.xml.flat",
@@ -142,6 +186,10 @@
     {
         "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\drawable_bg_splash_gradient.xml.flat",
         "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\drawable\\bg_splash_gradient.xml"
+    },
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
     },
     {
         "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\layout_fragment_settings.xml.flat",
@@ -164,8 +212,8 @@
         "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
     {
-        "merged": "com.example.spendwise.app-merged_res-53:/layout_item_savings_goal.xml.flat",
-        "source": "com.example.spendwise.app-main-55:/layout/item_savings_goal.xml"
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\layout_fragment_savings_goals.xml.flat",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\fragment_savings_goals.xml"
     },
     {
         "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\anim_slide_out_left.xml.flat",
@@ -176,12 +224,20 @@
         "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\drawable\\ic_add.xml"
     },
     {
-        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\layout_item_category.xml.flat",
-        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\item_category.xml"
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\mipmap-hdpi\\ic_launcher.webp"
     },
     {
         "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\layout_activity_main.xml.flat",
         "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\layout_item_category.xml.flat",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\item_category.xml"
+    },
+    {
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\layout_fragment_split_expense.xml.flat",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\fragment_split_expense.xml"
     },
     {
         "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\drawable_ic_launcher_foreground.xml.flat",
@@ -192,7 +248,7 @@
         "source": "com.example.spendwise.app-main-55:/layout/fragment_home.xml"
     },
     {
-        "merged": "com.example.spendwise.app-merged_res-53:/layout_fragment_settings.xml.flat",
-        "source": "com.example.spendwise.app-main-55:/layout/fragment_settings.xml"
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-merged_res-53:\\layout_item_savings_goal.xml.flat",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\item_savings_goal.xml"
     }
 ]
