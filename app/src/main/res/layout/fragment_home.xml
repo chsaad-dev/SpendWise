@@ -191,7 +191,7 @@
                     android:padding="14dp"
                     android:textAppearance="?attr/textAppearanceBodyMedium"
                     android:textColor="?attr/colorOnSecondaryContainer"
-                    android:text="💡 Your biggest spend: Food (42%)"/>
+                    android:text="Your biggest spend: Food (42%)"/>
             </com.google.android.material.card.MaterialCardView>
 
             <!-- Category Chart -->
