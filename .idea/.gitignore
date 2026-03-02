@@ -5,6 +5,8 @@
 /workspace.xml
 /shelf/
 
+.idea/
+local.properties
 # Build folders
 build/
 .gradle/
@@ -12,3 +14,5 @@ build/
 # OS/system files
 .DS_Store
 Thumbs.db
+
+
