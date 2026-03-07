@@ -23,13 +23,15 @@ Whether you're tracking daily coffee runs, managing monthly bills, or splitting 
 ## Key Features
 
 ### Core Functionality
-- ** Expense Tracking**: Quickly add, edit, and delete daily expenses.
-- ** Interactive Dashboard**: Visualize monthly spending with beautiful bar charts and summaries.
+- ** Income & Expense Tracking**: Quickly add, edit, and delete daily transactions, distinguishing between income and expenses.
+- ** Interactive Dashboard**: Visualize monthly spending with beautiful bar charts, pie charts, and a running Total Balance.
 - ** Category Management**: Create and manage custom categories with colorful icons.
 - ** Smart Filtering**: Filter transaction history by date range or specific categories.
 - ** Search & History**: View detailed transaction logs with swipe-to-delete gestures.
 
 ### Advanced Tools
+- ** Category-Specific Budgets**: Set monthly limits for individual categories and track progress via visual envelopes.
+- ** Advanced PDF Reports**: Export your monthly financial summary, complete with category breakdowns, to a formatted PDF.
 - ** Split Expenses**: Easily divide bills among friends or groups and track who owes what.
 - ** Savings Goals**: Set financial targets and track your progress visually.
 - ** Recurring Transactions**: Automate regular payments like rent or subscriptions.
