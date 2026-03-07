@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
@@ -20,7 +21,7 @@ import java.lang.String;
 
 public final class FragmentHistoryBinding implements ViewBinding {
   @NonNull
-  private final LinearLayout rootView;
+  private final CoordinatorLayout rootView;
 
   @NonNull
   public final ImageButton btnNextYear;
@@ -43,10 +44,11 @@ public final class FragmentHistoryBinding implements ViewBinding {
   @NonNull
   public final TextView tvYearlyTotal;
 
-  private FragmentHistoryBinding(@NonNull LinearLayout rootView, @NonNull ImageButton btnNextYear,
-      @NonNull ImageButton btnPrevYear, @NonNull LineChart chartTrend,
-      @NonNull LinearLayout layoutEmpty, @NonNull RecyclerView rvMonths,
-      @NonNull TextView tvYearLabel, @NonNull TextView tvYearlyTotal) {
+  private FragmentHistoryBinding(@NonNull CoordinatorLayout rootView,
+      @NonNull ImageButton btnNextYear, @NonNull ImageButton btnPrevYear,
+      @NonNull LineChart chartTrend, @NonNull LinearLayout layoutEmpty,
+      @NonNull RecyclerView rvMonths, @NonNull TextView tvYearLabel,
+      @NonNull TextView tvYearlyTotal) {
     this.rootView = rootView;
     this.btnNextYear = btnNextYear;
     this.btnPrevYear = btnPrevYear;
@@ -59,7 +61,7 @@ public final class FragmentHistoryBinding implements ViewBinding {
 
   @Override
   @NonNull
-  public LinearLayout getRoot() {
+  public CoordinatorLayout getRoot() {
     return rootView;
   }
 
@@ -126,7 +128,7 @@ public final class FragmentHistoryBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentHistoryBinding((LinearLayout) rootView, btnNextYear, btnPrevYear,
+      return new FragmentHistoryBinding((CoordinatorLayout) rootView, btnNextYear, btnPrevYear,
           chartTrend, layoutEmpty, rvMonths, tvYearLabel, tvYearlyTotal);
     }
     String missingId = rootView.getResources().getResourceName(id);
