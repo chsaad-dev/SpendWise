@@ -1,74 +1,78 @@
 [
     {
-        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-51:\\layout\\fragment_home.xml",
-        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-54:\\layout\\fragment_home.xml"
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\item_expense.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\item_expense.xml"
     },
     {
-        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-51:\\layout\\widget_quick_add.xml",
-        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-54:\\layout\\widget_quick_add.xml"
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\fragment_categories.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\fragment_categories.xml"
     },
     {
-        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-51:\\layout\\fragment_history.xml",
-        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-54:\\layout\\fragment_history.xml"
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\fragment_history.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\fragment_history.xml"
     },
     {
-        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-51:\\layout\\dialog_add_goal.xml",
-        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-54:\\layout\\dialog_add_goal.xml"
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\item_guide_page.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\item_guide_page.xml"
     },
     {
-        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-51:\\layout\\fragment_add_expense.xml",
-        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-54:\\layout\\fragment_add_expense.xml"
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\fragment_settings.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\fragment_settings.xml"
     },
     {
-        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-51:\\layout\\fragment_split_expense.xml",
-        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-54:\\layout\\fragment_split_expense.xml"
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\item_split_member.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\item_split_member.xml"
     },
     {
-        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-51:\\layout\\fragment_categories.xml",
-        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-54:\\layout\\fragment_categories.xml"
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\fragment_split_expense.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\fragment_split_expense.xml"
     },
     {
-        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-51:\\layout\\item_guide_page.xml",
-        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-54:\\layout\\item_guide_page.xml"
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\fragment_welcome.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\fragment_welcome.xml"
     },
     {
-        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-51:\\layout\\item_savings_goal.xml",
-        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-54:\\layout\\item_savings_goal.xml"
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\fragment_savings_goals.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\fragment_savings_goals.xml"
     },
     {
-        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-51:\\layout\\item_category.xml",
-        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-54:\\layout\\item_category.xml"
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\item_budget_envelope.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\item_budget_envelope.xml"
     },
     {
-        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-51:\\layout\\activity_main.xml",
-        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-54:\\layout\\activity_main.xml"
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\fragment_add_expense.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\fragment_add_expense.xml"
     },
     {
-        "merged": "com.example.spendwise.app-mergeDebugResources-51:/layout/fragment_settings.xml",
-        "source": "com.example.spendwise.app-main-54:/layout/fragment_settings.xml"
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\activity_main.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\activity_main.xml"
     },
     {
-        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-51:\\layout\\fragment_savings_goals.xml",
-        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-54:\\layout\\fragment_savings_goals.xml"
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\widget_quick_add.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\widget_quick_add.xml"
     },
     {
-        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-51:\\layout\\item_expense.xml",
-        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-54:\\layout\\item_expense.xml"
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\item_month_summary.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\item_month_summary.xml"
     },
     {
-        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-51:\\layout\\fragment_welcome.xml",
-        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-54:\\layout\\fragment_welcome.xml"
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\dialog_add_goal.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\dialog_add_goal.xml"
     },
     {
-        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-51:\\layout\\fragment_settings.xml",
-        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-54:\\layout\\fragment_settings.xml"
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\item_savings_goal.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\item_savings_goal.xml"
     },
     {
-        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-51:\\layout\\item_split_member.xml",
-        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-54:\\layout\\item_split_member.xml"
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\item_category.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\item_category.xml"
     },
     {
-        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-51:\\layout\\item_month_summary.xml",
-        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-54:\\layout\\item_month_summary.xml"
+        "merged": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-mergeDebugResources-52:\\layout\\fragment_home.xml",
+        "source": "C:\\Users\\chsaa\\.gradle\\daemon\\8.2\\com.example.spendwise.app-main-55:\\layout\\fragment_home.xml"
+    },
+    {
+        "merged": "com.example.spendwise.app-mergeDebugResources-52:/layout/fragment_settings.xml",
+        "source": "com.example.spendwise.app-main-55:/layout/fragment_settings.xml"
     }
 ]

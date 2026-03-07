@@ -15,6 +15,7 @@ import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.spendwise.R;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -48,6 +49,12 @@ public final class FragmentAddExpenseBinding implements ViewBinding {
   public final MaterialButton btnSplit;
 
   @NonNull
+  public final MaterialButton btnTypeExpense;
+
+  @NonNull
+  public final MaterialButton btnTypeIncome;
+
+  @NonNull
   public final TextInputEditText etAmount;
 
   @NonNull
@@ -63,13 +70,25 @@ public final class FragmentAddExpenseBinding implements ViewBinding {
   public final ImageView ivReceiptPreview;
 
   @NonNull
+  public final LinearLayout layoutReceipt;
+
+  @NonNull
   public final LinearLayout layoutRecurring;
 
   @NonNull
   public final MaterialSwitch switchRecurring;
 
   @NonNull
+  public final TextInputLayout tilCategory;
+
+  @NonNull
   public final TextInputLayout tilRecurrence;
+
+  @NonNull
+  public final TextInputLayout tilTags;
+
+  @NonNull
+  public final MaterialButtonToggleGroup toggleType;
 
   @NonNull
   public final TextView tvTitle;
@@ -78,11 +97,14 @@ public final class FragmentAddExpenseBinding implements ViewBinding {
       @NonNull AutoCompleteTextView actvCategory, @NonNull AutoCompleteTextView actvRecurrence,
       @NonNull MaterialButton btnAttachReceipt, @NonNull MaterialButton btnDelete,
       @NonNull MaterialButton btnRemoveReceipt, @NonNull MaterialButton btnSave,
-      @NonNull MaterialButton btnSplit, @NonNull TextInputEditText etAmount,
+      @NonNull MaterialButton btnSplit, @NonNull MaterialButton btnTypeExpense,
+      @NonNull MaterialButton btnTypeIncome, @NonNull TextInputEditText etAmount,
       @NonNull TextInputEditText etDate, @NonNull TextInputEditText etNote,
       @NonNull TextInputEditText etTags, @NonNull ImageView ivReceiptPreview,
-      @NonNull LinearLayout layoutRecurring, @NonNull MaterialSwitch switchRecurring,
-      @NonNull TextInputLayout tilRecurrence, @NonNull TextView tvTitle) {
+      @NonNull LinearLayout layoutReceipt, @NonNull LinearLayout layoutRecurring,
+      @NonNull MaterialSwitch switchRecurring, @NonNull TextInputLayout tilCategory,
+      @NonNull TextInputLayout tilRecurrence, @NonNull TextInputLayout tilTags,
+      @NonNull MaterialButtonToggleGroup toggleType, @NonNull TextView tvTitle) {
     this.rootView = rootView;
     this.actvCategory = actvCategory;
     this.actvRecurrence = actvRecurrence;
@@ -91,14 +113,20 @@ public final class FragmentAddExpenseBinding implements ViewBinding {
     this.btnRemoveReceipt = btnRemoveReceipt;
     this.btnSave = btnSave;
     this.btnSplit = btnSplit;
+    this.btnTypeExpense = btnTypeExpense;
+    this.btnTypeIncome = btnTypeIncome;
     this.etAmount = etAmount;
     this.etDate = etDate;
     this.etNote = etNote;
     this.etTags = etTags;
     this.ivReceiptPreview = ivReceiptPreview;
+    this.layoutReceipt = layoutReceipt;
     this.layoutRecurring = layoutRecurring;
     this.switchRecurring = switchRecurring;
+    this.tilCategory = tilCategory;
     this.tilRecurrence = tilRecurrence;
+    this.tilTags = tilTags;
+    this.toggleType = toggleType;
     this.tvTitle = tvTitle;
   }
 
@@ -171,6 +199,18 @@ public final class FragmentAddExpenseBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.btn_type_expense;
+      MaterialButton btnTypeExpense = ViewBindings.findChildViewById(rootView, id);
+      if (btnTypeExpense == null) {
+        break missingId;
+      }
+
+      id = R.id.btn_type_income;
+      MaterialButton btnTypeIncome = ViewBindings.findChildViewById(rootView, id);
+      if (btnTypeIncome == null) {
+        break missingId;
+      }
+
       id = R.id.et_amount;
       TextInputEditText etAmount = ViewBindings.findChildViewById(rootView, id);
       if (etAmount == null) {
@@ -201,6 +241,12 @@ public final class FragmentAddExpenseBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.layout_receipt;
+      LinearLayout layoutReceipt = ViewBindings.findChildViewById(rootView, id);
+      if (layoutReceipt == null) {
+        break missingId;
+      }
+
       id = R.id.layout_recurring;
       LinearLayout layoutRecurring = ViewBindings.findChildViewById(rootView, id);
       if (layoutRecurring == null) {
@@ -213,9 +259,27 @@ public final class FragmentAddExpenseBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.til_category;
+      TextInputLayout tilCategory = ViewBindings.findChildViewById(rootView, id);
+      if (tilCategory == null) {
+        break missingId;
+      }
+
       id = R.id.til_recurrence;
       TextInputLayout tilRecurrence = ViewBindings.findChildViewById(rootView, id);
       if (tilRecurrence == null) {
+        break missingId;
+      }
+
+      id = R.id.til_tags;
+      TextInputLayout tilTags = ViewBindings.findChildViewById(rootView, id);
+      if (tilTags == null) {
+        break missingId;
+      }
+
+      id = R.id.toggle_type;
+      MaterialButtonToggleGroup toggleType = ViewBindings.findChildViewById(rootView, id);
+      if (toggleType == null) {
         break missingId;
       }
 
@@ -226,8 +290,9 @@ public final class FragmentAddExpenseBinding implements ViewBinding {
       }
 
       return new FragmentAddExpenseBinding((ScrollView) rootView, actvCategory, actvRecurrence,
-          btnAttachReceipt, btnDelete, btnRemoveReceipt, btnSave, btnSplit, etAmount, etDate,
-          etNote, etTags, ivReceiptPreview, layoutRecurring, switchRecurring, tilRecurrence,
+          btnAttachReceipt, btnDelete, btnRemoveReceipt, btnSave, btnSplit, btnTypeExpense,
+          btnTypeIncome, etAmount, etDate, etNote, etTags, ivReceiptPreview, layoutReceipt,
+          layoutRecurring, switchRecurring, tilCategory, tilRecurrence, tilTags, toggleType,
           tvTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);

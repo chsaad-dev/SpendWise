@@ -51,6 +51,9 @@ public final class FragmentHomeBinding implements ViewBinding {
   public final ChipGroup chipGroupCategories;
 
   @NonNull
+  public final LinearLayout containerBudgetEnvelopes;
+
+  @NonNull
   public final TextInputEditText etSearch;
 
   @NonNull
@@ -58,6 +61,9 @@ public final class FragmentHomeBinding implements ViewBinding {
 
   @NonNull
   public final LinearLayout layoutBudget;
+
+  @NonNull
+  public final LinearLayout layoutCategoryBudgets;
 
   @NonNull
   public final LinearLayout layoutChartEmpty;
@@ -81,7 +87,13 @@ public final class FragmentHomeBinding implements ViewBinding {
   public final TextView tvTopCategory;
 
   @NonNull
+  public final TextView tvTotalBalance;
+
+  @NonNull
   public final TextView tvTotalExpense;
+
+  @NonNull
+  public final TextView tvTotalIncome;
 
   @NonNull
   public final TextView tvTransactionCount;
@@ -90,12 +102,14 @@ public final class FragmentHomeBinding implements ViewBinding {
       @NonNull ImageButton btnNextMonth, @NonNull ImageButton btnPrevMonth,
       @NonNull MaterialCardView cardInsight, @NonNull MaterialCardView cardPieChart,
       @NonNull HorizontalBarChart chartCategories, @NonNull PieChart chartPie,
-      @NonNull ChipGroup chipGroupCategories, @NonNull TextInputEditText etSearch,
-      @NonNull FloatingActionButton fabAdd, @NonNull LinearLayout layoutBudget,
+      @NonNull ChipGroup chipGroupCategories, @NonNull LinearLayout containerBudgetEnvelopes,
+      @NonNull TextInputEditText etSearch, @NonNull FloatingActionButton fabAdd,
+      @NonNull LinearLayout layoutBudget, @NonNull LinearLayout layoutCategoryBudgets,
       @NonNull LinearLayout layoutChartEmpty, @NonNull LinearLayout layoutEmpty,
       @NonNull LinearProgressIndicator progressBudget, @NonNull RecyclerView rvExpenses,
       @NonNull TextView tvBudgetLabel, @NonNull TextView tvMonthLabel,
-      @NonNull TextView tvTopCategory, @NonNull TextView tvTotalExpense,
+      @NonNull TextView tvTopCategory, @NonNull TextView tvTotalBalance,
+      @NonNull TextView tvTotalExpense, @NonNull TextView tvTotalIncome,
       @NonNull TextView tvTransactionCount) {
     this.rootView = rootView;
     this.btnNextMonth = btnNextMonth;
@@ -105,9 +119,11 @@ public final class FragmentHomeBinding implements ViewBinding {
     this.chartCategories = chartCategories;
     this.chartPie = chartPie;
     this.chipGroupCategories = chipGroupCategories;
+    this.containerBudgetEnvelopes = containerBudgetEnvelopes;
     this.etSearch = etSearch;
     this.fabAdd = fabAdd;
     this.layoutBudget = layoutBudget;
+    this.layoutCategoryBudgets = layoutCategoryBudgets;
     this.layoutChartEmpty = layoutChartEmpty;
     this.layoutEmpty = layoutEmpty;
     this.progressBudget = progressBudget;
@@ -115,7 +131,9 @@ public final class FragmentHomeBinding implements ViewBinding {
     this.tvBudgetLabel = tvBudgetLabel;
     this.tvMonthLabel = tvMonthLabel;
     this.tvTopCategory = tvTopCategory;
+    this.tvTotalBalance = tvTotalBalance;
     this.tvTotalExpense = tvTotalExpense;
+    this.tvTotalIncome = tvTotalIncome;
     this.tvTransactionCount = tvTransactionCount;
   }
 
@@ -188,6 +206,12 @@ public final class FragmentHomeBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.container_budget_envelopes;
+      LinearLayout containerBudgetEnvelopes = ViewBindings.findChildViewById(rootView, id);
+      if (containerBudgetEnvelopes == null) {
+        break missingId;
+      }
+
       id = R.id.et_search;
       TextInputEditText etSearch = ViewBindings.findChildViewById(rootView, id);
       if (etSearch == null) {
@@ -203,6 +227,12 @@ public final class FragmentHomeBinding implements ViewBinding {
       id = R.id.layout_budget;
       LinearLayout layoutBudget = ViewBindings.findChildViewById(rootView, id);
       if (layoutBudget == null) {
+        break missingId;
+      }
+
+      id = R.id.layout_category_budgets;
+      LinearLayout layoutCategoryBudgets = ViewBindings.findChildViewById(rootView, id);
+      if (layoutCategoryBudgets == null) {
         break missingId;
       }
 
@@ -248,9 +278,21 @@ public final class FragmentHomeBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tv_total_balance;
+      TextView tvTotalBalance = ViewBindings.findChildViewById(rootView, id);
+      if (tvTotalBalance == null) {
+        break missingId;
+      }
+
       id = R.id.tv_total_expense;
       TextView tvTotalExpense = ViewBindings.findChildViewById(rootView, id);
       if (tvTotalExpense == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_total_income;
+      TextView tvTotalIncome = ViewBindings.findChildViewById(rootView, id);
+      if (tvTotalIncome == null) {
         break missingId;
       }
 
@@ -261,9 +303,10 @@ public final class FragmentHomeBinding implements ViewBinding {
       }
 
       return new FragmentHomeBinding((CoordinatorLayout) rootView, btnNextMonth, btnPrevMonth,
-          cardInsight, cardPieChart, chartCategories, chartPie, chipGroupCategories, etSearch,
-          fabAdd, layoutBudget, layoutChartEmpty, layoutEmpty, progressBudget, rvExpenses,
-          tvBudgetLabel, tvMonthLabel, tvTopCategory, tvTotalExpense, tvTransactionCount);
+          cardInsight, cardPieChart, chartCategories, chartPie, chipGroupCategories,
+          containerBudgetEnvelopes, etSearch, fabAdd, layoutBudget, layoutCategoryBudgets,
+          layoutChartEmpty, layoutEmpty, progressBudget, rvExpenses, tvBudgetLabel, tvMonthLabel,
+          tvTopCategory, tvTotalBalance, tvTotalExpense, tvTotalIncome, tvTransactionCount);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

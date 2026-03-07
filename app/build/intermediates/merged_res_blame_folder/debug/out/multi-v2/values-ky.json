@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.spendwise.app-mergeDebugResources-50:/values-ky/values-ky.xml",
+            "outputFile": "com.example.spendwise.app-mergeDebugResources-51:/values-ky/values-ky.xml",
             "map": [
                 {
                     "source": "C:\\Users\\chsaa\\.gradle\\caches\\transforms-3\\7267a4a3daea2f370990b558ba71de49\\transformed\\navigation-ui-2.7.7\\res\\values-ky\\values-ky.xml",

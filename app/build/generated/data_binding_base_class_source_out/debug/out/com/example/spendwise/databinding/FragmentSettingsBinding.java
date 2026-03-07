@@ -42,6 +42,9 @@ public final class FragmentSettingsBinding implements ViewBinding {
   public final MaterialButton btnExportCsv;
 
   @NonNull
+  public final MaterialButton btnExportPdf;
+
+  @NonNull
   public final MaterialButton btnLanguage;
 
   @NonNull
@@ -60,9 +63,9 @@ public final class FragmentSettingsBinding implements ViewBinding {
       @NonNull MaterialButton btnBackup, @NonNull MaterialButton btnBudget,
       @NonNull MaterialButton btnClearCategories, @NonNull MaterialButton btnClearData,
       @NonNull MaterialButton btnCurrency, @NonNull MaterialButton btnExportCsv,
-      @NonNull MaterialButton btnLanguage, @NonNull MaterialButton btnPrivacy,
-      @NonNull MaterialButton btnRate, @NonNull MaterialButton btnRestore,
-      @NonNull MaterialSwitch switchDarkMode) {
+      @NonNull MaterialButton btnExportPdf, @NonNull MaterialButton btnLanguage,
+      @NonNull MaterialButton btnPrivacy, @NonNull MaterialButton btnRate,
+      @NonNull MaterialButton btnRestore, @NonNull MaterialSwitch switchDarkMode) {
     this.rootView = rootView;
     this.btnAbout = btnAbout;
     this.btnBackup = btnBackup;
@@ -71,6 +74,7 @@ public final class FragmentSettingsBinding implements ViewBinding {
     this.btnClearData = btnClearData;
     this.btnCurrency = btnCurrency;
     this.btnExportCsv = btnExportCsv;
+    this.btnExportPdf = btnExportPdf;
     this.btnLanguage = btnLanguage;
     this.btnPrivacy = btnPrivacy;
     this.btnRate = btnRate;
@@ -147,6 +151,12 @@ public final class FragmentSettingsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.btn_export_pdf;
+      MaterialButton btnExportPdf = ViewBindings.findChildViewById(rootView, id);
+      if (btnExportPdf == null) {
+        break missingId;
+      }
+
       id = R.id.btn_language;
       MaterialButton btnLanguage = ViewBindings.findChildViewById(rootView, id);
       if (btnLanguage == null) {
@@ -178,8 +188,8 @@ public final class FragmentSettingsBinding implements ViewBinding {
       }
 
       return new FragmentSettingsBinding((ScrollView) rootView, btnAbout, btnBackup, btnBudget,
-          btnClearCategories, btnClearData, btnCurrency, btnExportCsv, btnLanguage, btnPrivacy,
-          btnRate, btnRestore, switchDarkMode);
+          btnClearCategories, btnClearData, btnCurrency, btnExportCsv, btnExportPdf, btnLanguage,
+          btnPrivacy, btnRate, btnRestore, switchDarkMode);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -41,17 +41,42 @@ class CategoriesFragment : Fragment() {
         val btnAdd = view.findViewById<MaterialButton>(R.id.btn_add_category)
         val layoutEmpty = view.findViewById<LinearLayout>(R.id.layout_empty_categories)
 
-        val adapter = CategoryAdapter { category ->
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Delete Category")
-                .setMessage("Delete \"${category.name}\"? Existing expenses using this category will keep their label.")
-                .setPositiveButton("Delete") { _, _ ->
-                    viewModel.deleteCategory(category)
-                    Toast.makeText(context, "Category deleted", Toast.LENGTH_SHORT).show()
+        val adapter = CategoryAdapter(
+            onDeleteClick = { category ->
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Delete Category")
+                    .setMessage("Delete \"${category.name}\"? Existing expenses using this category will keep their label.")
+                    .setPositiveButton("Delete") { _, _ ->
+                        viewModel.deleteCategory(category)
+                        Toast.makeText(context, "Category deleted", Toast.LENGTH_SHORT).show()
+                    }
+                    .setNegativeButton("Cancel", null)
+                    .show()
+            },
+            onEditClick = { category ->
+                val input = android.widget.EditText(requireContext()).apply {
+                    inputType = android.text.InputType.TYPE_CLASS_NUMBER or android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL
+                    hint = "Enter monthly budget map"
+                    if (category.monthlyBudget > 0) setText(category.monthlyBudget.toString())
+                    setPadding(64, 32, 64, 32)
                 }
-                .setNegativeButton("Cancel", null)
-                .show()
-        }
+
+                MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Budget for ${category.name}")
+                    .setMessage("Set a monthly spending limit for this category.")
+                    .setView(input)
+                    .setPositiveButton("Save") { _, _ ->
+                        val value = input.text.toString().toDoubleOrNull() ?: 0.0
+                        viewModel.updateCategory(category.copy(monthlyBudget = value))
+                        Toast.makeText(context, "Budget saved", Toast.LENGTH_SHORT).show()
+                    }
+                    .setNeutralButton("Remove Limit") { _, _ ->
+                        viewModel.updateCategory(category.copy(monthlyBudget = 0.0))
+                    }
+                    .setNegativeButton("Cancel", null)
+                    .show()
+            }
+        )
 
         rvCategories.layoutManager = LinearLayoutManager(context)
         rvCategories.adapter = adapter
@@ -73,7 +98,10 @@ class CategoriesFragment : Fragment() {
         }
     }
 
-    class CategoryAdapter(private val onDeleteClick: (Category) -> Unit) :
+    class CategoryAdapter(
+        private val onDeleteClick: (Category) -> Unit,
+        private val onEditClick: (Category) -> Unit
+    ) :
         ListAdapter<Category, CategoryAdapter.ViewHolder>(DiffCallback()) {
 
         private val categoryColors = mapOf(
@@ -87,6 +115,7 @@ class CategoriesFragment : Fragment() {
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             private val tvName: TextView = view.findViewById(R.id.tv_category_name)
+            private val tvBudget: TextView = view.findViewById(R.id.tv_category_budget)
             private val colorDot: View = view.findViewById(R.id.view_color_dot)
             private val btnDelete: MaterialButton = view.findViewById(R.id.btn_delete_category)
 
@@ -101,6 +130,14 @@ class CategoriesFragment : Fragment() {
                 drawable.setColor(Color.parseColor(color))
                 colorDot.background = drawable
 
+                if (category.monthlyBudget > 0) {
+                    val fmt = java.text.NumberFormat.getCurrencyInstance(java.util.Locale.getDefault())
+                    tvBudget.text = "Limit: ${fmt.format(category.monthlyBudget)}"
+                } else {
+                    tvBudget.text = "No Budget"
+                }
+
+                itemView.setOnClickListener { onEditClick(category) }
                 btnDelete.setOnClickListener { onDeleteClick(category) }
             }
         }

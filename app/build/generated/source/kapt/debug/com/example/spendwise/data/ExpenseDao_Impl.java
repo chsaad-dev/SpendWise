@@ -46,7 +46,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "INSERT OR REPLACE INTO `expenses` (`id`,`amount`,`category`,`date`,`note`,`receiptPath`,`tags`) VALUES (nullif(?, 0),?,?,?,?,?,?)";
+        return "INSERT OR REPLACE INTO `expenses` (`id`,`amount`,`category`,`date`,`note`,`receiptPath`,`tags`,`isIncome`) VALUES (nullif(?, 0),?,?,?,?,?,?,?)";
       }
 
       @Override
@@ -75,6 +75,8 @@ public final class ExpenseDao_Impl implements ExpenseDao {
         } else {
           statement.bindString(7, entity.getTags());
         }
+        final int _tmp = entity.isIncome() ? 1 : 0;
+        statement.bindLong(8, _tmp);
       }
     };
     this.__deletionAdapterOfExpense = new EntityDeletionOrUpdateAdapter<Expense>(__db) {
@@ -94,7 +96,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "UPDATE OR ABORT `expenses` SET `id` = ?,`amount` = ?,`category` = ?,`date` = ?,`note` = ?,`receiptPath` = ?,`tags` = ? WHERE `id` = ?";
+        return "UPDATE OR ABORT `expenses` SET `id` = ?,`amount` = ?,`category` = ?,`date` = ?,`note` = ?,`receiptPath` = ?,`tags` = ?,`isIncome` = ? WHERE `id` = ?";
       }
 
       @Override
@@ -123,7 +125,9 @@ public final class ExpenseDao_Impl implements ExpenseDao {
         } else {
           statement.bindString(7, entity.getTags());
         }
-        statement.bindLong(8, entity.getId());
+        final int _tmp = entity.isIncome() ? 1 : 0;
+        statement.bindLong(8, _tmp);
+        statement.bindLong(9, entity.getId());
       }
     };
     this.__preparedStmtOfDeleteAllExpenses = new SharedSQLiteStatement(__db) {
@@ -137,7 +141,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
   }
 
   @Override
-  public Object insertExpense(final Expense expense, final Continuation<? super Unit> $completion) {
+  public Object insertExpense(final Expense expense, final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -151,11 +155,11 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           __db.endTransaction();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
-  public Object deleteExpense(final Expense expense, final Continuation<? super Unit> $completion) {
+  public Object deleteExpense(final Expense expense, final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -169,11 +173,11 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           __db.endTransaction();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
-  public Object updateExpense(final Expense expense, final Continuation<? super Unit> $completion) {
+  public Object updateExpense(final Expense expense, final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -187,11 +191,11 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           __db.endTransaction();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
-  public Object deleteAllExpenses(final Continuation<? super Unit> $completion) {
+  public Object deleteAllExpenses(final Continuation<? super Unit> arg0) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -210,7 +214,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           __preparedStmtOfDeleteAllExpenses.release(_stmt);
         }
       }
-    }, $completion);
+    }, arg0);
   }
 
   @Override
@@ -230,6 +234,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           final int _cursorIndexOfNote = CursorUtil.getColumnIndexOrThrow(_cursor, "note");
           final int _cursorIndexOfReceiptPath = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptPath");
           final int _cursorIndexOfTags = CursorUtil.getColumnIndexOrThrow(_cursor, "tags");
+          final int _cursorIndexOfIsIncome = CursorUtil.getColumnIndexOrThrow(_cursor, "isIncome");
           final List<Expense> _result = new ArrayList<Expense>(_cursor.getCount());
           while (_cursor.moveToNext()) {
             final Expense _item;
@@ -263,7 +268,11 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpTags = _cursor.getString(_cursorIndexOfTags);
             }
-            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote,_tmpReceiptPath,_tmpTags);
+            final boolean _tmpIsIncome;
+            final int _tmp;
+            _tmp = _cursor.getInt(_cursorIndexOfIsIncome);
+            _tmpIsIncome = _tmp != 0;
+            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote,_tmpReceiptPath,_tmpTags,_tmpIsIncome);
             _result.add(_item);
           }
           return _result;
@@ -280,7 +289,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
   }
 
   @Override
-  public Object getAllExpensesSync(final Continuation<? super List<Expense>> $completion) {
+  public Object getAllExpensesSync(final Continuation<? super List<Expense>> arg0) {
     final String _sql = "SELECT * FROM expenses ORDER BY date DESC";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
@@ -297,6 +306,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           final int _cursorIndexOfNote = CursorUtil.getColumnIndexOrThrow(_cursor, "note");
           final int _cursorIndexOfReceiptPath = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptPath");
           final int _cursorIndexOfTags = CursorUtil.getColumnIndexOrThrow(_cursor, "tags");
+          final int _cursorIndexOfIsIncome = CursorUtil.getColumnIndexOrThrow(_cursor, "isIncome");
           final List<Expense> _result = new ArrayList<Expense>(_cursor.getCount());
           while (_cursor.moveToNext()) {
             final Expense _item;
@@ -330,7 +340,11 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpTags = _cursor.getString(_cursorIndexOfTags);
             }
-            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote,_tmpReceiptPath,_tmpTags);
+            final boolean _tmpIsIncome;
+            final int _tmp;
+            _tmp = _cursor.getInt(_cursorIndexOfIsIncome);
+            _tmpIsIncome = _tmp != 0;
+            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote,_tmpReceiptPath,_tmpTags,_tmpIsIncome);
             _result.add(_item);
           }
           return _result;
@@ -339,7 +353,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           _statement.release();
         }
       }
-    }, $completion);
+    }, arg0);
   }
 
   @Override
@@ -371,6 +385,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           final int _cursorIndexOfNote = CursorUtil.getColumnIndexOrThrow(_cursor, "note");
           final int _cursorIndexOfReceiptPath = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptPath");
           final int _cursorIndexOfTags = CursorUtil.getColumnIndexOrThrow(_cursor, "tags");
+          final int _cursorIndexOfIsIncome = CursorUtil.getColumnIndexOrThrow(_cursor, "isIncome");
           final List<Expense> _result = new ArrayList<Expense>(_cursor.getCount());
           while (_cursor.moveToNext()) {
             final Expense _item;
@@ -404,7 +419,11 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpTags = _cursor.getString(_cursorIndexOfTags);
             }
-            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote,_tmpReceiptPath,_tmpTags);
+            final boolean _tmpIsIncome;
+            final int _tmp;
+            _tmp = _cursor.getInt(_cursorIndexOfIsIncome);
+            _tmpIsIncome = _tmp != 0;
+            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote,_tmpReceiptPath,_tmpTags,_tmpIsIncome);
             _result.add(_item);
           }
           return _result;
@@ -422,7 +441,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
 
   @Override
   public Object getExpensesByDateRangeSync(final long startDate, final long endDate,
-      final Continuation<? super List<Expense>> $completion) {
+      final Continuation<? super List<Expense>> arg2) {
     final String _sql = "SELECT * FROM expenses WHERE date BETWEEN ? AND ? ORDER BY date DESC";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 2);
     int _argIndex = 1;
@@ -443,6 +462,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           final int _cursorIndexOfNote = CursorUtil.getColumnIndexOrThrow(_cursor, "note");
           final int _cursorIndexOfReceiptPath = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptPath");
           final int _cursorIndexOfTags = CursorUtil.getColumnIndexOrThrow(_cursor, "tags");
+          final int _cursorIndexOfIsIncome = CursorUtil.getColumnIndexOrThrow(_cursor, "isIncome");
           final List<Expense> _result = new ArrayList<Expense>(_cursor.getCount());
           while (_cursor.moveToNext()) {
             final Expense _item;
@@ -476,7 +496,11 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpTags = _cursor.getString(_cursorIndexOfTags);
             }
-            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote,_tmpReceiptPath,_tmpTags);
+            final boolean _tmpIsIncome;
+            final int _tmp;
+            _tmp = _cursor.getInt(_cursorIndexOfIsIncome);
+            _tmpIsIncome = _tmp != 0;
+            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote,_tmpReceiptPath,_tmpTags,_tmpIsIncome);
             _result.add(_item);
           }
           return _result;
@@ -485,7 +509,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           _statement.release();
         }
       }
-    }, $completion);
+    }, arg2);
   }
 
   @Override
@@ -509,6 +533,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           final int _cursorIndexOfNote = CursorUtil.getColumnIndexOrThrow(_cursor, "note");
           final int _cursorIndexOfReceiptPath = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptPath");
           final int _cursorIndexOfTags = CursorUtil.getColumnIndexOrThrow(_cursor, "tags");
+          final int _cursorIndexOfIsIncome = CursorUtil.getColumnIndexOrThrow(_cursor, "isIncome");
           final List<Expense> _result = new ArrayList<Expense>(_cursor.getCount());
           while (_cursor.moveToNext()) {
             final Expense _item;
@@ -542,7 +567,11 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpTags = _cursor.getString(_cursorIndexOfTags);
             }
-            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote,_tmpReceiptPath,_tmpTags);
+            final boolean _tmpIsIncome;
+            final int _tmp;
+            _tmp = _cursor.getInt(_cursorIndexOfIsIncome);
+            _tmpIsIncome = _tmp != 0;
+            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote,_tmpReceiptPath,_tmpTags,_tmpIsIncome);
             _result.add(_item);
           }
           return _result;
@@ -581,6 +610,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           final int _cursorIndexOfNote = CursorUtil.getColumnIndexOrThrow(_cursor, "note");
           final int _cursorIndexOfReceiptPath = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptPath");
           final int _cursorIndexOfTags = CursorUtil.getColumnIndexOrThrow(_cursor, "tags");
+          final int _cursorIndexOfIsIncome = CursorUtil.getColumnIndexOrThrow(_cursor, "isIncome");
           final List<Expense> _result = new ArrayList<Expense>(_cursor.getCount());
           while (_cursor.moveToNext()) {
             final Expense _item;
@@ -614,7 +644,11 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpTags = _cursor.getString(_cursorIndexOfTags);
             }
-            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote,_tmpReceiptPath,_tmpTags);
+            final boolean _tmpIsIncome;
+            final int _tmp;
+            _tmp = _cursor.getInt(_cursorIndexOfIsIncome);
+            _tmpIsIncome = _tmp != 0;
+            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote,_tmpReceiptPath,_tmpTags,_tmpIsIncome);
             _result.add(_item);
           }
           return _result;
@@ -658,6 +692,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           final int _cursorIndexOfNote = CursorUtil.getColumnIndexOrThrow(_cursor, "note");
           final int _cursorIndexOfReceiptPath = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptPath");
           final int _cursorIndexOfTags = CursorUtil.getColumnIndexOrThrow(_cursor, "tags");
+          final int _cursorIndexOfIsIncome = CursorUtil.getColumnIndexOrThrow(_cursor, "isIncome");
           final List<Expense> _result = new ArrayList<Expense>(_cursor.getCount());
           while (_cursor.moveToNext()) {
             final Expense _item;
@@ -691,7 +726,11 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpTags = _cursor.getString(_cursorIndexOfTags);
             }
-            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote,_tmpReceiptPath,_tmpTags);
+            final boolean _tmpIsIncome;
+            final int _tmp;
+            _tmp = _cursor.getInt(_cursorIndexOfIsIncome);
+            _tmpIsIncome = _tmp != 0;
+            _item = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote,_tmpReceiptPath,_tmpTags,_tmpIsIncome);
             _result.add(_item);
           }
           return _result;
@@ -709,7 +748,42 @@ public final class ExpenseDao_Impl implements ExpenseDao {
 
   @Override
   public LiveData<Double> getTotalExpense() {
-    final String _sql = "SELECT SUM(amount) FROM expenses";
+    final String _sql = "SELECT SUM(amount) FROM expenses WHERE isIncome = 0";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
+    return __db.getInvalidationTracker().createLiveData(new String[] {"expenses"}, false, new Callable<Double>() {
+      @Override
+      @Nullable
+      public Double call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+        try {
+          final Double _result;
+          if (_cursor.moveToFirst()) {
+            final Double _tmp;
+            if (_cursor.isNull(0)) {
+              _tmp = null;
+            } else {
+              _tmp = _cursor.getDouble(0);
+            }
+            _result = _tmp;
+          } else {
+            _result = null;
+          }
+          return _result;
+        } finally {
+          _cursor.close();
+        }
+      }
+
+      @Override
+      protected void finalize() {
+        _statement.release();
+      }
+    });
+  }
+
+  @Override
+  public LiveData<Double> getTotalIncome() {
+    final String _sql = "SELECT SUM(amount) FROM expenses WHERE isIncome = 1";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     return __db.getInvalidationTracker().createLiveData(new String[] {"expenses"}, false, new Callable<Double>() {
       @Override
@@ -744,7 +818,46 @@ public final class ExpenseDao_Impl implements ExpenseDao {
 
   @Override
   public LiveData<Double> getMonthlyExpense(final long startDate, final long endDate) {
-    final String _sql = "SELECT SUM(amount) FROM expenses WHERE date BETWEEN ? AND ?";
+    final String _sql = "SELECT SUM(amount) FROM expenses WHERE isIncome = 0 AND date BETWEEN ? AND ?";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 2);
+    int _argIndex = 1;
+    _statement.bindLong(_argIndex, startDate);
+    _argIndex = 2;
+    _statement.bindLong(_argIndex, endDate);
+    return __db.getInvalidationTracker().createLiveData(new String[] {"expenses"}, false, new Callable<Double>() {
+      @Override
+      @Nullable
+      public Double call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+        try {
+          final Double _result;
+          if (_cursor.moveToFirst()) {
+            final Double _tmp;
+            if (_cursor.isNull(0)) {
+              _tmp = null;
+            } else {
+              _tmp = _cursor.getDouble(0);
+            }
+            _result = _tmp;
+          } else {
+            _result = null;
+          }
+          return _result;
+        } finally {
+          _cursor.close();
+        }
+      }
+
+      @Override
+      protected void finalize() {
+        _statement.release();
+      }
+    });
+  }
+
+  @Override
+  public LiveData<Double> getMonthlyIncome(final long startDate, final long endDate) {
+    final String _sql = "SELECT SUM(amount) FROM expenses WHERE isIncome = 1 AND date BETWEEN ? AND ?";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 2);
     int _argIndex = 1;
     _statement.bindLong(_argIndex, startDate);
@@ -783,8 +896,8 @@ public final class ExpenseDao_Impl implements ExpenseDao {
 
   @Override
   public Object getCategoryTotals(final long startDate, final long endDate,
-      final Continuation<? super List<CategoryTotal>> $completion) {
-    final String _sql = "SELECT category, SUM(amount) as total FROM expenses WHERE date BETWEEN ? AND ? GROUP BY category";
+      final Continuation<? super List<CategoryTotal>> arg2) {
+    final String _sql = "SELECT category, SUM(amount) as total FROM expenses WHERE isIncome = 0 AND date BETWEEN ? AND ? GROUP BY category";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 2);
     int _argIndex = 1;
     _statement.bindLong(_argIndex, startDate);
@@ -819,11 +932,11 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           _statement.release();
         }
       }
-    }, $completion);
+    }, arg2);
   }
 
   @Override
-  public Object getExpenseById(final int id, final Continuation<? super Expense> $completion) {
+  public Object getExpenseById(final int id, final Continuation<? super Expense> arg1) {
     final String _sql = "SELECT * FROM expenses WHERE id = ?";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
@@ -842,6 +955,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           final int _cursorIndexOfNote = CursorUtil.getColumnIndexOrThrow(_cursor, "note");
           final int _cursorIndexOfReceiptPath = CursorUtil.getColumnIndexOrThrow(_cursor, "receiptPath");
           final int _cursorIndexOfTags = CursorUtil.getColumnIndexOrThrow(_cursor, "tags");
+          final int _cursorIndexOfIsIncome = CursorUtil.getColumnIndexOrThrow(_cursor, "isIncome");
           final Expense _result;
           if (_cursor.moveToFirst()) {
             final int _tmpId;
@@ -874,7 +988,11 @@ public final class ExpenseDao_Impl implements ExpenseDao {
             } else {
               _tmpTags = _cursor.getString(_cursorIndexOfTags);
             }
-            _result = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote,_tmpReceiptPath,_tmpTags);
+            final boolean _tmpIsIncome;
+            final int _tmp;
+            _tmp = _cursor.getInt(_cursorIndexOfIsIncome);
+            _tmpIsIncome = _tmp != 0;
+            _result = new Expense(_tmpId,_tmpAmount,_tmpCategory,_tmpDate,_tmpNote,_tmpReceiptPath,_tmpTags,_tmpIsIncome);
           } else {
             _result = null;
           }
@@ -884,7 +1002,7 @@ public final class ExpenseDao_Impl implements ExpenseDao {
           _statement.release();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @NonNull

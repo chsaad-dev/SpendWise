@@ -59,6 +59,7 @@ class AddExpenseFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val tvTitle = view.findViewById<TextView>(R.id.tv_title)
+        val toggleType = view.findViewById<com.google.android.material.button.MaterialButtonToggleGroup>(R.id.toggle_type)
         val etAmount = view.findViewById<TextInputEditText>(R.id.et_amount)
         val actvCategory = view.findViewById<AutoCompleteTextView>(R.id.actv_category)
         val etDate = view.findViewById<TextInputEditText>(R.id.et_date)
@@ -73,6 +74,23 @@ class AddExpenseFragment : Fragment() {
         val btnAttachReceipt = view.findViewById<MaterialButton>(R.id.btn_attach_receipt)
         val ivReceiptPreview = view.findViewById<ImageView>(R.id.iv_receipt_preview)
         val btnRemoveReceipt = view.findViewById<MaterialButton>(R.id.btn_remove_receipt)
+        
+        val tilCategory = view.findViewById<TextInputLayout>(R.id.til_category)
+        val tilTags = view.findViewById<TextInputLayout>(R.id.til_tags)
+        val layoutReceipt = view.findViewById<LinearLayout>(R.id.layout_receipt)
+
+        toggleType.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (isChecked) {
+                val isIncome = checkedId == R.id.btn_type_income
+                val visibility = if (isIncome) View.GONE else View.VISIBLE
+                
+                tilCategory.visibility = visibility
+                tilTags.visibility = visibility
+                layoutReceipt.visibility = visibility
+                
+                layoutRecurring.visibility = if (isIncome || isEditMode) View.GONE else View.VISIBLE
+            }
+        }
 
         // Receipt photo
         btnAttachReceipt.setOnClickListener {
@@ -136,6 +154,13 @@ class AddExpenseFragment : Fragment() {
                         receiptPath = it.receiptPath
                         showReceiptPreview(ivReceiptPreview, btnRemoveReceipt, btnAttachReceipt, receiptPath!!)
                     }
+
+                    // Update UI state properly when initializing the view
+                    if (it.isIncome) {
+                        toggleType.check(R.id.btn_type_income)
+                    } else {
+                        toggleType.check(R.id.btn_type_expense)
+                    }
                 }
             }
         }
@@ -169,9 +194,11 @@ class AddExpenseFragment : Fragment() {
 
         btnSave.setOnClickListener {
             val amountStr = etAmount.text.toString()
-            val category = actvCategory.text.toString()
+            val isIncome = toggleType.checkedButtonId == R.id.btn_type_income
+            val category = if (isIncome) "Income" else actvCategory.text.toString()
             val note = etNote.text.toString()
-            val tags = etTags.text.toString().takeIf { it.isNotBlank() }
+            val tags = if (isIncome) null else etTags.text.toString().takeIf { it.isNotBlank() }
+            val finalReceiptPath = if (isIncome) null else receiptPath
 
             if (amountStr.isBlank() || category.isBlank()) {
                 Toast.makeText(context, "Please enter amount and category", Toast.LENGTH_SHORT).show()
@@ -186,6 +213,7 @@ class AddExpenseFragment : Fragment() {
 
             it.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
 
+
             if (isEditMode) {
                 val updated = Expense(
                     id = editExpenseId,
@@ -193,19 +221,21 @@ class AddExpenseFragment : Fragment() {
                     category = category,
                     date = calendar.timeInMillis,
                     note = note,
-                    receiptPath = receiptPath,
-                    tags = tags
+                    receiptPath = finalReceiptPath,
+                    tags = tags,
+                    isIncome = isIncome
                 )
                 viewModel.updateExpense(updated)
-                Toast.makeText(context, "Expense updated", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Transaction updated", Toast.LENGTH_SHORT).show()
             } else {
                 val expense = Expense(
                     amount = amount,
                     category = category,
                     date = calendar.timeInMillis,
                     note = note,
-                    receiptPath = receiptPath,
-                    tags = tags
+                    receiptPath = finalReceiptPath,
+                    tags = tags,
+                    isIncome = isIncome
                 )
                 viewModel.insertExpense(expense)
 

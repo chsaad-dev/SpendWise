@@ -52,7 +52,15 @@ class ExpenseAdapter(
         fun bind(expense: Expense) {
             val catText = if (!expense.receiptPath.isNullOrBlank()) "\uD83D\uDCCE ${expense.category}" else expense.category
             tvCategory.text = catText
-            tvAmount.text = currencyFormat.format(expense.amount)
+            
+            val formattedAmount = currencyFormat.format(expense.amount)
+            if (expense.isIncome) {
+                tvAmount.text = "+$formattedAmount"
+                tvAmount.setTextColor(Color.parseColor("#388E3C"))
+            } else {
+                tvAmount.text = "-$formattedAmount"
+                tvAmount.setTextColor(Color.parseColor("#D32F2F"))
+            }
 
             val noteText = StringBuilder()
             if (expense.note.isNotBlank()) noteText.append(expense.note)

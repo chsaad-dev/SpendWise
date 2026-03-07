@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
@@ -39,6 +40,9 @@ public final class FragmentHistoryBinding implements ViewBinding {
   public final RecyclerView rvMonths;
 
   @NonNull
+  public final NestedScrollView scrollContent;
+
+  @NonNull
   public final TextView tvYearLabel;
 
   @NonNull
@@ -47,14 +51,15 @@ public final class FragmentHistoryBinding implements ViewBinding {
   private FragmentHistoryBinding(@NonNull CoordinatorLayout rootView,
       @NonNull ImageButton btnNextYear, @NonNull ImageButton btnPrevYear,
       @NonNull LineChart chartTrend, @NonNull LinearLayout layoutEmpty,
-      @NonNull RecyclerView rvMonths, @NonNull TextView tvYearLabel,
-      @NonNull TextView tvYearlyTotal) {
+      @NonNull RecyclerView rvMonths, @NonNull NestedScrollView scrollContent,
+      @NonNull TextView tvYearLabel, @NonNull TextView tvYearlyTotal) {
     this.rootView = rootView;
     this.btnNextYear = btnNextYear;
     this.btnPrevYear = btnPrevYear;
     this.chartTrend = chartTrend;
     this.layoutEmpty = layoutEmpty;
     this.rvMonths = rvMonths;
+    this.scrollContent = scrollContent;
     this.tvYearLabel = tvYearLabel;
     this.tvYearlyTotal = tvYearlyTotal;
   }
@@ -116,6 +121,12 @@ public final class FragmentHistoryBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.scroll_content;
+      NestedScrollView scrollContent = ViewBindings.findChildViewById(rootView, id);
+      if (scrollContent == null) {
+        break missingId;
+      }
+
       id = R.id.tv_year_label;
       TextView tvYearLabel = ViewBindings.findChildViewById(rootView, id);
       if (tvYearLabel == null) {
@@ -129,7 +140,7 @@ public final class FragmentHistoryBinding implements ViewBinding {
       }
 
       return new FragmentHistoryBinding((CoordinatorLayout) rootView, btnNextYear, btnPrevYear,
-          chartTrend, layoutEmpty, rvMonths, tvYearLabel, tvYearlyTotal);
+          chartTrend, layoutEmpty, rvMonths, scrollContent, tvYearLabel, tvYearlyTotal);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

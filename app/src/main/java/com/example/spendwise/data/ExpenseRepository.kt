@@ -13,12 +13,17 @@ class ExpenseRepository(
     val allExpenses: LiveData<List<Expense>> = expenseDao.getAllExpenses()
     val allCategories: LiveData<List<Category>> = categoryDao.getAllCategories()
     val totalExpense: LiveData<Double?> = expenseDao.getTotalExpense()
+    val totalIncome: LiveData<Double?> = expenseDao.getTotalIncome()
     val allRecurringExpenses: LiveData<List<RecurringExpense>> = recurringExpenseDao.getAllActive()
     val allSavingsGoals: LiveData<List<SavingsGoal>> = savingsGoalDao.getAllGoals()
     val allSplitGroups: LiveData<List<SplitGroup>> = splitDao.getAllGroups()
 
     fun getMonthlyExpense(start: Long, end: Long): LiveData<Double?> {
         return expenseDao.getMonthlyExpense(start, end)
+    }
+
+    fun getMonthlyIncome(start: Long, end: Long): LiveData<Double?> {
+        return expenseDao.getMonthlyIncome(start, end)
     }
 
     fun getExpensesByDateRange(start: Long, end: Long): LiveData<List<Expense>> {
@@ -63,6 +68,10 @@ class ExpenseRepository(
 
     suspend fun insertCategory(category: Category) {
         categoryDao.insertCategory(category)
+    }
+
+    suspend fun updateCategory(category: Category) {
+        categoryDao.updateCategory(category)
     }
 
     suspend fun deleteCategory(category: Category) {

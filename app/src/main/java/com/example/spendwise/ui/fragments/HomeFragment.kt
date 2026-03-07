@@ -50,6 +50,8 @@ class HomeFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private lateinit var adapter: ExpenseAdapter
     private val currentMonth = Calendar.getInstance()
+    private var currentCategories: List<com.example.spendwise.data.Category>? = null
+    private var currentTotals: List<com.example.spendwise.data.CategoryTotal>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,7 +63,9 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val tvTotal = view.findViewById<TextView>(R.id.tv_total_expense)
+        val tvTotalBalance = view.findViewById<TextView>(R.id.tv_total_balance)
+        val tvTotalIncome = view.findViewById<TextView>(R.id.tv_total_income)
+        val tvTotalExpense = view.findViewById<TextView>(R.id.tv_total_expense)
         val tvCount = view.findViewById<TextView>(R.id.tv_transaction_count)
         val tvMonth = view.findViewById<TextView>(R.id.tv_month_label)
         val btnPrev = view.findViewById<ImageButton>(R.id.btn_prev_month)
@@ -174,15 +178,23 @@ class HomeFragment : Fragment() {
             tvCount.text = "${expenses?.size ?: 0} transactions"
         }
 
-        // Observe monthly total + budget bar
-        viewModel.monthlyTotal.observe(viewLifecycleOwner) { total ->
-            tvTotal.text = viewModel.formatCurrency(total ?: 0.0)
+        // Observe balances
+        viewModel.filteredBalance.observe(viewLifecycleOwner) { balance ->
+            tvTotalBalance.text = viewModel.formatCurrency(balance ?: 0.0)
+        }
+        
+        viewModel.filteredTotalIncome.observe(viewLifecycleOwner) { income ->
+            tvTotalIncome.text = viewModel.formatCurrency(income ?: 0.0)
+        }
+
+        viewModel.filteredTotalExpense.observe(viewLifecycleOwner) { expense ->
+            tvTotalExpense.text = viewModel.formatCurrency(expense ?: 0.0)
 
             // Budget progress
             val budget = viewModel.getBudgetLimit()
             if (budget > 0f) {
                 layoutBudget.visibility = View.VISIBLE
-                val spent = (total ?: 0.0).toFloat()
+                val spent = (expense ?: 0.0).toFloat()
                 val pct = ((spent / budget) * 100).toInt().coerceIn(0, 100)
                 progressBudget.setProgressCompat(pct, true)
                 tvBudget.text = "${viewModel.formatCurrency(spent.toDouble())} / ${viewModel.formatCurrency(budget.toDouble())} (${pct}%)"
@@ -201,6 +213,9 @@ class HomeFragment : Fragment() {
 
         // Category filter chips
         viewModel.allCategories.observe(viewLifecycleOwner) { categories ->
+            currentCategories = categories
+            updateBudgetEnvelopes()
+
             chipGroup.removeAllViews()
 
             val allChip = Chip(requireContext()).apply {
@@ -232,6 +247,9 @@ class HomeFragment : Fragment() {
         setupPieChart(pieChart)
 
         viewModel.categoryTotals.observe(viewLifecycleOwner) { totals ->
+            currentTotals = totals
+            updateBudgetEnvelopes()
+
             if (totals.isNullOrEmpty()) {
                 chart.visibility = View.GONE
                 layoutChartEmpty.visibility = View.VISIBLE
@@ -260,6 +278,49 @@ class HomeFragment : Fragment() {
         fabAdd.setOnClickListener {
             it.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             findNavController().navigate(R.id.action_home_to_addExpense)
+        }
+    }
+
+    private fun updateBudgetEnvelopes() {
+        val categories = currentCategories ?: return
+        val totals = currentTotals ?: emptyList()
+
+        val layoutCategoryBudgets = view?.findViewById<LinearLayout>(R.id.layout_category_budgets) ?: return
+        val container = view?.findViewById<LinearLayout>(R.id.container_budget_envelopes) ?: return
+
+        container.removeAllViews()
+
+        val budgetCategories = categories.filter { it.monthlyBudget > 0.0 }
+        
+        if (budgetCategories.isEmpty()) {
+            layoutCategoryBudgets.visibility = View.GONE
+            return
+        }
+
+        layoutCategoryBudgets.visibility = View.VISIBLE
+
+        for (category in budgetCategories) {
+            val spent = totals.find { it.category == category.name }?.total ?: 0.0
+            val budget = category.monthlyBudget
+
+            val itemView = layoutInflater.inflate(R.layout.item_budget_envelope, container, false)
+            val tvName = itemView.findViewById<TextView>(R.id.tv_envelope_name)
+            val tvProgress = itemView.findViewById<TextView>(R.id.tv_envelope_progress)
+            val progressBar = itemView.findViewById<LinearProgressIndicator>(R.id.progress_envelope)
+
+            tvName.text = category.name
+            val pct = ((spent / budget) * 100).toInt().coerceIn(0, 100)
+            progressBar.progress = pct
+            tvProgress.text = "${viewModel.formatCurrency(spent)} / ${viewModel.formatCurrency(budget)} ($pct%)"
+
+            val color = when {
+                pct < 60 -> Color.parseColor("#10B981")
+                pct < 85 -> Color.parseColor("#F59E0B")
+                else -> Color.parseColor("#EF4444")
+            }
+            progressBar.setIndicatorColor(color)
+
+            container.addView(itemView)
         }
     }
 

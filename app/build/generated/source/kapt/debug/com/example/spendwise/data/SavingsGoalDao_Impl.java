@@ -109,7 +109,7 @@ public final class SavingsGoalDao_Impl implements SavingsGoalDao {
   }
 
   @Override
-  public Object insert(final SavingsGoal goal, final Continuation<? super Unit> $completion) {
+  public Object insert(final SavingsGoal goal, final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -123,11 +123,11 @@ public final class SavingsGoalDao_Impl implements SavingsGoalDao {
           __db.endTransaction();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
-  public Object delete(final SavingsGoal goal, final Continuation<? super Unit> $completion) {
+  public Object delete(final SavingsGoal goal, final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -141,11 +141,11 @@ public final class SavingsGoalDao_Impl implements SavingsGoalDao {
           __db.endTransaction();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
-  public Object update(final SavingsGoal goal, final Continuation<? super Unit> $completion) {
+  public Object update(final SavingsGoal goal, final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -159,11 +159,11 @@ public final class SavingsGoalDao_Impl implements SavingsGoalDao {
           __db.endTransaction();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
-  public Object deleteAll(final Continuation<? super Unit> $completion) {
+  public Object deleteAll(final Continuation<? super Unit> arg0) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -182,7 +182,7 @@ public final class SavingsGoalDao_Impl implements SavingsGoalDao {
           __preparedStmtOfDeleteAll.release(_stmt);
         }
       }
-    }, $completion);
+    }, arg0);
   }
 
   @Override

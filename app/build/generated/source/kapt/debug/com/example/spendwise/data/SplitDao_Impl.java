@@ -174,7 +174,7 @@ public final class SplitDao_Impl implements SplitDao {
   }
 
   @Override
-  public Object insertGroup(final SplitGroup group, final Continuation<? super Long> $completion) {
+  public Object insertGroup(final SplitGroup group, final Continuation<? super Long> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Long>() {
       @Override
       @NonNull
@@ -188,12 +188,11 @@ public final class SplitDao_Impl implements SplitDao {
           __db.endTransaction();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
-  public Object insertMember(final SplitMember member,
-      final Continuation<? super Unit> $completion) {
+  public Object insertMember(final SplitMember member, final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -207,11 +206,11 @@ public final class SplitDao_Impl implements SplitDao {
           __db.endTransaction();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
-  public Object deleteGroup(final SplitGroup group, final Continuation<? super Unit> $completion) {
+  public Object deleteGroup(final SplitGroup group, final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -225,12 +224,11 @@ public final class SplitDao_Impl implements SplitDao {
           __db.endTransaction();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
-  public Object deleteMember(final SplitMember member,
-      final Continuation<? super Unit> $completion) {
+  public Object deleteMember(final SplitMember member, final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -244,11 +242,11 @@ public final class SplitDao_Impl implements SplitDao {
           __db.endTransaction();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
-  public Object updateGroup(final SplitGroup group, final Continuation<? super Unit> $completion) {
+  public Object updateGroup(final SplitGroup group, final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -262,12 +260,11 @@ public final class SplitDao_Impl implements SplitDao {
           __db.endTransaction();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
-  public Object updateMember(final SplitMember member,
-      final Continuation<? super Unit> $completion) {
+  public Object updateMember(final SplitMember member, final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -281,12 +278,11 @@ public final class SplitDao_Impl implements SplitDao {
           __db.endTransaction();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
-  public Object deleteAllMembersForGroup(final int groupId,
-      final Continuation<? super Unit> $completion) {
+  public Object deleteAllMembersForGroup(final int groupId, final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       @NonNull
@@ -307,7 +303,7 @@ public final class SplitDao_Impl implements SplitDao {
           __preparedStmtOfDeleteAllMembersForGroup.release(_stmt);
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
@@ -360,7 +356,7 @@ public final class SplitDao_Impl implements SplitDao {
 
   @Override
   public Object getGroupByExpenseId(final int expenseId,
-      final Continuation<? super SplitGroup> $completion) {
+      final Continuation<? super SplitGroup> arg1) {
     final String _sql = "SELECT * FROM split_groups WHERE expenseId = ? LIMIT 1";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
@@ -403,12 +399,11 @@ public final class SplitDao_Impl implements SplitDao {
           _statement.release();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
-  public Object getGroupById(final int groupId,
-      final Continuation<? super SplitGroup> $completion) {
+  public Object getGroupById(final int groupId, final Continuation<? super SplitGroup> arg1) {
     final String _sql = "SELECT * FROM split_groups WHERE id = ?";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
@@ -451,7 +446,7 @@ public final class SplitDao_Impl implements SplitDao {
           _statement.release();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
@@ -508,7 +503,7 @@ public final class SplitDao_Impl implements SplitDao {
 
   @Override
   public Object getMembersByGroupIdSync(final int groupId,
-      final Continuation<? super List<SplitMember>> $completion) {
+      final Continuation<? super List<SplitMember>> arg1) {
     final String _sql = "SELECT * FROM split_members WHERE groupId = ?";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
@@ -553,11 +548,11 @@ public final class SplitDao_Impl implements SplitDao {
           _statement.release();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @Override
-  public Object getUnpaidCount(final int groupId, final Continuation<? super Integer> $completion) {
+  public Object getUnpaidCount(final int groupId, final Continuation<? super Integer> arg1) {
     final String _sql = "SELECT COUNT(*) FROM split_members WHERE groupId = ? AND isPaid = 0";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
@@ -587,7 +582,7 @@ public final class SplitDao_Impl implements SplitDao {
           _statement.release();
         }
       }
-    }, $completion);
+    }, arg1);
   }
 
   @NonNull

@@ -90,6 +90,11 @@ class SettingsFragment : Fragment() {
         }
 
 
+        // ── 6.5. Export PDF ──
+        view.findViewById<MaterialButton>(R.id.btn_export_pdf).setOnClickListener {
+            showMonthPickerForPdf()
+        }
+
         // ── 7. Export CSV ──
         view.findViewById<MaterialButton>(R.id.btn_export_csv).setOnClickListener {
             exportCsv()
@@ -249,6 +254,93 @@ class SettingsFragment : Fragment() {
             .setSingleChoiceItems(languages, 0) { dialog, _ -> dialog.dismiss() }
             .setNegativeButton("OK", null)
             .show()
+    }
+
+    // ── Month Picker for PDF ──
+    private fun showMonthPickerForPdf() {
+        val format = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
+        val cal = Calendar.getInstance()
+        val months = Array(12) {
+            val title = format.format(cal.time)
+            // Save time properties attached to this index
+            val _year = cal.get(Calendar.YEAR)
+            val _month = cal.get(Calendar.MONTH)
+            cal.add(Calendar.MONTH, -1)
+            Pair(title, Pair(_year, _month))
+        }
+
+        val titles = months.map { it.first }.toTypedArray()
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Select Month for Report")
+            .setSingleChoiceItems(titles, 0) { dialog, which ->
+                val (year, month) = months[which].second
+                val monthTitle = months[which].first
+                generatePdfForMonth(year, month, monthTitle)
+                dialog.dismiss()
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    private fun generatePdfForMonth(year: Int, month: Int, title: String) {
+        val startCal = Calendar.getInstance().apply {
+            set(year, month, 1, 0, 0, 0)
+            set(Calendar.MILLISECOND, 0)
+        }
+        val endCal = Calendar.getInstance().apply {
+            set(year, month, startCal.getActualMaximum(Calendar.DAY_OF_MONTH), 23, 59, 59)
+            set(Calendar.MILLISECOND, 999)
+        }
+
+        val start = startCal.timeInMillis
+        val end = endCal.timeInMillis
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val db = AppDatabase.getDatabase(requireContext(), CoroutineScope(Dispatchers.IO))
+                val expenses = db.expenseDao().getExpensesByDateRangeSync(start, end)
+                
+                if (expenses.isEmpty()) {
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(context, "No data for $title", Toast.LENGTH_SHORT).show()
+                    }
+                    return@launch
+                }
+                
+                val categoryTotals = db.expenseDao().getCategoryTotals(start, end)
+                
+                val totalIncome = expenses.filter { it.isIncome }.sumOf { it.amount }
+                val totalExpense = expenses.filter { !it.isIncome }.sumOf { it.amount }
+
+                val file = com.example.spendwise.utils.PdfExportHelper.generateMonthlyReport(
+                    requireContext(),
+                    title,
+                    expenses,
+                    categoryTotals,
+                    totalIncome,
+                    totalExpense
+                )
+
+                withContext(Dispatchers.Main) {
+                    val uri = androidx.core.content.FileProvider.getUriForFile(
+                        requireContext(),
+                        "${requireContext().packageName}.fileprovider",
+                        file
+                    )
+                    val intent = Intent(Intent.ACTION_SEND).apply {
+                        type = "application/pdf"
+                        putExtra(Intent.EXTRA_STREAM, uri)
+                        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    }
+                    startActivity(Intent.createChooser(intent, "Share PDF Report"))
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context, "Failed to generate PDF: ${e.message}", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
     }
 
 

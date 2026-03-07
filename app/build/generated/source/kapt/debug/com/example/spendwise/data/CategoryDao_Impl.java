@@ -34,6 +34,8 @@ public final class CategoryDao_Impl implements CategoryDao {
 
   private final EntityDeletionOrUpdateAdapter<Category> __deletionAdapterOfCategory;
 
+  private final EntityDeletionOrUpdateAdapter<Category> __updateAdapterOfCategory;
+
   private final SharedSQLiteStatement __preparedStmtOfDeleteAllCategories;
 
   public CategoryDao_Impl(@NonNull final RoomDatabase __db) {
@@ -42,7 +44,7 @@ public final class CategoryDao_Impl implements CategoryDao {
       @Override
       @NonNull
       protected String createQuery() {
-        return "INSERT OR REPLACE INTO `categories` (`id`,`name`,`iconResId`,`colorHex`) VALUES (nullif(?, 0),?,?,?)";
+        return "INSERT OR REPLACE INTO `categories` (`id`,`name`,`iconResId`,`colorHex`,`monthlyBudget`) VALUES (nullif(?, 0),?,?,?,?)";
       }
 
       @Override
@@ -60,6 +62,7 @@ public final class CategoryDao_Impl implements CategoryDao {
         } else {
           statement.bindString(4, entity.getColorHex());
         }
+        statement.bindDouble(5, entity.getMonthlyBudget());
       }
     };
     this.__deletionAdapterOfCategory = new EntityDeletionOrUpdateAdapter<Category>(__db) {
@@ -73,6 +76,32 @@ public final class CategoryDao_Impl implements CategoryDao {
       protected void bind(@NonNull final SupportSQLiteStatement statement,
           @NonNull final Category entity) {
         statement.bindLong(1, entity.getId());
+      }
+    };
+    this.__updateAdapterOfCategory = new EntityDeletionOrUpdateAdapter<Category>(__db) {
+      @Override
+      @NonNull
+      protected String createQuery() {
+        return "UPDATE OR ABORT `categories` SET `id` = ?,`name` = ?,`iconResId` = ?,`colorHex` = ?,`monthlyBudget` = ? WHERE `id` = ?";
+      }
+
+      @Override
+      protected void bind(@NonNull final SupportSQLiteStatement statement,
+          @NonNull final Category entity) {
+        statement.bindLong(1, entity.getId());
+        if (entity.getName() == null) {
+          statement.bindNull(2);
+        } else {
+          statement.bindString(2, entity.getName());
+        }
+        statement.bindLong(3, entity.getIconResId());
+        if (entity.getColorHex() == null) {
+          statement.bindNull(4);
+        } else {
+          statement.bindString(4, entity.getColorHex());
+        }
+        statement.bindDouble(5, entity.getMonthlyBudget());
+        statement.bindLong(6, entity.getId());
       }
     };
     this.__preparedStmtOfDeleteAllCategories = new SharedSQLiteStatement(__db) {
@@ -124,6 +153,25 @@ public final class CategoryDao_Impl implements CategoryDao {
   }
 
   @Override
+  public Object updateCategory(final Category category,
+      final Continuation<? super Unit> $completion) {
+    return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
+      @Override
+      @NonNull
+      public Unit call() throws Exception {
+        __db.beginTransaction();
+        try {
+          __updateAdapterOfCategory.handle(category);
+          __db.setTransactionSuccessful();
+          return Unit.INSTANCE;
+        } finally {
+          __db.endTransaction();
+        }
+      }
+    }, $completion);
+  }
+
+  @Override
   public Object deleteAllCategories(final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
@@ -160,6 +208,7 @@ public final class CategoryDao_Impl implements CategoryDao {
           final int _cursorIndexOfName = CursorUtil.getColumnIndexOrThrow(_cursor, "name");
           final int _cursorIndexOfIconResId = CursorUtil.getColumnIndexOrThrow(_cursor, "iconResId");
           final int _cursorIndexOfColorHex = CursorUtil.getColumnIndexOrThrow(_cursor, "colorHex");
+          final int _cursorIndexOfMonthlyBudget = CursorUtil.getColumnIndexOrThrow(_cursor, "monthlyBudget");
           final List<Category> _result = new ArrayList<Category>(_cursor.getCount());
           while (_cursor.moveToNext()) {
             final Category _item;
@@ -179,7 +228,9 @@ public final class CategoryDao_Impl implements CategoryDao {
             } else {
               _tmpColorHex = _cursor.getString(_cursorIndexOfColorHex);
             }
-            _item = new Category(_tmpId,_tmpName,_tmpIconResId,_tmpColorHex);
+            final double _tmpMonthlyBudget;
+            _tmpMonthlyBudget = _cursor.getDouble(_cursorIndexOfMonthlyBudget);
+            _item = new Category(_tmpId,_tmpName,_tmpIconResId,_tmpColorHex,_tmpMonthlyBudget);
             _result.add(_item);
           }
           return _result;

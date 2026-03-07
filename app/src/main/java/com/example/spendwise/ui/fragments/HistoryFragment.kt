@@ -81,22 +81,26 @@ class HistoryFragment : Fragment() {
                     val end = cal.timeInMillis
 
                     val expenses = db.expenseDao().getExpensesByDateRangeSync(start, end)
-                    val total = expenses.sumOf { it.amount }
+                    
+                    val incomeSum = expenses.filter { it.isIncome }.sumOf { it.amount }
+                    val expenseSum = expenses.filter { !it.isIncome }.sumOf { it.amount }
+                    val balance = incomeSum - expenseSum
 
                     val monthName = SimpleDateFormat("MMMM", Locale.getDefault()).format(cal.time)
                     val shortName = SimpleDateFormat("MMM", Locale.getDefault()).format(cal.time)
 
                     trendLabels.add(shortName)
-                    trendEntries.add(Entry(month.toFloat(), total.toFloat()))
+                    trendEntries.add(Entry(month.toFloat(), balance.toFloat()))
 
                     if (expenses.isNotEmpty()) {
-                        yearTotal += total
+                        yearTotal += balance
                         val categoryBreakdown = expenses
+                            .filter { !it.isIncome }
                             .groupBy { it.category }
                             .map { (cat, items) -> cat to items.sumOf { it.amount } }
                             .sortedByDescending { it.second }
 
-                        monthData.add(MonthSummary(monthName, total, expenses.size, categoryBreakdown))
+                        monthData.add(MonthSummary(monthName, balance, expenses.size, categoryBreakdown))
                     }
                 }
 
@@ -212,7 +216,16 @@ class HistoryFragment : Fragment() {
         override fun onBindViewHolder(holder: VH, position: Int) {
             val month = months[position]
             holder.tvName.text = month.monthName
-            holder.tvTotal.text = fmt.format(month.total)
+            
+            val absTotal = Math.abs(month.total)
+            if (month.total >= 0) {
+                holder.tvTotal.text = "+${fmt.format(absTotal)}"
+                holder.tvTotal.setTextColor(Color.parseColor("#388E3C"))
+            } else {
+                holder.tvTotal.text = "-${fmt.format(absTotal)}"
+                holder.tvTotal.setTextColor(Color.parseColor("#D32F2F"))
+            }
+
             holder.tvCount.text = "${month.count} transactions"
 
             holder.layoutCategories.removeAllViews()
@@ -227,13 +240,13 @@ class HistoryFragment : Fragment() {
                     text = category
                     layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
                     setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_BodySmall)
-                    setTextColor(context.getColor(android.R.color.darker_gray))
+                    setTextColor(Color.parseColor("#555555"))
                 }
 
                 val tvAmt = TextView(holder.itemView.context).apply {
-                    text = fmt.format(amount)
+                    text = "-${fmt.format(amount)}"
                     setTextAppearance(com.google.android.material.R.style.TextAppearance_Material3_BodySmall)
-                    setTextColor(context.getColor(android.R.color.darker_gray))
+                    setTextColor(Color.parseColor("#D32F2F"))
                 }
 
                 row.addView(tvCat)

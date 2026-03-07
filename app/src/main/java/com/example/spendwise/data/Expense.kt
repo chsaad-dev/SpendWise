@@ -12,5 +12,6 @@ data class Expense(
     val date: Long,
     val note: String,
     val receiptPath: String? = null,
-    val tags: String? = null
+    val tags: String? = null,
+    val isIncome: Boolean = false
 )

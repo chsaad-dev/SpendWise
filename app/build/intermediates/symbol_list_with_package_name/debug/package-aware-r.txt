@@ -822,6 +822,28 @@ attr logo
 attr logoAdjustViewBounds
 attr logoDescription
 attr logoScaleType
+attr lottieAnimationViewStyle
+attr lottie_asyncUpdates
+attr lottie_autoPlay
+attr lottie_cacheComposition
+attr lottie_clipTextToBoundingBox
+attr lottie_clipToCompositionBounds
+attr lottie_colorFilter
+attr lottie_defaultFontFileExtension
+attr lottie_enableMergePathsForKitKatAndAbove
+attr lottie_fallbackRes
+attr lottie_fileName
+attr lottie_ignoreDisabledSystemAnimations
+attr lottie_imageAssetsFolder
+attr lottie_loop
+attr lottie_progress
+attr lottie_rawRes
+attr lottie_renderMode
+attr lottie_repeatCount
+attr lottie_repeatMode
+attr lottie_speed
+attr lottie_url
+attr lottie_useCompositionFrameRate
 attr marginHorizontal
 attr marginLeftSystemWindowInsets
 attr marginRightSystemWindowInsets
@@ -3272,6 +3294,7 @@ id auto
 id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
+id automatic
 id barrier
 id baseline
 id beginOnFirstDraw
@@ -3300,6 +3323,7 @@ id btn_delete_category
 id btn_delete_goal
 id btn_delete_member
 id btn_export_csv
+id btn_export_pdf
 id btn_language
 id btn_next
 id btn_next_month
@@ -3314,6 +3338,8 @@ id btn_save
 id btn_save_split
 id btn_skip
 id btn_split
+id btn_type_expense
+id btn_type_income
 id buttonPanel
 id cache_measures
 id callMeasure
@@ -3352,6 +3378,7 @@ id compress
 id confirm_button
 id constraint
 id container
+id container_budget_envelopes
 id content
 id contentPanel
 id contiguous
@@ -3383,6 +3410,7 @@ id disableHome
 id disableIntraAutoTransition
 id disablePostScroll
 id disableScroll
+id disabled
 id disjoint
 id dragAnticlockwise
 id dragClockwise
@@ -3402,6 +3430,7 @@ id edit_query
 id edit_text_id
 id elastic
 id embed
+id enabled
 id end
 id endToStart
 id enterAlways
@@ -3447,6 +3476,7 @@ id graph_wrap
 id group_divider
 id grouping
 id groups
+id hardware
 id header_title
 id hide_ime_id
 id hideable
@@ -3479,10 +3509,12 @@ id layout
 id layout_bottom_controls
 id layout_budget
 id layout_categories
+id layout_category_budgets
 id layout_chart_empty
 id layout_empty
 id layout_empty_categories
 id layout_indicators
+id layout_receipt
 id layout_recurring
 id left
 id leftToRight
@@ -3493,6 +3525,7 @@ id linear
 id listMode
 id list_item
 id locale
+id lottie_layer_name
 id ltr
 id m3_side_sheet
 id marquee
@@ -3613,12 +3646,15 @@ id postLayout
 id pressed
 id progress_budget
 id progress_circular
+id progress_envelope
 id progress_goal
 id progress_horizontal
 id radio
 id ratio
 id rectangles
 id report_drawn
+id restart
+id reverse
 id reverseSawtooth
 id right
 id rightToLeft
@@ -3642,6 +3678,7 @@ id scroll
 id scrollIndicatorDown
 id scrollIndicatorUp
 id scrollView
+id scroll_content
 id scrollable
 id search_badge
 id search_bar
@@ -3673,6 +3710,7 @@ id snackbar_action
 id snackbar_text
 id snap
 id snapMargins
+id software
 id south
 id spacer
 id special_effects_controller_view_tag
@@ -3730,12 +3768,15 @@ id textinput_helper_text
 id textinput_placeholder
 id textinput_prefix_text
 id textinput_suffix_text
+id til_category
 id til_recurrence
+id til_tags
 id time
 id title
 id titleDividerNoCustom
 id title_template
 id toggle
+id toggle_type
 id top
 id topPanel
 id touch_outside
@@ -3750,8 +3791,11 @@ id triangle
 id tv_amount
 id tv_budget_label
 id tv_category
+id tv_category_budget
 id tv_category_name
 id tv_date
+id tv_envelope_name
+id tv_envelope_progress
 id tv_goal_deadline
 id tv_goal_name
 id tv_goal_saved
@@ -3768,7 +3812,9 @@ id tv_split_expense_info
 id tv_split_total
 id tv_title
 id tv_top_category
+id tv_total_balance
 id tv_total_expense
+id tv_total_income
 id tv_transaction_count
 id tv_year_label
 id tv_yearly_total
@@ -3943,6 +3989,7 @@ layout fragment_split_expense
 layout fragment_welcome
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
+layout item_budget_envelope
 layout item_category
 layout item_expense
 layout item_guide_page
@@ -4017,6 +4064,9 @@ mipmap ic_launcher_foreground
 mipmap ic_launcher_round
 navigation nav_graph
 plurals mtrl_badge_content_description
+raw anim_empty_chart
+raw anim_empty_history
+raw anim_empty_wallet
 string abc_action_bar_home_description
 string abc_action_bar_up_description
 string abc_action_menu_overflow_description
@@ -5387,6 +5437,7 @@ styleable LinearLayoutCompat android_gravity android_orientation android_baselin
 styleable LinearLayoutCompat_Layout android_layout_gravity android_layout_width android_layout_height android_layout_weight
 styleable LinearProgressIndicator indeterminateAnimationType indicatorDirectionLinear
 styleable ListPopupWindow android_dropDownHorizontalOffset android_dropDownVerticalOffset
+styleable LottieAnimationView lottie_asyncUpdates lottie_autoPlay lottie_cacheComposition lottie_clipTextToBoundingBox lottie_clipToCompositionBounds lottie_colorFilter lottie_defaultFontFileExtension lottie_enableMergePathsForKitKatAndAbove lottie_fallbackRes lottie_fileName lottie_ignoreDisabledSystemAnimations lottie_imageAssetsFolder lottie_loop lottie_progress lottie_rawRes lottie_renderMode lottie_repeatCount lottie_repeatMode lottie_speed lottie_url lottie_useCompositionFrameRate
 styleable MaterialAlertDialog backgroundInsetBottom backgroundInsetEnd backgroundInsetStart backgroundInsetTop backgroundTint
 styleable MaterialAlertDialogTheme materialAlertDialogBodyTextStyle materialAlertDialogButtonSpacerVisibility materialAlertDialogTheme materialAlertDialogTitleIconStyle materialAlertDialogTitlePanelStyle materialAlertDialogTitleTextStyle
 styleable MaterialAutoCompleteTextView android_inputType android_popupElevation dropDownBackgroundTint simpleItemLayout simpleItemSelectedColor simpleItemSelectedRippleColor simpleItems

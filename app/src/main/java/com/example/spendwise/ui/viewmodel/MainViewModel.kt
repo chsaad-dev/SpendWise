@@ -28,6 +28,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val allExpenses: LiveData<List<Expense>>
     val allCategories: LiveData<List<Category>>
     val totalExpense: LiveData<Double?>
+    val totalIncome: LiveData<Double?>
     val allRecurringExpenses: LiveData<List<RecurringExpense>>
     val allSavingsGoals: LiveData<List<SavingsGoal>>
     val allSplitGroups: LiveData<List<SplitGroup>>
@@ -45,8 +46,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _categoryTotals = MutableLiveData<List<CategoryTotal>>()
     val categoryTotals: LiveData<List<CategoryTotal>> = _categoryTotals
 
-    private val _monthlyTotal = MutableLiveData<Double>(0.0)
-    val monthlyTotal: LiveData<Double> = _monthlyTotal
+    private val _filteredTotalIncome = MutableLiveData<Double>(0.0)
+    val filteredTotalIncome: LiveData<Double> = _filteredTotalIncome
+
+    private val _filteredTotalExpense = MutableLiveData<Double>(0.0)
+    val filteredTotalExpense: LiveData<Double> = _filteredTotalExpense
+
+    private val _filteredBalance = MutableLiveData<Double>(0.0)
+    val filteredBalance: LiveData<Double> = _filteredBalance
 
     val currencyFormat: NumberFormat = NumberFormat.getCurrencyInstance(Locale.getDefault()).apply {
         currency = Currency.getInstance(Locale.getDefault())
@@ -63,6 +70,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         allExpenses = repository.allExpenses
         allCategories = repository.allCategories
         totalExpense = repository.totalExpense
+        totalIncome = repository.totalIncome
         allRecurringExpenses = repository.allRecurringExpenses
         allSavingsGoals = repository.allSavingsGoals
         allSplitGroups = repository.allSplitGroups
@@ -100,7 +108,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
 
         filteredExpenses.value = result
-        _monthlyTotal.value = result.sumOf { it.amount }
+        
+        val income = result.filter { it.isIncome }.sumOf { it.amount }
+        val expense = result.filter { !it.isIncome }.sumOf { it.amount }
+        
+        _filteredTotalIncome.value = income
+        _filteredTotalExpense.value = expense
+        _filteredBalance.value = income - expense
         if (dateRange != null) {
             loadCategoryTotals(dateRange.first, dateRange.second)
         }
@@ -134,6 +148,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun insertCategory(category: Category) = viewModelScope.launch {
         repository.insertCategory(category)
+    }
+
+    fun updateCategory(category: Category) = viewModelScope.launch {
+        repository.updateCategory(category)
     }
 
     fun deleteCategory(category: Category) = viewModelScope.launch {
@@ -230,6 +248,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getMonthlyExpense(start: Long, end: Long): LiveData<Double?> {
         return repository.getMonthlyExpense(start, end)
+    }
+
+    fun getMonthlyIncome(start: Long, end: Long): LiveData<Double?> {
+        return repository.getMonthlyIncome(start, end)
     }
 
     fun getBudgetLimit(): Float {

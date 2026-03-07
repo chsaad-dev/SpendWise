@@ -26,6 +26,7 @@ MERGED from [androidx.navigation:navigation-ui-ktx:2.7.7] C:\Users\chsaa\.gradle
 MERGED from [androidx.navigation:navigation-ui:2.7.7] C:\Users\chsaa\.gradle\caches\transforms-3\7267a4a3daea2f370990b558ba71de49\transformed\navigation-ui-2.7.7\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\chsaa\.gradle\caches\transforms-3\3d94f2ddae9f2b16b5782a896b77f7e7\transformed\material-1.11.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\chsaa\.gradle\caches\transforms-3\1680cd33057ba3fcb3501eefaa77ac77\transformed\constraintlayout-2.1.4\AndroidManifest.xml:2:1-11:12
+MERGED from [com.airbnb.android:lottie:6.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\a30a77de982f70f87247ae97dd345052\transformed\lottie-6.3.0\AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\chsaa\.gradle\caches\transforms-3\a2e9ed7c52b7ca45db7b9fb204604607\transformed\appcompat-resources-1.6.1\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.appcompat:appcompat:1.6.1] C:\Users\chsaa\.gradle\caches\transforms-3\826b3ef135ec5a3cd2cd20c53e2b22ee\transformed\appcompat-1.6.1\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.emoji2:emoji2-views-helper:1.2.0] C:\Users\chsaa\.gradle\caches\transforms-3\6b00fbed80d8d28695195ed2e8d30506\transformed\emoji2-views-helper-1.2.0\AndroidManifest.xml:2:1-7:12
@@ -108,6 +109,8 @@ MERGED from [com.google.android.material:material:1.11.0] C:\Users\chsaa\.gradle
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\chsaa\.gradle\caches\transforms-3\3d94f2ddae9f2b16b5782a896b77f7e7\transformed\material-1.11.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\chsaa\.gradle\caches\transforms-3\1680cd33057ba3fcb3501eefaa77ac77\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\chsaa\.gradle\caches\transforms-3\1680cd33057ba3fcb3501eefaa77ac77\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
+MERGED from [com.airbnb.android:lottie:6.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\a30a77de982f70f87247ae97dd345052\transformed\lottie-6.3.0\AndroidManifest.xml:7:5-20
+MERGED from [com.airbnb.android:lottie:6.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\a30a77de982f70f87247ae97dd345052\transformed\lottie-6.3.0\AndroidManifest.xml:7:5-20
 MERGED from [androidx.emoji2:emoji2:1.2.0] C:\Users\chsaa\.gradle\caches\transforms-3\a4d9de4186d9a39fb31fcb7f8c0b6bd8\transformed\emoji2-1.2.0\AndroidManifest.xml:23:5-33:19
 MERGED from [androidx.emoji2:emoji2:1.2.0] C:\Users\chsaa\.gradle\caches\transforms-3\a4d9de4186d9a39fb31fcb7f8c0b6bd8\transformed\emoji2-1.2.0\AndroidManifest.xml:23:5-33:19
 MERGED from [androidx.window:window:1.0.0] C:\Users\chsaa\.gradle\caches\transforms-3\69f610d461bfc07f641bfe7a09f2304d\transformed\window-1.0.0\AndroidManifest.xml:24:5-31:19
@@ -228,6 +231,8 @@ MERGED from [com.google.android.material:material:1.11.0] C:\Users\chsaa\.gradle
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\chsaa\.gradle\caches\transforms-3\3d94f2ddae9f2b16b5782a896b77f7e7\transformed\material-1.11.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\chsaa\.gradle\caches\transforms-3\1680cd33057ba3fcb3501eefaa77ac77\transformed\constraintlayout-2.1.4\AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\chsaa\.gradle\caches\transforms-3\1680cd33057ba3fcb3501eefaa77ac77\transformed\constraintlayout-2.1.4\AndroidManifest.xml:5:5-7:41
+MERGED from [com.airbnb.android:lottie:6.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\a30a77de982f70f87247ae97dd345052\transformed\lottie-6.3.0\AndroidManifest.xml:5:5-44
+MERGED from [com.airbnb.android:lottie:6.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\a30a77de982f70f87247ae97dd345052\transformed\lottie-6.3.0\AndroidManifest.xml:5:5-44
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\chsaa\.gradle\caches\transforms-3\a2e9ed7c52b7ca45db7b9fb204604607\transformed\appcompat-resources-1.6.1\AndroidManifest.xml:20:5-44
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\chsaa\.gradle\caches\transforms-3\a2e9ed7c52b7ca45db7b9fb204604607\transformed\appcompat-resources-1.6.1\AndroidManifest.xml:20:5-44
 MERGED from [androidx.appcompat:appcompat:1.6.1] C:\Users\chsaa\.gradle\caches\transforms-3\826b3ef135ec5a3cd2cd20c53e2b22ee\transformed\appcompat-1.6.1\AndroidManifest.xml:20:5-44

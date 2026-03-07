@@ -31,13 +31,19 @@ interface ExpenseDao {
     @Query("SELECT * FROM expenses WHERE category = :category AND date BETWEEN :startDate AND :endDate ORDER BY date DESC")
     fun getExpensesByCategoryAndDateRange(category: String, startDate: Long, endDate: Long): LiveData<List<Expense>>
 
-    @Query("SELECT SUM(amount) FROM expenses")
+    @Query("SELECT SUM(amount) FROM expenses WHERE isIncome = 0")
     fun getTotalExpense(): LiveData<Double?>
 
-    @Query("SELECT SUM(amount) FROM expenses WHERE date BETWEEN :startDate AND :endDate")
+    @Query("SELECT SUM(amount) FROM expenses WHERE isIncome = 1")
+    fun getTotalIncome(): LiveData<Double?>
+
+    @Query("SELECT SUM(amount) FROM expenses WHERE isIncome = 0 AND date BETWEEN :startDate AND :endDate")
     fun getMonthlyExpense(startDate: Long, endDate: Long): LiveData<Double?>
 
-    @Query("SELECT category, SUM(amount) as total FROM expenses WHERE date BETWEEN :startDate AND :endDate GROUP BY category")
+    @Query("SELECT SUM(amount) FROM expenses WHERE isIncome = 1 AND date BETWEEN :startDate AND :endDate")
+    fun getMonthlyIncome(startDate: Long, endDate: Long): LiveData<Double?>
+
+    @Query("SELECT category, SUM(amount) as total FROM expenses WHERE isIncome = 0 AND date BETWEEN :startDate AND :endDate GROUP BY category")
     suspend fun getCategoryTotals(startDate: Long, endDate: Long): List<CategoryTotal>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

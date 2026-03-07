@@ -24,16 +24,20 @@ public final class ItemCategoryBinding implements ViewBinding {
   public final MaterialButton btnDeleteCategory;
 
   @NonNull
+  public final TextView tvCategoryBudget;
+
+  @NonNull
   public final TextView tvCategoryName;
 
   @NonNull
   public final View viewColorDot;
 
   private ItemCategoryBinding(@NonNull MaterialCardView rootView,
-      @NonNull MaterialButton btnDeleteCategory, @NonNull TextView tvCategoryName,
-      @NonNull View viewColorDot) {
+      @NonNull MaterialButton btnDeleteCategory, @NonNull TextView tvCategoryBudget,
+      @NonNull TextView tvCategoryName, @NonNull View viewColorDot) {
     this.rootView = rootView;
     this.btnDeleteCategory = btnDeleteCategory;
+    this.tvCategoryBudget = tvCategoryBudget;
     this.tvCategoryName = tvCategoryName;
     this.viewColorDot = viewColorDot;
   }
@@ -71,6 +75,12 @@ public final class ItemCategoryBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tv_category_budget;
+      TextView tvCategoryBudget = ViewBindings.findChildViewById(rootView, id);
+      if (tvCategoryBudget == null) {
+        break missingId;
+      }
+
       id = R.id.tv_category_name;
       TextView tvCategoryName = ViewBindings.findChildViewById(rootView, id);
       if (tvCategoryName == null) {
@@ -83,8 +93,8 @@ public final class ItemCategoryBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ItemCategoryBinding((MaterialCardView) rootView, btnDeleteCategory, tvCategoryName,
-          viewColorDot);
+      return new ItemCategoryBinding((MaterialCardView) rootView, btnDeleteCategory,
+          tvCategoryBudget, tvCategoryName, viewColorDot);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
