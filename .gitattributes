@@ -1,0 +1,10 @@
+# Ignore build output and Gradle wrappers for GitHub language statistics
+gradlew linguist-vendored
+gradlew.bat linguist-vendored
+gradle/wrapper/gradle-wrapper.jar linguist-vendored
+build/ linguist-vendored
+app/build/ linguist-vendored
+
+# Also mark config files and generated code to avoid skewing stats
+*.xml linguist-vendored
+*.json linguist-vendored
