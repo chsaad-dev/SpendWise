@@ -18,203 +18,198 @@
 13-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:7:5-71
 13-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:7:22-69
 14
-15    <!-- suppress DeprecatedClassUsageInspection -->
-16    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
-16-->[androidx.biometric:biometric:1.1.0] C:\Users\chsaa\.gradle\caches\transforms-3\42de5b0c326d9f857a50584ef294d1e9\transformed\biometric-1.1.0\AndroidManifest.xml:27:5-74
-16-->[androidx.biometric:biometric:1.1.0] C:\Users\chsaa\.gradle\caches\transforms-3\42de5b0c326d9f857a50584ef294d1e9\transformed\biometric-1.1.0\AndroidManifest.xml:27:22-71
-17
-18    <permission
-18-->[androidx.core:core:1.12.0] C:\Users\chsaa\.gradle\caches\transforms-3\9660a9cb54f7bbc4e28308efb4763ad7\transformed\core-1.12.0\AndroidManifest.xml:22:5-24:47
-19        android:name="com.example.spendwise.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-19-->[androidx.core:core:1.12.0] C:\Users\chsaa\.gradle\caches\transforms-3\9660a9cb54f7bbc4e28308efb4763ad7\transformed\core-1.12.0\AndroidManifest.xml:23:9-81
-20        android:protectionLevel="signature" />
-20-->[androidx.core:core:1.12.0] C:\Users\chsaa\.gradle\caches\transforms-3\9660a9cb54f7bbc4e28308efb4763ad7\transformed\core-1.12.0\AndroidManifest.xml:24:9-44
-21
-22    <uses-permission android:name="com.example.spendwise.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-22-->[androidx.core:core:1.12.0] C:\Users\chsaa\.gradle\caches\transforms-3\9660a9cb54f7bbc4e28308efb4763ad7\transformed\core-1.12.0\AndroidManifest.xml:26:5-97
-22-->[androidx.core:core:1.12.0] C:\Users\chsaa\.gradle\caches\transforms-3\9660a9cb54f7bbc4e28308efb4763ad7\transformed\core-1.12.0\AndroidManifest.xml:26:22-94
-23
-24    <application
-24-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:9:5-59:19
-25        android:name="com.example.spendwise.SpendWiseApp"
-25-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:10:9-37
-26        android:allowBackup="true"
-26-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:11:9-35
-27        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-27-->[androidx.core:core:1.12.0] C:\Users\chsaa\.gradle\caches\transforms-3\9660a9cb54f7bbc4e28308efb4763ad7\transformed\core-1.12.0\AndroidManifest.xml:28:18-86
-28        android:dataExtractionRules="@xml/data_extraction_rules"
-28-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:12:9-65
-29        android:debuggable="true"
-30        android:extractNativeLibs="false"
-31        android:fullBackupContent="@xml/backup_rules"
-31-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:13:9-54
-32        android:icon="@mipmap/ic_launcher"
-32-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:14:9-43
-33        android:label="@string/app_name"
-33-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:15:9-41
-34        android:roundIcon="@mipmap/ic_launcher_round"
-34-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:16:9-54
-35        android:supportsRtl="true"
-35-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:17:9-35
-36        android:testOnly="true"
-37        android:theme="@style/Theme.SpendWise" >
-37-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:18:9-47
-38        <activity
-38-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:21:9-29:20
-39            android:name="com.example.spendwise.MainActivity"
-39-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:22:13-41
-40            android:exported="true"
-40-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:23:13-36
-41            android:windowSoftInputMode="adjustPan" >
-41-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:24:13-52
-42            <intent-filter>
-42-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:25:13-28:29
-43                <action android:name="android.intent.action.MAIN" />
-43-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:26:17-69
-43-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:26:25-66
-44
-45                <category android:name="android.intent.category.LAUNCHER" />
-45-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:27:17-77
-45-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:27:27-74
-46            </intent-filter>
-47        </activity>
-48
+15    <permission
+15-->[androidx.core:core:1.12.0] C:\Users\chsaa\.gradle\caches\transforms-3\9660a9cb54f7bbc4e28308efb4763ad7\transformed\core-1.12.0\AndroidManifest.xml:22:5-24:47
+16        android:name="com.example.spendwise.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+16-->[androidx.core:core:1.12.0] C:\Users\chsaa\.gradle\caches\transforms-3\9660a9cb54f7bbc4e28308efb4763ad7\transformed\core-1.12.0\AndroidManifest.xml:23:9-81
+17        android:protectionLevel="signature" />
+17-->[androidx.core:core:1.12.0] C:\Users\chsaa\.gradle\caches\transforms-3\9660a9cb54f7bbc4e28308efb4763ad7\transformed\core-1.12.0\AndroidManifest.xml:24:9-44
+18
+19    <uses-permission android:name="com.example.spendwise.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+19-->[androidx.core:core:1.12.0] C:\Users\chsaa\.gradle\caches\transforms-3\9660a9cb54f7bbc4e28308efb4763ad7\transformed\core-1.12.0\AndroidManifest.xml:26:5-97
+19-->[androidx.core:core:1.12.0] C:\Users\chsaa\.gradle\caches\transforms-3\9660a9cb54f7bbc4e28308efb4763ad7\transformed\core-1.12.0\AndroidManifest.xml:26:22-94
+20
+21    <application
+21-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:9:5-59:19
+22        android:name="com.example.spendwise.SpendWiseApp"
+22-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:10:9-37
+23        android:allowBackup="true"
+23-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:11:9-35
+24        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+24-->[androidx.core:core:1.12.0] C:\Users\chsaa\.gradle\caches\transforms-3\9660a9cb54f7bbc4e28308efb4763ad7\transformed\core-1.12.0\AndroidManifest.xml:28:18-86
+25        android:dataExtractionRules="@xml/data_extraction_rules"
+25-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:12:9-65
+26        android:debuggable="true"
+27        android:extractNativeLibs="false"
+28        android:fullBackupContent="@xml/backup_rules"
+28-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:13:9-54
+29        android:icon="@mipmap/ic_launcher"
+29-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:14:9-43
+30        android:label="@string/app_name"
+30-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:15:9-41
+31        android:roundIcon="@mipmap/ic_launcher_round"
+31-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:16:9-54
+32        android:supportsRtl="true"
+32-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:17:9-35
+33        android:testOnly="true"
+34        android:theme="@style/Theme.SpendWise" >
+34-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:18:9-47
+35        <activity
+35-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:21:9-29:20
+36            android:name="com.example.spendwise.MainActivity"
+36-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:22:13-41
+37            android:exported="true"
+37-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:23:13-36
+38            android:windowSoftInputMode="adjustPan" >
+38-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:24:13-52
+39            <intent-filter>
+39-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:25:13-28:29
+40                <action android:name="android.intent.action.MAIN" />
+40-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:26:17-69
+40-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:26:25-66
+41
+42                <category android:name="android.intent.category.LAUNCHER" />
+42-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:27:17-77
+42-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:27:27-74
+43            </intent-filter>
+44        </activity>
+45
+46        <receiver
+46-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:31:9-33:39
+47            android:name="com.example.spendwise.ReminderReceiver"
+47-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:32:13-45
+48            android:exported="false" />
+48-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:33:13-37
 49        <receiver
-49-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:31:9-33:39
-50            android:name="com.example.spendwise.ReminderReceiver"
-50-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:32:13-45
+49-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:35:9-37:39
+50            android:name="com.example.spendwise.WeeklySummaryReceiver"
+50-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:36:13-50
 51            android:exported="false" />
-51-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:33:13-37
+51-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:37:13-37
 52        <receiver
-52-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:35:9-37:39
-53            android:name="com.example.spendwise.WeeklySummaryReceiver"
-53-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:36:13-50
-54            android:exported="false" />
-54-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:37:13-37
-55        <receiver
-55-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:39:9-48:20
-56            android:name="com.example.spendwise.QuickAddWidgetProvider"
-56-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:40:13-51
-57            android:exported="false" >
-57-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:41:13-37
-58            <intent-filter>
-58-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:42:13-44:29
-59                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-59-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:43:17-83
-59-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:43:25-81
-60            </intent-filter>
-61
-62            <meta-data
-62-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:45:13-47:64
-63                android:name="android.appwidget.provider"
-63-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:46:17-58
-64                android:resource="@xml/quick_add_widget_info" />
-64-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:47:17-62
-65        </receiver>
-66
-67        <provider
-68            android:name="androidx.core.content.FileProvider"
-68-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:51:13-62
-69            android:authorities="com.example.spendwise.fileprovider"
-69-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:52:13-64
-70            android:exported="false"
-70-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:53:13-37
-71            android:grantUriPermissions="true" >
-71-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:54:13-47
-72            <meta-data
-72-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:55:13-57:53
-73                android:name="android.support.FILE_PROVIDER_PATHS"
-73-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:56:17-67
-74                android:resource="@xml/file_paths" />
-74-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:57:17-51
-75        </provider>
-76        <provider
-76-->[androidx.emoji2:emoji2:1.2.0] C:\Users\chsaa\.gradle\caches\transforms-3\a4d9de4186d9a39fb31fcb7f8c0b6bd8\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
-77            android:name="androidx.startup.InitializationProvider"
-77-->[androidx.emoji2:emoji2:1.2.0] C:\Users\chsaa\.gradle\caches\transforms-3\a4d9de4186d9a39fb31fcb7f8c0b6bd8\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
-78            android:authorities="com.example.spendwise.androidx-startup"
-78-->[androidx.emoji2:emoji2:1.2.0] C:\Users\chsaa\.gradle\caches\transforms-3\a4d9de4186d9a39fb31fcb7f8c0b6bd8\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
-79            android:exported="false" >
-79-->[androidx.emoji2:emoji2:1.2.0] C:\Users\chsaa\.gradle\caches\transforms-3\a4d9de4186d9a39fb31fcb7f8c0b6bd8\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+52-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:39:9-48:20
+53            android:name="com.example.spendwise.QuickAddWidgetProvider"
+53-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:40:13-51
+54            android:exported="false" >
+54-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:41:13-37
+55            <intent-filter>
+55-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:42:13-44:29
+56                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+56-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:43:17-83
+56-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:43:25-81
+57            </intent-filter>
+58
+59            <meta-data
+59-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:45:13-47:64
+60                android:name="android.appwidget.provider"
+60-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:46:17-58
+61                android:resource="@xml/quick_add_widget_info" />
+61-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:47:17-62
+62        </receiver>
+63
+64        <provider
+65            android:name="androidx.core.content.FileProvider"
+65-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:51:13-62
+66            android:authorities="com.example.spendwise.fileprovider"
+66-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:52:13-64
+67            android:exported="false"
+67-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:53:13-37
+68            android:grantUriPermissions="true" >
+68-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:54:13-47
+69            <meta-data
+69-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:55:13-57:53
+70                android:name="android.support.FILE_PROVIDER_PATHS"
+70-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:56:17-67
+71                android:resource="@xml/file_paths" />
+71-->C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:57:17-51
+72        </provider>
+73        <provider
+73-->[androidx.emoji2:emoji2:1.2.0] C:\Users\chsaa\.gradle\caches\transforms-3\a4d9de4186d9a39fb31fcb7f8c0b6bd8\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+74            android:name="androidx.startup.InitializationProvider"
+74-->[androidx.emoji2:emoji2:1.2.0] C:\Users\chsaa\.gradle\caches\transforms-3\a4d9de4186d9a39fb31fcb7f8c0b6bd8\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+75            android:authorities="com.example.spendwise.androidx-startup"
+75-->[androidx.emoji2:emoji2:1.2.0] C:\Users\chsaa\.gradle\caches\transforms-3\a4d9de4186d9a39fb31fcb7f8c0b6bd8\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+76            android:exported="false" >
+76-->[androidx.emoji2:emoji2:1.2.0] C:\Users\chsaa\.gradle\caches\transforms-3\a4d9de4186d9a39fb31fcb7f8c0b6bd8\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+77            <meta-data
+77-->[androidx.emoji2:emoji2:1.2.0] C:\Users\chsaa\.gradle\caches\transforms-3\a4d9de4186d9a39fb31fcb7f8c0b6bd8\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+78                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+78-->[androidx.emoji2:emoji2:1.2.0] C:\Users\chsaa\.gradle\caches\transforms-3\a4d9de4186d9a39fb31fcb7f8c0b6bd8\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+79                android:value="androidx.startup" />
+79-->[androidx.emoji2:emoji2:1.2.0] C:\Users\chsaa\.gradle\caches\transforms-3\a4d9de4186d9a39fb31fcb7f8c0b6bd8\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
 80            <meta-data
-80-->[androidx.emoji2:emoji2:1.2.0] C:\Users\chsaa\.gradle\caches\transforms-3\a4d9de4186d9a39fb31fcb7f8c0b6bd8\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
-81                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-81-->[androidx.emoji2:emoji2:1.2.0] C:\Users\chsaa\.gradle\caches\transforms-3\a4d9de4186d9a39fb31fcb7f8c0b6bd8\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+80-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\chsaa\.gradle\caches\transforms-3\3cd5515aa42692c47f19f0b638dbbb36\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:29:13-31:52
+81                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+81-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\chsaa\.gradle\caches\transforms-3\3cd5515aa42692c47f19f0b638dbbb36\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:30:17-78
 82                android:value="androidx.startup" />
-82-->[androidx.emoji2:emoji2:1.2.0] C:\Users\chsaa\.gradle\caches\transforms-3\a4d9de4186d9a39fb31fcb7f8c0b6bd8\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+82-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\chsaa\.gradle\caches\transforms-3\3cd5515aa42692c47f19f0b638dbbb36\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:31:17-49
 83            <meta-data
-83-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\chsaa\.gradle\caches\transforms-3\3cd5515aa42692c47f19f0b638dbbb36\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:29:13-31:52
-84                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-84-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\chsaa\.gradle\caches\transforms-3\3cd5515aa42692c47f19f0b638dbbb36\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:30:17-78
+83-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
+84                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+84-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
 85                android:value="androidx.startup" />
-85-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\chsaa\.gradle\caches\transforms-3\3cd5515aa42692c47f19f0b638dbbb36\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:31:17-49
-86            <meta-data
-86-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
-87                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-87-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
-88                android:value="androidx.startup" />
-88-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
-89        </provider>
-90
+85-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
+86        </provider>
+87
+88        <uses-library
+88-->[androidx.window:window:1.0.0] C:\Users\chsaa\.gradle\caches\transforms-3\69f610d461bfc07f641bfe7a09f2304d\transformed\window-1.0.0\AndroidManifest.xml:25:9-27:40
+89            android:name="androidx.window.extensions"
+89-->[androidx.window:window:1.0.0] C:\Users\chsaa\.gradle\caches\transforms-3\69f610d461bfc07f641bfe7a09f2304d\transformed\window-1.0.0\AndroidManifest.xml:26:13-54
+90            android:required="false" />
+90-->[androidx.window:window:1.0.0] C:\Users\chsaa\.gradle\caches\transforms-3\69f610d461bfc07f641bfe7a09f2304d\transformed\window-1.0.0\AndroidManifest.xml:27:13-37
 91        <uses-library
-91-->[androidx.window:window:1.0.0] C:\Users\chsaa\.gradle\caches\transforms-3\69f610d461bfc07f641bfe7a09f2304d\transformed\window-1.0.0\AndroidManifest.xml:25:9-27:40
-92            android:name="androidx.window.extensions"
-92-->[androidx.window:window:1.0.0] C:\Users\chsaa\.gradle\caches\transforms-3\69f610d461bfc07f641bfe7a09f2304d\transformed\window-1.0.0\AndroidManifest.xml:26:13-54
+91-->[androidx.window:window:1.0.0] C:\Users\chsaa\.gradle\caches\transforms-3\69f610d461bfc07f641bfe7a09f2304d\transformed\window-1.0.0\AndroidManifest.xml:28:9-30:40
+92            android:name="androidx.window.sidecar"
+92-->[androidx.window:window:1.0.0] C:\Users\chsaa\.gradle\caches\transforms-3\69f610d461bfc07f641bfe7a09f2304d\transformed\window-1.0.0\AndroidManifest.xml:29:13-51
 93            android:required="false" />
-93-->[androidx.window:window:1.0.0] C:\Users\chsaa\.gradle\caches\transforms-3\69f610d461bfc07f641bfe7a09f2304d\transformed\window-1.0.0\AndroidManifest.xml:27:13-37
-94        <uses-library
-94-->[androidx.window:window:1.0.0] C:\Users\chsaa\.gradle\caches\transforms-3\69f610d461bfc07f641bfe7a09f2304d\transformed\window-1.0.0\AndroidManifest.xml:28:9-30:40
-95            android:name="androidx.window.sidecar"
-95-->[androidx.window:window:1.0.0] C:\Users\chsaa\.gradle\caches\transforms-3\69f610d461bfc07f641bfe7a09f2304d\transformed\window-1.0.0\AndroidManifest.xml:29:13-51
-96            android:required="false" />
-96-->[androidx.window:window:1.0.0] C:\Users\chsaa\.gradle\caches\transforms-3\69f610d461bfc07f641bfe7a09f2304d\transformed\window-1.0.0\AndroidManifest.xml:30:13-37
-97
-98        <service
-98-->[androidx.room:room-runtime:2.6.1] C:\Users\chsaa\.gradle\caches\transforms-3\607c570300cd2d705f51601c89359b42\transformed\room-runtime-2.6.1\AndroidManifest.xml:24:9-28:63
-99            android:name="androidx.room.MultiInstanceInvalidationService"
-99-->[androidx.room:room-runtime:2.6.1] C:\Users\chsaa\.gradle\caches\transforms-3\607c570300cd2d705f51601c89359b42\transformed\room-runtime-2.6.1\AndroidManifest.xml:25:13-74
-100            android:directBootAware="true"
-100-->[androidx.room:room-runtime:2.6.1] C:\Users\chsaa\.gradle\caches\transforms-3\607c570300cd2d705f51601c89359b42\transformed\room-runtime-2.6.1\AndroidManifest.xml:26:13-43
-101            android:exported="false" />
-101-->[androidx.room:room-runtime:2.6.1] C:\Users\chsaa\.gradle\caches\transforms-3\607c570300cd2d705f51601c89359b42\transformed\room-runtime-2.6.1\AndroidManifest.xml:27:13-37
-102
-103        <receiver
-103-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
-104            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-104-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
-105            android:directBootAware="false"
-105-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
-106            android:enabled="true"
-106-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
-107            android:exported="true"
-107-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
-108            android:permission="android.permission.DUMP" >
-108-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
+93-->[androidx.window:window:1.0.0] C:\Users\chsaa\.gradle\caches\transforms-3\69f610d461bfc07f641bfe7a09f2304d\transformed\window-1.0.0\AndroidManifest.xml:30:13-37
+94
+95        <service
+95-->[androidx.room:room-runtime:2.6.1] C:\Users\chsaa\.gradle\caches\transforms-3\607c570300cd2d705f51601c89359b42\transformed\room-runtime-2.6.1\AndroidManifest.xml:24:9-28:63
+96            android:name="androidx.room.MultiInstanceInvalidationService"
+96-->[androidx.room:room-runtime:2.6.1] C:\Users\chsaa\.gradle\caches\transforms-3\607c570300cd2d705f51601c89359b42\transformed\room-runtime-2.6.1\AndroidManifest.xml:25:13-74
+97            android:directBootAware="true"
+97-->[androidx.room:room-runtime:2.6.1] C:\Users\chsaa\.gradle\caches\transforms-3\607c570300cd2d705f51601c89359b42\transformed\room-runtime-2.6.1\AndroidManifest.xml:26:13-43
+98            android:exported="false" />
+98-->[androidx.room:room-runtime:2.6.1] C:\Users\chsaa\.gradle\caches\transforms-3\607c570300cd2d705f51601c89359b42\transformed\room-runtime-2.6.1\AndroidManifest.xml:27:13-37
+99
+100        <receiver
+100-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
+101            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+101-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
+102            android:directBootAware="false"
+102-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
+103            android:enabled="true"
+103-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
+104            android:exported="true"
+104-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
+105            android:permission="android.permission.DUMP" >
+105-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
+106            <intent-filter>
+106-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
+107                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+107-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
+107-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
+108            </intent-filter>
 109            <intent-filter>
-109-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
-110                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-110-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
-110-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
+109-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
+110                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+110-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
+110-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
 111            </intent-filter>
 112            <intent-filter>
-112-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
-113                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-113-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
-113-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
+112-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
+113                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+113-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
+113-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
 114            </intent-filter>
 115            <intent-filter>
-115-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
-116                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-116-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
-116-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
+115-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
+116                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+116-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
+116-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
 117            </intent-filter>
-118            <intent-filter>
-118-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
-119                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-119-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
-119-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\chsaa\.gradle\caches\transforms-3\098cc22fcaf1016b44d97c753cd56638\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
-120            </intent-filter>
-121        </receiver>
-122    </application>
-123
-124</manifest>
+118        </receiver>
+119    </application>
+120
+121</manifest>

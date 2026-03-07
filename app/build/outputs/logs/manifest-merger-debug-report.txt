@@ -26,7 +26,6 @@ MERGED from [androidx.navigation:navigation-ui-ktx:2.7.7] C:\Users\chsaa\.gradle
 MERGED from [androidx.navigation:navigation-ui:2.7.7] C:\Users\chsaa\.gradle\caches\transforms-3\7267a4a3daea2f370990b558ba71de49\transformed\navigation-ui-2.7.7\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\chsaa\.gradle\caches\transforms-3\3d94f2ddae9f2b16b5782a896b77f7e7\transformed\material-1.11.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\chsaa\.gradle\caches\transforms-3\1680cd33057ba3fcb3501eefaa77ac77\transformed\constraintlayout-2.1.4\AndroidManifest.xml:2:1-11:12
-MERGED from [androidx.biometric:biometric:1.1.0] C:\Users\chsaa\.gradle\caches\transforms-3\42de5b0c326d9f857a50584ef294d1e9\transformed\biometric-1.1.0\AndroidManifest.xml:17:1-29:12
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\chsaa\.gradle\caches\transforms-3\a2e9ed7c52b7ca45db7b9fb204604607\transformed\appcompat-resources-1.6.1\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.appcompat:appcompat:1.6.1] C:\Users\chsaa\.gradle\caches\transforms-3\826b3ef135ec5a3cd2cd20c53e2b22ee\transformed\appcompat-1.6.1\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.emoji2:emoji2-views-helper:1.2.0] C:\Users\chsaa\.gradle\caches\transforms-3\6b00fbed80d8d28695195ed2e8d30506\transformed\emoji2-views-helper-1.2.0\AndroidManifest.xml:2:1-7:12
@@ -52,8 +51,8 @@ MERGED from [androidx.window:window:1.0.0] C:\Users\chsaa\.gradle\caches\transfo
 MERGED from [androidx.core:core:1.12.0] C:\Users\chsaa\.gradle\caches\transforms-3\9660a9cb54f7bbc4e28308efb4763ad7\transformed\core-1.12.0\AndroidManifest.xml:17:1-30:12
 MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] C:\Users\chsaa\.gradle\caches\transforms-3\92307f6c45b3efdbf9f2c76bbe748dda\transformed\savedstate-ktx-1.2.1\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.savedstate:savedstate:1.2.1] C:\Users\chsaa\.gradle\caches\transforms-3\c13aa91cb3591c6ae76d673da435a87a\transformed\savedstate-1.2.1\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\chsaa\.gradle\caches\transforms-3\3cd5515aa42692c47f19f0b638dbbb36\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:17:1-35:12
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.7.0] C:\Users\chsaa\.gradle\caches\transforms-3\c3baf6f6fd8513013b8924c7c6fae33e\transformed\lifecycle-livedata-core-2.7.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\chsaa\.gradle\caches\transforms-3\3cd5515aa42692c47f19f0b638dbbb36\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:17:1-35:12
 MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.7.0] C:\Users\chsaa\.gradle\caches\transforms-3\462bf5371099154d7ec893efa2877954\transformed\lifecycle-livedata-core-ktx-2.7.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.lifecycle:lifecycle-livedata:2.7.0] C:\Users\chsaa\.gradle\caches\transforms-3\ec09df457e3e7ce7eed8d3ca4094fdd4\transformed\lifecycle-livedata-2.7.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.7.0] C:\Users\chsaa\.gradle\caches\transforms-3\ee8c1bebeed0ca32a12e7fced93e9914\transformed\lifecycle-runtime-2.7.0\AndroidManifest.xml:2:1-7:12
@@ -100,8 +99,6 @@ ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidMa
 		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:6:22-76
 uses-permission#android.permission.USE_BIOMETRIC
 ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:7:5-71
-MERGED from [androidx.biometric:biometric:1.1.0] C:\Users\chsaa\.gradle\caches\transforms-3\42de5b0c326d9f857a50584ef294d1e9\transformed\biometric-1.1.0\AndroidManifest.xml:24:5-72
-MERGED from [androidx.biometric:biometric:1.1.0] C:\Users\chsaa\.gradle\caches\transforms-3\42de5b0c326d9f857a50584ef294d1e9\transformed\biometric-1.1.0\AndroidManifest.xml:24:5-72
 	android:name
 		ADDED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml:7:22-69
 application
@@ -231,8 +228,6 @@ MERGED from [com.google.android.material:material:1.11.0] C:\Users\chsaa\.gradle
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\chsaa\.gradle\caches\transforms-3\3d94f2ddae9f2b16b5782a896b77f7e7\transformed\material-1.11.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\chsaa\.gradle\caches\transforms-3\1680cd33057ba3fcb3501eefaa77ac77\transformed\constraintlayout-2.1.4\AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\chsaa\.gradle\caches\transforms-3\1680cd33057ba3fcb3501eefaa77ac77\transformed\constraintlayout-2.1.4\AndroidManifest.xml:5:5-7:41
-MERGED from [androidx.biometric:biometric:1.1.0] C:\Users\chsaa\.gradle\caches\transforms-3\42de5b0c326d9f857a50584ef294d1e9\transformed\biometric-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.biometric:biometric:1.1.0] C:\Users\chsaa\.gradle\caches\transforms-3\42de5b0c326d9f857a50584ef294d1e9\transformed\biometric-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\chsaa\.gradle\caches\transforms-3\a2e9ed7c52b7ca45db7b9fb204604607\transformed\appcompat-resources-1.6.1\AndroidManifest.xml:20:5-44
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\chsaa\.gradle\caches\transforms-3\a2e9ed7c52b7ca45db7b9fb204604607\transformed\appcompat-resources-1.6.1\AndroidManifest.xml:20:5-44
 MERGED from [androidx.appcompat:appcompat:1.6.1] C:\Users\chsaa\.gradle\caches\transforms-3\826b3ef135ec5a3cd2cd20c53e2b22ee\transformed\appcompat-1.6.1\AndroidManifest.xml:20:5-44
@@ -283,10 +278,10 @@ MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] C:\Users\chsaa\.gradle\ca
 MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] C:\Users\chsaa\.gradle\caches\transforms-3\92307f6c45b3efdbf9f2c76bbe748dda\transformed\savedstate-ktx-1.2.1\AndroidManifest.xml:20:5-44
 MERGED from [androidx.savedstate:savedstate:1.2.1] C:\Users\chsaa\.gradle\caches\transforms-3\c13aa91cb3591c6ae76d673da435a87a\transformed\savedstate-1.2.1\AndroidManifest.xml:20:5-44
 MERGED from [androidx.savedstate:savedstate:1.2.1] C:\Users\chsaa\.gradle\caches\transforms-3\c13aa91cb3591c6ae76d673da435a87a\transformed\savedstate-1.2.1\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\chsaa\.gradle\caches\transforms-3\3cd5515aa42692c47f19f0b638dbbb36\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:21:5-44
-MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\chsaa\.gradle\caches\transforms-3\3cd5515aa42692c47f19f0b638dbbb36\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:21:5-44
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.7.0] C:\Users\chsaa\.gradle\caches\transforms-3\c3baf6f6fd8513013b8924c7c6fae33e\transformed\lifecycle-livedata-core-2.7.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.7.0] C:\Users\chsaa\.gradle\caches\transforms-3\c3baf6f6fd8513013b8924c7c6fae33e\transformed\lifecycle-livedata-core-2.7.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\chsaa\.gradle\caches\transforms-3\3cd5515aa42692c47f19f0b638dbbb36\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\chsaa\.gradle\caches\transforms-3\3cd5515aa42692c47f19f0b638dbbb36\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:21:5-44
 MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.7.0] C:\Users\chsaa\.gradle\caches\transforms-3\462bf5371099154d7ec893efa2877954\transformed\lifecycle-livedata-core-ktx-2.7.0\AndroidManifest.xml:5:5-44
 MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.7.0] C:\Users\chsaa\.gradle\caches\transforms-3\462bf5371099154d7ec893efa2877954\transformed\lifecycle-livedata-core-ktx-2.7.0\AndroidManifest.xml:5:5-44
 MERGED from [androidx.lifecycle:lifecycle-livedata:2.7.0] C:\Users\chsaa\.gradle\caches\transforms-3\ec09df457e3e7ce7eed8d3ca4094fdd4\transformed\lifecycle-livedata-2.7.0\AndroidManifest.xml:20:5-44
@@ -343,10 +338,6 @@ MERGED from [androidx.print:print:1.0.0] C:\Users\chsaa\.gradle\caches\transform
 		INJECTED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
 		INJECTED from C:\Users\chsaa\AndroidStudioProjects\SpendWise\app\src\main\AndroidManifest.xml
-uses-permission#android.permission.USE_FINGERPRINT
-ADDED from [androidx.biometric:biometric:1.1.0] C:\Users\chsaa\.gradle\caches\transforms-3\42de5b0c326d9f857a50584ef294d1e9\transformed\biometric-1.1.0\AndroidManifest.xml:27:5-74
-	android:name
-		ADDED from [androidx.biometric:biometric:1.1.0] C:\Users\chsaa\.gradle\caches\transforms-3\42de5b0c326d9f857a50584ef294d1e9\transformed\biometric-1.1.0\AndroidManifest.xml:27:22-71
 provider#androidx.startup.InitializationProvider
 ADDED from [androidx.emoji2:emoji2:1.2.0] C:\Users\chsaa\.gradle\caches\transforms-3\a4d9de4186d9a39fb31fcb7f8c0b6bd8\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
 MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\chsaa\.gradle\caches\transforms-3\3cd5515aa42692c47f19f0b638dbbb36\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:24:9-32:20

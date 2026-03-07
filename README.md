@@ -33,7 +33,7 @@ Whether you're tracking daily coffee runs, managing monthly bills, or splitting 
 - ** Split Expenses**: Easily divide bills among friends or groups and track who owes what.
 - ** Savings Goals**: Set financial targets and track your progress visually.
 - ** Recurring Transactions**: Automate regular payments like rent or subscriptions.
-- ** Secure Login**: Protect your data with a local PIN-based authentication system.
+- ** Welcome Guide**: Clean and modern first-time onboarding experience.
 - ** Offline First**: No internet required. Your data stays on your device, always.
 - ** Customization**: Native Light Theme support with dynamic colors.
 

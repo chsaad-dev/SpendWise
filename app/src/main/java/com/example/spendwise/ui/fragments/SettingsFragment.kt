@@ -50,16 +50,6 @@ class SettingsFragment : Fragment() {
         ActivityResultContracts.OpenDocument()
     ) { uri -> uri?.let { restoreDatabaseFrom(it) } }
 
-    private val notifPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { granted ->
-        if (granted) {
-            enableReminder()
-        } else {
-            Toast.makeText(context, "Notification permission denied", Toast.LENGTH_SHORT).show()
-            view?.findViewById<MaterialSwitch>(R.id.switch_reminder)?.isChecked = false
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,10 +62,6 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val prefs = requireActivity().getSharedPreferences("SpendWisePrefs", Context.MODE_PRIVATE)
 
-        // ── 1. Reset PIN ──
-        view.findViewById<MaterialButton>(R.id.btn_reset_pin).setOnClickListener {
-            showResetPinDialog()
-        }
 
         // ── 2. Monthly Budget ──
         view.findViewById<MaterialButton>(R.id.btn_budget).setOnClickListener {
@@ -103,35 +89,6 @@ class SettingsFragment : Fragment() {
             showLanguageDialog()
         }
 
-        // ── 6. Daily Reminder ──
-        val switchReminder = view.findViewById<MaterialSwitch>(R.id.switch_reminder)
-        switchReminder.isChecked = prefs.getBoolean("reminder_enabled", false)
-        switchReminder.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
-                    ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.POST_NOTIFICATIONS)
-                    != PackageManager.PERMISSION_GRANTED
-                ) {
-                    notifPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-                } else {
-                    enableReminder()
-                }
-            } else {
-                disableReminder()
-            }
-        }
-
-        // ── 6b. Weekly Summary ──
-        val switchWeekly = view.findViewById<MaterialSwitch>(R.id.switch_weekly_summary)
-        switchWeekly.isChecked = prefs.getBoolean("weekly_summary_enabled", false)
-        switchWeekly.setOnCheckedChangeListener { _, isChecked ->
-            prefs.edit().putBoolean("weekly_summary_enabled", isChecked).apply()
-            if (isChecked) {
-                enableWeeklySummary()
-            } else {
-                disableWeeklySummary()
-            }
-        }
 
         // ── 7. Export CSV ──
         view.findViewById<MaterialButton>(R.id.btn_export_csv).setOnClickListener {
@@ -188,12 +145,15 @@ class SettingsFragment : Fragment() {
                 .setTitle("About SpendWise")
                 .setMessage(
                     "SpendWise v2.0\n\n" +
-                    "A simple, secure, and offline expense tracker.\n\n" +
-                    "• Track daily expenses by category\n" +
-                    "• Visualize spending with charts\n" +
-                    "• PIN-protected for privacy\n" +
-                    "• No internet required\n\n" +
-                    "Built with ❤️ using Material 3"
+                    "SpendWise is your comprehensive, offline-first personal finance companion designed to help you effortlessly manage your money.\n\n" +
+                    "Key Features:\n" +
+                    "• Intelligent Tracking: Log daily spending with custom categories.\n" +
+                    "• Visual Analytics: Understand habits through dynamic charts and summaries.\n" +
+                    "• Advanced Budgeting: Set monthly limits to keep spending in check.\n" +
+                    "• Collaborative: Split bills with friends seamlessly.\n" +
+                    "• Data Control: Export, backup, and restore your database at any time.\n\n" +
+                    "Developer: SaadDev\n" +
+                    "Built with ❤️ and native Android Material Design 3 for a fluid, modern, and beautiful user experience."
                 )
                 .setPositiveButton("OK", null)
                 .show()
@@ -205,14 +165,13 @@ class SettingsFragment : Fragment() {
                 .setTitle("Privacy Policy")
                 .setMessage(
                     "SpendWise Privacy Policy\n\n" +
-                    "Your privacy matters to us.\n\n" +
-                    "• All data is stored locally on your device only.\n" +
-                    "• No data is collected, transmitted, or shared with third parties.\n" +
-                    "• No analytics or tracking of any kind.\n" +
-                    "• No internet connection required or used.\n" +
-                    "• Your PIN is stored locally and never leaves your device.\n" +
-                    "• Deleting the app removes all data permanently.\n\n" +
-                    "You are in full control of your data at all times."
+                    "At SpendWise, we believe your financial data is strictly yours. We have built this application with a \"Privacy First\" and \"Offline First\" philosophy.\n\n" +
+                    "1. Local Storage: All transactions, categories, and preferences are stored securely on your device's internal storage.\n" +
+                    "2. Zero Data Collection: We do not collect, harvest, or transmit any personal or financial information.\n" +
+                    "3. No Third-Party Tracking: There are no remote analytics, tracking SDKs, telemetry, or ad networks integrated into SpendWise.\n" +
+                    "4. Fully Offline: The app functions 100% offline and does not require an internet connection.\n" +
+                    "5. Total Control: You retain full ownership of your records. You can permanently wipe all data directly from the settings at any time.\n\n" +
+                    "By using SpendWise, you are guaranteed absolute privacy over your personal finances."
                 )
                 .setPositiveButton("OK", null)
                 .show()
@@ -228,36 +187,6 @@ class SettingsFragment : Fragment() {
         }
     }
 
-    // ── Reset PIN Dialog ──
-    private fun showResetPinDialog() {
-        val prefs = requireActivity().getSharedPreferences("SpendWisePrefs", Context.MODE_PRIVATE)
-        val currentPin = prefs.getString("user_pin", "1234") ?: "1234"
-
-        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_reset_pin, null)
-        val etCurrent = dialogView.findViewById<EditText>(R.id.et_current_pin)
-        val etNewPin = dialogView.findViewById<EditText>(R.id.et_new_pin)
-        val etConfirm = dialogView.findViewById<EditText>(R.id.et_confirm_pin)
-
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Reset PIN")
-            .setView(dialogView)
-            .setPositiveButton("Save") { _, _ ->
-                when {
-                    etCurrent.text.toString() != currentPin ->
-                        Toast.makeText(context, "Current PIN is incorrect", Toast.LENGTH_SHORT).show()
-                    etNewPin.text.toString().length < 4 ->
-                        Toast.makeText(context, "PIN must be at least 4 digits", Toast.LENGTH_SHORT).show()
-                    etNewPin.text.toString() != etConfirm.text.toString() ->
-                        Toast.makeText(context, "New PINs don't match", Toast.LENGTH_SHORT).show()
-                    else -> {
-                        prefs.edit().putString("user_pin", etNewPin.text.toString()).apply()
-                        Toast.makeText(context, "PIN updated successfully", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
-            .setNegativeButton("Cancel", null)
-            .show()
-    }
 
     // ── Budget Dialog ──
     private fun showBudgetDialog() {
@@ -322,86 +251,6 @@ class SettingsFragment : Fragment() {
             .show()
     }
 
-    // ── Daily Reminder ──
-    private fun enableReminder() {
-        val prefs = requireActivity().getSharedPreferences("SpendWisePrefs", Context.MODE_PRIVATE)
-        prefs.edit().putBoolean("reminder_enabled", true).apply()
-
-        val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(requireContext(), ReminderReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(
-            requireContext(), 0, intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
-
-        // Schedule daily at 8 PM
-        val calendar = Calendar.getInstance().apply {
-            set(Calendar.HOUR_OF_DAY, 20)
-            set(Calendar.MINUTE, 0)
-            set(Calendar.SECOND, 0)
-            if (before(Calendar.getInstance())) add(Calendar.DAY_OF_MONTH, 1)
-        }
-
-        alarmManager.setRepeating(
-            AlarmManager.RTC_WAKEUP,
-            calendar.timeInMillis,
-            AlarmManager.INTERVAL_DAY,
-            pendingIntent
-        )
-        Toast.makeText(context, "Daily reminder set for 8:00 PM", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun disableReminder() {
-        val prefs = requireActivity().getSharedPreferences("SpendWisePrefs", Context.MODE_PRIVATE)
-        prefs.edit().putBoolean("reminder_enabled", false).apply()
-
-        val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(requireContext(), ReminderReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(
-            requireContext(), 0, intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
-        alarmManager.cancel(pendingIntent)
-        Toast.makeText(context, "Daily reminder disabled", Toast.LENGTH_SHORT).show()
-    }
-
-    // ── Weekly Summary ──
-    private fun enableWeeklySummary() {
-        val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(requireContext(), com.example.spendwise.WeeklySummaryReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(
-            requireContext(), 1001, intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
-
-        // Schedule every Sunday at 6 PM
-        val calendar = Calendar.getInstance().apply {
-            set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY)
-            set(Calendar.HOUR_OF_DAY, 18)
-            set(Calendar.MINUTE, 0)
-            set(Calendar.SECOND, 0)
-            if (before(Calendar.getInstance())) add(Calendar.WEEK_OF_YEAR, 1)
-        }
-
-        alarmManager.setRepeating(
-            AlarmManager.RTC_WAKEUP,
-            calendar.timeInMillis,
-            AlarmManager.INTERVAL_DAY * 7,
-            pendingIntent
-        )
-        Toast.makeText(context, "Weekly summary set for Sundays at 6 PM", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun disableWeeklySummary() {
-        val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(requireContext(), com.example.spendwise.WeeklySummaryReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(
-            requireContext(), 1001, intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
-        alarmManager.cancel(pendingIntent)
-        Toast.makeText(context, "Weekly summary disabled", Toast.LENGTH_SHORT).show()
-    }
 
     // ── Export CSV ──
     private fun exportCsv() {

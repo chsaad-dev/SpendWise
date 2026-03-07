@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.spendwise.app-mergeDebugResources-51:/values-night-v8/values-night-v8.xml",
+            "outputFile": "com.example.spendwise.app-mergeDebugResources-50:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
                     "source": "C:\\Users\\chsaa\\AndroidStudioProjects\\SpendWise\\app\\src\\main\\res\\values-night\\themes.xml",

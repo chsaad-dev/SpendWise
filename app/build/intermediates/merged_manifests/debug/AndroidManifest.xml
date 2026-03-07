@@ -12,9 +12,6 @@
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
 
-    <!-- suppress DeprecatedClassUsageInspection -->
-    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
-
     <permission
         android:name="com.example.spendwise.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
         android:protectionLevel="signature" />
