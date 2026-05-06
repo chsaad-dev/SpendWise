@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <style name="ShapeAppearance.SpendWise.FAB" parent="ShapeAppearance.Material3.Corner.Medium">
-        <item name="cornerSize">16dp</item>
-    </style>
-    <style name="Theme.SpendWise" parent="Theme.Material3.Dark.NoActionBar">
-        <item name="android:statusBarColor">@android:color/transparent</item>
-    </style>
-</resources>
