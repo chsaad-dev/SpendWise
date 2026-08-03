@@ -2,7 +2,13 @@ package com.example.spendwise
 
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updateLayoutParams
+import androidx.core.view.updatePadding
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -15,14 +21,42 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         setContentView(R.layout.activity_main)
+
+        val rootLayout = findViewById<View>(R.id.main_content)
+        val navHostFragmentView = findViewById<View>(R.id.nav_host_fragment)
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav.setupWithNavController(navController)
+
+        ViewCompat.setOnApplyWindowInsetsListener(rootLayout) { _, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+
+            rootLayout.updatePadding(top = systemBars.top)
+
+            val density = resources.displayMetrics.density
+            val baseNavHeightPx = (80 * density).toInt()
+
+            val isBottomNavVisible = bottomNav.visibility == View.VISIBLE
+            val bottomMargin = if (isBottomNavVisible) {
+                baseNavHeightPx + systemBars.bottom
+            } else {
+                systemBars.bottom
+            }
+
+            navHostFragmentView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                this.bottomMargin = bottomMargin
+            }
+
+            bottomNav.updatePadding(bottom = systemBars.bottom)
+
+            insets
+        }
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
@@ -33,6 +67,8 @@ class MainActivity : AppCompatActivity() {
                     bottomNav.visibility = View.VISIBLE
                 }
             }
+
+            ViewCompat.requestApplyInsets(rootLayout)
 
             if (destination.id == R.id.homeFragment && pendingAddExpense) {
                 pendingAddExpense = false
