@@ -146,7 +146,7 @@ This project is licensed under the [LICENSE](LICENSE).
 ---
 
 ## Author
-**Android Developer**  
+**Muhammad Saad Android Developer**  
 *Passionate about building clean, efficient, and user-friendly mobile applications.*
 
 [GitHub](https://github.com/chsaad-dev) | [LinkedIn](https://www.linkedin.com/in/muhammad-saad-a45929202?)
