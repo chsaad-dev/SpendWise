@@ -149,4 +149,4 @@ This project is licensed under the [LICENSE](LICENSE).
 **Muhammad Saad Android Developer**  
 *Passionate about building clean, efficient, and user-friendly mobile applications.*
 
-[GitHub](https://github.com/chsaad-dev) | [LinkedIn](https://www.linkedin.com/in/muhammad-saad-a45929202?)
+[GitHub](https://github.com/chsaad-dev) | [LinkedIn](https://www.linkedin.com/in/muhammad-saad075/) | [Portfolio](https://saadev.site)
