@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.spendwise.R
 import com.example.spendwise.ReminderReceiver
 import com.example.spendwise.data.AppDatabase
@@ -391,7 +392,9 @@ class SettingsFragment : Fragment() {
             val dbFile = requireContext().getDatabasePath("spendwise_database")
             // Checkpoint WAL to ensure all data is in main db file
             AppDatabase.getDatabase(requireContext(), CoroutineScope(Dispatchers.IO))
-                .openHelper.writableDatabase.execSQL("PRAGMA wal_checkpoint(FULL)")
+                .openHelper.writableDatabase
+                .query("PRAGMA wal_checkpoint(FULL)")
+                .use { it.moveToFirst() }
 
             requireContext().contentResolver.openOutputStream(uri)?.use { output ->
                 FileInputStream(dbFile).use { input -> input.copyTo(output) }
@@ -404,14 +407,36 @@ class SettingsFragment : Fragment() {
 
     // ── Restore Database ──
     private fun restoreDatabaseFrom(uri: Uri) {
-        try {
-            val dbFile = requireContext().getDatabasePath("spendwise_database")
-            requireContext().contentResolver.openInputStream(uri)?.use { input ->
-                FileOutputStream(dbFile).use { output -> input.copyTo(output) }
+        val ctx = requireContext().applicationContext
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                // 1. Close Room so it releases the file lock
+                AppDatabase.closeAndReset()
+
+                withContext(Dispatchers.IO) {
+                    val dbFile = ctx.getDatabasePath("spendwise_database")
+
+                    // 2. Delete stale WAL / SHM / journal files
+                    for (suffix in listOf("-wal", "-shm", "-journal")) {
+                        File(dbFile.path + suffix).delete()
+                    }
+
+                    // 3. Copy the backup over the main DB file
+                    ctx.contentResolver.openInputStream(uri)?.use { input ->
+                        FileOutputStream(dbFile).use { output -> input.copyTo(output) }
+                    } ?: throw IllegalStateException("Cannot open backup file")
+                }
+
+                Toast.makeText(ctx, "Database restored. Restarting…", Toast.LENGTH_SHORT).show()
+
+                // 4. Kill process so the next launch opens a fresh Room connection
+                @Suppress("DEPRECATION")
+                android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+                    android.os.Process.killProcess(android.os.Process.myPid())
+                }, 600)
+            } catch (e: Exception) {
+                Toast.makeText(ctx, "Restore failed: ${e.message}", Toast.LENGTH_SHORT).show()
             }
-            Toast.makeText(context, "Database restored. Please restart the app.", Toast.LENGTH_LONG).show()
-        } catch (e: Exception) {
-            Toast.makeText(context, "Restore failed: ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
 }
