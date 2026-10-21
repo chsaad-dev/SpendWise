@@ -10,3 +10,9 @@ Thumbs.db
 .externalNativeBuild/
 *.class
 *.log
+keystore.properties
+*.jks
+*.keystore
+/app/release/
+upload_certificate.pem
+
