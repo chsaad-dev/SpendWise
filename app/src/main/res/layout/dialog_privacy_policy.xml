@@ -41,12 +41,13 @@
                 app:strokeColor="?attr/colorOutlineVariant"
                 app:cardBackgroundColor="?attr/colorPrimaryContainer">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="ðŸ›¡ï¸"
-                    android:textSize="34sp"
-                    android:gravity="center" />
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_shield_check"
+                    app:tint="?attr/colorPrimary"
+                    android:contentDescription="Privacy Shield" />
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
@@ -63,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="Privacy First Â· Offline First Â· Zero Tracking"
+                android:text="Privacy First - Offline First - Zero Tracking"
                 android:textAppearance="?attr/textAppearanceBodyMedium"
                 android:textColor="?attr/colorPrimary"
                 android:textStyle="bold" />
@@ -82,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="14dp"
                     android:paddingVertical="5dp"
-                    android:text="Effective Date: March 2026 · Verified Safe"
+                    android:text="Effective Date: March 2026 - Verified Safe"
                     android:textAppearance="?attr/textAppearanceLabelSmall"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:textStyle="bold" />
@@ -114,13 +115,28 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="ðŸ”’ Absolute Privacy Guarantee"
-                    android:textAppearance="?attr/textAppearanceTitleSmall"
-                    android:textStyle="bold"
-                    android:textColor="?attr/colorPrimary" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_lock"
+                        app:tint="?attr/colorPrimary"
+                        android:contentDescription="Lock" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Absolute Privacy Guarantee"
+                        android:textAppearance="?attr/textAppearanceTitleSmall"
+                        android:textStyle="bold"
+                        android:textColor="?attr/colorPrimary" />
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -169,13 +185,21 @@
                     android:orientation="horizontal"
                     android:padding="14dp">
 
-                    <TextView
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="44dp"
                         android:layout_height="44dp"
-                        android:text="ðŸ“±"
-                        android:textSize="22sp"
-                        android:gravity="center"
-                        android:background="?attr/colorSurfaceContainerHigh" />
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_database"
+                            app:tint="?attr/colorPrimary"
+                            android:contentDescription="Database" />
+                    </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -221,13 +245,21 @@
                     android:orientation="horizontal"
                     android:padding="14dp">
 
-                    <TextView
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="44dp"
                         android:layout_height="44dp"
-                        android:text="ðŸš«"
-                        android:textSize="22sp"
-                        android:gravity="center"
-                        android:background="?attr/colorSurfaceContainerHigh" />
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_person_off"
+                            app:tint="?attr/colorPrimary"
+                            android:contentDescription="No Account" />
+                    </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -273,13 +305,21 @@
                     android:orientation="horizontal"
                     android:padding="14dp">
 
-                    <TextView
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="44dp"
                         android:layout_height="44dp"
-                        android:text="ðŸ›‘"
-                        android:textSize="22sp"
-                        android:gravity="center"
-                        android:background="?attr/colorSurfaceContainerHigh" />
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_no_tracking"
+                            app:tint="?attr/colorPrimary"
+                            android:contentDescription="No Tracking" />
+                    </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -291,7 +331,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="3. Zero Analytics &amp; Tracking"
+                            android:text="3. Zero Analytics and Tracking"
                             android:textAppearance="?attr/textAppearanceTitleSmall"
                             android:textStyle="bold"
                             android:textColor="?attr/colorOnSurface" />
@@ -325,13 +365,21 @@
                     android:orientation="horizontal"
                     android:padding="14dp">
 
-                    <TextView
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="44dp"
                         android:layout_height="44dp"
-                        android:text="âœ¨"
-                        android:textSize="22sp"
-                        android:gravity="center"
-                        android:background="?attr/colorSurfaceContainerHigh" />
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_block"
+                            app:tint="?attr/colorPrimary"
+                            android:contentDescription="No Ads" />
+                    </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -377,13 +425,21 @@
                     android:orientation="horizontal"
                     android:padding="14dp">
 
-                    <TextView
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="44dp"
                         android:layout_height="44dp"
-                        android:text="âœˆï¸"
-                        android:textSize="22sp"
-                        android:gravity="center"
-                        android:background="?attr/colorSurfaceContainerHigh" />
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_cloud_off"
+                            app:tint="?attr/colorPrimary"
+                            android:contentDescription="Offline" />
+                    </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -429,13 +485,21 @@
                     android:orientation="horizontal"
                     android:padding="14dp">
 
-                    <TextView
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="44dp"
                         android:layout_height="44dp"
-                        android:text="ðŸ“·"
-                        android:textSize="22sp"
-                        android:gravity="center"
-                        android:background="?attr/colorSurfaceContainerHigh" />
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_receipt"
+                            app:tint="?attr/colorPrimary"
+                            android:contentDescription="Receipts" />
+                    </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -447,7 +511,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="6. Receipt Photos &amp; Image Sandbox"
+                            android:text="6. Receipt Photos and Image Sandbox"
                             android:textAppearance="?attr/textAppearanceTitleSmall"
                             android:textStyle="bold"
                             android:textColor="?attr/colorOnSurface" />
@@ -481,13 +545,21 @@
                     android:orientation="horizontal"
                     android:padding="14dp">
 
-                    <TextView
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="44dp"
                         android:layout_height="44dp"
-                        android:text="ðŸ’¾"
-                        android:textSize="22sp"
-                        android:gravity="center"
-                        android:background="?attr/colorSurfaceContainerHigh" />
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_download"
+                            app:tint="?attr/colorPrimary"
+                            android:contentDescription="Export" />
+                    </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -499,7 +571,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="7. Data Ownership &amp; Portability"
+                            android:text="7. Data Ownership and Portability"
                             android:textAppearance="?attr/textAppearanceTitleSmall"
                             android:textStyle="bold"
                             android:textColor="?attr/colorOnSurface" />
@@ -533,13 +605,21 @@
                     android:orientation="horizontal"
                     android:padding="14dp">
 
-                    <TextView
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="44dp"
                         android:layout_height="44dp"
-                        android:text="ðŸ—‘ï¸"
-                        android:textSize="22sp"
-                        android:gravity="center"
-                        android:background="?attr/colorSurfaceContainerHigh" />
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_delete"
+                            app:tint="?attr/colorPrimary"
+                            android:contentDescription="Delete" />
+                    </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -575,7 +655,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="16dp"
-            android:text="COMPLIANCE &amp; INQUIRIES"
+            android:text="COMPLIANCE AND INQUIRIES"
             android:textAppearance="?attr/textAppearanceLabelLarge"
             android:textStyle="bold"
             android:textColor="?attr/colorPrimary"
@@ -598,13 +678,28 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="âš–ï¸ Policy Changes &amp; Contact"
-                    android:textAppearance="?attr/textAppearanceTitleSmall"
-                    android:textStyle="bold"
-                    android:textColor="?attr/colorOnSurface" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_support"
+                        app:tint="?attr/colorPrimary"
+                        android:contentDescription="Support" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Policy Changes and Contact"
+                        android:textAppearance="?attr/textAppearanceTitleSmall"
+                        android:textStyle="bold"
+                        android:textColor="?attr/colorOnSurface" />
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -641,11 +736,12 @@
                 style="@style/Widget.Material3.Button"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
-                android:text="I Understand &amp; Close"
+                android:text="I Understand and Close"
+                app:icon="@drawable/ic_check_circle"
+                app:iconGravity="textStart"
                 android:textSize="15sp"
                 app:cornerRadius="14dp" />
         </LinearLayout>
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
-

@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="Smart · Secure · Simple"
+                android:text="Smart - Secure - Simple"
                 android:textAppearance="?attr/textAppearanceBodyMedium"
                 android:textColor="?attr/colorPrimary"
                 android:textStyle="bold" />
@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="14dp"
                     android:paddingVertical="5dp"
-                    android:text="Version 1.0.2 · 100% Offline &amp; Ad-Free"
+                    android:text="Version 1.0.2 - 100% Offline and Ad-Free"
                     android:textAppearance="?attr/textAppearanceLabelSmall"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:textStyle="bold" />
@@ -114,19 +114,34 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="ðŸ’¡ The Philosophy"
-                    android:textAppearance="?attr/textAppearanceTitleSmall"
-                    android:textStyle="bold"
-                    android:textColor="?attr/colorPrimary" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_info"
+                        app:tint="?attr/colorPrimary"
+                        android:contentDescription="Info" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="The Philosophy"
+                        android:textAppearance="?attr/textAppearanceTitleSmall"
+                        android:textStyle="bold"
+                        android:textColor="?attr/colorPrimary" />
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="SpendWise was engineered with a Privacy-First, Offline-First philosophy. We believe your personal finances are your business alone. No account creation, no cloud sync, and no third-party tracking â€” just a modern, delightful tool to help you master your money."
+                    android:text="SpendWise was engineered with a Privacy-First, Offline-First philosophy. We believe your personal finances are your business alone. No account creation, no cloud sync, and no third-party tracking - just a modern, delightful tool to help you master your money."
                     android:textAppearance="?attr/textAppearanceBodyMedium"
                     android:textColor="?attr/colorOnSurface"
                     android:lineSpacingMultiplier="1.35" />
@@ -152,7 +167,7 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="10dp">
 
-            <!-- Feature 1: Intelligent Tracking -->
+            <!-- Feature 1: Quick Tracking & Receipts -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -170,13 +185,21 @@
                     android:gravity="center_vertical"
                     android:padding="12dp">
 
-                    <TextView
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="44dp"
                         android:layout_height="44dp"
-                        android:text="âš¡"
-                        android:textSize="22sp"
-                        android:gravity="center"
-                        android:background="?attr/colorSurfaceContainerHigh" />
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_bolt"
+                            app:tint="?attr/colorPrimary"
+                            android:contentDescription="Tracking" />
+                    </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -188,7 +211,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Quick Tracking &amp; Receipts"
+                            android:text="Quick Tracking and Receipts"
                             android:textAppearance="?attr/textAppearanceTitleSmall"
                             android:textStyle="bold"
                             android:textColor="?attr/colorOnSurface" />
@@ -223,13 +246,21 @@
                     android:gravity="center_vertical"
                     android:padding="12dp">
 
-                    <TextView
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="44dp"
                         android:layout_height="44dp"
-                        android:text="ðŸŽ¯"
-                        android:textSize="22sp"
-                        android:gravity="center"
-                        android:background="?attr/colorSurfaceContainerHigh" />
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_pie_chart"
+                            app:tint="?attr/colorPrimary"
+                            android:contentDescription="Budget" />
+                    </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -250,7 +281,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="Set monthly spending limits with color-coded warning progress bars (Green â†’ Yellow â†’ Red)."
+                            android:text="Set monthly spending limits with color-coded warning progress bars (Green - Yellow - Red)."
                             android:textAppearance="?attr/textAppearanceBodySmall"
                             android:textColor="?attr/colorOnSurfaceVariant"
                             android:lineSpacingMultiplier="1.25" />
@@ -276,13 +307,21 @@
                     android:gravity="center_vertical"
                     android:padding="12dp">
 
-                    <TextView
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="44dp"
                         android:layout_height="44dp"
-                        android:text="ðŸ“Š"
-                        android:textSize="22sp"
-                        android:gravity="center"
-                        android:background="?attr/colorSurfaceContainerHigh" />
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_trending_up"
+                            app:tint="?attr/colorPrimary"
+                            android:contentDescription="Analytics" />
+                    </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -303,7 +342,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="Interactive donut charts, horizontal category bars, and smooth cubic bezier historical trends."
+                            android:text="Interactive donut charts, horizontal category bars, and smooth yearly historical trends."
                             android:textAppearance="?attr/textAppearanceBodySmall"
                             android:textColor="?attr/colorOnSurfaceVariant"
                             android:lineSpacingMultiplier="1.25" />
@@ -311,7 +350,7 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Feature 4: Bill Splitting & Savings -->
+            <!-- Feature 4: Split Bills & Savings -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -329,13 +368,21 @@
                     android:gravity="center_vertical"
                     android:padding="12dp">
 
-                    <TextView
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="44dp"
                         android:layout_height="44dp"
-                        android:text="ðŸ¤"
-                        android:textSize="22sp"
-                        android:gravity="center"
-                        android:background="?attr/colorSurfaceContainerHigh" />
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_group"
+                            app:tint="?attr/colorPrimary"
+                            android:contentDescription="Split Bills" />
+                    </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -347,7 +394,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Split Bills &amp; Savings Goals"
+                            android:text="Split Bills and Savings Goals"
                             android:textAppearance="?attr/textAppearanceTitleSmall"
                             android:textStyle="bold"
                             android:textColor="?attr/colorOnSurface" />
@@ -382,13 +429,21 @@
                     android:gravity="center_vertical"
                     android:padding="12dp">
 
-                    <TextView
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="44dp"
                         android:layout_height="44dp"
-                        android:text="ðŸ’¾"
-                        android:textSize="22sp"
-                        android:gravity="center"
-                        android:background="?attr/colorSurfaceContainerHigh" />
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_download"
+                            app:tint="?attr/colorPrimary"
+                            android:contentDescription="Backup" />
+                    </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -400,7 +455,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="PDF Reports &amp; Full Backups"
+                            android:text="PDF Reports and Full Backups"
                             android:textAppearance="?attr/textAppearanceTitleSmall"
                             android:textStyle="bold"
                             android:textColor="?attr/colorOnSurface" />
@@ -418,13 +473,13 @@
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
 
-        <!-- Section: Technology Stack -->
+        <!-- Section: Speed & Privacy Highlights -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="16dp"
-            android:text="BUILT FOR SPEED &amp; PRIVACY"
+            android:text="BUILT FOR SPEED AND PRIVACY"
             android:textAppearance="?attr/textAppearanceLabelLarge"
             android:textStyle="bold"
             android:textColor="?attr/colorPrimary"
@@ -447,19 +502,34 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="âš™ï¸ Modern Native Android"
-                    android:textAppearance="?attr/textAppearanceTitleSmall"
-                    android:textStyle="bold"
-                    android:textColor="?attr/colorOnSurface" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_speed"
+                        app:tint="?attr/colorPrimary"
+                        android:contentDescription="Speed" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Fast, Lightweight and Secure"
+                        android:textAppearance="?attr/textAppearanceTitleSmall"
+                        android:textStyle="bold"
+                        android:textColor="?attr/colorOnSurface" />
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="â€¢ Language: 100% Kotlin with Coroutines &amp; Flow\nâ€¢ Architecture: MVVM (Model-View-ViewModel)\nâ€¢ Database: SQLite Room Persistence Library with WAL mode\nâ€¢ UI: Material Design 3 Components with Dynamic Color\nâ€¢ Visuals: MPAndroidChart &amp; Lottie Vector Animations\nâ€¢ Navigation: Android Jetpack Single-Activity Navigation"
+                    android:layout_marginTop="8dp"
+                    android:text="- 100% Offline: Zero internet required, works seamlessly anywhere\n- Ultra Responsive: Lightweight native Android Material 3 experience\n- Secure Local Storage: Kept privately on your phone\n- Visual Simplicity: Clean charts with zero clutter or ads\n- Battery Efficient: No background battery-draining services"
                     android:textAppearance="?attr/textAppearanceBodySmall"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:lineSpacingMultiplier="1.4" />
@@ -472,7 +542,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="20dp"
-            android:text="DEVELOPER &amp; COMMUNITY"
+            android:text="DEVELOPER AND COMMUNITY"
             android:textAppearance="?attr/textAppearanceLabelLarge"
             android:textStyle="bold"
             android:textColor="?attr/colorPrimary"
@@ -501,13 +571,21 @@
                     android:orientation="horizontal"
                     android:gravity="center_vertical">
 
-                    <TextView
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:text="ðŸ‘¨â€ðŸ’»"
-                        android:textSize="26sp"
-                        android:gravity="center"
-                        android:background="?attr/colorSurfaceContainerHigh" />
+                        app:cardCornerRadius="14dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
+
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_support"
+                            app:tint="?attr/colorPrimary"
+                            android:contentDescription="Developer" />
+                    </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -572,7 +650,9 @@
                 style="@style/Widget.Material3.Button"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
-                android:text="â­ Rate on Google Play"
+                android:text="Rate on Google Play"
+                app:icon="@drawable/ic_star_rate"
+                app:iconGravity="textStart"
                 android:textSize="15sp"
                 app:cornerRadius="14dp" />
 
