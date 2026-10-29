@@ -52,16 +52,7 @@ class ExpenseAdapter(
             val catText = if (!expense.receiptPath.isNullOrBlank()) "\uD83D\uDCCE ${expense.category}" else expense.category
             tvCategory.text = catText
             
-            val prefs = itemView.context.getSharedPreferences("SpendWisePrefs", android.content.Context.MODE_PRIVATE)
-            val currencyCode = prefs.getString("currency_code", "default") ?: "default"
-            val currencyFormat = if (currencyCode == "default") {
-                NumberFormat.getCurrencyInstance(Locale.getDefault())
-            } else {
-                NumberFormat.getCurrencyInstance(Locale.getDefault()).apply {
-                    currency = Currency.getInstance(currencyCode)
-                }
-            }
-            val formattedAmount = currencyFormat.format(expense.amount)
+            val formattedAmount = com.example.spendwise.utils.CurrencyHelper.format(itemView.context, expense.amount)
             if (expense.isIncome) {
                 tvAmount.text = "+$formattedAmount"
                 tvAmount.setTextColor(Color.parseColor("#388E3C"))

@@ -425,4 +425,12 @@ class HomeFragment : Fragment() {
         chart.centerText = viewModel.formatCurrency(total.toDouble())
         chart.invalidate()
     }
+
+    override fun onResume() {
+        super.onResume()
+        if (::adapter.isInitialized) {
+            adapter.notifyDataSetChanged()
+        }
+        viewModel.setMonthFilter(currentMonth)
+    }
 }

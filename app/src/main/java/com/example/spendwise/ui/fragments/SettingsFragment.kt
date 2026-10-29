@@ -173,9 +173,10 @@ class SettingsFragment : Fragment() {
         val prefs = requireActivity().getSharedPreferences("SpendWisePrefs", Context.MODE_PRIVATE)
         val current = prefs.getFloat("monthly_budget", 0f)
 
+        val symbol = com.example.spendwise.utils.CurrencyHelper.getCurrencyFormat(requireContext()).currency?.symbol ?: ""
         val input = EditText(requireContext()).apply {
             inputType = android.text.InputType.TYPE_CLASS_NUMBER or android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL
-            hint = "Enter monthly budget"
+            hint = if (symbol.isNotBlank()) "Enter monthly budget ($symbol)" else "Enter monthly budget"
             if (current > 0f) setText(current.toString())
             setPadding(64, 32, 64, 32)
         }
@@ -187,7 +188,11 @@ class SettingsFragment : Fragment() {
             .setPositiveButton("Save") { _, _ ->
                 val value = input.text.toString().toFloatOrNull() ?: 0f
                 prefs.edit().putFloat("monthly_budget", value).apply()
-                val msg = if (value > 0f) "Budget set to ${value.toInt()}" else "Budget limit removed"
+                val msg = if (value > 0f) {
+                    "Budget set to ${com.example.spendwise.utils.CurrencyHelper.format(requireContext(), value.toDouble())}"
+                } else {
+                    "Budget limit removed"
+                }
                 Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
             }
             .setNeutralButton("Remove Limit") { _, _ ->

@@ -47,7 +47,7 @@ class WeeklySummaryReceiver : BroadcastReceiver() {
                 val total = expenses.sumOf { it.amount }
                 val count = expenses.size
 
-                val currencyFormat = NumberFormat.getCurrencyInstance(Locale.getDefault())
+                val currencyFormat = com.example.spendwise.utils.CurrencyHelper.getCurrencyFormat(context)
                 val topCategory = expenses.groupBy { it.category }
                     .maxByOrNull { it.value.sumOf { e -> e.amount } }?.key ?: "None"
 

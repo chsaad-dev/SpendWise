@@ -1,5 +1,6 @@
 package com.example.spendwise.ui.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,12 +17,11 @@ import com.example.spendwise.R
 import com.example.spendwise.data.SplitGroup
 import com.example.spendwise.data.SplitMember
 import com.example.spendwise.ui.viewmodel.MainViewModel
+import com.example.spendwise.utils.CurrencyHelper
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.checkbox.MaterialCheckBox
 import com.google.android.material.chip.Chip
 import com.google.android.material.textfield.TextInputEditText
-import java.text.NumberFormat
-import java.util.Locale
 
 class SplitExpenseFragment : Fragment() {
 
@@ -63,7 +63,7 @@ class SplitExpenseFragment : Fragment() {
         val chipEqual = view.findViewById<Chip>(R.id.chip_equal)
         val chipCustom = view.findViewById<Chip>(R.id.chip_custom)
 
-        val currencyFormat = NumberFormat.getCurrencyInstance(Locale.getDefault())
+        val currencyFormat = CurrencyHelper.getCurrencyFormat(requireContext())
 
         tvInfo.text = "$expenseCategory expense"
         tvTotal.text = currencyFormat.format(expenseAmount)
@@ -152,8 +152,6 @@ class SplitExpenseFragment : Fragment() {
         private val onDelete: () -> Unit
     ) : RecyclerView.Adapter<MemberAdapter.VH>() {
 
-        private val currencyFormat = NumberFormat.getCurrencyInstance(Locale.getDefault())
-
         class VH(view: View) : RecyclerView.ViewHolder(view) {
             val tvName: TextView = view.findViewById(R.id.tv_member_name)
             val etAmount: TextInputEditText = view.findViewById(R.id.et_member_amount)
@@ -174,7 +172,8 @@ class SplitExpenseFragment : Fragment() {
             holder.tvName.text = member.name
 
             if (isEqualSplit) {
-                holder.etAmount.setText(currencyFormat.format(member.shareAmount))
+                val fmt = CurrencyHelper.getCurrencyFormat(holder.itemView.context)
+                holder.etAmount.setText(fmt.format(member.shareAmount))
                 holder.etAmount.isEnabled = false
             } else {
                 holder.etAmount.isEnabled = true

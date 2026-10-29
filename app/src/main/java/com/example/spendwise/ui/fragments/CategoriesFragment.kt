@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.spendwise.R
 import com.example.spendwise.data.Category
 import com.example.spendwise.ui.viewmodel.MainViewModel
+import com.example.spendwise.utils.CurrencyHelper
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
@@ -25,6 +26,7 @@ import com.google.android.material.textfield.TextInputEditText
 class CategoriesFragment : Fragment() {
 
     private val viewModel: MainViewModel by activityViewModels()
+    private var categoryAdapter: CategoryAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,9 +56,11 @@ class CategoriesFragment : Fragment() {
                     .show()
             },
             onEditClick = { category ->
+                val fmt = CurrencyHelper.getCurrencyFormat(requireContext())
+                val symbol = fmt.currency?.symbol ?: ""
                 val input = android.widget.EditText(requireContext()).apply {
                     inputType = android.text.InputType.TYPE_CLASS_NUMBER or android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL
-                    hint = "Enter monthly budget map"
+                    hint = if (symbol.isNotBlank()) "Enter monthly budget ($symbol)" else "Enter monthly budget"
                     if (category.monthlyBudget > 0) setText(category.monthlyBudget.toString())
                     setPadding(64, 32, 64, 32)
                 }
@@ -78,6 +82,7 @@ class CategoriesFragment : Fragment() {
             }
         )
 
+        categoryAdapter = adapter
         rvCategories.layoutManager = LinearLayoutManager(context)
         rvCategories.adapter = adapter
 
@@ -96,6 +101,11 @@ class CategoriesFragment : Fragment() {
                 Toast.makeText(context, "Enter a category name", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        categoryAdapter?.notifyDataSetChanged()
     }
 
     class CategoryAdapter(
@@ -131,7 +141,7 @@ class CategoriesFragment : Fragment() {
                 colorDot.background = drawable
 
                 if (category.monthlyBudget > 0) {
-                    val fmt = java.text.NumberFormat.getCurrencyInstance(java.util.Locale.getDefault())
+                    val fmt = CurrencyHelper.getCurrencyFormat(itemView.context)
                     tvBudget.text = "Limit: ${fmt.format(category.monthlyBudget)}"
                 } else {
                     tvBudget.text = "No Budget"

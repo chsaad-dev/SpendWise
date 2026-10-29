@@ -58,16 +58,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     // Currency formatter that respects the user's choice in Settings.
     // Called fresh each time so changes take effect without a restart.
     fun buildCurrencyFormat(): NumberFormat {
-        val prefs = getApplication<android.app.Application>()
-            .getSharedPreferences("SpendWisePrefs", Context.MODE_PRIVATE)
-        val code = prefs.getString("currency_code", "default") ?: "default"
-        return if (code == "default") {
-            NumberFormat.getCurrencyInstance(Locale.getDefault())
-        } else {
-            NumberFormat.getCurrencyInstance(Locale.getDefault()).apply {
-                currency = Currency.getInstance(code)
-            }
-        }
+        return com.example.spendwise.utils.CurrencyHelper.getCurrencyFormat(getApplication())
     }
 
     init {

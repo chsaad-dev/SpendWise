@@ -16,11 +16,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.spendwise.R
 import com.example.spendwise.data.SavingsGoal
 import com.example.spendwise.ui.viewmodel.MainViewModel
+import com.example.spendwise.utils.CurrencyHelper
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.google.android.material.textfield.TextInputEditText
-import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -28,6 +28,7 @@ import java.util.Locale
 class SavingsGoalFragment : Fragment() {
 
     private val viewModel: MainViewModel by activityViewModels()
+    private var goalAdapter: GoalAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,6 +56,7 @@ class SavingsGoalFragment : Fragment() {
             }
         )
 
+        goalAdapter = adapter
         rvGoals.layoutManager = LinearLayoutManager(context)
         rvGoals.adapter = adapter
 
@@ -69,6 +71,11 @@ class SavingsGoalFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        goalAdapter?.notifyDataSetChanged()
+    }
+
     private fun showAddGoalDialog() {
         val dialogView = LayoutInflater.from(requireContext())
             .inflate(R.layout.dialog_add_goal, null)
@@ -76,6 +83,12 @@ class SavingsGoalFragment : Fragment() {
         val etName = dialogView.findViewById<TextInputEditText>(R.id.et_goal_name)
         val etTarget = dialogView.findViewById<TextInputEditText>(R.id.et_goal_target)
         val etDeadline = dialogView.findViewById<TextInputEditText>(R.id.et_goal_deadline)
+
+        val fmt = CurrencyHelper.getCurrencyFormat(requireContext())
+        val symbol = fmt.currency?.symbol ?: ""
+        if (symbol.isNotBlank()) {
+            etTarget.hint = "Target amount ($symbol)"
+        }
 
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.MONTH, 3) // Default: 3 months from now
@@ -122,8 +135,10 @@ class SavingsGoalFragment : Fragment() {
     }
 
     private fun showAddSavingsDialog(goal: SavingsGoal) {
+        val fmt = CurrencyHelper.getCurrencyFormat(requireContext())
+        val symbol = fmt.currency?.symbol ?: ""
         val input = EditText(requireContext()).apply {
-            hint = "Amount to add"
+            hint = if (symbol.isNotBlank()) "Amount to add ($symbol)" else "Amount to add"
             inputType = android.text.InputType.TYPE_CLASS_NUMBER or android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL
             setPadding(64, 32, 64, 32)
         }
@@ -158,7 +173,6 @@ class SavingsGoalFragment : Fragment() {
     ) : RecyclerView.Adapter<GoalAdapter.VH>() {
 
         private var goals = listOf<SavingsGoal>()
-        private val currencyFormat = NumberFormat.getCurrencyInstance(Locale.getDefault())
         private val dateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
 
         fun submitList(list: List<SavingsGoal>) {
@@ -193,6 +207,7 @@ class SavingsGoalFragment : Fragment() {
                 ((goal.savedAmount / goal.targetAmount) * 100).toInt().coerceAtMost(100)
             else 0
 
+            val currencyFormat = CurrencyHelper.getCurrencyFormat(holder.itemView.context)
             holder.progressGoal.progress = progress
             holder.tvSaved.text = "${currencyFormat.format(goal.savedAmount)} saved"
             holder.tvTarget.text = "of ${currencyFormat.format(goal.targetAmount)}"

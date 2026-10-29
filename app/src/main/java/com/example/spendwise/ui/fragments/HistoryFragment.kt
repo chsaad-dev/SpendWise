@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spendwise.R
 import com.example.spendwise.data.AppDatabase
+import com.example.spendwise.utils.CurrencyHelper
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
@@ -24,7 +25,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.NumberFormat
-import java.util.Currency
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -32,6 +32,7 @@ import java.util.Locale
 class HistoryFragment : Fragment() {
 
     private var selectedYear = Calendar.getInstance().get(Calendar.YEAR)
+    private var reloadYearAction: (() -> Unit)? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,9 +56,11 @@ class HistoryFragment : Fragment() {
         rvMonths.layoutManager = LinearLayoutManager(context)
 
         fun loadYear() {
+            if (!isAdded) return
             tvYear.text = selectedYear.toString()
             CoroutineScope(Dispatchers.IO).launch {
-                val db = AppDatabase.getDatabase(requireContext(), CoroutineScope(Dispatchers.IO))
+                val context = context ?: return@launch
+                val db = AppDatabase.getDatabase(context, CoroutineScope(Dispatchers.IO))
                 val monthData = mutableListOf<MonthSummary>()
                 val trendEntries = mutableListOf<Entry>()
                 val trendLabels = mutableListOf<String>()
@@ -110,15 +113,8 @@ class HistoryFragment : Fragment() {
                 monthData.reverse()
 
                 withContext(Dispatchers.Main) {
-                    val prefs = requireContext().getSharedPreferences("SpendWisePrefs", android.content.Context.MODE_PRIVATE)
-                    val currencyCode = prefs.getString("currency_code", "default") ?: "default"
-                    val fmt = if (currencyCode == "default") {
-                        NumberFormat.getCurrencyInstance(Locale.getDefault())
-                    } else {
-                        NumberFormat.getCurrencyInstance(Locale.getDefault()).apply {
-                            currency = Currency.getInstance(currencyCode)
-                        }
-                    }
+                    if (!isAdded) return@withContext
+                    val fmt = CurrencyHelper.getCurrencyFormat(context)
                     tvYearlyTotal.text = fmt.format(yearTotal)
 
                     // Trend chart
@@ -140,6 +136,7 @@ class HistoryFragment : Fragment() {
             }
         }
 
+        reloadYearAction = { loadYear() }
         loadYear()
 
         btnPrev.setOnClickListener {
@@ -151,6 +148,11 @@ class HistoryFragment : Fragment() {
             selectedYear++
             loadYear()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        reloadYearAction?.invoke()
     }
 
     private fun setupTrendChart(chart: LineChart, entries: List<Entry>, labels: List<String>) {

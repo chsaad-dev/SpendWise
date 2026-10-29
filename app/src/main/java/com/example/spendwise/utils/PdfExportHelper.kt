@@ -62,7 +62,7 @@ object PdfExportHelper {
             textAlign = Paint.Align.RIGHT
         }
 
-        val currencyFormat = NumberFormat.getCurrencyInstance(Locale.getDefault())
+        val currencyFormat = CurrencyHelper.getCurrencyFormat(context)
         val dateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
 
         var yPos = MARGIN + 20f
