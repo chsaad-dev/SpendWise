@@ -79,11 +79,12 @@
                 app:cardBackgroundColor="?attr/colorSurfaceContainerHigh">
 
                 <TextView
+                    android:id="@+id/tv_dialog_version"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="14dp"
                     android:paddingVertical="5dp"
-                    android:text="Version 1.0.2 - 100% Offline and Ad-Free"
+                    android:text="Version 1.0.3 - 100% Offline and Ad-Free"
                     android:textAppearance="?attr/textAppearanceLabelSmall"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:textStyle="bold" />

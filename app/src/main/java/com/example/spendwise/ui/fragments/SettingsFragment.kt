@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatDelegate
@@ -242,6 +243,13 @@ class SettingsFragment : Fragment() {
         val dialog = BottomSheetDialog(requireContext())
         val dialogView = layoutInflater.inflate(R.layout.dialog_about, null)
         dialog.setContentView(dialogView)
+
+        val versionName = try {
+            requireContext().packageManager.getPackageInfo(requireContext().packageName, 0).versionName ?: "1.0.3"
+        } catch (e: Exception) {
+            "1.0.3"
+        }
+        dialogView.findViewById<TextView>(R.id.tv_dialog_version)?.text = "Version $versionName - 100% Offline and Ad-Free"
 
         dialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
         dialog.behavior.skipCollapsed = true
