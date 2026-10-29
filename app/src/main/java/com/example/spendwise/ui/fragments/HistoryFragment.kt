@@ -49,6 +49,7 @@ class HistoryFragment : Fragment() {
         val btnNext = view.findViewById<ImageButton>(R.id.btn_next_year)
         val rvMonths = view.findViewById<RecyclerView>(R.id.rv_months)
         val layoutEmpty = view.findViewById<LinearLayout>(R.id.layout_empty)
+        val cardTrendChart = view.findViewById<com.google.android.material.card.MaterialCardView>(R.id.card_trend_chart)
         val trendChart = view.findViewById<LineChart>(R.id.chart_trend)
 
         rvMonths.layoutManager = LinearLayoutManager(context)
@@ -127,9 +128,11 @@ class HistoryFragment : Fragment() {
 
                     if (monthData.isEmpty()) {
                         rvMonths.visibility = View.GONE
+                        cardTrendChart.visibility = View.GONE
                         layoutEmpty.visibility = View.VISIBLE
                     } else {
                         rvMonths.visibility = View.VISIBLE
+                        cardTrendChart.visibility = View.VISIBLE
                         layoutEmpty.visibility = View.GONE
                         rvMonths.adapter = MonthAdapter(monthData, fmt)
                     }

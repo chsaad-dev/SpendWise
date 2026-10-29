@@ -35,7 +35,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <!-- Spending Trends Chart -->
-            <com.google.android.material.card.MaterialCardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginHorizontal="16dp" android:layout_marginTop="12dp" app:cardCornerRadius="16dp" app:cardElevation="0dp" app:strokeWidth="1dp" app:strokeColor="?attr/colorOutlineVariant" app:cardBackgroundColor="?attr/colorSurface">
+            <com.google.android.material.card.MaterialCardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginHorizontal="16dp" android:layout_marginTop="12dp" app:cardCornerRadius="16dp" app:cardElevation="0dp" app:strokeWidth="1dp" app:strokeColor="?attr/colorOutlineVariant" app:cardBackgroundColor="?attr/colorSurface" android:id="@+id/card_trend_chart">
 
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
 
