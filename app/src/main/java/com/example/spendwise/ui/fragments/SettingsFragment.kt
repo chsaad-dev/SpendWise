@@ -24,6 +24,8 @@ import com.example.spendwise.R
 import com.example.spendwise.ReminderReceiver
 import com.example.spendwise.data.AppDatabase
 import com.example.spendwise.ui.viewmodel.MainViewModel
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.materialswitch.MaterialSwitch
@@ -147,40 +149,12 @@ class SettingsFragment : Fragment() {
 
         // ── 12. About ──
         view.findViewById<MaterialButton>(R.id.btn_about).setOnClickListener {
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle("About SpendWise")
-                .setMessage(
-                    "SpendWise v2.0\n\n" +
-                    "SpendWise is your comprehensive, offline-first personal finance companion designed to help you effortlessly manage your money.\n\n" +
-                    "Key Features:\n" +
-                    "• Intelligent Tracking: Log daily spending with custom categories.\n" +
-                    "• Visual Analytics: Understand habits through dynamic charts and summaries.\n" +
-                    "• Advanced Budgeting: Set monthly limits to keep spending in check.\n" +
-                    "• Collaborative: Split bills with friends seamlessly.\n" +
-                    "• Data Control: Export, backup, and restore your database at any time.\n\n" +
-                    "Developer: SaadDev\n" +
-                    "Built with ❤️ and native Android Material Design 3 for a fluid, modern, and beautiful user experience."
-                )
-                .setPositiveButton("OK", null)
-                .show()
+            showAboutDialog()
         }
 
         // ── 13. Privacy Policy ──
         view.findViewById<MaterialButton>(R.id.btn_privacy).setOnClickListener {
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Privacy Policy")
-                .setMessage(
-                    "SpendWise Privacy Policy\n\n" +
-                    "At SpendWise, we believe your financial data is strictly yours. We have built this application with a \"Privacy First\" and \"Offline First\" philosophy.\n\n" +
-                    "1. Local Storage: All transactions, categories, and preferences are stored securely on your device's internal storage.\n" +
-                    "2. Zero Data Collection: We do not collect, harvest, or transmit any personal or financial information.\n" +
-                    "3. No Third-Party Tracking: There are no remote analytics, tracking SDKs, telemetry, or ad networks integrated into SpendWise.\n" +
-                    "4. Fully Offline: The app functions 100% offline and does not require an internet connection.\n" +
-                    "5. Total Control: You retain full ownership of your records. You can permanently wipe all data directly from the settings at any time.\n\n" +
-                    "By using SpendWise, you are guaranteed absolute privacy over your personal finances."
-                )
-                .setPositiveButton("OK", null)
-                .show()
+            showPrivacyPolicyDialog()
         }
 
         // ── 14. Rate App ──
@@ -257,6 +231,47 @@ class SettingsFragment : Fragment() {
             .show()
     }
 
+
+    // ── About Dialog (Rich Bottom Sheet) ──
+    private fun showAboutDialog() {
+        val dialog = BottomSheetDialog(requireContext())
+        val dialogView = layoutInflater.inflate(R.layout.dialog_about, null)
+        dialog.setContentView(dialogView)
+
+        dialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        dialog.behavior.skipCollapsed = true
+
+        dialogView.findViewById<MaterialButton>(R.id.btn_dialog_rate_app)?.setOnClickListener {
+            dialog.dismiss()
+            try {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${requireContext().packageName}")))
+            } catch (e: Exception) {
+                Toast.makeText(context, "Play Store not available", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        dialogView.findViewById<MaterialButton>(R.id.btn_dialog_close_about)?.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    // ── Privacy Policy Dialog (Rich Bottom Sheet) ──
+    private fun showPrivacyPolicyDialog() {
+        val dialog = BottomSheetDialog(requireContext())
+        val dialogView = layoutInflater.inflate(R.layout.dialog_privacy_policy, null)
+        dialog.setContentView(dialogView)
+
+        dialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        dialog.behavior.skipCollapsed = true
+
+        dialogView.findViewById<MaterialButton>(R.id.btn_dialog_close_privacy)?.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
     // ── Month Picker for PDF ──
     private fun showMonthPickerForPdf() {
         val format = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
