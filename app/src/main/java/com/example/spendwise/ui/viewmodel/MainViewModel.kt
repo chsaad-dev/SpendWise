@@ -55,8 +55,19 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _filteredBalance = MutableLiveData<Double>(0.0)
     val filteredBalance: LiveData<Double> = _filteredBalance
 
-    val currencyFormat: NumberFormat = NumberFormat.getCurrencyInstance(Locale.getDefault()).apply {
-        currency = Currency.getInstance(Locale.getDefault())
+    // Currency formatter that respects the user's choice in Settings.
+    // Called fresh each time so changes take effect without a restart.
+    fun buildCurrencyFormat(): NumberFormat {
+        val prefs = getApplication<android.app.Application>()
+            .getSharedPreferences("SpendWisePrefs", Context.MODE_PRIVATE)
+        val code = prefs.getString("currency_code", "default") ?: "default"
+        return if (code == "default") {
+            NumberFormat.getCurrencyInstance(Locale.getDefault())
+        } else {
+            NumberFormat.getCurrencyInstance(Locale.getDefault()).apply {
+                currency = Currency.getInstance(code)
+            }
+        }
     }
 
     init {
@@ -127,7 +138,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun formatCurrency(amount: Double): String {
-        return currencyFormat.format(amount)
+        return buildCurrencyFormat().format(amount)
     }
 
     fun setSearchQuery(query: String?) {

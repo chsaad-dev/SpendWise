@@ -24,6 +24,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.NumberFormat
+import java.util.Currency
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -108,7 +109,15 @@ class HistoryFragment : Fragment() {
                 monthData.reverse()
 
                 withContext(Dispatchers.Main) {
-                    val fmt = NumberFormat.getCurrencyInstance(Locale.getDefault())
+                    val prefs = requireContext().getSharedPreferences("SpendWisePrefs", android.content.Context.MODE_PRIVATE)
+                    val currencyCode = prefs.getString("currency_code", "default") ?: "default"
+                    val fmt = if (currencyCode == "default") {
+                        NumberFormat.getCurrencyInstance(Locale.getDefault())
+                    } else {
+                        NumberFormat.getCurrencyInstance(Locale.getDefault()).apply {
+                            currency = Currency.getInstance(currencyCode)
+                        }
+                    }
                     tvYearlyTotal.text = fmt.format(yearTotal)
 
                     // Trend chart

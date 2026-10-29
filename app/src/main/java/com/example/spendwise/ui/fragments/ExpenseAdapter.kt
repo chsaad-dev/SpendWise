@@ -14,6 +14,7 @@ import com.example.spendwise.R
 import com.example.spendwise.data.Expense
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
+import java.util.Currency
 import java.util.Date
 import java.util.Locale
 
@@ -30,8 +31,6 @@ class ExpenseAdapter(
         "Health" to "#10B981",
         "Others" to "#64748B"
     )
-
-    private val currencyFormat = NumberFormat.getCurrencyInstance(Locale.getDefault())
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExpenseViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_expense, parent, false)
@@ -53,6 +52,15 @@ class ExpenseAdapter(
             val catText = if (!expense.receiptPath.isNullOrBlank()) "\uD83D\uDCCE ${expense.category}" else expense.category
             tvCategory.text = catText
             
+            val prefs = itemView.context.getSharedPreferences("SpendWisePrefs", android.content.Context.MODE_PRIVATE)
+            val currencyCode = prefs.getString("currency_code", "default") ?: "default"
+            val currencyFormat = if (currencyCode == "default") {
+                NumberFormat.getCurrencyInstance(Locale.getDefault())
+            } else {
+                NumberFormat.getCurrencyInstance(Locale.getDefault()).apply {
+                    currency = Currency.getInstance(currencyCode)
+                }
+            }
             val formattedAmount = currencyFormat.format(expense.amount)
             if (expense.isIncome) {
                 tvAmount.text = "+$formattedAmount"
