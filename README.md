@@ -3,7 +3,13 @@
 **Smart. Secure. Simple.**  
 *Your personal finance companion in the pocket.*
 
-![Kotlin](https://img.shields.io/badge/Kotlin-1.9.0-purple?style=flat&logo=kotlin)  ![Android](https://img.shields.io/badge/Android-SDK%2034-green?style=flat&logo=android)  ![License](https://img.shields.io/badge/License-MIT-blue?style=flat)
+![Kotlin](https://img.shields.io/badge/Kotlin-1.9.0-purple?style=flat&logo=kotlin)  ![Android](https://img.shields.io/badge/Android-SDK%2036-green?style=flat&logo=android)  [![Download APK](https://img.shields.io/badge/Download-APK%20v1.0.3-brightgreen?style=flat&logo=android)](https://github.com/chsaad-dev/SpendWise/raw/main/apk/SpendWise-v1.0.3-debug.apk)  ![License](https://img.shields.io/badge/License-MIT-blue?style=flat)
+
+---
+
+## 📲 Download & Install (Direct APK)
+You can download and test the latest debug build directly on your Android phone (Android 7.0+):
+* **[Download SpendWise v1.0.3 Debug APK (Direct Download)](https://github.com/chsaad-dev/SpendWise/raw/main/apk/SpendWise-v1.0.3-debug.apk)** (~7.1 MB)
 
 ---
 
