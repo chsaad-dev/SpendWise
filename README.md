@@ -16,7 +16,7 @@ Whether you're tracking daily coffee runs, managing monthly bills, or splitting 
 ## Screenshots
 | Dashboard | Add Expense | Monthly Analysis | Settings |
 |:---:|:---:|:---:|:---:|
-| ![Dashboard Placehoder](docs/screenshots/dashboard.png) | ![Add Expense Placeholder](docs/screenshots/add_expense.png) | ![Analysis Placeholder](docs/screenshots/analysis.png) | ![Settings Placeholder](docs/screenshots/settings.png) |
+| ![Dashboard](docs/screenshots/dashboard.png) | ![Add Expense](docs/screenshots/add_expense.png) | ![Monthly Analysis](docs/screenshots/analysis.png) | ![Settings](docs/screenshots/settings.png) |
 
 ---
 
