@@ -1,6 +1,7 @@
 package com.example.spendwise.ui.fragments
 
 import android.app.DatePickerDialog
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
@@ -309,11 +310,41 @@ class AddExpenseFragment : Fragment() {
     private fun showReceiptPreview(iv: ImageView, btnRemove: MaterialButton, btnAttach: MaterialButton, path: String) {
         val file = File(path)
         if (file.exists()) {
-            val bitmap = BitmapFactory.decodeFile(path)
-            iv.setImageBitmap(bitmap)
-            iv.visibility = View.VISIBLE
-            btnRemove.visibility = View.VISIBLE
-            btnAttach.text = "\u2705  Receipt Attached"
+            val bitmap = decodeSampledBitmap(path, 800, 800)
+            if (bitmap != null) {
+                iv.setImageBitmap(bitmap)
+                iv.visibility = View.VISIBLE
+                btnRemove.visibility = View.VISIBLE
+                btnAttach.text = "\u2705  Receipt Attached"
+            }
+        }
+    }
+
+    private fun decodeSampledBitmap(path: String, reqWidth: Int, reqHeight: Int): Bitmap? {
+        return try {
+            val options = BitmapFactory.Options().apply {
+                inJustDecodeBounds = true
+            }
+            BitmapFactory.decodeFile(path, options)
+
+            var inSampleSize = 1
+            val height = options.outHeight
+            val width = options.outWidth
+
+            if (height > reqHeight || width > reqWidth) {
+                val halfHeight = height / 2
+                val halfWidth = width / 2
+                while ((halfHeight / inSampleSize) >= reqHeight && (halfWidth / inSampleSize) >= reqWidth) {
+                    inSampleSize *= 2
+                }
+            }
+
+            options.inJustDecodeBounds = false
+            options.inSampleSize = inSampleSize
+            options.inPreferredConfig = Bitmap.Config.RGB_565
+            BitmapFactory.decodeFile(path, options)
+        } catch (e: Exception) {
+            null
         }
     }
 
