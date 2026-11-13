@@ -28,14 +28,6 @@
         </activity>
 
         <receiver
-            android:name=".ReminderReceiver"
-            android:exported="false"/>
-
-        <receiver
-            android:name=".WeeklySummaryReceiver"
-            android:exported="false"/>
-
-        <receiver
             android:name=".QuickAddWidgetProvider"
             android:exported="false">
             <intent-filter>

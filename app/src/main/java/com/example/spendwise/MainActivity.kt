@@ -1,9 +1,16 @@
 package com.example.spendwise
 
+import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.content.edit
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -12,12 +19,22 @@ import androidx.core.view.updatePadding
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.example.spendwise.utils.NotificationScheduler
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
     private var pendingAddExpense = false
+
+    private val requestNotificationPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            NotificationScheduler.enableDaily(this, 20, 0)
+            NotificationScheduler.enableWeekly(this)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +82,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 else -> {
                     bottomNav.visibility = View.VISIBLE
+                    checkNotificationPermission()
                 }
             }
 
@@ -77,6 +95,28 @@ class MainActivity : AppCompatActivity() {
         }
 
         checkWidgetIntent()
+    }
+
+    private fun checkNotificationPermission() {
+        val prefs = getSharedPreferences("SpendWisePrefs", Context.MODE_PRIVATE)
+        val alreadyAsked = prefs.getBoolean("notif_permission_asked", false)
+        if (alreadyAsked) return
+
+        prefs.edit { putBoolean("notif_permission_asked", true) }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                == PackageManager.PERMISSION_GRANTED
+            ) {
+                NotificationScheduler.enableDaily(this, 20, 0)
+                NotificationScheduler.enableWeekly(this)
+            } else {
+                requestNotificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        } else {
+            NotificationScheduler.enableDaily(this, 20, 0)
+            NotificationScheduler.enableWeekly(this)
+        }
     }
 
     override fun onNewIntent(intent: android.content.Intent) {

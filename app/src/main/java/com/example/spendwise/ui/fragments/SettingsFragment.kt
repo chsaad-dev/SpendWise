@@ -1,14 +1,13 @@
 package com.example.spendwise.ui.fragments
 
 import android.Manifest
-import android.app.AlarmManager
-import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,19 +16,24 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.spendwise.R
-import com.example.spendwise.ReminderReceiver
 import com.example.spendwise.data.AppDatabase
 import com.example.spendwise.ui.viewmodel.MainViewModel
+import com.example.spendwise.utils.NotificationHelper
+import com.example.spendwise.utils.NotificationScheduler
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.materialswitch.MaterialSwitch
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -45,6 +49,37 @@ import java.util.Locale
 class SettingsFragment : Fragment() {
 
     private val viewModel: MainViewModel by activityViewModels()
+
+    private var isUpdatingNotificationSwitches = false
+    private var pendingSwitchToEnable: MaterialSwitch? = null
+    private var switchDailyReminder: MaterialSwitch? = null
+    private var switchWeeklySummary: MaterialSwitch? = null
+    private var tvReminderTime: TextView? = null
+
+    private val requestNotificationPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        val prefs = requireActivity().getSharedPreferences("SpendWisePrefs", Context.MODE_PRIVATE)
+        prefs.edit { putBoolean("notif_permission_asked", true) }
+
+        if (isGranted) {
+            val targetSwitch = pendingSwitchToEnable
+            if (targetSwitch == switchDailyReminder) {
+                val hour = prefs.getInt(NotificationScheduler.KEY_DAILY_HOUR, NotificationScheduler.DEFAULT_DAILY_HOUR)
+                val minute = prefs.getInt(NotificationScheduler.KEY_DAILY_MINUTE, NotificationScheduler.DEFAULT_DAILY_MINUTE)
+                NotificationScheduler.enableDaily(requireContext(), hour, minute)
+                isUpdatingNotificationSwitches = true
+                switchDailyReminder?.isChecked = true
+                isUpdatingNotificationSwitches = false
+            } else if (targetSwitch == switchWeeklySummary) {
+                NotificationScheduler.enableWeekly(requireContext())
+                isUpdatingNotificationSwitches = true
+                switchWeeklySummary?.isChecked = true
+                isUpdatingNotificationSwitches = false
+            }
+        }
+        pendingSwitchToEnable = null
+    }
 
     private val backupLauncher = registerForActivityResult(
         ActivityResultContracts.CreateDocument("application/octet-stream")
@@ -91,6 +126,64 @@ class SettingsFragment : Fragment() {
         // ── 5. App Language ──
         view.findViewById<MaterialButton>(R.id.btn_language).setOnClickListener {
             showLanguageDialog()
+        }
+
+        // ── 5.5. Notifications ──
+        switchDailyReminder = view.findViewById(R.id.switch_daily_reminder)
+        switchWeeklySummary = view.findViewById(R.id.switch_weekly_summary)
+        tvReminderTime = view.findViewById(R.id.tv_reminder_time)
+        val rowReminderTime = view.findViewById<View>(R.id.row_reminder_time)
+
+        switchDailyReminder?.setOnCheckedChangeListener { _, isChecked ->
+            if (isUpdatingNotificationSwitches) return@setOnCheckedChangeListener
+            if (isChecked) {
+                handleEnableNotification(switchDailyReminder) {
+                    val hour = prefs.getInt(NotificationScheduler.KEY_DAILY_HOUR, NotificationScheduler.DEFAULT_DAILY_HOUR)
+                    val minute = prefs.getInt(NotificationScheduler.KEY_DAILY_MINUTE, NotificationScheduler.DEFAULT_DAILY_MINUTE)
+                    NotificationScheduler.enableDaily(requireContext(), hour, minute)
+                }
+            } else {
+                NotificationScheduler.disableDaily(requireContext())
+            }
+        }
+
+        switchWeeklySummary?.setOnCheckedChangeListener { _, isChecked ->
+            if (isUpdatingNotificationSwitches) return@setOnCheckedChangeListener
+            if (isChecked) {
+                handleEnableNotification(switchWeeklySummary) {
+                    NotificationScheduler.enableWeekly(requireContext())
+                }
+            } else {
+                NotificationScheduler.disableWeekly(requireContext())
+            }
+        }
+
+        rowReminderTime.setOnClickListener {
+            val isSystem24Hour = android.text.format.DateFormat.is24HourFormat(requireContext())
+            val clockFormat = if (isSystem24Hour) TimeFormat.CLOCK_24H else TimeFormat.CLOCK_12H
+            val currentHour = prefs.getInt(NotificationScheduler.KEY_DAILY_HOUR, NotificationScheduler.DEFAULT_DAILY_HOUR)
+            val currentMinute = prefs.getInt(NotificationScheduler.KEY_DAILY_MINUTE, NotificationScheduler.DEFAULT_DAILY_MINUTE)
+
+            val picker = MaterialTimePicker.Builder()
+                .setTimeFormat(clockFormat)
+                .setHour(currentHour)
+                .setMinute(currentMinute)
+                .setTitleText("Reminder Time")
+                .build()
+
+            picker.addOnPositiveButtonClickListener {
+                val newHour = picker.hour
+                val newMinute = picker.minute
+                prefs.edit {
+                    putInt(NotificationScheduler.KEY_DAILY_HOUR, newHour)
+                    putInt(NotificationScheduler.KEY_DAILY_MINUTE, newMinute)
+                }
+                tvReminderTime?.text = formatTime(newHour, newMinute)
+                if (switchDailyReminder?.isChecked == true && NotificationHelper.hasNotificationPermission(requireContext())) {
+                    NotificationScheduler.enableDaily(requireContext(), newHour, newMinute)
+                }
+            }
+            picker.show(parentFragmentManager, "reminder_time_picker")
         }
 
 
@@ -412,6 +505,91 @@ class SettingsFragment : Fragment() {
                 startActivity(Intent.createChooser(shareIntent, "Export Expenses"))
             }
         }
+    }
+
+    private fun handleEnableNotification(targetSwitch: MaterialSwitch?, onGrantedAction: () -> Unit) {
+        val prefs = requireActivity().getSharedPreferences("SpendWisePrefs", Context.MODE_PRIVATE)
+        if (NotificationHelper.hasNotificationPermission(requireContext())) {
+            onGrantedAction()
+            return
+        }
+
+        // Revert switch until granted
+        isUpdatingNotificationSwitches = true
+        targetSwitch?.isChecked = false
+        isUpdatingNotificationSwitches = false
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val notifAsked = prefs.getBoolean("notif_permission_asked", false)
+            val notificationsBlocked = !NotificationManagerCompat.from(requireContext()).areNotificationsEnabled()
+            val permanentlyDenied = notificationsBlocked || (notifAsked && !shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS))
+
+            if (permanentlyDenied) {
+                showNotificationSettingsDialog()
+            } else {
+                pendingSwitchToEnable = targetSwitch
+                requestNotificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        } else {
+            showNotificationSettingsDialog()
+        }
+    }
+
+    private fun showNotificationSettingsDialog() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Notifications Disabled")
+            .setMessage("Notifications are disabled for SpendWise. Please enable them in system settings to receive reminders and summaries.")
+            .setPositiveButton("Open Settings") { _, _ ->
+                openAppNotificationSettings()
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    private fun openAppNotificationSettings() {
+        try {
+            val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).apply {
+                    putExtra(Settings.EXTRA_APP_PACKAGE, requireContext().packageName)
+                }
+            } else {
+                Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                    data = Uri.fromParts("package", requireContext().packageName, null)
+                }
+            }
+            startActivity(intent)
+        } catch (e: Exception) {
+            Toast.makeText(context, "Unable to open settings", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateNotificationUi()
+    }
+
+    private fun updateNotificationUi() {
+        val prefs = requireActivity().getSharedPreferences("SpendWisePrefs", Context.MODE_PRIVATE)
+        val hasPermission = NotificationHelper.hasNotificationPermission(requireContext())
+        val dailyEnabled = prefs.getBoolean(NotificationScheduler.KEY_DAILY_ENABLED, false) && hasPermission
+        val weeklyEnabled = prefs.getBoolean(NotificationScheduler.KEY_WEEKLY_ENABLED, false) && hasPermission
+
+        isUpdatingNotificationSwitches = true
+        switchDailyReminder?.isChecked = dailyEnabled
+        switchWeeklySummary?.isChecked = weeklyEnabled
+
+        val hour = prefs.getInt(NotificationScheduler.KEY_DAILY_HOUR, NotificationScheduler.DEFAULT_DAILY_HOUR)
+        val minute = prefs.getInt(NotificationScheduler.KEY_DAILY_MINUTE, NotificationScheduler.DEFAULT_DAILY_MINUTE)
+        tvReminderTime?.text = formatTime(hour, minute)
+        isUpdatingNotificationSwitches = false
+    }
+
+    private fun formatTime(hour: Int, minute: Int): String {
+        val cal = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, hour)
+            set(Calendar.MINUTE, minute)
+        }
+        return SimpleDateFormat("hh:mm a", Locale.getDefault()).format(cal.time)
     }
 
     // ── Backup Database ──
