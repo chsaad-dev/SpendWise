@@ -57,6 +57,9 @@ class SettingsFragment : Fragment() {
     private var switchDailyReminder: MaterialSwitch? = null
     private var switchWeeklySummary: MaterialSwitch? = null
     private var tvReminderTime: TextView? = null
+    private var tvBudgetValue: TextView? = null
+    private var tvCurrencyValue: TextView? = null
+    private var tvAboutVersion: TextView? = null
 
     private val requestNotificationPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -103,14 +106,28 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val prefs = requireActivity().getSharedPreferences("SpendWisePrefs", Context.MODE_PRIVATE)
 
+        // Trailing value labels
+        tvBudgetValue = view.findViewById(R.id.tv_budget_value)
+        tvCurrencyValue = view.findViewById(R.id.tv_currency_value)
+        tvAboutVersion = view.findViewById(R.id.tv_about_version)
+
+        val versionName = try {
+            requireContext().packageManager.getPackageInfo(requireContext().packageName, 0).versionName ?: "1.0.4"
+        } catch (e: Exception) {
+            "1.0.4"
+        }
+        tvAboutVersion?.text = "v$versionName"
+
+        updateBudgetValue()
+        updateCurrencyValue()
 
         // ── 2. Monthly Budget ──
-        view.findViewById<MaterialButton>(R.id.btn_budget).setOnClickListener {
+        view.findViewById<View>(R.id.btn_budget).setOnClickListener {
             showBudgetDialog()
         }
 
         // ── 3. Default Currency ──
-        view.findViewById<MaterialButton>(R.id.btn_currency).setOnClickListener {
+        view.findViewById<View>(R.id.btn_currency).setOnClickListener {
             showCurrencyDialog()
         }
 
@@ -126,7 +143,7 @@ class SettingsFragment : Fragment() {
         }
 
         // ── 5. App Language ──
-        view.findViewById<MaterialButton>(R.id.btn_language).setOnClickListener {
+        view.findViewById<View>(R.id.btn_language).setOnClickListener {
             showLanguageDialog()
         }
 
@@ -190,23 +207,23 @@ class SettingsFragment : Fragment() {
 
 
         // ── 6.5. Export PDF ──
-        view.findViewById<MaterialButton>(R.id.btn_export_pdf).setOnClickListener {
+        view.findViewById<View>(R.id.btn_export_pdf).setOnClickListener {
             showMonthPickerForPdf()
         }
 
         // ── 7. Export CSV ──
-        view.findViewById<MaterialButton>(R.id.btn_export_csv).setOnClickListener {
+        view.findViewById<View>(R.id.btn_export_csv).setOnClickListener {
             exportCsv()
         }
 
         // ── 8. Backup ──
-        view.findViewById<MaterialButton>(R.id.btn_backup).setOnClickListener {
+        view.findViewById<View>(R.id.btn_backup).setOnClickListener {
             val timestamp = SimpleDateFormat("yyyyMMdd_HHmm", Locale.getDefault()).format(Date())
             backupLauncher.launch("SpendWise_Backup_$timestamp.db")
         }
 
         // ── 9. Restore ──
-        view.findViewById<MaterialButton>(R.id.btn_restore).setOnClickListener {
+        view.findViewById<View>(R.id.btn_restore).setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle("Restore Database")
                 .setMessage("This will replace all current data with the backup. Continue?")
@@ -218,43 +235,41 @@ class SettingsFragment : Fragment() {
         }
 
         // ── 10. Clear Categories ──
-        view.findViewById<MaterialButton>(R.id.btn_clear_categories).setOnClickListener {
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Clear All Categories")
-                .setMessage("This will permanently delete all your categories. Expenses will keep their category names.")
-                .setPositiveButton("Delete All") { _, _ ->
-                    viewModel.clearAllCategories()
-                    Toast.makeText(context, "All categories cleared", Toast.LENGTH_SHORT).show()
-                }
-                .setNegativeButton("Cancel", null)
-                .show()
+        view.findViewById<View>(R.id.btn_clear_categories).setOnClickListener {
+            showDestructiveConfirmDialog(
+                title = "Clear All Categories",
+                message = "This will permanently delete all your categories. Expenses will keep their category names.",
+                confirmButtonText = "Delete All"
+            ) {
+                viewModel.clearAllCategories()
+                Toast.makeText(context, "All categories cleared", Toast.LENGTH_SHORT).show()
+            }
         }
 
         // ── 11. Clear All Data ──
-        view.findViewById<MaterialButton>(R.id.btn_clear_data).setOnClickListener {
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Clear All Expenses")
-                .setMessage("This will permanently delete all your expense records. This action cannot be undone.")
-                .setPositiveButton("Delete Everything") { _, _ ->
-                    viewModel.clearAllData()
-                    Toast.makeText(context, "All expenses cleared", Toast.LENGTH_SHORT).show()
-                }
-                .setNegativeButton("Cancel", null)
-                .show()
+        view.findViewById<View>(R.id.btn_clear_data).setOnClickListener {
+            showDestructiveConfirmDialog(
+                title = "Clear All Expenses",
+                message = "This will permanently delete all your expense records. This action cannot be undone.",
+                confirmButtonText = "Delete Everything"
+            ) {
+                viewModel.clearAllData()
+                Toast.makeText(context, "All expenses cleared", Toast.LENGTH_SHORT).show()
+            }
         }
 
         // ── 12. About ──
-        view.findViewById<MaterialButton>(R.id.btn_about).setOnClickListener {
+        view.findViewById<View>(R.id.btn_about).setOnClickListener {
             showAboutDialog()
         }
 
         // ── 13. Privacy Policy ──
-        view.findViewById<MaterialButton>(R.id.btn_privacy).setOnClickListener {
+        view.findViewById<View>(R.id.btn_privacy).setOnClickListener {
             showPrivacyPolicyDialog()
         }
 
         // ── 14. Rate App ──
-        view.findViewById<MaterialButton>(R.id.btn_rate).setOnClickListener {
+        view.findViewById<View>(R.id.btn_rate).setOnClickListener {
             try {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${requireContext().packageName}")))
             } catch (e: Exception) {
@@ -276,10 +291,12 @@ class SettingsFragment : Fragment() {
                     "Budget limit removed"
                 }
                 Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+                updateBudgetValue()
             },
             onRemove = {
                 prefs.edit().putFloat("monthly_budget", 0f).apply()
                 Toast.makeText(context, "Budget limit removed", Toast.LENGTH_SHORT).show()
+                updateBudgetValue()
             }
         ).show(childFragmentManager, MonthlyBudgetBottomSheet.TAG)
     }
@@ -291,6 +308,8 @@ class SettingsFragment : Fragment() {
         CurrencyPickerBottomSheet.newInstance(currentCode) { code, displayName ->
             prefs.edit().putString("currency_code", code).apply()
             Toast.makeText(context, "Currency set to $displayName", Toast.LENGTH_SHORT).show()
+            updateCurrencyValue()
+            updateBudgetValue()
         }.show(childFragmentManager, CurrencyPickerBottomSheet.TAG)
     }
 
@@ -559,6 +578,70 @@ class SettingsFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         updateNotificationUi()
+        updateBudgetValue()
+        updateCurrencyValue()
+    }
+
+    private fun updateBudgetValue() {
+        val prefs = requireActivity().getSharedPreferences("SpendWisePrefs", Context.MODE_PRIVATE)
+        val budget = prefs.getFloat("monthly_budget", 0f)
+        if (budget > 0f) {
+            tvBudgetValue?.text = com.example.spendwise.utils.CurrencyHelper.format(requireContext(), budget.toDouble())
+        } else {
+            tvBudgetValue?.text = "Not set"
+        }
+    }
+
+    private fun updateCurrencyValue() {
+        val prefs = requireActivity().getSharedPreferences("SpendWisePrefs", Context.MODE_PRIVATE)
+        val code = prefs.getString("currency_code", "default") ?: "default"
+        tvCurrencyValue?.text = when (code) {
+            "PKR" -> "PKR (Rs)"
+            "USD" -> "USD ($)"
+            "EUR" -> "EUR (€)"
+            "GBP" -> "GBP (£)"
+            "INR" -> "INR (₹)"
+            "AED" -> "AED (د.إ)"
+            "SAR" -> "SAR (﷼)"
+            "CAD" -> "CAD (C$)"
+            "AUD" -> "AUD (A$)"
+            "JPY" -> "JPY (¥)"
+            "BDT" -> "BDT (৳)"
+            "default" -> "System Default"
+            else -> code
+        }
+    }
+
+    private fun showDestructiveConfirmDialog(
+        title: String,
+        message: String,
+        confirmButtonText: String,
+        onConfirm: () -> Unit
+    ) {
+        val dialog = BottomSheetDialog(requireContext())
+        val dialogView = layoutInflater.inflate(R.layout.bottom_sheet_confirm_destructive, null)
+        dialog.setContentView(dialogView)
+
+        dialog.setOnShowListener {
+            val bottomSheet = dialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+            bottomSheet?.setBackgroundResource(android.R.color.transparent)
+        }
+
+        dialogView.findViewById<TextView>(R.id.tv_destructive_title)?.text = title
+        dialogView.findViewById<TextView>(R.id.tv_destructive_message)?.text = message
+
+        val btnConfirm = dialogView.findViewById<MaterialButton>(R.id.btn_destructive_confirm)
+        btnConfirm?.text = confirmButtonText
+        btnConfirm?.setOnClickListener {
+            dialog.dismiss()
+            onConfirm()
+        }
+
+        dialogView.findViewById<MaterialButton>(R.id.btn_destructive_cancel)?.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 
     private fun updateNotificationUi() {
