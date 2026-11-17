@@ -24,6 +24,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.spendwise.R
 import com.example.spendwise.data.AppDatabase
+import com.example.spendwise.ui.dialogs.CurrencyPickerBottomSheet
+import com.example.spendwise.ui.dialogs.MonthlyBudgetBottomSheet
 import com.example.spendwise.ui.viewmodel.MainViewModel
 import com.example.spendwise.utils.NotificationHelper
 import com.example.spendwise.utils.NotificationScheduler
@@ -262,25 +264,11 @@ class SettingsFragment : Fragment() {
     }
 
 
-    // ── Budget Dialog ──
+    // ── Budget Dialog (Modern Bottom Sheet) ──
     private fun showBudgetDialog() {
         val prefs = requireActivity().getSharedPreferences("SpendWisePrefs", Context.MODE_PRIVATE)
-        val current = prefs.getFloat("monthly_budget", 0f)
-
-        val symbol = com.example.spendwise.utils.CurrencyHelper.getCurrencyFormat(requireContext()).currency?.symbol ?: ""
-        val input = EditText(requireContext()).apply {
-            inputType = android.text.InputType.TYPE_CLASS_NUMBER or android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL
-            hint = if (symbol.isNotBlank()) "Enter monthly budget ($symbol)" else "Enter monthly budget"
-            if (current > 0f) setText(current.toString())
-            setPadding(64, 32, 64, 32)
-        }
-
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Monthly Budget Limit")
-            .setMessage("Set a spending limit to get warnings when you're close.")
-            .setView(input)
-            .setPositiveButton("Save") { _, _ ->
-                val value = input.text.toString().toFloatOrNull() ?: 0f
+        MonthlyBudgetBottomSheet.newInstance(
+            onSave = { value ->
                 prefs.edit().putFloat("monthly_budget", value).apply()
                 val msg = if (value > 0f) {
                     "Budget set to ${com.example.spendwise.utils.CurrencyHelper.format(requireContext(), value.toDouble())}"
@@ -288,35 +276,22 @@ class SettingsFragment : Fragment() {
                     "Budget limit removed"
                 }
                 Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-            }
-            .setNeutralButton("Remove Limit") { _, _ ->
+            },
+            onRemove = {
                 prefs.edit().putFloat("monthly_budget", 0f).apply()
                 Toast.makeText(context, "Budget limit removed", Toast.LENGTH_SHORT).show()
             }
-            .setNegativeButton("Cancel", null)
-            .show()
+        ).show(childFragmentManager, MonthlyBudgetBottomSheet.TAG)
     }
 
-    // ── Currency Dialog ──
+    // ── Currency Dialog (Modern Bottom Sheet) ──
     private fun showCurrencyDialog() {
         val prefs = requireActivity().getSharedPreferences("SpendWisePrefs", Context.MODE_PRIVATE)
-        val currencies = arrayOf(
-            "System Default", "USD ($)", "EUR (€)", "GBP (£)", "INR (₹)",
-            "JPY (¥)", "CAD (C$)", "AUD (A$)", "PKR (Rs)", "BDT (৳)"
-        )
-        val codes = arrayOf("default", "USD", "EUR", "GBP", "INR", "JPY", "CAD", "AUD", "PKR", "BDT")
-        val saved = prefs.getString("currency_code", "default") ?: "default"
-        val selected = codes.indexOf(saved).coerceAtLeast(0)
-
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Default Currency")
-            .setSingleChoiceItems(currencies, selected) { dialog, which ->
-                prefs.edit().putString("currency_code", codes[which]).apply()
-                Toast.makeText(context, "Currency set to ${currencies[which]}", Toast.LENGTH_SHORT).show()
-                dialog.dismiss()
-            }
-            .setNegativeButton("Cancel", null)
-            .show()
+        val currentCode = prefs.getString("currency_code", "default") ?: "default"
+        CurrencyPickerBottomSheet.newInstance(currentCode) { code, displayName ->
+            prefs.edit().putString("currency_code", code).apply()
+            Toast.makeText(context, "Currency set to $displayName", Toast.LENGTH_SHORT).show()
+        }.show(childFragmentManager, CurrencyPickerBottomSheet.TAG)
     }
 
     // ── Language Dialog ──
@@ -334,18 +309,27 @@ class SettingsFragment : Fragment() {
     // ── About Dialog (Rich Bottom Sheet) ──
     private fun showAboutDialog() {
         val dialog = BottomSheetDialog(requireContext())
-        val dialogView = layoutInflater.inflate(R.layout.dialog_about, null)
+        val dialogView = layoutInflater.inflate(R.layout.bottom_sheet_about, null)
         dialog.setContentView(dialogView)
 
+        dialog.setOnShowListener {
+            val bottomSheet = dialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+            bottomSheet?.setBackgroundResource(android.R.color.transparent)
+        }
+
         val versionName = try {
-            requireContext().packageManager.getPackageInfo(requireContext().packageName, 0).versionName ?: "1.0.3"
+            requireContext().packageManager.getPackageInfo(requireContext().packageName, 0).versionName ?: "1.0.4"
         } catch (e: Exception) {
-            "1.0.3"
+            "1.0.4"
         }
         dialogView.findViewById<TextView>(R.id.tv_dialog_version)?.text = "Version $versionName - 100% Offline and Ad-Free"
 
         dialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
         dialog.behavior.skipCollapsed = true
+
+        dialogView.findViewById<View>(R.id.btn_dialog_close_top)?.setOnClickListener {
+            dialog.dismiss()
+        }
 
         dialogView.findViewById<MaterialButton>(R.id.btn_dialog_rate_app)?.setOnClickListener {
             dialog.dismiss()
@@ -366,11 +350,20 @@ class SettingsFragment : Fragment() {
     // ── Privacy Policy Dialog (Rich Bottom Sheet) ──
     private fun showPrivacyPolicyDialog() {
         val dialog = BottomSheetDialog(requireContext())
-        val dialogView = layoutInflater.inflate(R.layout.dialog_privacy_policy, null)
+        val dialogView = layoutInflater.inflate(R.layout.bottom_sheet_privacy, null)
         dialog.setContentView(dialogView)
+
+        dialog.setOnShowListener {
+            val bottomSheet = dialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+            bottomSheet?.setBackgroundResource(android.R.color.transparent)
+        }
 
         dialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
         dialog.behavior.skipCollapsed = true
+
+        dialogView.findViewById<View>(R.id.btn_dialog_close_top)?.setOnClickListener {
+            dialog.dismiss()
+        }
 
         dialogView.findViewById<MaterialButton>(R.id.btn_dialog_close_privacy)?.setOnClickListener {
             dialog.dismiss()

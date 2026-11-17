@@ -35,6 +35,8 @@ object CurrencyHelper {
                 "INR" -> Locale.forLanguageTag("en-IN")
                 "PKR" -> Locale.forLanguageTag("en-PK")
                 "BDT" -> Locale.forLanguageTag("bn-BD")
+                "AED" -> Locale.forLanguageTag("en-AE")
+                "SAR" -> Locale.forLanguageTag("en-SA")
                 else -> Locale.getDefault()
             }
             NumberFormat.getCurrencyInstance(targetLocale).apply {

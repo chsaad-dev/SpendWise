@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_bottom_sheet"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="24dp">
+
+    <!-- Centered Drag Handle -->
+    <View
+        android:layout_width="36dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_drag_handle"/>
+
+    <!-- Header Section with Wallet Icon Badge -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            app:cardCornerRadius="12dp"
+            app:cardBackgroundColor="@color/brand_primary_container"
+            app:strokeWidth="0dp"
+            app:cardElevation="0dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_wallet"
+                app:tint="@color/brand_primary"
+                android:contentDescription="Monthly Budget"/>
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="14dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Monthly Budget Limit"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/text_primary"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Get alerted before you exceed your monthly spending target"
+                android:textSize="13sp"
+                android:textColor="@color/text_secondary"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Outlined Currency Input -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_monthly_budget"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Monthly Limit"
+        app:boxCornerRadiusTopStart="14dp"
+        app:boxCornerRadiusTopEnd="14dp"
+        app:boxCornerRadiusBottomStart="14dp"
+        app:boxCornerRadiusBottomEnd="14dp"
+        app:boxBackgroundColor="@color/bg_surface_subtle"
+        app:boxStrokeColor="@color/brand_primary"
+        app:boxStrokeWidth="1.5dp"
+        app:prefixText="Rs "
+        app:prefixTextColor="@color/brand_primary"
+        app:prefixTextAppearance="@style/TextAppearance.Material3.BodyLarge">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_monthly_budget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:textColor="@color/text_primary"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Quick Preset Chips -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/chip_preset_1"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="6dp"
+            android:text="Rs 10,000"
+            android:textColor="@color/text_primary"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/bg_surface_subtle"
+            app:cornerRadius="999dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:elevation="0dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/chip_preset_2"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="3dp"
+            android:text="Rs 25,000"
+            android:textColor="@color/text_primary"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/bg_surface_subtle"
+            app:cornerRadius="999dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:elevation="0dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/chip_preset_3"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:layout_marginStart="6dp"
+            android:text="Rs 50,000"
+            android:textColor="@color/text_primary"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/bg_surface_subtle"
+            app:cornerRadius="999dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:elevation="0dp"/>
+    </LinearLayout>
+
+    <!-- Save Limit CTA -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_save_budget"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:text="Save Limit"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/brand_primary"
+        app:cornerRadius="14dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        app:elevation="0dp"/>
+
+    <!-- Secondary Row (Remove Limit + Cancel) -->
+    <LinearLayout
+        android:id="@+id/layout_secondary_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_remove_budget"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="5dp"
+            android:text="Remove Limit"
+            android:textColor="@color/danger_primary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/danger_container"
+            app:cornerRadius="14dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:elevation="0dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_cancel_budget"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginStart="5dp"
+            android:text="Cancel"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/bg_surface_subtle"
+            app:cornerRadius="14dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:elevation="0dp"/>
+    </LinearLayout>
+
+</LinearLayout>

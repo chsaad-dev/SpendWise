@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_currency"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/stroke_subtle"
+    app:cardBackgroundColor="@color/bg_surface_subtle">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="14dp"
+        android:paddingVertical="12dp">
+
+        <!-- Left Currency Symbol Badge -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/badge_symbol"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
+            app:cardBackgroundColor="@color/bg_surface">
+
+            <TextView
+                android:id="@+id/tv_currency_symbol"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                tools:text="Rs"/>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Center Text: Code and Name -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="12dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_currency_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14.5sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                tools:text="PKR — Pakistani Rupee"/>
+
+            <TextView
+                android:id="@+id/tv_currency_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textSize="12sp"
+                android:textColor="@color/text_secondary"
+                tools:text="Rupee (Rs)"/>
+        </LinearLayout>
+
+        <!-- Right Checkmark Icon -->
+        <ImageView
+            android:id="@+id/iv_currency_check"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/ic_check_circle"
+            app:tint="@color/brand_primary"
+            android:visibility="gone"
+            android:contentDescription="Selected"/>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
