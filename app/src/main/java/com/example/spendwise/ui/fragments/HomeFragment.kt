@@ -2,18 +2,27 @@ package com.example.spendwise.ui.fragments
 
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.text.Editable
+import android.text.SpannableString
+import android.text.Spanned
 import android.text.TextWatcher
+import android.text.style.AbsoluteSizeSpan
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import android.view.HapticFeedbackConstants
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -22,17 +31,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spendwise.R
 import com.example.spendwise.ui.viewmodel.MainViewModel
-import com.github.mikephil.charting.charts.HorizontalBarChart
 import com.github.mikephil.charting.charts.PieChart
-import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.BarData
-import com.github.mikephil.charting.data.BarDataSet
-import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
-import com.github.mikephil.charting.formatter.PercentFormatter
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -40,7 +42,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.textfield.TextInputEditText
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -53,6 +54,7 @@ class HomeFragment : Fragment() {
     private var currentCategories: List<com.example.spendwise.data.Category>? = null
     private var currentTotals: List<com.example.spendwise.data.CategoryTotal>? = null
     private var tvMonthLabel: TextView? = null
+    private var selectedCategoryName: String? = null
     private val monthFormat = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
 
     private fun updateMonthLabel() {
@@ -80,11 +82,9 @@ class HomeFragment : Fragment() {
         val btnNext = view.findViewById<ImageButton>(R.id.btn_next_month)
         val rvExpenses = view.findViewById<RecyclerView>(R.id.rv_expenses)
         val fabAdd = view.findViewById<FloatingActionButton>(R.id.fab_add)
-        val chart = view.findViewById<HorizontalBarChart>(R.id.chart_categories)
         val chipGroup = view.findViewById<ChipGroup>(R.id.chip_group_categories)
         val layoutEmpty = view.findViewById<LinearLayout>(R.id.layout_empty)
-        val layoutChartEmpty = view.findViewById<LinearLayout>(R.id.layout_chart_empty)
-        val etSearch = view.findViewById<TextInputEditText>(R.id.et_search)
+        val etSearch = view.findViewById<EditText>(R.id.et_search)
         val layoutBudget = view.findViewById<LinearLayout>(R.id.layout_budget)
         val progressBudget = view.findViewById<LinearProgressIndicator>(R.id.progress_budget)
         val tvBudget = view.findViewById<TextView>(R.id.tv_budget_label)
@@ -234,9 +234,8 @@ class HomeFragment : Fragment() {
                 val spent = (expense ?: 0.0).toFloat()
                 val pct = ((spent / budget) * 100).toInt().coerceIn(0, 100)
                 progressBudget.setProgressCompat(pct, true)
-                tvBudget.text = "${viewModel.formatCurrency(spent.toDouble())} / ${viewModel.formatCurrency(budget.toDouble())} (${pct}%)"
+                tvBudget.text = "Budget: ${viewModel.formatCurrency(spent.toDouble())} / ${viewModel.formatCurrency(budget.toDouble())} (${pct}%)"
 
-                // Color: green < 60%, yellow 60-85%, red > 85%
                 val color = when {
                     pct < 60 -> Color.WHITE
                     pct < 85 -> Color.parseColor("#FFEB3B")
@@ -254,12 +253,25 @@ class HomeFragment : Fragment() {
             updateBudgetEnvelopes()
 
             chipGroup.removeAllViews()
+            val density = resources.displayMetrics.density
+
+            fun styleFilterChip(chip: Chip, checked: Boolean) {
+                chip.isCheckable = true
+                chip.isChecked = checked
+                chip.isCheckedIconVisible = false
+                chip.chipCornerRadius = 999f * density
+                chip.chipStrokeWidth = 1f * density
+                chip.setChipBackgroundColorResource(R.color.color_filter_chip_background)
+                chip.setTextColor(ContextCompat.getColorStateList(requireContext(), R.color.color_filter_chip_text))
+                chip.setChipStrokeColorResource(R.color.color_filter_chip_stroke)
+                chip.textSize = 12.5f
+            }
 
             val allChip = Chip(requireContext()).apply {
                 text = "All"
-                isCheckable = true
-                isChecked = true
+                styleFilterChip(this, selectedCategoryName == null)
                 setOnClickListener {
+                    selectedCategoryName = null
                     viewModel.setCategoryFilter(null)
                 }
             }
@@ -268,8 +280,9 @@ class HomeFragment : Fragment() {
             categories.forEach { cat ->
                 val chip = Chip(requireContext()).apply {
                     text = cat.name
-                    isCheckable = true
+                    styleFilterChip(this, selectedCategoryName == cat.name)
                     setOnClickListener {
+                        selectedCategoryName = cat.name
                         viewModel.setCategoryFilter(cat.name)
                     }
                 }
@@ -277,8 +290,7 @@ class HomeFragment : Fragment() {
             }
         }
 
-        // Top category insight + Chart
-        setupChart(chart)
+        // Category Breakdown Donut Card
         val pieChart = view.findViewById<PieChart>(R.id.chart_pie)
         val cardPieChart = view.findViewById<MaterialCardView>(R.id.card_pie_chart)
         setupPieChart(pieChart)
@@ -288,15 +300,10 @@ class HomeFragment : Fragment() {
             updateBudgetEnvelopes()
 
             if (totals.isNullOrEmpty()) {
-                chart.visibility = View.GONE
-                layoutChartEmpty.visibility = View.VISIBLE
                 cardInsight.visibility = View.GONE
                 cardPieChart.visibility = View.GONE
             } else {
-                chart.visibility = View.VISIBLE
-                layoutChartEmpty.visibility = View.GONE
                 cardPieChart.visibility = View.VISIBLE
-                updateChart(chart, totals.map { it.category }, totals.map { it.total.toFloat() })
                 updatePieChart(pieChart, totals.map { it.category }, totals.map { it.total.toFloat() })
 
                 // Top category insight
@@ -336,7 +343,7 @@ class HomeFragment : Fragment() {
 
         layoutCategoryBudgets.visibility = View.VISIBLE
 
-        for (category in budgetCategories) {
+        budgetCategories.forEachIndexed { index, category ->
             val spent = totals.find { it.category == category.name }?.total ?: 0.0
             val budget = category.monthlyBudget
 
@@ -351,80 +358,31 @@ class HomeFragment : Fragment() {
             tvProgress.text = "${viewModel.formatCurrency(spent)} / ${viewModel.formatCurrency(budget)} ($pct%)"
 
             val color = when {
-                pct < 60 -> Color.parseColor("#10B981")
-                pct < 85 -> Color.parseColor("#F59E0B")
-                else -> Color.parseColor("#EF4444")
+                pct < 60 -> ContextCompat.getColor(requireContext(), R.color.success_primary)
+                pct < 90 -> Color.parseColor("#F59E0B")
+                else -> ContextCompat.getColor(requireContext(), R.color.danger_primary)
             }
             progressBar.setIndicatorColor(color)
+
+            if (index == budgetCategories.size - 1) {
+                itemView.findViewById<View>(R.id.layout_envelope_root)?.setPadding(0, 0, 0, 0)
+            }
 
             container.addView(itemView)
         }
     }
 
-    private fun setupChart(chart: HorizontalBarChart) {
-        chart.description.isEnabled = false
-        chart.legend.isEnabled = false
-        chart.setTouchEnabled(false)
-        chart.setDrawGridBackground(false)
-        chart.setDrawBarShadow(false)
-        chart.setFitBars(true)
-
-        chart.axisLeft.isEnabled = false
-        chart.axisRight.isEnabled = false
-
-        chart.xAxis.apply {
-            position = XAxis.XAxisPosition.BOTTOM
-            setDrawGridLines(false)
-            setDrawAxisLine(false)
-            textColor = Color.parseColor("#3F484A")
-            granularity = 1f
-        }
-    }
-
-    private fun updateChart(chart: HorizontalBarChart, labels: List<String>, values: List<Float>) {
-        val chartColors = listOf(
-            Color.parseColor("#006B75"),
-            Color.parseColor("#A855F7"),
-            Color.parseColor("#F59E0B"),
-            Color.parseColor("#EF4444"),
-            Color.parseColor("#3B82F6"),
-            Color.parseColor("#10B981"),
-            Color.parseColor("#EC4899"),
-            Color.parseColor("#6366F1")
-        )
-
-        val entries = values.mapIndexed { index, value ->
-            BarEntry(index.toFloat(), value)
-        }
-
-        val dataSet = BarDataSet(entries, "").apply {
-            colors = chartColors.take(values.size)
-            setDrawValues(true)
-            valueTextSize = 11f
-            valueTextColor = Color.parseColor("#3F484A")
-        }
-
-        chart.data = BarData(dataSet).apply {
-            barWidth = 0.6f
-        }
-
-        chart.xAxis.valueFormatter = IndexAxisValueFormatter(labels)
-        chart.xAxis.labelCount = labels.size
-        chart.invalidate()
-    }
-
     private fun setupPieChart(chart: PieChart) {
         chart.description.isEnabled = false
         chart.setUsePercentValues(true)
-        chart.setDrawEntryLabels(true)
-        chart.setEntryLabelColor(Color.parseColor("#3F484A"))
-        chart.setEntryLabelTextSize(11f)
+        chart.setDrawEntryLabels(false)
         chart.isDrawHoleEnabled = true
-        chart.holeRadius = 50f
-        chart.transparentCircleRadius = 55f
+        chart.holeRadius = 64f
+        chart.transparentCircleRadius = 68f
         chart.setHoleColor(Color.TRANSPARENT)
-        chart.setCenterTextSize(14f)
-        chart.setCenterTextColor(Color.parseColor("#3F484A"))
+        chart.setTransparentCircleColor(Color.TRANSPARENT)
+        chart.setCenterTextSize(15f)
+        chart.setCenterTextColor(ContextCompat.getColor(requireContext(), R.color.text_primary))
         chart.legend.isEnabled = false
         chart.setTouchEnabled(true)
         chart.isRotationEnabled = true
@@ -433,14 +391,14 @@ class HomeFragment : Fragment() {
 
     private fun updatePieChart(chart: PieChart, labels: List<String>, values: List<Float>) {
         val pieColors = listOf(
-            Color.parseColor("#006B75"),
-            Color.parseColor("#A855F7"),
-            Color.parseColor("#F59E0B"),
-            Color.parseColor("#EF4444"),
-            Color.parseColor("#3B82F6"),
-            Color.parseColor("#10B981"),
-            Color.parseColor("#EC4899"),
-            Color.parseColor("#6366F1")
+            Color.parseColor("#3B82F6"), // Blue
+            Color.parseColor("#EF4444"), // Red
+            Color.parseColor("#F59E0B"), // Amber
+            Color.parseColor("#10B981"), // Emerald
+            Color.parseColor("#8B5CF6"), // Purple
+            Color.parseColor("#EC4899"), // Pink
+            Color.parseColor("#06B6D4"), // Cyan
+            Color.parseColor("#64748B")  // Slate
         )
 
         val entries = labels.zip(values).map { (label, value) ->
@@ -449,18 +407,73 @@ class HomeFragment : Fragment() {
 
         val dataSet = PieDataSet(entries, "").apply {
             colors = pieColors.take(values.size)
-            sliceSpace = 2f
-            selectionShift = 5f
-            setDrawValues(true)
-            valueTextSize = 10f
-            valueTextColor = Color.WHITE
-            valueFormatter = PercentFormatter(chart)
+            sliceSpace = 2.5f
+            selectionShift = 4f
+            setDrawValues(false)
         }
 
         chart.data = PieData(dataSet)
+
+        // Center text: "Total Spent\nRs 22,500.00" styled
         val total = values.sum()
-        chart.centerText = viewModel.formatCurrency(total.toDouble())
+        val totalText = viewModel.formatCurrency(total.toDouble())
+        val centerStr = "Total Spent\n$totalText"
+        val spannable = SpannableString(centerStr)
+        val newline = centerStr.indexOf('\n')
+        val density = resources.displayMetrics.density
+        if (newline != -1) {
+            spannable.setSpan(
+                AbsoluteSizeSpan((12 * density).toInt()),
+                0, newline,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            spannable.setSpan(
+                ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.text_secondary)),
+                0, newline,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            spannable.setSpan(
+                AbsoluteSizeSpan((17 * density).toInt()),
+                newline + 1, centerStr.length,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            spannable.setSpan(
+                StyleSpan(Typeface.BOLD),
+                newline + 1, centerStr.length,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            spannable.setSpan(
+                ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.text_primary)),
+                newline + 1, centerStr.length,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
+        chart.centerText = spannable
         chart.invalidate()
+
+        // Clean side-by-side / vertical legend list
+        val containerLegend = view?.findViewById<LinearLayout>(R.id.container_pie_legend)
+        containerLegend?.removeAllViews()
+        val totalSpend = values.sum()
+        labels.zip(values).forEachIndexed { index, (label, value) ->
+            val sliceColor = pieColors[index % pieColors.size]
+            val row = layoutInflater.inflate(R.layout.item_category_legend, containerLegend, false)
+            val dot = row.findViewById<View>(R.id.view_legend_dot)
+            val tvName = row.findViewById<TextView>(R.id.tv_legend_name)
+            val tvVal = row.findViewById<TextView>(R.id.tv_legend_value)
+
+            dot.background = GradientDrawable().apply {
+                shape = GradientDrawable.OVAL
+                setColor(sliceColor)
+            }
+            tvName.text = label
+
+            val pct = if (totalSpend > 0) (value / totalSpend) * 100f else 0f
+            val formatted = viewModel.formatCurrency(value.toDouble())
+            tvVal.text = String.format(Locale.getDefault(), "%s (%.1f%%)", formatted, pct)
+
+            containerLegend?.addView(row)
+        }
     }
 
     override fun onDestroyView() {

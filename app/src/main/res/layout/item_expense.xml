@@ -6,10 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
-    app:cardBackgroundColor="?attr/colorSurface"
-    app:cardCornerRadius="12dp"
+    app:cardBackgroundColor="@color/bg_surface"
+    app:cardCornerRadius="16dp"
     app:cardElevation="0dp"
-    app:strokeColor="?attr/colorOutlineVariant"
+    app:strokeColor="@color/stroke_subtle"
     app:strokeWidth="1dp">
 
     <LinearLayout
@@ -19,38 +19,41 @@
         android:gravity="center_vertical"
         android:padding="14dp">
 
-        <!-- Category color dot -->
+        <!-- 4dp x 34dp Vertical rounded color accent pill -->
         <View
             android:id="@+id/view_category_dot"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:background="@drawable/shape_dot"/>
+            android:layout_width="4dp"
+            android:layout_height="34dp"
+            android:background="@drawable/shape_dot" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:layout_marginStart="14dp">
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp">
 
             <TextView
                 android:id="@+id/tv_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceBodyLarge"
-                android:textColor="?attr/colorOnSurface"
-                tools:text="Food"/>
+                android:textSize="15sp"
+                android:fontFamily="sans-serif-medium"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                tools:text="Transport" />
 
             <TextView
                 android:id="@+id/tv_note"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:textAppearance="?attr/textAppearanceBodySmall"
-                android:textColor="?attr/colorOnSurfaceVariant"
+                android:textSize="12.5sp"
+                android:textColor="@color/text_secondary"
                 android:maxLines="1"
                 android:ellipsize="end"
-                tools:text="Lunch at cafe"/>
+                tools:text="Fuel" />
         </LinearLayout>
 
         <LinearLayout
@@ -63,19 +66,21 @@
                 android:id="@+id/tv_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textSize="15sp"
+                android:fontFamily="sans-serif-medium"
                 android:textStyle="bold"
-                android:textColor="?attr/colorOnSurface"
-                tools:text="-$12.50"/>
+                android:textColor="@color/danger_primary"
+                android:fontFeatureSettings="tnum"
+                tools:text="-Rs 3,500.00" />
 
             <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:textAppearance="?attr/textAppearanceLabelSmall"
-                android:textColor="?attr/colorOutline"
-                tools:text="Feb 14"/>
+                android:textSize="11.5sp"
+                android:textColor="@color/text_secondary"
+                tools:text="Nov 17" />
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

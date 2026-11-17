@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -55,10 +56,10 @@ class ExpenseAdapter(
             val formattedAmount = com.example.spendwise.utils.CurrencyHelper.format(itemView.context, expense.amount)
             if (expense.isIncome) {
                 tvAmount.text = "+$formattedAmount"
-                tvAmount.setTextColor(Color.parseColor("#388E3C"))
+                tvAmount.setTextColor(ContextCompat.getColor(itemView.context, R.color.success_primary))
             } else {
                 tvAmount.text = "-$formattedAmount"
-                tvAmount.setTextColor(Color.parseColor("#D32F2F"))
+                tvAmount.setTextColor(ContextCompat.getColor(itemView.context, R.color.danger_primary))
             }
 
             val noteText = StringBuilder()
@@ -73,9 +74,11 @@ class ExpenseAdapter(
             tvDate.text = dateFormat.format(Date(expense.date))
 
             val color = categoryColors[expense.category] ?: "#64748B"
-            val drawable = GradientDrawable()
-            drawable.shape = GradientDrawable.OVAL
-            drawable.setColor(Color.parseColor(color))
+            val drawable = GradientDrawable().apply {
+                shape = GradientDrawable.RECTANGLE
+                cornerRadius = 999f
+                setColor(Color.parseColor(color))
+            }
             categoryDot.background = drawable
 
             itemView.setOnClickListener { onItemClick(expense) }
