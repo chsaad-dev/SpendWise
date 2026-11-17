@@ -1,28 +1,27 @@
 package com.example.spendwise.ui.fragments
 
-import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spendwise.R
 import com.example.spendwise.data.SavingsGoal
+import com.example.spendwise.ui.dialogs.AddSavingsBottomSheet
+import com.example.spendwise.ui.dialogs.DeleteGoalBottomSheet
+import com.example.spendwise.ui.dialogs.NewGoalBottomSheet
 import com.example.spendwise.ui.viewmodel.MainViewModel
 import com.example.spendwise.utils.CurrencyHelper
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.progressindicator.LinearProgressIndicator
-import com.google.android.material.textfield.TextInputEditText
 import java.text.SimpleDateFormat
-import java.util.Calendar
 import java.util.Locale
 
 class SavingsGoalFragment : Fragment() {
@@ -43,17 +42,11 @@ class SavingsGoalFragment : Fragment() {
         val rvGoals = view.findViewById<RecyclerView>(R.id.rv_goals)
         val layoutEmpty = view.findViewById<LinearLayout>(R.id.layout_empty)
         val btnAddGoal = view.findViewById<MaterialButton>(R.id.btn_add_goal)
+        val btnEmptyAddGoal = view.findViewById<MaterialButton>(R.id.btn_empty_add_goal)
 
         val adapter = GoalAdapter(
             onAddSavings = { goal -> showAddSavingsDialog(goal) },
-            onDelete = { goal ->
-                MaterialAlertDialogBuilder(requireContext())
-                    .setTitle("Delete Goal")
-                    .setMessage("Delete \"${goal.name}\"?")
-                    .setPositiveButton("Delete") { _, _ -> viewModel.deleteGoal(goal) }
-                    .setNegativeButton("Cancel", null)
-                    .show()
-            }
+            onDelete = { goal -> showDeleteGoalDialog(goal) }
         )
 
         goalAdapter = adapter
@@ -69,6 +62,10 @@ class SavingsGoalFragment : Fragment() {
         btnAddGoal.setOnClickListener {
             showAddGoalDialog()
         }
+
+        btnEmptyAddGoal?.setOnClickListener {
+            showAddGoalDialog()
+        }
     }
 
     override fun onResume() {
@@ -77,93 +74,36 @@ class SavingsGoalFragment : Fragment() {
     }
 
     private fun showAddGoalDialog() {
-        val dialogView = LayoutInflater.from(requireContext())
-            .inflate(R.layout.dialog_add_goal, null)
-
-        val etName = dialogView.findViewById<TextInputEditText>(R.id.et_goal_name)
-        val etTarget = dialogView.findViewById<TextInputEditText>(R.id.et_goal_target)
-        val etDeadline = dialogView.findViewById<TextInputEditText>(R.id.et_goal_deadline)
-
-        val fmt = CurrencyHelper.getCurrencyFormat(requireContext())
-        val symbol = fmt.currency?.symbol ?: ""
-        if (symbol.isNotBlank()) {
-            etTarget.hint = "Target amount ($symbol)"
-        }
-
-        val calendar = Calendar.getInstance()
-        calendar.add(Calendar.MONTH, 3) // Default: 3 months from now
-
-        val dateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
-        etDeadline.setText(dateFormat.format(calendar.time))
-
-        etDeadline.setOnClickListener {
-            DatePickerDialog(
-                requireContext(),
-                { _, year, month, day ->
-                    calendar.set(year, month, day)
-                    etDeadline.setText(dateFormat.format(calendar.time))
-                },
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
-            ).show()
-        }
-
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle("New Savings Goal")
-            .setView(dialogView)
-            .setPositiveButton("Create") { _, _ ->
-                val name = etName.text.toString().trim()
-                val target = etTarget.text.toString().toDoubleOrNull()
-
-                if (name.isBlank() || target == null || target <= 0) {
-                    Toast.makeText(context, "Please enter a valid name and target", Toast.LENGTH_SHORT).show()
-                    return@setPositiveButton
-                }
-
-                viewModel.insertGoal(
-                    SavingsGoal(
-                        name = name,
-                        targetAmount = target,
-                        deadline = calendar.timeInMillis
-                    )
+        NewGoalBottomSheet.newInstance { name, target, deadline ->
+            viewModel.insertGoal(
+                SavingsGoal(
+                    name = name,
+                    targetAmount = target,
+                    deadline = deadline
                 )
-                Toast.makeText(context, "Goal created \u2713", Toast.LENGTH_SHORT).show()
-            }
-            .setNegativeButton("Cancel", null)
-            .show()
+            )
+            Toast.makeText(context, "Goal created ✓", Toast.LENGTH_SHORT).show()
+        }.show(childFragmentManager, NewGoalBottomSheet.TAG)
     }
 
     private fun showAddSavingsDialog(goal: SavingsGoal) {
-        val fmt = CurrencyHelper.getCurrencyFormat(requireContext())
-        val symbol = fmt.currency?.symbol ?: ""
-        val input = EditText(requireContext()).apply {
-            hint = if (symbol.isNotBlank()) "Amount to add ($symbol)" else "Amount to add"
-            inputType = android.text.InputType.TYPE_CLASS_NUMBER or android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL
-            setPadding(64, 32, 64, 32)
-        }
+        AddSavingsBottomSheet.newInstance(goal) { amount ->
+            val updatedGoal = goal.copy(savedAmount = goal.savedAmount + amount)
+            viewModel.updateGoal(updatedGoal)
 
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Add Savings to \"${goal.name}\"")
-            .setView(input)
-            .setPositiveButton("Add") { _, _ ->
-                val amount = input.text.toString().toDoubleOrNull()
-                if (amount == null || amount <= 0) {
-                    Toast.makeText(context, "Enter a valid amount", Toast.LENGTH_SHORT).show()
-                    return@setPositiveButton
-                }
-
-                val updatedGoal = goal.copy(savedAmount = goal.savedAmount + amount)
-                viewModel.updateGoal(updatedGoal)
-
-                if (updatedGoal.savedAmount >= updatedGoal.targetAmount) {
-                    Toast.makeText(context, "\uD83C\uDF89 Goal reached!", Toast.LENGTH_LONG).show()
-                } else {
-                    Toast.makeText(context, "Savings added \u2713", Toast.LENGTH_SHORT).show()
-                }
+            if (updatedGoal.savedAmount >= updatedGoal.targetAmount) {
+                Toast.makeText(context, "\uD83C\uDF89 Goal reached!", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(context, "Savings added ✓", Toast.LENGTH_SHORT).show()
             }
-            .setNegativeButton("Cancel", null)
-            .show()
+        }.show(childFragmentManager, AddSavingsBottomSheet.TAG)
+    }
+
+    private fun showDeleteGoalDialog(goal: SavingsGoal) {
+        DeleteGoalBottomSheet.newInstance(goal) {
+            viewModel.deleteGoal(goal)
+            Toast.makeText(context, "Goal deleted", Toast.LENGTH_SHORT).show()
+        }.show(childFragmentManager, DeleteGoalBottomSheet.TAG)
     }
 
     // ── Adapter ──
@@ -183,6 +123,7 @@ class SavingsGoalFragment : Fragment() {
         class VH(view: View) : RecyclerView.ViewHolder(view) {
             val tvName: TextView = view.findViewById(R.id.tv_goal_name)
             val tvDeadline: TextView = view.findViewById(R.id.tv_goal_deadline)
+            val tvPercent: TextView = view.findViewById(R.id.tv_goal_percent)
             val progressGoal: LinearProgressIndicator = view.findViewById(R.id.progress_goal)
             val tvSaved: TextView = view.findViewById(R.id.tv_goal_saved)
             val tvTarget: TextView = view.findViewById(R.id.tv_goal_target)
@@ -200,17 +141,37 @@ class SavingsGoalFragment : Fragment() {
 
         override fun onBindViewHolder(holder: VH, position: Int) {
             val goal = goals[position]
+            val context = holder.itemView.context
+
             holder.tvName.text = goal.name
-            holder.tvDeadline.text = dateFormat.format(goal.deadline)
+            holder.tvDeadline.text = "Target: ${dateFormat.format(goal.deadline)}"
 
             val progress = if (goal.targetAmount > 0)
                 ((goal.savedAmount / goal.targetAmount) * 100).toInt().coerceAtMost(100)
             else 0
 
-            val currencyFormat = CurrencyHelper.getCurrencyFormat(holder.itemView.context)
             holder.progressGoal.progress = progress
-            holder.tvSaved.text = "${currencyFormat.format(goal.savedAmount)} saved"
-            holder.tvTarget.text = "of ${currencyFormat.format(goal.targetAmount)}"
+            holder.tvPercent.text = "$progress%"
+
+            if (progress >= 100) {
+                holder.tvPercent.setBackgroundResource(R.drawable.bg_pill_percent_completed)
+                holder.tvPercent.setTextColor(ContextCompat.getColor(context, R.color.success_primary))
+                holder.progressGoal.setIndicatorColor(ContextCompat.getColor(context, R.color.success_primary))
+            } else {
+                holder.tvPercent.setBackgroundResource(R.drawable.bg_pill_percent_active)
+                holder.tvPercent.setTextColor(ContextCompat.getColor(context, R.color.brand_primary))
+                holder.progressGoal.setIndicatorColor(ContextCompat.getColor(context, R.color.brand_primary))
+            }
+
+            val fmtSaved = CurrencyHelper.getCurrencyFormat(context).apply {
+                if (goal.savedAmount % 1.0 == 0.0) maximumFractionDigits = 0
+            }
+            val fmtTarget = CurrencyHelper.getCurrencyFormat(context).apply {
+                if (goal.targetAmount % 1.0 == 0.0) maximumFractionDigits = 0
+            }
+
+            holder.tvSaved.text = "${fmtSaved.format(goal.savedAmount)} saved"
+            holder.tvTarget.text = "of ${fmtTarget.format(goal.targetAmount)}"
 
             holder.btnAddSavings.setOnClickListener { onAddSavings(goal) }
             holder.btnDelete.setOnClickListener { onDelete(goal) }

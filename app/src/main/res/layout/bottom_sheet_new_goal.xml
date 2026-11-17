@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_bottom_sheet"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="24dp">
+
+    <!-- Drag Handle Pill -->
+    <View
+        android:layout_width="36dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_drag_handle"/>
+
+    <!-- Header Section -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Savings Goal"
+        android:textColor="@color/text_primary"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-medium"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="Set a target amount and deadline to stay on track"
+        android:textColor="@color/text_secondary"
+        android:textSize="13sp"/>
+
+    <!-- Input 1: Goal Name -->
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:hintEnabled="false"
+        app:boxCornerRadiusBottomEnd="14dp"
+        app:boxCornerRadiusBottomStart="14dp"
+        app:boxCornerRadiusTopEnd="14dp"
+        app:boxCornerRadiusTopStart="14dp"
+        app:boxBackgroundColor="@color/bg_surface"
+        app:boxStrokeColor="@color/stroke_subtle"
+        app:boxStrokeWidth="1dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_goal_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Goal Name (e.g., New Car, Emergency Fund)"
+            android:textColorHint="@color/text_secondary"
+            android:inputType="textCapWords"
+            android:textColor="@color/text_primary"
+            android:textSize="15sp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Input 2: Target Amount (Zero overlap) -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_goal_target"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:hintEnabled="false"
+        app:boxCornerRadiusBottomEnd="14dp"
+        app:boxCornerRadiusBottomStart="14dp"
+        app:boxCornerRadiusTopEnd="14dp"
+        app:boxCornerRadiusTopStart="14dp"
+        app:boxBackgroundColor="@color/bg_surface"
+        app:boxStrokeColor="@color/stroke_subtle"
+        app:boxStrokeWidth="1dp"
+        app:prefixText="Rs "
+        app:prefixTextColor="@color/brand_primary"
+        app:prefixTextAppearance="@style/TextAppearance.SpendWise.PrefixBold">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_goal_target"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Target Amount"
+            android:textColorHint="@color/text_secondary"
+            android:inputType="numberDecimal"
+            android:textColor="@color/text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Input 3: Deadline Date Picker -->
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:hintEnabled="false"
+        app:boxCornerRadiusBottomEnd="14dp"
+        app:boxCornerRadiusBottomStart="14dp"
+        app:boxCornerRadiusTopEnd="14dp"
+        app:boxCornerRadiusTopStart="14dp"
+        app:boxBackgroundColor="@color/bg_surface"
+        app:boxStrokeColor="@color/stroke_subtle"
+        app:boxStrokeWidth="1dp"
+        app:endIconMode="custom"
+        app:endIconDrawable="@drawable/ic_calendar"
+        app:endIconTint="@color/brand_primary">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_goal_deadline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Target Deadline"
+            android:textColorHint="@color/text_secondary"
+            android:focusable="false"
+            android:clickable="true"
+            android:textColor="@color/text_primary"
+            android:textSize="15sp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Action Buttons -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_create_goal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="22dp"
+        android:text="Create Goal"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/brand_primary"
+        app:cornerRadius="14dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_cancel_goal"
+        style="@style/Widget.Material3.Button.TonalButton"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        android:text="Cancel"
+        android:textColor="@color/text_secondary"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/bg_surface_subtle"
+        app:cornerRadius="14dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        app:elevation="0dp"/>
+
+</LinearLayout>

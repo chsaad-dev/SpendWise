@@ -2,14 +2,15 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="6dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="0dp"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="18dp"
     app:strokeWidth="1dp"
-    app:strokeColor="?attr/colorOutlineVariant"
-    app:cardBackgroundColor="?attr/colorSurface">
+    app:strokeColor="@color/stroke_subtle"
+    app:cardBackgroundColor="@color/bg_surface"
+    app:cardElevation="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,44 +18,99 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Goal name + deadline row -->
+        <!-- Row 1: Icon + Title/Deadline + Percentage Pill -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-            <TextView
-                android:id="@+id/tv_goal_name"
+            <!-- Rounded-square icon badge -->
+            <FrameLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/shape_category_badge"
+                android:backgroundTint="@color/brand_primary_container">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_target"
+                    app:tint="@color/brand_primary"
+                    android:contentDescription="@null"/>
+            </FrameLayout>
+
+            <!-- Title & Deadline -->
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Goal Name"
-                android:textAppearance="?attr/textAppearanceTitleMedium"
-                android:textStyle="bold"
-                android:textColor="?attr/colorOnSurface"/>
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/tv_goal_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    tools:text="New Car"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_marginEnd="4dp"
+                        android:src="@drawable/ic_calendar"
+                        app:tint="@color/text_secondary"
+                        android:contentDescription="@null"/>
+
+                    <TextView
+                        android:id="@+id/tv_goal_deadline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp"
+                        tools:text="Target: Feb 17, 2027"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Compact percentage badge pill -->
             <TextView
-                android:id="@+id/tv_goal_deadline"
+                android:id="@+id/tv_goal_percent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dec 31, 2025"
-                android:textAppearance="?attr/textAppearanceBodySmall"
-                android:textColor="?attr/colorOnSurfaceVariant"/>
+                android:background="@drawable/bg_pill_percent_active"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:textColor="@color/brand_primary"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                tools:text="0%"/>
         </LinearLayout>
 
-        <!-- Progress bar -->
+        <!-- Row 2: Progress Bar & Amounts -->
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/progress_goal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            app:trackCornerRadius="8dp"
-            app:trackThickness="10dp"
-            app:indicatorColor="?attr/colorPrimary"
-            app:trackColor="?attr/colorSurfaceVariant"/>
+            android:layout_marginTop="14dp"
+            app:trackThickness="8dp"
+            app:trackCornerRadius="999dp"
+            app:trackColor="@color/bg_surface_subtle"
+            app:indicatorColor="@color/brand_primary"/>
 
-        <!-- Amount row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,45 +122,69 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="$0 saved"
-                android:textAppearance="?attr/textAppearanceBodyMedium"
-                android:textColor="?attr/colorPrimary"/>
+                android:textColor="@color/brand_primary"
+                android:textSize="13.5sp"
+                android:textStyle="bold"
+                tools:text="Rs 0 saved"/>
 
             <TextView
                 android:id="@+id/tv_goal_target"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="of $1,000"
-                android:textAppearance="?attr/textAppearanceBodyMedium"
-                android:textColor="?attr/colorOnSurfaceVariant"/>
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"
+                tools:text="of Rs 5,000"/>
         </LinearLayout>
 
-        <!-- Action buttons row -->
+        <!-- Row 3: Action Footer with subtle divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="14dp"
+            android:background="@color/stroke_subtle"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:orientation="horizontal"
-            android:gravity="end">
+            android:gravity="center_vertical">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_add_savings"
                 style="@style/Widget.Material3.Button.TonalButton"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_weight="1"
                 android:text="+ Add Savings"
-                android:textSize="12sp"
-                app:cornerRadius="8dp"/>
+                android:textColor="@color/brand_primary"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/brand_primary_container"
+                app:cornerRadius="12dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                app:elevation="0dp"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_delete_goal"
-                style="@style/Widget.Material3.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_marginStart="4dp"
-                android:text="Delete"
-                android:textColor="?attr/colorError"
-                android:textSize="12sp"/>
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="10dp"
+                app:icon="@drawable/ic_delete"
+                app:iconSize="18dp"
+                app:iconGravity="textStart"
+                app:iconTint="@color/danger_primary"
+                app:backgroundTint="@color/danger_container"
+                app:cornerRadius="12dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp"
+                android:padding="0dp"
+                app:elevation="0dp"/>
         </LinearLayout>
+
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

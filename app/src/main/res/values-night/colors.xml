@@ -11,4 +11,6 @@
     <color name="brand_primary_container">#1E1B4B</color>
     <color name="danger_primary">#EF4444</color>
     <color name="danger_container">#3B1219</color>
+    <color name="success_primary">#22C55E</color>
+    <color name="success_container">#14532D</color>
 </resources>
