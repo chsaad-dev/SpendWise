@@ -13,4 +13,6 @@
     <color name="danger_container">#3B1219</color>
     <color name="success_primary">#22C55E</color>
     <color name="success_container">#14532D</color>
+    <color name="warning_primary">#FB923C</color>
+    <color name="warning_container">#431407</color>
 </resources>
