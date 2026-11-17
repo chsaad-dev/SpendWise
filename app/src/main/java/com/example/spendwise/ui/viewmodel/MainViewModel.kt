@@ -36,6 +36,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _filterDateRange = MutableLiveData<Pair<Long, Long>>()
     val filterDateRange: LiveData<Pair<Long, Long>> = _filterDateRange
 
+    private val _selectedMonthCalendar = MutableLiveData<Calendar>(Calendar.getInstance())
+    val selectedMonthCalendar: LiveData<Calendar> = _selectedMonthCalendar
+
     private val _selectedCategory = MutableLiveData<String?>(null)
     val selectedCategory: LiveData<String?> = _selectedCategory
 
@@ -223,6 +226,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun setMonthFilter(calendar: Calendar) {
+        _selectedMonthCalendar.value = calendar.clone() as Calendar
         val start = calendar.clone() as Calendar
         start.set(Calendar.DAY_OF_MONTH, 1)
         start.set(Calendar.HOUR_OF_DAY, 0)

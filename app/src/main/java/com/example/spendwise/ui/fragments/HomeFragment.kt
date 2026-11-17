@@ -52,6 +52,13 @@ class HomeFragment : Fragment() {
     private val currentMonth = Calendar.getInstance()
     private var currentCategories: List<com.example.spendwise.data.Category>? = null
     private var currentTotals: List<com.example.spendwise.data.CategoryTotal>? = null
+    private var tvMonthLabel: TextView? = null
+    private val monthFormat = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
+
+    private fun updateMonthLabel() {
+        tvMonthLabel?.text = monthFormat.format(currentMonth.time)
+        viewModel.setMonthFilter(currentMonth)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,6 +75,7 @@ class HomeFragment : Fragment() {
         val tvTotalExpense = view.findViewById<TextView>(R.id.tv_total_expense)
         val tvCount = view.findViewById<TextView>(R.id.tv_transaction_count)
         val tvMonth = view.findViewById<TextView>(R.id.tv_month_label)
+        tvMonthLabel = tvMonth
         val btnPrev = view.findViewById<ImageButton>(R.id.btn_prev_month)
         val btnNext = view.findViewById<ImageButton>(R.id.btn_next_month)
         val rvExpenses = view.findViewById<RecyclerView>(R.id.rv_expenses)
@@ -83,14 +91,43 @@ class HomeFragment : Fragment() {
         val cardInsight = view.findViewById<MaterialCardView>(R.id.card_insight)
         val tvTopCategory = view.findViewById<TextView>(R.id.tv_top_category)
 
-        val monthFormat = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
+        // Sync with ViewModel or FragmentResultListener
+        val savedCal = viewModel.selectedMonthCalendar.value
+        if (savedCal != null) {
+            currentMonth.timeInMillis = savedCal.timeInMillis
+        }
+        updateMonthLabel()
 
-        fun updateMonthLabel() {
-            tvMonth.text = monthFormat.format(currentMonth.time)
-            viewModel.setMonthFilter(currentMonth)
+        parentFragmentManager.setFragmentResultListener("request_select_month", viewLifecycleOwner) { _, bundle ->
+            val month = bundle.getInt("selected_month", -1)
+            val year = bundle.getInt("selected_year", -1)
+            if (month != -1 && year != -1) {
+                currentMonth.set(Calendar.YEAR, year)
+                currentMonth.set(Calendar.MONTH, month)
+                currentMonth.set(Calendar.DAY_OF_MONTH, 1)
+                updateMonthLabel()
+            }
         }
 
-        updateMonthLabel()
+        viewModel.selectedMonthCalendar.observe(viewLifecycleOwner) { cal ->
+            if (currentMonth.get(Calendar.YEAR) != cal.get(Calendar.YEAR) ||
+                currentMonth.get(Calendar.MONTH) != cal.get(Calendar.MONTH)
+            ) {
+                currentMonth.timeInMillis = cal.timeInMillis
+                tvMonth.text = monthFormat.format(currentMonth.time)
+            }
+        }
+
+        arguments?.let { args ->
+            val month = args.getInt("selected_month", -1)
+            val year = args.getInt("selected_year", -1)
+            if (month != -1 && year != -1) {
+                currentMonth.set(Calendar.YEAR, year)
+                currentMonth.set(Calendar.MONTH, month)
+                currentMonth.set(Calendar.DAY_OF_MONTH, 1)
+                updateMonthLabel()
+            }
+        }
 
         btnPrev.setOnClickListener {
             currentMonth.add(Calendar.MONTH, -1)
@@ -426,10 +463,23 @@ class HomeFragment : Fragment() {
         chart.invalidate()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        tvMonthLabel = null
+    }
+
     override fun onResume() {
         super.onResume()
         if (::adapter.isInitialized) {
             adapter.notifyDataSetChanged()
+        }
+        viewModel.selectedMonthCalendar.value?.let { savedCal ->
+            if (currentMonth.get(Calendar.YEAR) != savedCal.get(Calendar.YEAR) ||
+                currentMonth.get(Calendar.MONTH) != savedCal.get(Calendar.MONTH)
+            ) {
+                currentMonth.timeInMillis = savedCal.timeInMillis
+                tvMonthLabel?.text = monthFormat.format(currentMonth.time)
+            }
         }
         viewModel.setMonthFilter(currentMonth)
     }

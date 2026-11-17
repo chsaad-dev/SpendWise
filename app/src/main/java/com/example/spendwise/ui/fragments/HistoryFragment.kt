@@ -151,6 +151,13 @@ class HistoryFragment : Fragment() {
                                 set(Calendar.DAY_OF_MONTH, 1)
                             }
                             viewModel.setMonthFilter(filterCal)
+
+                            val resultBundle = Bundle().apply {
+                                putInt("selected_month", monthIndex)
+                                putInt("selected_year", selectedYear)
+                            }
+                            parentFragmentManager.setFragmentResult("request_select_month", resultBundle)
+
                             requireActivity().findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottom_navigation)?.selectedItemId = R.id.homeFragment
                         }
                     }
@@ -208,7 +215,9 @@ class HistoryFragment : Fragment() {
         chart.setDrawGridBackground(false)
 
         chart.axisLeft.apply {
+            resetAxisMaximum()
             axisMinimum = 0f
+            spaceTop = 18f
             setDrawGridLines(true)
             gridColor = strokeSubtleColor
             setDrawAxisLine(false)
