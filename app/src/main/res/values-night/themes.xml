@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.SpendWise" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="bottomSheetDialogTheme">@style/Theme.SpendWise.BottomSheetDialog</item>
+    </style>
+
+    <style name="Theme.SpendWise.BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.SpendWise.BottomSheet</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
+    <style name="Widget.SpendWise.BottomSheet" parent="Widget.Material3.BottomSheet">
+        <item name="shapeAppearance">@style/ShapeAppearance.SpendWise.BottomSheet</item>
+        <item name="backgroundTint">@color/bg_surface</item>
+    </style>
+
+    <style name="ShapeAppearance.SpendWise.BottomSheet" parent="ShapeAppearance.Material3.Corner.Large">
+        <item name="cornerSizeTopLeft">28dp</item>
+        <item name="cornerSizeTopRight">28dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
+    <style name="TextAppearance.SpendWise.PrefixBold" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/brand_primary</item>
     </style>
 
     <style name="ShapeAppearance.SpendWise.FAB" parent="ShapeAppearance.Material3.Corner.Medium">

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_bottom_sheet"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="24dp">
+
+    <!-- Drag Handle Pill -->
+    <View
+        android:layout_width="36dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_drag_handle"/>
+
+    <!-- Header Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <!-- Category color badge -->
+        <FrameLayout
+            android:id="@+id/badge_budget_category"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginEnd="14dp">
+
+            <ImageView
+                android:id="@+id/iv_budget_category_icon"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center"
+                android:contentDescription="@null"
+                tools:src="@drawable/ic_cat_entertainment"/>
+        </FrameLayout>
+
+        <!-- Title & Subtitle -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_budget_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_primary"
+                android:textSize="19sp"
+                android:fontFamily="sans-serif-medium"
+                android:textStyle="bold"
+                tools:text="Budget for Entertainment"/>
+
+            <TextView
+                android:id="@+id/tv_budget_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Set a monthly spending limit to track alerts"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Currency Input Field -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_budget_amount"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:hintEnabled="false"
+        app:boxCornerRadiusBottomEnd="14dp"
+        app:boxCornerRadiusBottomStart="14dp"
+        app:boxCornerRadiusTopEnd="14dp"
+        app:boxCornerRadiusTopStart="14dp"
+        app:boxBackgroundColor="@color/bg_surface"
+        app:boxStrokeColor="@color/stroke_subtle"
+        app:boxStrokeWidth="1dp"
+        app:prefixText="Rs "
+        app:prefixTextColor="@color/brand_primary"
+        app:prefixTextAppearance="@style/TextAppearance.SpendWise.PrefixBold">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_budget_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="0"
+            android:inputType="number"
+            android:textColor="@color/text_primary"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Quick Preset Chips -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_preset_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="6dp"
+            android:text="Rs 2,000"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            app:chipCornerRadius="999dp"
+            app:chipBackgroundColor="@color/bg_surface_subtle"
+            app:chipStrokeColor="@color/stroke_subtle"
+            app:chipStrokeWidth="1dp"
+            app:chipMinHeight="36dp"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_preset_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="3dp"
+            android:text="Rs 5,000"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            app:chipCornerRadius="999dp"
+            app:chipBackgroundColor="@color/bg_surface_subtle"
+            app:chipStrokeColor="@color/stroke_subtle"
+            app:chipStrokeWidth="1dp"
+            app:chipMinHeight="36dp"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_preset_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="6dp"
+            android:text="Rs 10,000"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            app:chipCornerRadius="999dp"
+            app:chipBackgroundColor="@color/bg_surface_subtle"
+            app:chipStrokeColor="@color/stroke_subtle"
+            app:chipStrokeWidth="1dp"
+            app:chipMinHeight="36dp"/>
+    </LinearLayout>
+
+    <!-- Primary CTA: Save Budget -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_save_budget"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:text="Save Budget"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/brand_primary"
+        app:cornerRadius="14dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"/>
+
+    <!-- Secondary Row: Remove Limit & Cancel -->
+    <LinearLayout
+        android:id="@+id/layout_budget_secondary_actions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_remove_limit"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="6dp"
+            android:text="Remove Limit"
+            android:textColor="@color/danger_primary"
+            android:textSize="14sp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_cancel_budget"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:layout_marginStart="6dp"
+            android:text="Cancel"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp"
+            app:backgroundTint="@color/bg_surface_subtle"
+            app:cornerRadius="14dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:elevation="0dp"/>
+    </LinearLayout>
+</LinearLayout>

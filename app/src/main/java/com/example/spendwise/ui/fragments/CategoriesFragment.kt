@@ -6,9 +6,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DiffUtil
@@ -17,10 +20,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spendwise.R
 import com.example.spendwise.data.Category
+import com.example.spendwise.ui.dialogs.CategoryBudgetBottomSheet
+import com.example.spendwise.ui.dialogs.DeleteCategoryBottomSheet
 import com.example.spendwise.ui.viewmodel.MainViewModel
 import com.example.spendwise.utils.CurrencyHelper
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 
 class CategoriesFragment : Fragment() {
@@ -45,40 +49,23 @@ class CategoriesFragment : Fragment() {
 
         val adapter = CategoryAdapter(
             onDeleteClick = { category ->
-                MaterialAlertDialogBuilder(requireContext())
-                    .setTitle("Delete Category")
-                    .setMessage("Delete \"${category.name}\"? Existing expenses using this category will keep their label.")
-                    .setPositiveButton("Delete") { _, _ ->
-                        viewModel.deleteCategory(category)
-                        Toast.makeText(context, "Category deleted", Toast.LENGTH_SHORT).show()
-                    }
-                    .setNegativeButton("Cancel", null)
-                    .show()
+                DeleteCategoryBottomSheet.newInstance(category) {
+                    viewModel.deleteCategory(category)
+                    Toast.makeText(context, "Category deleted", Toast.LENGTH_SHORT).show()
+                }.show(childFragmentManager, DeleteCategoryBottomSheet.TAG)
             },
             onEditClick = { category ->
-                val fmt = CurrencyHelper.getCurrencyFormat(requireContext())
-                val symbol = fmt.currency?.symbol ?: ""
-                val input = android.widget.EditText(requireContext()).apply {
-                    inputType = android.text.InputType.TYPE_CLASS_NUMBER or android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL
-                    hint = if (symbol.isNotBlank()) "Enter monthly budget ($symbol)" else "Enter monthly budget"
-                    if (category.monthlyBudget > 0) setText(category.monthlyBudget.toString())
-                    setPadding(64, 32, 64, 32)
-                }
-
-                MaterialAlertDialogBuilder(requireContext())
-                    .setTitle("Budget for ${category.name}")
-                    .setMessage("Set a monthly spending limit for this category.")
-                    .setView(input)
-                    .setPositiveButton("Save") { _, _ ->
-                        val value = input.text.toString().toDoubleOrNull() ?: 0.0
+                CategoryBudgetBottomSheet.newInstance(
+                    category = category,
+                    onSave = { value ->
                         viewModel.updateCategory(category.copy(monthlyBudget = value))
                         Toast.makeText(context, "Budget saved", Toast.LENGTH_SHORT).show()
-                    }
-                    .setNeutralButton("Remove Limit") { _, _ ->
+                    },
+                    onRemove = {
                         viewModel.updateCategory(category.copy(monthlyBudget = 0.0))
+                        Toast.makeText(context, "Budget limit removed", Toast.LENGTH_SHORT).show()
                     }
-                    .setNegativeButton("Cancel", null)
-                    .show()
+                ).show(childFragmentManager, CategoryBudgetBottomSheet.TAG)
             }
         )
 
@@ -126,28 +113,74 @@ class CategoriesFragment : Fragment() {
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             private val tvName: TextView = view.findViewById(R.id.tv_category_name)
             private val tvBudget: TextView = view.findViewById(R.id.tv_category_budget)
-            private val colorDot: View = view.findViewById(R.id.view_color_dot)
+            private val badgeLayout: FrameLayout = view.findViewById(R.id.layout_category_badge)
+            private val ivIcon: ImageView = view.findViewById(R.id.iv_category_icon)
+            private val colorDot: View? = view.findViewById(R.id.view_color_dot)
             private val btnDelete: MaterialButton = view.findViewById(R.id.btn_delete_category)
 
             fun bind(category: Category) {
                 tvName.text = category.name
 
-                // Color dot
-                val color = if (category.colorHex != "#000000") category.colorHex
-                    else categoryColors[category.name] ?: "#64748B"
-                val drawable = GradientDrawable()
-                drawable.shape = GradientDrawable.OVAL
-                drawable.setColor(Color.parseColor(color))
-                colorDot.background = drawable
+                // Category color
+                val color = if (category.colorHex != "#000000" && category.colorHex.isNotBlank()) category.colorHex
+                else categoryColors[category.name] ?: "#64748B"
+                val parsedColor = try {
+                    Color.parseColor(color)
+                } catch (e: Exception) {
+                    Color.parseColor("#64748B")
+                }
 
+                // 15% opacity rounded square badge (40dp x 40dp, 12dp corner radius)
+                val badgeBg = GradientDrawable().apply {
+                    shape = GradientDrawable.RECTANGLE
+                    cornerRadius = itemView.context.resources.displayMetrics.density * 12f
+                    val alpha15 = (255 * 0.15).toInt()
+                    val colorWithAlpha = Color.argb(
+                        alpha15,
+                        Color.red(parsedColor),
+                        Color.green(parsedColor),
+                        Color.blue(parsedColor)
+                    )
+                    setColor(colorWithAlpha)
+                }
+                badgeLayout.background = badgeBg
+
+                // Crisp category vector icon
+                val iconRes = when (category.name.lowercase().trim()) {
+                    "food" -> R.drawable.ic_cat_food
+                    "transport" -> R.drawable.ic_cat_transport
+                    "shopping" -> R.drawable.ic_cat_shopping
+                    "entertainment" -> R.drawable.ic_cat_entertainment
+                    "health" -> R.drawable.ic_cat_health
+                    else -> R.drawable.ic_cat_others
+                }
+                ivIcon.setImageResource(iconRes)
+                ivIcon.setColorFilter(parsedColor)
+
+                // Optional legacy dot compatibility
+                colorDot?.visibility = View.GONE
+
+                // Interactive Budget Pill Badge
                 if (category.monthlyBudget > 0) {
                     val fmt = CurrencyHelper.getCurrencyFormat(itemView.context)
-                    tvBudget.text = "Limit: ${fmt.format(category.monthlyBudget)}"
+                    val formatted = if (category.monthlyBudget % 1.0 == 0.0) {
+                        fmt.apply { maximumFractionDigits = 0 }.format(category.monthlyBudget)
+                    } else {
+                        fmt.format(category.monthlyBudget)
+                    }
+                    tvBudget.text = "$formatted / mo"
+                    tvBudget.setBackgroundResource(R.drawable.bg_pill_budget_active)
+                    tvBudget.setTextColor(ContextCompat.getColor(itemView.context, R.color.brand_primary))
+                    tvBudget.setTypeface(null, android.graphics.Typeface.BOLD)
                 } else {
-                    tvBudget.text = "No Budget"
+                    tvBudget.text = "+ Set Budget"
+                    tvBudget.setBackgroundResource(R.drawable.bg_pill_budget_empty)
+                    tvBudget.setTextColor(ContextCompat.getColor(itemView.context, R.color.text_secondary))
+                    tvBudget.setTypeface(null, android.graphics.Typeface.NORMAL)
                 }
 
                 itemView.setOnClickListener { onEditClick(category) }
+                tvBudget.setOnClickListener { onEditClick(category) }
                 btnDelete.setOnClickListener { onDeleteClick(category) }
             }
         }

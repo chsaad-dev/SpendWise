@@ -40,6 +40,18 @@
     <color name="cat_health">#10B981</color>
     <color name="cat_others">#64748B</color>
 
+    <!-- Semantic Theme Tokens (Light Mode) -->
+    <color name="bg_screen">#F8FAFC</color>
+    <color name="bg_surface">#FFFFFF</color>
+    <color name="bg_surface_subtle">#F1F5F9</color>
+    <color name="stroke_subtle">#E2E8F0</color>
+    <color name="text_primary">#0F172A</color>
+    <color name="text_secondary">#64748B</color>
+    <color name="brand_primary">#4F46E5</color>
+    <color name="brand_primary_container">#EEF2FF</color>
+    <color name="danger_primary">#DC2626</color>
+    <color name="danger_container">#FEF2F2</color>
+
     <!-- Chart colors -->
     <color name="chart_1">#006B75</color>
     <color name="chart_2">#EF875B</color>
