@@ -38,6 +38,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val themeMode = SpendWiseApp.getSavedThemeMode(this)
+        SpendWiseApp.applyThemeMode(themeMode)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)

@@ -4,10 +4,13 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.view.HapticFeedbackConstants
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +26,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.spendwise.R
+import com.example.spendwise.SpendWiseApp
 import com.example.spendwise.data.AppDatabase
 import com.example.spendwise.ui.dialogs.CurrencyPickerBottomSheet
 import com.example.spendwise.ui.dialogs.MonthlyBudgetBottomSheet
@@ -32,6 +36,7 @@ import com.example.spendwise.utils.NotificationScheduler
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.materialswitch.MaterialSwitch
 import com.google.android.material.timepicker.MaterialTimePicker
@@ -131,15 +136,91 @@ class SettingsFragment : Fragment() {
             showCurrencyDialog()
         }
 
-        // ── 4. Dark Mode ──
-        val switchDark = view.findViewById<MaterialSwitch>(R.id.switch_dark_mode)
-        switchDark.isChecked = prefs.getBoolean("dark_mode", false)
-        switchDark.setOnCheckedChangeListener { _, isChecked ->
-            prefs.edit().putBoolean("dark_mode", isChecked).apply()
-            AppCompatDelegate.setDefaultNightMode(
-                if (isChecked) AppCompatDelegate.MODE_NIGHT_YES
-                else AppCompatDelegate.MODE_NIGHT_NO
-            )
+        // ── 4. Theme Selector (System | Light | Dark) ──
+        val cardThemeSystem = view.findViewById<MaterialCardView>(R.id.card_theme_system)
+        val tvThemeSystem = view.findViewById<TextView>(R.id.tv_theme_system)
+        val cardThemeLight = view.findViewById<MaterialCardView>(R.id.card_theme_light)
+        val tvThemeLight = view.findViewById<TextView>(R.id.tv_theme_light)
+        val cardThemeDark = view.findViewById<MaterialCardView>(R.id.card_theme_dark)
+        val tvThemeDark = view.findViewById<TextView>(R.id.tv_theme_dark)
+
+        val density = resources.displayMetrics.density
+
+        fun updateThemeSelectorUi(mode: String) {
+            val colorSurface = ContextCompat.getColor(requireContext(), R.color.bg_surface)
+            val colorBrandPrimary = ContextCompat.getColor(requireContext(), R.color.brand_primary)
+            val colorTextSecondary = ContextCompat.getColor(requireContext(), R.color.text_secondary)
+            val elevationActive = 1f * density
+            val boldTypeface = Typeface.create("sans-serif-medium", Typeface.BOLD)
+            val normalTypeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
+
+            // System
+            if (mode == SpendWiseApp.THEME_SYSTEM) {
+                cardThemeSystem.setCardBackgroundColor(colorSurface)
+                cardThemeSystem.cardElevation = elevationActive
+                tvThemeSystem.setTextColor(colorBrandPrimary)
+                tvThemeSystem.typeface = boldTypeface
+            } else {
+                cardThemeSystem.setCardBackgroundColor(Color.TRANSPARENT)
+                cardThemeSystem.cardElevation = 0f
+                tvThemeSystem.setTextColor(colorTextSecondary)
+                tvThemeSystem.typeface = normalTypeface
+            }
+
+            // Light
+            if (mode == SpendWiseApp.THEME_LIGHT) {
+                cardThemeLight.setCardBackgroundColor(colorSurface)
+                cardThemeLight.cardElevation = elevationActive
+                tvThemeLight.setTextColor(colorBrandPrimary)
+                tvThemeLight.typeface = boldTypeface
+            } else {
+                cardThemeLight.setCardBackgroundColor(Color.TRANSPARENT)
+                cardThemeLight.cardElevation = 0f
+                tvThemeLight.setTextColor(colorTextSecondary)
+                tvThemeLight.typeface = normalTypeface
+            }
+
+            // Dark
+            if (mode == SpendWiseApp.THEME_DARK) {
+                cardThemeDark.setCardBackgroundColor(colorSurface)
+                cardThemeDark.cardElevation = elevationActive
+                tvThemeDark.setTextColor(colorBrandPrimary)
+                tvThemeDark.typeface = boldTypeface
+            } else {
+                cardThemeDark.setCardBackgroundColor(Color.TRANSPARENT)
+                cardThemeDark.cardElevation = 0f
+                tvThemeDark.setTextColor(colorTextSecondary)
+                tvThemeDark.typeface = normalTypeface
+            }
+        }
+
+        fun setTheme(mode: String) {
+            val currentMode = SpendWiseApp.getSavedThemeMode(requireContext())
+            if (currentMode == mode) return
+
+            prefs.edit()
+                .putString(SpendWiseApp.KEY_THEME_MODE, mode)
+                .putBoolean("dark_mode", mode == SpendWiseApp.THEME_DARK)
+                .apply()
+
+            updateThemeSelectorUi(mode)
+            SpendWiseApp.applyThemeMode(mode)
+        }
+
+        val initialMode = SpendWiseApp.getSavedThemeMode(requireContext())
+        updateThemeSelectorUi(initialMode)
+
+        cardThemeSystem.setOnClickListener {
+            it.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            setTheme(SpendWiseApp.THEME_SYSTEM)
+        }
+        cardThemeLight.setOnClickListener {
+            it.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            setTheme(SpendWiseApp.THEME_LIGHT)
+        }
+        cardThemeDark.setOnClickListener {
+            it.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            setTheme(SpendWiseApp.THEME_DARK)
         }
 
         // ── 5. App Language ──

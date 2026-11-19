@@ -172,32 +172,110 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- Dark Mode Row -->
+                <!-- Theme Row -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:minHeight="52dp"
+                    android:minHeight="54dp"
                     android:orientation="horizontal"
                     android:paddingHorizontal="16dp"
-                    android:paddingVertical="10dp">
+                    android:paddingVertical="14dp">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="sans-serif-medium"
-                        android:text="Dark Mode"
+                        android:text="Theme"
                         android:textColor="@color/text_primary"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:layout_marginEnd="12dp" />
 
-                    <com.google.android.material.materialswitch.MaterialSwitch
-                        android:id="@+id/switch_dark_mode"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:thumbTint="@color/switch_thumb_selector"
-                        app:trackDecorationTint="@color/switch_track_selector"
-                        app:trackTint="@color/switch_track_selector" />
+                    <!-- 3-Segment Pill Switcher -->
+                    <LinearLayout
+                        android:id="@+id/layout_theme_segmented"
+                        android:layout_width="210dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/bg_segmented_theme_container"
+                        android:orientation="horizontal"
+                        android:padding="3dp"
+                        android:weightSum="3">
+
+                        <!-- System Segment -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_theme_system"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:focusable="true"
+                            app:cardBackgroundColor="@color/bg_surface"
+                            app:cardCornerRadius="9dp"
+                            app:cardElevation="1dp"
+                            app:strokeWidth="0dp">
+
+                            <TextView
+                                android:id="@+id/tv_theme_system"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="sans-serif-medium"
+                                android:gravity="center"
+                                android:text="System"
+                                android:textColor="@color/brand_primary"
+                                android:textSize="12.5sp"
+                                android:textStyle="bold" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Light Segment -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_theme_light"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:focusable="true"
+                            app:cardBackgroundColor="@android:color/transparent"
+                            app:cardCornerRadius="9dp"
+                            app:cardElevation="0dp"
+                            app:strokeWidth="0dp">
+
+                            <TextView
+                                android:id="@+id/tv_theme_light"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="sans-serif-medium"
+                                android:gravity="center"
+                                android:text="Light"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12.5sp" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Dark Segment -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/card_theme_dark"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:focusable="true"
+                            app:cardBackgroundColor="@android:color/transparent"
+                            app:cardCornerRadius="9dp"
+                            app:cardElevation="0dp"
+                            app:strokeWidth="0dp">
+
+                            <TextView
+                                android:id="@+id/tv_theme_dark"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="sans-serif-medium"
+                                android:gravity="center"
+                                android:text="Dark"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12.5sp" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
                 </LinearLayout>
 
                 <View
