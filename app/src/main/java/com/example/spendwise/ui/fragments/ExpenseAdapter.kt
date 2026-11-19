@@ -50,8 +50,7 @@ class ExpenseAdapter(
         private val categoryDot: View = itemView.findViewById(R.id.view_category_dot)
 
         fun bind(expense: Expense) {
-            val catText = if (!expense.receiptPath.isNullOrBlank()) "\uD83D\uDCCE ${expense.category}" else expense.category
-            tvCategory.text = catText
+            tvCategory.text = expense.category
             
             val formattedAmount = com.example.spendwise.utils.CurrencyHelper.format(itemView.context, expense.amount)
             if (expense.isIncome) {
