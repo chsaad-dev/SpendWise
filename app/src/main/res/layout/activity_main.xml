@@ -14,13 +14,49 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph"/>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
+    <!-- Floating Frosted-Glass Pill Navigation Dock -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_bottom_nav"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:menu="@menu/bottom_nav_menu"
-        app:labelVisibilityMode="labeled"
-        style="@style/Widget.Material3.BottomNavigationView"/>
+        android:layout_height="68dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="14dp"
+        app:cardCornerRadius="999dp"
+        app:cardElevation="10dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/nav_glass_stroke"
+        app:cardBackgroundColor="@color/nav_glass_fill">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Blur / Tint Backdrop Layer (RenderEffect blur applied on API 31+) -->
+            <View
+                android:id="@+id/nav_blur_layer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/nav_glass_fill" />
+
+            <!-- Clean 5-Tab Navigation -->
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:paddingHorizontal="8dp"
+                app:menu="@menu/bottom_nav_menu"
+                app:labelVisibilityMode="labeled"
+                app:itemIconSize="22dp"
+                app:itemIconTint="@color/bottom_nav_icon_tint"
+                app:itemTextColor="@color/bottom_nav_icon_tint"
+                app:itemActiveIndicatorStyle="@style/Widget.SpendWise.BottomNav.ActiveIndicator"
+                app:itemTextAppearanceActive="@style/TextAppearance.SpendWise.BottomNav.Active"
+                app:itemTextAppearanceInactive="@style/TextAppearance.SpendWise.BottomNav.Inactive"
+                app:elevation="0dp"/>
+        </FrameLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

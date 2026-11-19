@@ -33,16 +33,38 @@
         <item name="bottomSheetDialogTheme">@style/Theme.SpendWise.BottomSheetDialog</item>
     </style>
 
-    <!-- Bottom Navigation Style: emerald active indicator -->
+    <!-- Bottom Navigation Style: Floating Frosted-Glass Pill -->
     <style name="Widget.SpendWise.BottomNav" parent="Widget.Material3.BottomNavigationView">
-        <item name="android:background">@color/bg_surface</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="elevation">0dp</item>
         <item name="itemActiveIndicatorStyle">@style/Widget.SpendWise.BottomNav.ActiveIndicator</item>
         <item name="itemIconTint">@color/bottom_nav_icon_tint</item>
         <item name="itemTextColor">@color/bottom_nav_icon_tint</item>
+        <item name="itemTextAppearanceActive">@style/TextAppearance.SpendWise.BottomNav.Active</item>
+        <item name="itemTextAppearanceInactive">@style/TextAppearance.SpendWise.BottomNav.Inactive</item>
     </style>
 
     <style name="Widget.SpendWise.BottomNav.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
-        <item name="android:color">@color/brand_primary_container</item>
+        <item name="android:color">@color/nav_active_halo</item>
+        <item name="android:width">44dp</item>
+        <item name="android:height">32dp</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.SpendWise.NavActiveHalo</item>
+    </style>
+
+    <style name="ShapeAppearance.SpendWise.NavActiveHalo" parent="ShapeAppearance.Material3.Corner.Large">
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="TextAppearance.SpendWise.BottomNav.Active" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TextAppearance.SpendWise.BottomNav.Inactive" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">sans-serif</item>
     </style>
 
     <style name="Theme.SpendWise.BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">

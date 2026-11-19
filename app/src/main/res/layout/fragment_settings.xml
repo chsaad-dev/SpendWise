@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg_screen"
     android:clipToPadding="false"
-    android:paddingBottom="96dp">
+    android:paddingBottom="104dp">
 
     <LinearLayout
         android:layout_width="match_parent"

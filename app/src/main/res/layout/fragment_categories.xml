@@ -95,7 +95,7 @@
         android:layout_weight="1"
         android:layout_marginTop="14dp"
         android:paddingHorizontal="16dp"
-        android:paddingBottom="96dp"
+        android:paddingBottom="104dp"
         android:clipToPadding="false"
         tools:listitem="@layout/item_category"/>
 

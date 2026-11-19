@@ -26,4 +26,9 @@
     <!-- FAB (Dark — crisp mint on deep dark) -->
     <color name="fab_bg">#34D399</color>
     <color name="fab_icon">#062819</color>
+
+    <!-- Floating Frosted-Glass Nav Tokens (Dark Mode) -->
+    <color name="nav_glass_fill">#E6161920</color>
+    <color name="nav_glass_stroke">#26FFFFFF</color>
+    <color name="nav_active_halo">@color/brand_primary_container</color>
 </resources>

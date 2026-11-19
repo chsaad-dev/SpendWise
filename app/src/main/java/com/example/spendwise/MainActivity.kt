@@ -1,6 +1,8 @@
 package com.example.spendwise
 
 import android.Manifest
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
@@ -13,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.core.view.ViewCompat
-import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
@@ -45,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val rootLayout = findViewById<View>(R.id.main_content)
-        val navHostFragmentView = findViewById<View>(R.id.nav_host_fragment)
+        val cardBottomNav = findViewById<View>(R.id.card_bottom_nav)
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
         val navHostFragment = supportFragmentManager
@@ -54,42 +55,85 @@ class MainActivity : AppCompatActivity() {
 
         bottomNav.setupWithNavController(navController)
 
+        // Glass blur on Android 12+ (API 31+)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val blurLayer = findViewById<View>(R.id.nav_blur_layer)
+            try {
+                blurLayer?.setRenderEffect(
+                    android.graphics.RenderEffect.createBlurEffect(
+                        28f, 28f, android.graphics.Shader.TileMode.CLAMP
+                    )
+                )
+            } catch (_: Exception) {}
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(rootLayout) { _, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
 
+            // Status bar inset for root layout
             rootLayout.updatePadding(top = systemBars.top)
 
+            // Dynamic bottom margin for floating pill navigation dock so it floats above gesture bar / navigation bar
             val density = resources.displayMetrics.density
-            val baseNavHeightPx = (80 * density).toInt()
-
-            val isBottomNavVisible = bottomNav.visibility == View.VISIBLE
-            val bottomMargin = if (isBottomNavVisible) {
-                baseNavHeightPx + systemBars.bottom
-            } else {
-                systemBars.bottom
+            val baseBottomMargin = (14 * density).toInt()
+            cardBottomNav.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                this.bottomMargin = baseBottomMargin + systemBars.bottom
             }
-
-            navHostFragmentView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                this.bottomMargin = bottomMargin
-            }
-
-            bottomNav.updatePadding(bottom = systemBars.bottom)
 
             insets
+        }
+
+        var isNavVisible = true
+
+        fun showBottomNav() {
+            isNavVisible = true
+            cardBottomNav.animate().cancel()
+            cardBottomNav.visibility = View.VISIBLE
+            cardBottomNav.animate()
+                .translationY(0f)
+                .alpha(1f)
+                .setDuration(220)
+                .setListener(null)
+                .start()
+        }
+
+        fun hideBottomNav(immediate: Boolean = false) {
+            isNavVisible = false
+            cardBottomNav.animate().cancel()
+            if (immediate) {
+                cardBottomNav.visibility = View.GONE
+                cardBottomNav.alpha = 0f
+                cardBottomNav.translationY = 300f
+                return
+            }
+            cardBottomNav.animate()
+                .translationY(300f)
+                .alpha(0f)
+                .setDuration(200)
+                .setListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator) {
+                        if (!isNavVisible) {
+                            cardBottomNav.visibility = View.GONE
+                        }
+                    }
+                })
+                .start()
         }
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.welcomeFragment -> {
-                    bottomNav.visibility = View.GONE
+                    hideBottomNav(immediate = true)
+                }
+                R.id.addExpenseFragment,
+                R.id.splitExpenseFragment -> {
+                    hideBottomNav(immediate = false)
                 }
                 else -> {
-                    bottomNav.visibility = View.VISIBLE
+                    showBottomNav()
                     checkNotificationPermission()
                 }
             }
-
-            ViewCompat.requestApplyInsets(rootLayout)
 
             if (destination.id == R.id.homeFragment && pendingAddExpense) {
                 pendingAddExpense = false

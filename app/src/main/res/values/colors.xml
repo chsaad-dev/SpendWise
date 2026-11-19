@@ -66,6 +66,11 @@
     <color name="fab_bg">#0F5132</color>
     <color name="fab_icon">#FFFFFF</color>
 
+    <!-- Floating Frosted-Glass Nav Tokens (Light Mode) -->
+    <color name="nav_glass_fill">#EBFFFFFF</color>
+    <color name="nav_glass_stroke">#26000000</color>
+    <color name="nav_active_halo">@color/brand_primary_container</color>
+
     <!-- Chart colors -->
     <color name="chart_1">#006B75</color>
     <color name="chart_2">#EF875B</color>
