@@ -19,9 +19,8 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.spendwise.ui.fragments.HomeFragment"
-        android:label="Home"
-        tools:layout="@layout/fragment_home">
+        android:name="com.example.spendwise.ui.fragments.NavPlaceholderFragment"
+        android:label="Home">
         <action
             android:id="@+id/action_home_to_addExpense"
             app:destination="@id/addExpenseFragment"
