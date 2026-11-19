@@ -19,7 +19,9 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.updatePadding
 import androidx.fragment.app.DialogFragment
 import com.example.spendwise.R
@@ -35,7 +37,7 @@ class ReceiptViewerDialogFragment : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NORMAL, android.R.style.Theme_Black_NoTitleBar_Fullscreen)
+        setStyle(STYLE_NORMAL, R.style.Theme_SpendWise_FullScreenDialog)
         receiptPath = arguments?.getString(ARG_RECEIPT_PATH)
     }
 
@@ -44,10 +46,10 @@ class ReceiptViewerDialogFragment : DialogFragment() {
         dialog?.window?.apply {
             setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
             setBackgroundDrawable(ColorDrawable(Color.parseColor("#090A0D")))
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                statusBarColor = Color.parseColor("#090A0D")
-                navigationBarColor = Color.parseColor("#090A0D")
-            }
+            WindowCompat.setDecorFitsSystemWindows(this, false)
+            statusBarColor = Color.TRANSPARENT
+            navigationBarColor = Color.TRANSPARENT
+            WindowInsetsControllerCompat(this, decorView).isAppearanceLightStatusBars = false
         }
     }
 
@@ -73,7 +75,7 @@ class ReceiptViewerDialogFragment : DialogFragment() {
         // Status-bar insets padding
         ViewCompat.setOnApplyWindowInsetsListener(topBar) { v, insets ->
             val statusBar = insets.getInsets(WindowInsetsCompat.Type.statusBars())
-            val basePaddingTop = (16 * resources.displayMetrics.density).toInt()
+            val basePaddingTop = (12 * resources.displayMetrics.density).toInt()
             v.updatePadding(top = statusBar.top + basePaddingTop)
             insets
         }
