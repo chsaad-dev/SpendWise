@@ -17,9 +17,11 @@ SpendWise is a modern, offline-first Android expense tracker built with Material
 
 ## Screenshots
 
-| Dashboard | Add Expense | Monthly Analysis | Settings |
-| :---: | :---: | :---: | :---: |
-| ![Dashboard](docs/screenshots/dashboard.png) | ![Add Expense](docs/screenshots/add_expense.png) | ![Monthly Analysis](docs/screenshots/analysis.png) | ![Settings](docs/screenshots/settings.png) |
+| Dashboard | Add Expense | Spending Trends |
+| :---: | :---: | :---: |
+| ![Dashboard](docs/screenshots/dashboard.png) | ![Add Expense](docs/screenshots/add_expense.png) | ![Spending Trends](docs/screenshots/analysis.png) |
+| **Reports and Export** | **Reminders and Settings** | **Light and Dark Themes** |
+| ![Reports and Export](docs/screenshots/report.png) | ![Reminders and Settings](docs/screenshots/settings.png) | ![Light and Dark Themes](docs/screenshots/light_dark.png) |
 
 ## What is New in v1.1.0
 
