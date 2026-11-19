@@ -58,6 +58,7 @@
     <color name="warning_container">#FFEDD5</color>
     <!-- Hero Card (Light — emerald gradient via drawable) -->
     <color name="hero_card_bg">#0F4C3A</color>
+    <color name="hero_card_stroke">#1A5C42</color>
     <color name="hero_card_text_balance">#FFFFFF</color>
     <color name="hero_card_text_secondary">#B7E4D1</color>
     <color name="hero_income_text">#6EE7B7</color>
