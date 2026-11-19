@@ -30,6 +30,7 @@ import com.example.spendwise.data.Category
 import com.example.spendwise.data.Expense
 import com.example.spendwise.data.RecurringExpense
 import com.example.spendwise.ui.dialogs.DeleteTransactionBottomSheet
+import com.example.spendwise.ui.dialogs.ReceiptViewerDialogFragment
 import com.example.spendwise.ui.viewmodel.MainViewModel
 import com.example.spendwise.utils.CurrencyHelper
 import com.google.android.material.button.MaterialButton
@@ -99,6 +100,7 @@ class AddExpenseFragment : Fragment() {
         val layoutReceipt = view.findViewById<View>(R.id.layout_receipt)
         val rowAttachReceipt = view.findViewById<View>(R.id.row_attach_receipt)
         val layoutReceiptAttached = view.findViewById<LinearLayout>(R.id.layout_receipt_attached)
+        val cardReceiptPreview = view.findViewById<View>(R.id.card_receipt_preview)
         val ivReceiptPreview = view.findViewById<ImageView>(R.id.iv_receipt_preview)
         val btnRemoveReceipt = view.findViewById<MaterialButton>(R.id.btn_remove_receipt)
 
@@ -274,6 +276,21 @@ class AddExpenseFragment : Fragment() {
         rowAttachReceipt.setOnClickListener {
             it.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             pickImageLauncher.launch("image/*")
+        }
+
+        val openReceiptViewer = {
+            receiptPath?.let { path ->
+                ReceiptViewerDialogFragment.newInstance(path)
+                    .show(childFragmentManager, ReceiptViewerDialogFragment.TAG)
+            }
+        }
+        cardReceiptPreview?.setOnClickListener {
+            it.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            openReceiptViewer()
+        }
+        ivReceiptPreview.setOnClickListener {
+            it.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            openReceiptViewer()
         }
 
         btnRemoveReceipt.setOnClickListener {
