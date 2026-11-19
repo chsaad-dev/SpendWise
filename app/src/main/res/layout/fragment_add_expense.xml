@@ -565,7 +565,7 @@
             android:layout_marginTop="20dp"
             android:fontFamily="sans-serif-medium"
             android:text="Save Expense"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/text_on_brand"
             android:textSize="15sp"
             android:textStyle="bold"
             app:backgroundTint="@color/brand_primary"

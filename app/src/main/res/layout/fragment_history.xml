@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="14dp"
-                app:cardBackgroundColor="@color/brand_primary"
+                app:cardBackgroundColor="@color/hero_card_bg"
                 app:cardCornerRadius="18dp"
                 app:cardElevation="0dp"
                 app:strokeWidth="0dp">
@@ -107,7 +107,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif"
                         android:text="Yearly Balance"
-                        android:textColor="#E0E7FF"
+                        android:textColor="@color/hero_card_text_secondary"
                         android:textSize="13sp" />
 
                     <!-- Hero Figure -->
@@ -117,7 +117,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:fontFamily="sans-serif-medium"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/hero_card_text_balance"
                         android:textSize="30sp"
                         android:textStyle="bold"
                         tools:text="Rs 50,500.00" />
@@ -147,7 +147,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif"
                                 android:text="Income"
-                                android:textColor="#C7D2FE"
+                                android:textColor="@color/hero_card_text_secondary"
                                 android:textSize="11.5sp" />
 
                             <TextView
@@ -156,7 +156,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
                                 android:fontFamily="sans-serif-medium"
-                                android:textColor="#FFFFFF"
+                                android:textColor="@color/hero_income_text"
                                 android:textSize="14sp"
                                 android:textStyle="bold"
                                 tools:text="Rs 100,000" />
@@ -174,7 +174,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif"
                                 android:text="Spent"
-                                android:textColor="#C7D2FE"
+                                android:textColor="@color/hero_card_text_secondary"
                                 android:textSize="11.5sp" />
 
                             <TextView
@@ -183,7 +183,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
                                 android:fontFamily="sans-serif-medium"
-                                android:textColor="#FFFFFF"
+                                android:textColor="@color/hero_expense_text"
                                 android:textSize="14sp"
                                 android:textStyle="bold"
                                 tools:text="Rs 49,500" />

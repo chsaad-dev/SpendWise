@@ -121,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="14dp"
-                app:cardBackgroundColor="@color/brand_primary"
+                app:cardBackgroundColor="@color/hero_card_bg"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="0dp"
                 app:strokeWidth="0dp">
@@ -145,7 +145,7 @@
                             android:layout_weight="1"
                             android:text="Total Balance"
                             android:textSize="13sp"
-                            android:textColor="#E0E7FF" />
+                            android:textColor="@color/hero_card_text_secondary" />
 
                         <!-- Translucent pill for transaction count -->
                         <TextView
@@ -157,7 +157,7 @@
                             android:paddingVertical="3dp"
                             android:textSize="11.5sp"
                             android:fontFamily="sans-serif-medium"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@color/hero_card_text_secondary"
                             tools:text="6 transactions" />
                     </LinearLayout>
 
@@ -170,7 +170,7 @@
                         android:textSize="30sp"
                         android:fontFamily="sans-serif-medium"
                         android:textStyle="bold"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/hero_card_text_balance"
                         android:fontFeatureSettings="tnum"
                         tools:text="Rs 27,500.00" />
 
@@ -197,7 +197,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Income"
                                 android:textSize="11.5sp"
-                                android:textColor="#C7D2FE" />
+                                android:textColor="@color/hero_card_text_secondary" />
 
                             <TextView
                                 android:id="@+id/tv_total_income"
@@ -207,7 +207,7 @@
                                 android:textSize="14.5sp"
                                 android:fontFamily="sans-serif-medium"
                                 android:textStyle="bold"
-                                android:textColor="#86EFAC"
+                                android:textColor="@color/hero_income_text"
                                 android:fontFeatureSettings="tnum"
                                 tools:text="Rs 50,000.00" />
                         </LinearLayout>
@@ -224,7 +224,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Expenses"
                                 android:textSize="11.5sp"
-                                android:textColor="#C7D2FE" />
+                                android:textColor="@color/hero_card_text_secondary" />
 
                             <TextView
                                 android:id="@+id/tv_total_expense"
@@ -234,7 +234,7 @@
                                 android:textSize="14.5sp"
                                 android:fontFamily="sans-serif-medium"
                                 android:textStyle="bold"
-                                android:textColor="#FCA5A5"
+                                android:textColor="@color/hero_expense_text"
                                 android:fontFeatureSettings="tnum"
                                 tools:text="Rs 22,500.00" />
                         </LinearLayout>
@@ -264,7 +264,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:textSize="11.5sp"
-                            android:textColor="#E0E7FF"
+                            android:textColor="@color/hero_card_text_secondary"
                             tools:text="Budget: Rs 22,500 / Rs 30,000 (75%)" />
                     </LinearLayout>
                 </LinearLayout>
@@ -468,8 +468,8 @@
         android:layout_marginBottom="20dp"
         android:contentDescription="Add transaction"
         app:srcCompat="@drawable/ic_add"
-        app:tint="#FFFFFF"
-        app:backgroundTint="@color/brand_primary"
+        app:tint="@color/fab_icon"
+        app:backgroundTint="@color/fab_bg"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.FAB"
         app:elevation="4dp" />
 

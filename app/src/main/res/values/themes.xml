@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Theme.SpendWise" parent="Theme.Material3.Light.NoActionBar">
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorOnPrimary">@color/onPrimary</item>
-        <item name="colorPrimaryContainer">@color/primaryContainer</item>
-        <item name="colorOnPrimaryContainer">@color/onPrimaryContainer</item>
+        <item name="colorPrimary">@color/brand_primary</item>
+        <item name="colorOnPrimary">@color/text_on_brand</item>
+        <item name="colorPrimaryContainer">@color/brand_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/text_primary</item>
 
         <item name="colorSecondary">@color/secondary</item>
         <item name="colorOnSecondary">@color/onSecondary</item>
@@ -15,19 +15,34 @@
         <item name="colorTertiaryContainer">@color/tertiaryContainer</item>
         <item name="colorOnTertiaryContainer">@color/onTertiaryContainer</item>
 
-        <item name="android:colorBackground">@color/background</item>
-        <item name="colorOnBackground">@color/onBackground</item>
-        <item name="colorSurface">@color/surface</item>
-        <item name="colorOnSurface">@color/onSurface</item>
-        <item name="colorSurfaceVariant">@color/surfaceVariant</item>
-        <item name="colorOnSurfaceVariant">@color/onSurfaceVariant</item>
-        <item name="colorOutline">@color/outline</item>
-        <item name="colorOutlineVariant">@color/outlineVariant</item>
+        <item name="android:colorBackground">@color/bg_screen</item>
+        <item name="colorOnBackground">@color/text_primary</item>
+        <item name="colorSurface">@color/bg_surface</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorSurfaceVariant">@color/bg_surface_subtle</item>
+        <item name="colorOnSurfaceVariant">@color/text_secondary</item>
+        <item name="colorOutline">@color/stroke_subtle</item>
+        <item name="colorOutlineVariant">@color/stroke_subtle</item>
 
-        <item name="colorError">@color/error</item>
+        <item name="colorError">@color/danger_primary</item>
         <item name="colorOnError">@color/onError</item>
 
+        <!-- Bottom Navigation — monochrome active indicator -->
+        <item name="bottomNavigationStyle">@style/Widget.SpendWise.BottomNav</item>
+
         <item name="bottomSheetDialogTheme">@style/Theme.SpendWise.BottomSheetDialog</item>
+    </style>
+
+    <!-- Bottom Navigation Style: neutral active indicator, no purple tint -->
+    <style name="Widget.SpendWise.BottomNav" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background">@color/bg_surface</item>
+        <item name="itemActiveIndicatorStyle">@style/Widget.SpendWise.BottomNav.ActiveIndicator</item>
+        <item name="itemIconTint">@color/bottom_nav_icon_tint</item>
+        <item name="itemTextColor">@color/bottom_nav_icon_tint</item>
+    </style>
+
+    <style name="Widget.SpendWise.BottomNav.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/bg_surface_subtle</item>
     </style>
 
     <style name="Theme.SpendWise.BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">

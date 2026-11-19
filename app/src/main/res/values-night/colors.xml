@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Semantic Theme Tokens (Dark Mode) -->
-    <color name="bg_screen">#0B1120</color>
-    <color name="bg_surface">#151E32</color>
-    <color name="bg_surface_subtle">#1E293B</color>
-    <color name="stroke_subtle">#27354F</color>
-    <color name="text_primary">#F8FAFC</color>
-    <color name="text_secondary">#94A3B8</color>
-    <color name="brand_primary">#6366F1</color>
-    <color name="brand_primary_container">#1E1B4B</color>
-    <color name="danger_primary">#EF4444</color>
-    <color name="danger_container">#3B1219</color>
-    <color name="success_primary">#22C55E</color>
-    <color name="success_container">#14532D</color>
-    <color name="warning_primary">#FB923C</color>
-    <color name="warning_container">#431407</color>
+    <!-- Semantic Theme Tokens (Dark Mode — OLED) -->
+    <color name="bg_screen">#000000</color>
+    <color name="bg_surface">#1C1C1E</color>
+    <color name="bg_surface_subtle">#2C2C2E</color>
+    <color name="stroke_subtle">#2C2C2E</color>
+    <color name="text_primary">#F5F5F7</color>
+    <color name="text_secondary">#8E8E93</color>
+    <color name="brand_primary">#F5F5F7</color>
+    <color name="brand_primary_container">#2C2C2E</color>
+    <color name="accent_interactive">#0A84FF</color>
+    <color name="danger_primary">#FF453A</color>
+    <color name="danger_container">#2E1416</color>
+    <color name="success_primary">#30D158</color>
+    <color name="success_container">#122B1A</color>
+    <color name="warning_primary">#FF9F0A</color>
+    <color name="warning_container">#2E1A00</color>
+    <!-- Hero Card (Dark) -->
+    <color name="hero_card_bg">#1C1C1E</color>
+    <color name="hero_card_text_balance">#F5F5F7</color>
+    <color name="hero_card_text_secondary">#8E8E93</color>
+    <color name="hero_income_text">#30D158</color>
+    <color name="hero_expense_text">#FF453A</color>
+    <!-- FAB (Dark) -->
+    <color name="fab_bg">#F5F5F7</color>
+    <color name="fab_icon">#111111</color>
 </resources>

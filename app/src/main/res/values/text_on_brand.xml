@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Light Mode: brand_primary is #111111 (dark button), text must be white -->
+<resources>
+    <color name="text_on_brand">#FFFFFF</color>
+</resources>
