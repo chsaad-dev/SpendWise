@@ -37,11 +37,15 @@
     <style name="Widget.SpendWise.BottomNav" parent="Widget.Material3.BottomNavigationView">
         <item name="android:background">@android:color/transparent</item>
         <item name="elevation">0dp</item>
+        <item name="android:minHeight">68dp</item>
         <item name="itemActiveIndicatorStyle">@style/Widget.SpendWise.BottomNav.ActiveIndicator</item>
         <item name="itemIconTint">@color/bottom_nav_icon_tint</item>
         <item name="itemTextColor">@color/bottom_nav_icon_tint</item>
         <item name="itemTextAppearanceActive">@style/TextAppearance.SpendWise.BottomNav.Active</item>
         <item name="itemTextAppearanceInactive">@style/TextAppearance.SpendWise.BottomNav.Inactive</item>
+        <item name="itemPaddingTop">4dp</item>
+        <item name="itemPaddingBottom">4dp</item>
+        <item name="itemHorizontalTranslationEnabled">false</item>
     </style>
 
     <style name="Widget.SpendWise.BottomNav.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">

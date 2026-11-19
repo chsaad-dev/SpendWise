@@ -9,6 +9,9 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
@@ -69,6 +72,7 @@ class MainActivity : AppCompatActivity() {
         val tabContainer = findViewById<View>(R.id.tab_fragment_container)
         val cardBottomNav = findViewById<View>(R.id.card_bottom_nav)
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        val density = resources.displayMetrics.density
         val navHostView = findViewById<View>(R.id.nav_host_fragment)
 
         val navHostFragment = supportFragmentManager
@@ -96,7 +100,6 @@ class MainActivity : AppCompatActivity() {
             rootLayout.updatePadding(top = systemBars.top)
 
             // Dynamic bottom margin for floating pill navigation dock so it floats above gesture bar / navigation bar
-            val density = resources.displayMetrics.density
             val baseBottomMargin = (14 * density).toInt()
             cardBottomNav.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 this.bottomMargin = baseBottomMargin + systemBars.bottom
@@ -146,7 +149,32 @@ class MainActivity : AppCompatActivity() {
             else -> null
         }
 
-        bottomNav.selectedItemId = getMenuIdForTag(activeTabTag)
+        class NavTab(
+            val tag: String,
+            val menuId: Int,
+            val item: View,
+            val halo: View,
+            val icon: ImageView,
+            val label: TextView
+        )
+
+        val tabBundles = listOf(
+            NavTab(TAG_HOME, R.id.homeFragment, findViewById(R.id.tab_item_home), findViewById(R.id.tab_halo_home), findViewById(R.id.tab_icon_home), findViewById(R.id.tab_label_home)),
+            NavTab(TAG_HISTORY, R.id.historyFragment, findViewById(R.id.tab_item_history), findViewById(R.id.tab_halo_history), findViewById(R.id.tab_icon_history), findViewById(R.id.tab_label_history)),
+            NavTab(TAG_CATEGORIES, R.id.categoriesFragment, findViewById(R.id.tab_item_categories), findViewById(R.id.tab_halo_categories), findViewById(R.id.tab_icon_categories), findViewById(R.id.tab_label_categories)),
+            NavTab(TAG_GOALS, R.id.savingsGoalFragment, findViewById(R.id.tab_item_goals), findViewById(R.id.tab_halo_goals), findViewById(R.id.tab_icon_goals), findViewById(R.id.tab_label_goals)),
+            NavTab(TAG_SETTINGS, R.id.settingsFragment, findViewById(R.id.tab_item_settings), findViewById(R.id.tab_halo_settings), findViewById(R.id.tab_icon_settings), findViewById(R.id.tab_label_settings))
+        )
+
+        fun updateCustomTabUi(selectedTag: String) {
+            for (tab in tabBundles) {
+                val isSelected = (tab.tag == selectedTag)
+                tab.halo.setBackgroundResource(if (isSelected) R.drawable.shape_nav_active_halo else 0)
+                tab.icon.isSelected = isSelected
+                tab.label.isSelected = isSelected
+                tab.label.setTypeface(null, if (isSelected) android.graphics.Typeface.BOLD else android.graphics.Typeface.NORMAL)
+            }
+        }
 
         fun switchTab(targetTag: String) {
             if (targetTag == activeTabTag) return
@@ -177,7 +205,21 @@ class MainActivity : AppCompatActivity() {
 
             ft.commit()
             activeTabTag = targetTag
+            updateCustomTabUi(targetTag)
+            val menuId = getMenuIdForTag(targetTag)
+            if (bottomNav.selectedItemId != menuId) {
+                bottomNav.selectedItemId = menuId
+            }
         }
+
+        for (tab in tabBundles) {
+            tab.item.setOnClickListener {
+                switchTab(tab.tag)
+            }
+        }
+
+        bottomNav.selectedItemId = getMenuIdForTag(activeTabTag)
+        updateCustomTabUi(activeTabTag)
 
         bottomNav.setOnItemSelectedListener { item ->
             val targetTag = getTagForMenuId(item.itemId) ?: return@setOnItemSelectedListener false

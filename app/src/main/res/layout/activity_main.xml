@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_content"
@@ -8,26 +8,38 @@
 
     <FrameLayout
         android:id="@+id/tab_fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:visibility="gone"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/nav_graph"/>
+        app:navGraph="@navigation/nav_graph"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_bottom_nav"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="68dp"
-        android:layout_gravity="bottom|center_horizontal"
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="14dp"
+        app:layout_constraintWidth_max="460dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:cardCornerRadius="999dp"
+        android:elevation="16dp"
         app:cardElevation="10dp"
         app:strokeWidth="1dp"
         app:strokeColor="@color/nav_glass_stroke"
@@ -44,23 +56,211 @@
                 android:layout_height="match_parent"
                 android:background="@color/nav_glass_fill" />
 
+            <!-- Hidden BottomNavigationView to preserve existing APIs and HistoryFragment compatibility -->
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottom_navigation"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="invisible"
+                app:menu="@menu/bottom_nav_menu" />
+
+            <!-- Custom 5-Tab Container with vertical LinearLayout items -->
+            <LinearLayout
+                android:id="@+id/custom_bottom_nav"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:paddingHorizontal="8dp"
-                app:menu="@menu/bottom_nav_menu"
-                app:labelVisibilityMode="labeled"
-                app:itemIconSize="22dp"
-                app:itemIconTint="@color/bottom_nav_icon_tint"
-                app:itemTextColor="@color/bottom_nav_icon_tint"
-                app:itemActiveIndicatorStyle="@style/Widget.SpendWise.BottomNav.ActiveIndicator"
-                app:itemTextAppearanceActive="@style/TextAppearance.SpendWise.BottomNav.Active"
-                app:itemTextAppearanceInactive="@style/TextAppearance.SpendWise.BottomNav.Inactive"
-                app:elevation="0dp"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="6dp">
+
+                <!-- Tab 1: Home -->
+                <LinearLayout
+                    android:id="@+id/tab_item_home"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:minWidth="72dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="?attr/selectableItemBackgroundBorderless">
+
+                    <FrameLayout
+                        android:id="@+id/tab_halo_home"
+                        android:layout_width="44dp"
+                        android:layout_height="32dp">
+
+                        <ImageView
+                            android:id="@+id/tab_icon_home"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_home"
+                            app:tint="@color/bottom_nav_icon_tint"
+                            android:contentDescription="Home" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/tab_label_home"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Home"
+                        android:textSize="11sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="@color/bottom_nav_icon_tint" />
+                </LinearLayout>
+
+                <!-- Tab 2: History -->
+                <LinearLayout
+                    android:id="@+id/tab_item_history"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:minWidth="72dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="?attr/selectableItemBackgroundBorderless">
+
+                    <FrameLayout
+                        android:id="@+id/tab_halo_history"
+                        android:layout_width="44dp"
+                        android:layout_height="32dp">
+
+                        <ImageView
+                            android:id="@+id/tab_icon_history"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_history"
+                            app:tint="@color/bottom_nav_icon_tint"
+                            android:contentDescription="History" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/tab_label_history"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="History"
+                        android:textSize="11sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="@color/bottom_nav_icon_tint" />
+                </LinearLayout>
+
+                <!-- Tab 3: Categories -->
+                <LinearLayout
+                    android:id="@+id/tab_item_categories"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:minWidth="72dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="?attr/selectableItemBackgroundBorderless">
+
+                    <FrameLayout
+                        android:id="@+id/tab_halo_categories"
+                        android:layout_width="44dp"
+                        android:layout_height="32dp">
+
+                        <ImageView
+                            android:id="@+id/tab_icon_categories"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_category"
+                            app:tint="@color/bottom_nav_icon_tint"
+                            android:contentDescription="Categories" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/tab_label_categories"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Categories"
+                        android:textSize="11sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="@color/bottom_nav_icon_tint" />
+                </LinearLayout>
+
+                <!-- Tab 4: Goals -->
+                <LinearLayout
+                    android:id="@+id/tab_item_goals"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:minWidth="72dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="?attr/selectableItemBackgroundBorderless">
+
+                    <FrameLayout
+                        android:id="@+id/tab_halo_goals"
+                        android:layout_width="44dp"
+                        android:layout_height="32dp">
+
+                        <ImageView
+                            android:id="@+id/tab_icon_goals"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_goals"
+                            app:tint="@color/bottom_nav_icon_tint"
+                            android:contentDescription="Goals" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/tab_label_goals"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Goals"
+                        android:textSize="11sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="@color/bottom_nav_icon_tint" />
+                </LinearLayout>
+
+                <!-- Tab 5: Settings -->
+                <LinearLayout
+                    android:id="@+id/tab_item_settings"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:minWidth="72dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="?attr/selectableItemBackgroundBorderless">
+
+                    <FrameLayout
+                        android:id="@+id/tab_halo_settings"
+                        android:layout_width="44dp"
+                        android:layout_height="32dp">
+
+                        <ImageView
+                            android:id="@+id/tab_icon_settings"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_settings"
+                            app:tint="@color/bottom_nav_icon_tint"
+                            android:contentDescription="Settings" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/tab_label_settings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Settings"
+                        android:textSize="11sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="@color/bottom_nav_icon_tint" />
+                </LinearLayout>
+
+            </LinearLayout>
         </FrameLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

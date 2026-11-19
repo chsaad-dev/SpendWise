@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,10 +8,16 @@
     android:background="@color/bg_screen">
 
     <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/scroll_home"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:clipToPadding="false"
-        android:paddingBottom="104dp">
+        android:paddingBottom="104dp"
+        app:layout_constraintWidth_max="@dimen/screen_content_max_width"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -411,12 +417,19 @@
                 android:padding="48dp"
                 android:visibility="gone">
 
-                <com.airbnb.lottie.LottieAnimationView
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    app:lottie_rawRes="@raw/anim_empty_wallet"
-                    app:lottie_autoPlay="true"
-                    app:lottie_loop="true" />
+                <FrameLayout
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:background="@drawable/shape_empty_halo">
+
+                    <ImageView
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_wallet"
+                        app:tint="@color/brand_primary"
+                        android:contentDescription="@null" />
+                </FrameLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -444,7 +457,6 @@
         android:id="@+id/fab_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="104dp"
         android:contentDescription="Add transaction"
@@ -452,6 +464,8 @@
         app:tint="@color/fab_icon"
         app:backgroundTint="@color/fab_bg"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.FAB"
-        app:elevation="4dp" />
+        app:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="@id/scroll_home"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
