@@ -3,6 +3,8 @@ package com.example.spendwise.ui.fragments
 import android.app.DatePickerDialog
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.view.HapticFeedbackConstants
@@ -11,11 +13,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -23,7 +28,9 @@ import com.example.spendwise.R
 import com.example.spendwise.data.Expense
 import com.example.spendwise.data.RecurringExpense
 import com.example.spendwise.ui.viewmodel.MainViewModel
+import com.example.spendwise.utils.CurrencyHelper
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.materialswitch.MaterialSwitch
 import com.google.android.material.textfield.TextInputEditText
@@ -37,9 +44,10 @@ import java.util.UUID
 class AddExpenseFragment : Fragment() {
 
     private val viewModel: MainViewModel by activityViewModels()
-    private val calendar = Calendar.getInstance()
+    private val calendar: Calendar = Calendar.getInstance()
     private var editExpenseId: Int = -1
     private var isEditMode: Boolean = false
+    private var isIncome: Boolean = false
     private var receiptPath: String? = null
 
     // Receipt photo picker
@@ -59,50 +67,152 @@ class AddExpenseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val btnBack = view.findViewById<ImageButton>(R.id.btn_back)
         val tvTitle = view.findViewById<TextView>(R.id.tv_title)
-        val toggleType = view.findViewById<com.google.android.material.button.MaterialButtonToggleGroup>(R.id.toggle_type)
-        val etAmount = view.findViewById<TextInputEditText>(R.id.et_amount)
+        val cardTypeExpense = view.findViewById<MaterialCardView>(R.id.card_type_expense)
+        val tvTypeExpense = view.findViewById<TextView>(R.id.tv_type_expense)
+        val cardTypeIncome = view.findViewById<MaterialCardView>(R.id.card_type_income)
+        val tvTypeIncome = view.findViewById<TextView>(R.id.tv_type_income)
+
+        val tvCurrencyPrefix = view.findViewById<TextView>(R.id.tv_currency_prefix)
+        val etAmount = view.findViewById<EditText>(R.id.et_amount)
+        val chipAdd500 = view.findViewById<TextView>(R.id.chip_add_500)
+        val chipAdd1000 = view.findViewById<TextView>(R.id.chip_add_1000)
+        val chipAdd5000 = view.findViewById<TextView>(R.id.chip_add_5000)
+
+        val tilCategory = view.findViewById<TextInputLayout>(R.id.til_category)
         val actvCategory = view.findViewById<AutoCompleteTextView>(R.id.actv_category)
+        val tilDate = view.findViewById<TextInputLayout>(R.id.til_date)
         val etDate = view.findViewById<TextInputEditText>(R.id.et_date)
+        val tilNote = view.findViewById<TextInputLayout>(R.id.til_note)
         val etNote = view.findViewById<TextInputEditText>(R.id.et_note)
+        val tilTags = view.findViewById<TextInputLayout>(R.id.til_tags)
         val etTags = view.findViewById<TextInputEditText>(R.id.et_tags)
-        val btnSave = view.findViewById<MaterialButton>(R.id.btn_save)
-        val btnDelete = view.findViewById<MaterialButton>(R.id.btn_delete)
+
+        val layoutReceipt = view.findViewById<View>(R.id.layout_receipt)
+        val rowAttachReceipt = view.findViewById<View>(R.id.row_attach_receipt)
+        val layoutReceiptAttached = view.findViewById<LinearLayout>(R.id.layout_receipt_attached)
+        val ivReceiptPreview = view.findViewById<ImageView>(R.id.iv_receipt_preview)
+        val btnRemoveReceipt = view.findViewById<MaterialButton>(R.id.btn_remove_receipt)
+
+        val layoutRecurring = view.findViewById<View>(R.id.layout_recurring)
         val switchRecurring = view.findViewById<MaterialSwitch>(R.id.switch_recurring)
         val tilRecurrence = view.findViewById<TextInputLayout>(R.id.til_recurrence)
         val actvRecurrence = view.findViewById<AutoCompleteTextView>(R.id.actv_recurrence)
-        val layoutRecurring = view.findViewById<LinearLayout>(R.id.layout_recurring)
-        val btnAttachReceipt = view.findViewById<MaterialButton>(R.id.btn_attach_receipt)
-        val ivReceiptPreview = view.findViewById<ImageView>(R.id.iv_receipt_preview)
-        val btnRemoveReceipt = view.findViewById<MaterialButton>(R.id.btn_remove_receipt)
-        
-        val tilCategory = view.findViewById<TextInputLayout>(R.id.til_category)
-        val tilTags = view.findViewById<TextInputLayout>(R.id.til_tags)
-        val layoutReceipt = view.findViewById<LinearLayout>(R.id.layout_receipt)
 
-        toggleType.addOnButtonCheckedListener { _, checkedId, isChecked ->
-            if (isChecked) {
-                val isIncome = checkedId == R.id.btn_type_income
-                val visibility = if (isIncome) View.GONE else View.VISIBLE
-                
-                tilCategory.visibility = visibility
-                tilTags.visibility = visibility
-                layoutReceipt.visibility = visibility
-                
-                layoutRecurring.visibility = if (isIncome || isEditMode) View.GONE else View.VISIBLE
+        val btnSave = view.findViewById<MaterialButton>(R.id.btn_save)
+        val btnSplit = view.findViewById<MaterialButton>(R.id.btn_split)
+        val btnDelete = view.findViewById<MaterialButton>(R.id.btn_delete)
+
+        // Back button
+        btnBack.setOnClickListener {
+            it.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            findNavController().popBackStack()
+        }
+
+        // Live Currency Prefix
+        val symbol = try {
+            CurrencyHelper.getCurrencyFormat(requireContext()).currency?.symbol?.trim() ?: "Rs"
+        } catch (e: Exception) {
+            "Rs"
+        }
+        tvCurrencyPrefix.text = symbol
+
+        // Quick Amount Chips
+        fun addQuickAmount(delta: Double) {
+            val current = etAmount.text.toString().trim().toDoubleOrNull() ?: 0.0
+            val updated = current + delta
+            if (updated % 1.0 == 0.0) {
+                etAmount.setText(updated.toInt().toString())
+            } else {
+                etAmount.setText(String.format(Locale.US, "%.2f", updated))
+            }
+            etAmount.setSelection(etAmount.text?.length ?: 0)
+            etAmount.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+        }
+        chipAdd500.setOnClickListener { addQuickAmount(500.0) }
+        chipAdd1000.setOnClickListener { addQuickAmount(1000.0) }
+        chipAdd5000.setOnClickListener { addQuickAmount(5000.0) }
+
+        // Mode switching logic
+        fun updateMode(income: Boolean) {
+            isIncome = income
+            val density = resources.displayMetrics.density
+            if (!isIncome) {
+                cardTypeExpense.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.bg_surface))
+                cardTypeExpense.cardElevation = 2f * density
+                tvTypeExpense.setTextColor(ContextCompat.getColor(requireContext(), R.color.danger_primary))
+                tvTypeExpense.typeface = Typeface.create("sans-serif-medium", Typeface.BOLD)
+
+                cardTypeIncome.setCardBackgroundColor(Color.TRANSPARENT)
+                cardTypeIncome.cardElevation = 0f
+                tvTypeIncome.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_secondary))
+                tvTypeIncome.typeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
+
+                tilCategory.visibility = View.VISIBLE
+                tilTags.visibility = View.VISIBLE
+                layoutReceipt.visibility = View.VISIBLE
+                layoutRecurring.visibility = if (isEditMode) View.GONE else View.VISIBLE
+                (tilDate.layoutParams as? ViewGroup.MarginLayoutParams)?.topMargin = (12 * density).toInt()
+
+                btnSave.text = if (isEditMode) "Update Expense" else "Save Expense"
+                btnSave.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.brand_primary)
+                if (isEditMode) {
+                    tvTitle.text = "Edit Expense"
+                    btnSplit.visibility = View.VISIBLE
+                }
+            } else {
+                cardTypeIncome.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.bg_surface))
+                cardTypeIncome.cardElevation = 2f * density
+                tvTypeIncome.setTextColor(ContextCompat.getColor(requireContext(), R.color.success_primary))
+                tvTypeIncome.typeface = Typeface.create("sans-serif-medium", Typeface.BOLD)
+
+                cardTypeExpense.setCardBackgroundColor(Color.TRANSPARENT)
+                cardTypeExpense.cardElevation = 0f
+                tvTypeExpense.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_secondary))
+                tvTypeExpense.typeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
+
+                tilCategory.visibility = View.GONE
+                tilTags.visibility = View.GONE
+                layoutReceipt.visibility = View.GONE
+                layoutRecurring.visibility = View.GONE
+                (tilDate.layoutParams as? ViewGroup.MarginLayoutParams)?.topMargin = 0
+
+                btnSave.text = if (isEditMode) "Update Income" else "Save Income"
+                btnSave.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.success_primary)
+                if (isEditMode) {
+                    tvTitle.text = "Edit Income"
+                    btnSplit.visibility = View.GONE
+                }
+            }
+            tilDate.requestLayout()
+        }
+
+        cardTypeExpense.setOnClickListener {
+            if (isIncome) {
+                it.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                updateMode(false)
             }
         }
 
-        // Receipt photo
-        btnAttachReceipt.setOnClickListener {
+        cardTypeIncome.setOnClickListener {
+            if (!isIncome) {
+                it.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                updateMode(true)
+            }
+        }
+
+        // Receipt attachment
+        rowAttachReceipt.setOnClickListener {
+            it.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             pickImageLauncher.launch("image/*")
         }
 
         btnRemoveReceipt.setOnClickListener {
+            it.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             receiptPath = null
-            ivReceiptPreview.visibility = View.GONE
-            btnRemoveReceipt.visibility = View.GONE
-            btnAttachReceipt.text = "\uD83D\uDCCE  Attach Receipt Photo"
+            layoutReceiptAttached.visibility = View.GONE
+            rowAttachReceipt.visibility = View.VISIBLE
         }
 
         // Recurrence type dropdown
@@ -116,56 +226,49 @@ class AddExpenseFragment : Fragment() {
             tilRecurrence.visibility = if (isChecked) View.VISIBLE else View.GONE
         }
 
+        // Check Edit Mode
         editExpenseId = arguments?.getInt("expenseId", -1) ?: -1
         isEditMode = editExpenseId != -1
 
         if (isEditMode) {
-            tvTitle.text = "Edit Expense"
-            btnSave.text = "Update Expense"
             btnDelete.visibility = View.VISIBLE
             layoutRecurring.visibility = View.GONE
 
-            // Show split button in edit mode
-            val btnSplit = view.findViewById<MaterialButton>(R.id.btn_split)
-            btnSplit.visibility = View.VISIBLE
             viewModel.getExpenseById(editExpenseId) { expense ->
-                expense?.let {
+                expense?.let { exp ->
+                    if (exp.amount % 1.0 == 0.0) {
+                        etAmount.setText(exp.amount.toInt().toString())
+                    } else {
+                        etAmount.setText(String.format(Locale.US, "%.2f", exp.amount))
+                    }
+                    actvCategory.setText(exp.category, false)
+                    etNote.setText(exp.note)
+                    etTags.setText(exp.tags ?: "")
+                    calendar.timeInMillis = exp.date
+                    updateDateLabel(etDate)
+
+                    if (!exp.receiptPath.isNullOrBlank()) {
+                        receiptPath = exp.receiptPath
+                        showReceiptPreview(ivReceiptPreview, layoutReceiptAttached, rowAttachReceipt, receiptPath!!)
+                    }
+
+                    updateMode(exp.isIncome)
+
                     btnSplit.setOnClickListener { _ ->
                         val bundle = Bundle().apply {
-                            putInt("expenseId", it.id)
-                            putFloat("expenseAmount", it.amount.toFloat())
-                            putString("expenseCategory", it.category)
+                            putInt("expenseId", exp.id)
+                            putFloat("expenseAmount", exp.amount.toFloat())
+                            putString("expenseCategory", exp.category)
                         }
                         findNavController().navigate(R.id.action_addExpense_to_split, bundle)
                     }
                 }
             }
-
-            viewModel.getExpenseById(editExpenseId) { expense ->
-                expense?.let {
-                    etAmount.setText(String.format("%.2f", it.amount))
-                    actvCategory.setText(it.category, false)
-                    etNote.setText(it.note)
-                    etTags.setText(it.tags ?: "")
-                    calendar.timeInMillis = it.date
-                    updateDateLabel(etDate)
-
-                    // Show receipt preview if exists
-                    if (!it.receiptPath.isNullOrBlank()) {
-                        receiptPath = it.receiptPath
-                        showReceiptPreview(ivReceiptPreview, btnRemoveReceipt, btnAttachReceipt, receiptPath!!)
-                    }
-
-                    // Update UI state properly when initializing the view
-                    if (it.isIncome) {
-                        toggleType.check(R.id.btn_type_income)
-                    } else {
-                        toggleType.check(R.id.btn_type_expense)
-                    }
-                }
-            }
+        } else {
+            updateMode(false)
         }
 
+        // Date Picker
         val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, day ->
             calendar.set(Calendar.YEAR, year)
             calendar.set(Calendar.MONTH, month)
@@ -184,6 +287,7 @@ class AddExpenseFragment : Fragment() {
         }
         updateDateLabel(etDate)
 
+        // Categories list
         viewModel.allCategories.observe(viewLifecycleOwner) { categories ->
             val categoryAdapter = ArrayAdapter(
                 requireContext(),
@@ -193,27 +297,26 @@ class AddExpenseFragment : Fragment() {
             actvCategory.setAdapter(categoryAdapter)
         }
 
+        // Save Button
         btnSave.setOnClickListener {
-            val amountStr = etAmount.text.toString()
-            val isIncome = toggleType.checkedButtonId == R.id.btn_type_income
-            val category = if (isIncome) "Income" else actvCategory.text.toString()
-            val note = etNote.text.toString()
-            val tags = if (isIncome) null else etTags.text.toString().takeIf { it.isNotBlank() }
+            val amountStr = etAmount.text.toString().trim()
+            val category = if (isIncome) "Income" else actvCategory.text.toString().trim()
+            val note = etNote.text.toString().trim()
+            val tags = if (isIncome) null else etTags.text.toString().trim().takeIf { it.isNotBlank() }
             val finalReceiptPath = if (isIncome) null else receiptPath
 
-            if (amountStr.isBlank() || category.isBlank()) {
-                Toast.makeText(context, "Please enter amount and category", Toast.LENGTH_SHORT).show()
+            if (amountStr.isBlank() || (!isIncome && category.isBlank())) {
+                Toast.makeText(context, if (isIncome) "Please enter an amount" else "Please enter amount and category", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val amount = amountStr.toDoubleOrNull()
-            if (amount == null) {
-                Toast.makeText(context, "Invalid amount", Toast.LENGTH_SHORT).show()
+            if (amount == null || amount <= 0.0) {
+                Toast.makeText(context, "Please enter a valid amount", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             it.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
-
 
             if (isEditMode) {
                 val updated = Expense(
@@ -227,7 +330,7 @@ class AddExpenseFragment : Fragment() {
                     isIncome = isIncome
                 )
                 viewModel.updateExpense(updated)
-                Toast.makeText(context, "Transaction updated", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, if (isIncome) "Income updated ✓" else "Expense updated ✓", Toast.LENGTH_SHORT).show()
             } else {
                 val expense = Expense(
                     amount = amount,
@@ -240,7 +343,7 @@ class AddExpenseFragment : Fragment() {
                 )
                 viewModel.insertExpense(expense)
 
-                if (switchRecurring.isChecked) {
+                if (!isIncome && switchRecurring.isChecked) {
                     val recurrenceType = when (actvRecurrence.text.toString()) {
                         "Daily" -> "DAILY"
                         "Weekly" -> "WEEKLY"
@@ -255,25 +358,27 @@ class AddExpenseFragment : Fragment() {
                             lastProcessedDate = System.currentTimeMillis()
                         )
                     )
-                    Toast.makeText(context, "Recurring expense saved \u2713", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Recurring expense saved ✓", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(context, "Expense saved", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, if (isIncome) "Income saved ✓" else "Expense saved ✓", Toast.LENGTH_SHORT).show()
                 }
             }
             findNavController().popBackStack()
         }
 
+        // Delete Button
         btnDelete.setOnClickListener {
             it.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
 
+            val itemType = if (isIncome) "Income" else "Expense"
             MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Delete Expense")
-                .setMessage("Are you sure you want to delete this expense?")
+                .setTitle("Delete $itemType")
+                .setMessage("Are you sure you want to delete this $itemType?")
                 .setPositiveButton("Delete") { _, _ ->
                     viewModel.getExpenseById(editExpenseId) { expense ->
                         expense?.let { viewModel.deleteExpense(it) }
                     }
-                    Toast.makeText(context, "Expense deleted", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "$itemType deleted", Toast.LENGTH_SHORT).show()
                     findNavController().popBackStack()
                 }
                 .setNegativeButton("Cancel", null)
@@ -297,25 +402,29 @@ class AddExpenseFragment : Fragment() {
             receiptPath = destFile.absolutePath
 
             val ivPreview = view?.findViewById<ImageView>(R.id.iv_receipt_preview)
-            val btnRemove = view?.findViewById<MaterialButton>(R.id.btn_remove_receipt)
-            val btnAttach = view?.findViewById<MaterialButton>(R.id.btn_attach_receipt)
-            if (ivPreview != null && btnRemove != null && btnAttach != null) {
-                showReceiptPreview(ivPreview, btnRemove, btnAttach, destFile.absolutePath)
+            val layoutAttached = view?.findViewById<LinearLayout>(R.id.layout_receipt_attached)
+            val rowAttach = view?.findViewById<View>(R.id.row_attach_receipt)
+            if (ivPreview != null && layoutAttached != null && rowAttach != null) {
+                showReceiptPreview(ivPreview, layoutAttached, rowAttach, destFile.absolutePath)
             }
         } catch (e: Exception) {
             Toast.makeText(context, "Failed to attach receipt", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun showReceiptPreview(iv: ImageView, btnRemove: MaterialButton, btnAttach: MaterialButton, path: String) {
+    private fun showReceiptPreview(
+        iv: ImageView,
+        layoutAttached: LinearLayout,
+        rowAttach: View,
+        path: String
+    ) {
         val file = File(path)
         if (file.exists()) {
             val bitmap = decodeSampledBitmap(path, 800, 800)
             if (bitmap != null) {
                 iv.setImageBitmap(bitmap)
-                iv.visibility = View.VISIBLE
-                btnRemove.visibility = View.VISIBLE
-                btnAttach.text = "\u2705  Receipt Attached"
+                layoutAttached.visibility = View.VISIBLE
+                rowAttach.visibility = View.GONE
             }
         }
     }
