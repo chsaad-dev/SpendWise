@@ -90,8 +90,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="14dp"
-                app:cardBackgroundColor="@color/hero_card_bg"
-                app:cardCornerRadius="18dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardCornerRadius="20dp"
                 app:cardElevation="0dp"
                 app:strokeWidth="0dp">
 
@@ -99,6 +99,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:background="@drawable/bg_hero_card_gradient"
                     android:padding="18dp">
 
                     <!-- Top Label -->
@@ -127,7 +128,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginTop="14dp"
-                        android:background="#2EFFFFFF" />
+                        android:background="#25FFFFFF" />
 
                     <LinearLayout
                         android:layout_width="match_parent"

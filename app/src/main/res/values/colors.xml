@@ -41,29 +41,29 @@
     <color name="cat_others">#64748B</color>
 
     <!-- Semantic Theme Tokens (Light Mode) -->
-    <color name="bg_screen">#F5F5F7</color>
+    <color name="bg_screen">#F6F7F9</color>
     <color name="bg_surface">#FFFFFF</color>
-    <color name="bg_surface_subtle">#EBEBF0</color>
-    <color name="stroke_subtle">#E5E5EA</color>
+    <color name="bg_surface_subtle">#ECEEF2</color>
+    <color name="stroke_subtle">#E2E5EC</color>
     <color name="text_primary">#111111</color>
     <color name="text_secondary">#6E6E73</color>
-    <color name="brand_primary">#111111</color>
-    <color name="brand_primary_container">#EBEBF0</color>
-    <color name="accent_interactive">#007AFF</color>
+    <color name="brand_primary">#0F5132</color>
+    <color name="brand_primary_container">#E8F5EE</color>
+    <color name="accent_interactive">#0F766E</color>
     <color name="danger_primary">#DC2626</color>
     <color name="danger_container">#FEE2E2</color>
     <color name="success_primary">#16A34A</color>
     <color name="success_container">#DCFCE7</color>
     <color name="warning_primary">#EA580C</color>
     <color name="warning_container">#FFEDD5</color>
-    <!-- Hero Card -->
-    <color name="hero_card_bg">#161618</color>
+    <!-- Hero Card (Light — emerald gradient via drawable) -->
+    <color name="hero_card_bg">#0F4C3A</color>
     <color name="hero_card_text_balance">#FFFFFF</color>
-    <color name="hero_card_text_secondary">#A1A1A6</color>
-    <color name="hero_income_text">#30D158</color>
-    <color name="hero_expense_text">#FF6961</color>
+    <color name="hero_card_text_secondary">#B7E4D1</color>
+    <color name="hero_income_text">#6EE7B7</color>
+    <color name="hero_expense_text">#FCA5A5</color>
     <!-- FAB -->
-    <color name="fab_bg">#111111</color>
+    <color name="fab_bg">#0F5132</color>
     <color name="fab_icon">#FFFFFF</color>
 
     <!-- Chart colors -->

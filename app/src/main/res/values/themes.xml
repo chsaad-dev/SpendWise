@@ -27,13 +27,13 @@
         <item name="colorError">@color/danger_primary</item>
         <item name="colorOnError">@color/onError</item>
 
-        <!-- Bottom Navigation — monochrome active indicator -->
+        <!-- Bottom Navigation — emerald active indicator -->
         <item name="bottomNavigationStyle">@style/Widget.SpendWise.BottomNav</item>
 
         <item name="bottomSheetDialogTheme">@style/Theme.SpendWise.BottomSheetDialog</item>
     </style>
 
-    <!-- Bottom Navigation Style: neutral active indicator, no purple tint -->
+    <!-- Bottom Navigation Style: emerald active indicator -->
     <style name="Widget.SpendWise.BottomNav" parent="Widget.Material3.BottomNavigationView">
         <item name="android:background">@color/bg_surface</item>
         <item name="itemActiveIndicatorStyle">@style/Widget.SpendWise.BottomNav.ActiveIndicator</item>
@@ -42,7 +42,7 @@
     </style>
 
     <style name="Widget.SpendWise.BottomNav.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
-        <item name="android:color">@color/bg_surface_subtle</item>
+        <item name="android:color">@color/brand_primary_container</item>
     </style>
 
     <style name="Theme.SpendWise.BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
