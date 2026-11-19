@@ -49,14 +49,23 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _categoryTotals = MutableLiveData<List<CategoryTotal>>()
     val categoryTotals: LiveData<List<CategoryTotal>> = _categoryTotals
 
-    private val _filteredTotalIncome = MutableLiveData<Double>(0.0)
+    private val _filteredTotalIncome = MutableLiveData<Double>()
     val filteredTotalIncome: LiveData<Double> = _filteredTotalIncome
 
-    private val _filteredTotalExpense = MutableLiveData<Double>(0.0)
+    private val _filteredTotalExpense = MutableLiveData<Double>()
     val filteredTotalExpense: LiveData<Double> = _filteredTotalExpense
 
-    private val _filteredBalance = MutableLiveData<Double>(0.0)
+    private val _filteredBalance = MutableLiveData<Double>()
     val filteredBalance: LiveData<Double> = _filteredBalance
+
+    private val _isInitialDataLoaded = MutableLiveData<Boolean>(false)
+    val isInitialDataLoaded: LiveData<Boolean> = _isInitialDataLoaded
+
+    fun markInitialDataLoaded() {
+        if (_isInitialDataLoaded.value != true) {
+            _isInitialDataLoaded.value = true
+        }
+    }
 
     // Currency formatter that respects the user's choice in Settings.
     // Called fresh each time so changes take effect without a restart.
@@ -82,7 +91,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
         setMonthFilter(Calendar.getInstance())
 
-        filteredExpenses.addSource(allExpenses) { applyFilters() }
+        filteredExpenses.addSource(allExpenses) {
+            markInitialDataLoaded()
+            applyFilters()
+        }
         filteredExpenses.addSource(_filterDateRange) { applyFilters() }
         filteredExpenses.addSource(_selectedCategory) { applyFilters() }
         filteredExpenses.addSource(_searchQuery) { applyFilters() }
@@ -90,12 +102,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun applyFilters() {
-        val expenses = allExpenses.value ?: emptyList()
+        val expenses = allExpenses.value
+        if (expenses == null && _isInitialDataLoaded.value != true) {
+            return
+        }
+        val safeExpenses = expenses ?: emptyList()
         val dateRange = _filterDateRange.value
         val category = _selectedCategory.value
         val query = _searchQuery.value
 
-        var result = expenses
+        var result = safeExpenses
 
         if (dateRange != null) {
             result = result.filter { it.date in dateRange.first..dateRange.second }

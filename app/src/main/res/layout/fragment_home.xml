@@ -341,6 +341,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="14dp"
+                android:visibility="gone"
                 app:cardBackgroundColor="@color/bg_surface"
                 app:cardCornerRadius="18dp"
                 app:cardElevation="0dp"

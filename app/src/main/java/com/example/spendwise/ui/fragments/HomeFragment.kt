@@ -208,24 +208,45 @@ class HomeFragment : Fragment() {
         ItemTouchHelper(swipeCallback).attachToRecyclerView(rvExpenses)
 
         // Observe filtered expenses
+        fun updateEmptyState(expenses: List<com.example.spendwise.data.Expense>?) {
+            val isLoaded = viewModel.isInitialDataLoaded.value == true
+            val isEmpty = expenses.isNullOrEmpty()
+            layoutEmpty.visibility = if (isLoaded && isEmpty) View.VISIBLE else View.GONE
+            rvExpenses.visibility = if (isEmpty) View.GONE else View.VISIBLE
+            if (isLoaded || !expenses.isNullOrEmpty()) {
+                tvCount.visibility = View.VISIBLE
+                tvCount.text = "${expenses?.size ?: 0} transactions"
+            } else {
+                tvCount.visibility = View.GONE
+            }
+        }
+
+        viewModel.isInitialDataLoaded.observe(viewLifecycleOwner) {
+            updateEmptyState(viewModel.filteredExpenses.value)
+        }
+
         viewModel.filteredExpenses.observe(viewLifecycleOwner) { expenses ->
             adapter.submitList(expenses)
-            layoutEmpty.visibility = if (expenses.isNullOrEmpty()) View.VISIBLE else View.GONE
-            rvExpenses.visibility = if (expenses.isNullOrEmpty()) View.GONE else View.VISIBLE
-            tvCount.text = "${expenses?.size ?: 0} transactions"
+            updateEmptyState(expenses)
         }
 
         // Observe balances
         viewModel.filteredBalance.observe(viewLifecycleOwner) { balance ->
-            tvTotalBalance.text = viewModel.formatCurrency(balance ?: 0.0)
+            if (balance != null) {
+                tvTotalBalance.text = viewModel.formatCurrency(balance)
+            }
         }
         
         viewModel.filteredTotalIncome.observe(viewLifecycleOwner) { income ->
-            tvTotalIncome.text = viewModel.formatCurrency(income ?: 0.0)
+            if (income != null) {
+                tvTotalIncome.text = viewModel.formatCurrency(income)
+            }
         }
 
         viewModel.filteredTotalExpense.observe(viewLifecycleOwner) { expense ->
-            tvTotalExpense.text = viewModel.formatCurrency(expense ?: 0.0)
+            if (expense != null) {
+                tvTotalExpense.text = viewModel.formatCurrency(expense)
+            }
 
             // Budget progress
             val budget = viewModel.getBudgetLimit()
@@ -373,6 +394,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupPieChart(chart: PieChart) {
+        chart.setNoDataText("")
         chart.description.isEnabled = false
         chart.setUsePercentValues(true)
         chart.setDrawEntryLabels(false)

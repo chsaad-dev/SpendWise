@@ -28,6 +28,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.spendwise.R
 import com.example.spendwise.SpendWiseApp
 import com.example.spendwise.data.AppDatabase
+import com.example.spendwise.ui.dialogs.AppLanguageBottomSheet
 import com.example.spendwise.ui.dialogs.CurrencyPickerBottomSheet
 import com.example.spendwise.ui.dialogs.MonthlyBudgetBottomSheet
 import com.example.spendwise.ui.viewmodel.MainViewModel
@@ -305,14 +306,13 @@ class SettingsFragment : Fragment() {
 
         // ── 9. Restore ──
         view.findViewById<View>(R.id.btn_restore).setOnClickListener {
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Restore Database")
-                .setMessage("This will replace all current data with the backup. Continue?")
-                .setPositiveButton("Restore") { _, _ ->
-                    restoreLauncher.launch(arrayOf("application/octet-stream", "*/*"))
-                }
-                .setNegativeButton("Cancel", null)
-                .show()
+            showDestructiveConfirmDialog(
+                title = "Restore Database",
+                message = "This will replace all current data with the backup file. Continue?",
+                confirmButtonText = "Restore"
+            ) {
+                restoreLauncher.launch(arrayOf("application/octet-stream", "*/*"))
+            }
         }
 
         // ── 10. Clear Categories ──
@@ -394,15 +394,9 @@ class SettingsFragment : Fragment() {
         }.show(childFragmentManager, CurrencyPickerBottomSheet.TAG)
     }
 
-    // ── Language Dialog ──
+    // ── Language Dialog (Modern Bottom Sheet) ──
     private fun showLanguageDialog() {
-        val languages = arrayOf("English (Default)")
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle("App Language")
-            .setMessage("Only English is supported currently. More languages will be added in future updates.")
-            .setSingleChoiceItems(languages, 0) { dialog, _ -> dialog.dismiss() }
-            .setNegativeButton("OK", null)
-            .show()
+        AppLanguageBottomSheet.newInstance().show(childFragmentManager, AppLanguageBottomSheet.TAG)
     }
 
 

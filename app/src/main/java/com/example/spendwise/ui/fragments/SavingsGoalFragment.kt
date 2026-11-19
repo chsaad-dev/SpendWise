@@ -53,10 +53,23 @@ class SavingsGoalFragment : Fragment() {
         rvGoals.layoutManager = LinearLayoutManager(context)
         rvGoals.adapter = adapter
 
+        fun updateEmptyState(goals: List<SavingsGoal>?) {
+            val isLoaded = viewModel.isInitialDataLoaded.value == true
+            val isEmpty = goals.isNullOrEmpty()
+            layoutEmpty.visibility = if (isLoaded && isEmpty) View.VISIBLE else View.GONE
+            rvGoals.visibility = if (isEmpty) View.GONE else View.VISIBLE
+        }
+
+        viewModel.isInitialDataLoaded.observe(viewLifecycleOwner) {
+            updateEmptyState(viewModel.allSavingsGoals.value)
+        }
+
         viewModel.allSavingsGoals.observe(viewLifecycleOwner) { goals ->
+            if (goals != null) {
+                viewModel.markInitialDataLoaded()
+            }
             adapter.submitList(goals)
-            layoutEmpty.visibility = if (goals.isEmpty()) View.VISIBLE else View.GONE
-            rvGoals.visibility = if (goals.isEmpty()) View.GONE else View.VISIBLE
+            updateEmptyState(goals)
         }
 
         btnAddGoal.setOnClickListener {

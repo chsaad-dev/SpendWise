@@ -73,10 +73,23 @@ class CategoriesFragment : Fragment() {
         rvCategories.layoutManager = LinearLayoutManager(context)
         rvCategories.adapter = adapter
 
+        fun updateEmptyState(categories: List<Category>?) {
+            val isLoaded = viewModel.isInitialDataLoaded.value == true
+            val isEmpty = categories.isNullOrEmpty()
+            layoutEmpty.visibility = if (isLoaded && isEmpty) View.VISIBLE else View.GONE
+            rvCategories.visibility = if (isEmpty) View.GONE else View.VISIBLE
+        }
+
+        viewModel.isInitialDataLoaded.observe(viewLifecycleOwner) {
+            updateEmptyState(viewModel.allCategories.value)
+        }
+
         viewModel.allCategories.observe(viewLifecycleOwner) { categories ->
+            if (categories != null) {
+                viewModel.markInitialDataLoaded()
+            }
             adapter.submitList(categories)
-            layoutEmpty.visibility = if (categories.isNullOrEmpty()) View.VISIBLE else View.GONE
-            rvCategories.visibility = if (categories.isNullOrEmpty()) View.GONE else View.VISIBLE
+            updateEmptyState(categories)
         }
 
         btnAdd.setOnClickListener {

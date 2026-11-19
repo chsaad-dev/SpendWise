@@ -60,6 +60,7 @@ class HistoryFragment : Fragment() {
         val trendChart = view.findViewById<LineChart>(R.id.chart_trend)
 
         rvMonths.layoutManager = LinearLayoutManager(context)
+        trendChart?.setNoDataText("")
 
         fun loadYear() {
             if (!isAdded) return
@@ -131,19 +132,19 @@ class HistoryFragment : Fragment() {
                     tvYearlyIncome.text = fmt.format(yearIncome)
                     tvYearlySpent.text = fmt.format(yearSpent)
 
-                    // Trend chart
-                    if (trendChart != null) {
-                        setupTrendChart(trendChart, trendEntries, trendLabels)
-                    }
+                    val isLoaded = viewModel.isInitialDataLoaded.value == true
 
                     if (monthData.isEmpty()) {
                         rvMonths.visibility = View.GONE
                         cardTrendChart.visibility = View.GONE
-                        layoutEmpty.visibility = View.VISIBLE
+                        layoutEmpty.visibility = if (isLoaded) View.VISIBLE else View.GONE
                     } else {
                         rvMonths.visibility = View.VISIBLE
                         cardTrendChart.visibility = View.VISIBLE
                         layoutEmpty.visibility = View.GONE
+                        if (trendChart != null) {
+                            setupTrendChart(trendChart, trendEntries, trendLabels)
+                        }
                         rvMonths.adapter = MonthAdapter(monthData, fmt) { monthIndex ->
                             val filterCal = Calendar.getInstance().apply {
                                 set(Calendar.YEAR, selectedYear)
@@ -168,6 +169,12 @@ class HistoryFragment : Fragment() {
         reloadYearAction = { loadYear() }
         loadYear()
 
+        viewModel.isInitialDataLoaded.observe(viewLifecycleOwner) { isLoaded ->
+            if (isLoaded) {
+                loadYear()
+            }
+        }
+
         btnPrev.setOnClickListener {
             selectedYear--
             loadYear()
@@ -185,6 +192,7 @@ class HistoryFragment : Fragment() {
     }
 
     private fun setupTrendChart(chart: LineChart, entries: List<Entry>, labels: List<String>) {
+        chart.setNoDataText("")
         val ctx = chart.context
         val primaryColor = ContextCompat.getColor(ctx, R.color.brand_primary)
         val secondaryTextColor = ContextCompat.getColor(ctx, R.color.text_secondary)
