@@ -1,13 +1,16 @@
 package com.example.spendwise.ui.fragments
 
-import android.content.Context
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
+import android.view.HapticFeedbackConstants
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -19,8 +22,7 @@ import com.example.spendwise.data.SplitMember
 import com.example.spendwise.ui.viewmodel.MainViewModel
 import com.example.spendwise.utils.CurrencyHelper
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.checkbox.MaterialCheckBox
-import com.google.android.material.chip.Chip
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textfield.TextInputEditText
 
 class SplitExpenseFragment : Fragment() {
@@ -49,23 +51,26 @@ class SplitExpenseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        expenseId = arguments?.getInt("expenseId", -1) ?: -1
+        expenseId    = arguments?.getInt("expenseId", -1) ?: -1
         expenseAmount = (arguments?.getFloat("expenseAmount", 0f) ?: 0f).toDouble()
         expenseCategory = arguments?.getString("expenseCategory", "") ?: ""
 
-        val tvInfo = view.findViewById<TextView>(R.id.tv_split_expense_info)
-        val tvTotal = view.findViewById<TextView>(R.id.tv_split_total)
-        val etDescription = view.findViewById<TextInputEditText>(R.id.et_split_description)
-        val etMemberName = view.findViewById<TextInputEditText>(R.id.et_member_name)
-        val btnAddMember = view.findViewById<MaterialButton>(R.id.btn_add_member)
-        val rvMembers = view.findViewById<RecyclerView>(R.id.rv_members)
-        val btnSave = view.findViewById<MaterialButton>(R.id.btn_save_split)
-        val chipEqual = view.findViewById<Chip>(R.id.chip_equal)
-        val chipCustom = view.findViewById<Chip>(R.id.chip_custom)
+        val btnBack         = view.findViewById<ImageButton>(R.id.btn_back)
+        val tvInfo          = view.findViewById<TextView>(R.id.tv_split_expense_info)
+        val tvTotal         = view.findViewById<TextView>(R.id.tv_split_total)
+        val etDescription   = view.findViewById<TextInputEditText>(R.id.et_split_description)
+        val etMemberName    = view.findViewById<TextInputEditText>(R.id.et_member_name)
+        val btnAddMember    = view.findViewById<MaterialButton>(R.id.btn_add_member)
+        val rvMembers       = view.findViewById<RecyclerView>(R.id.rv_members)
+        val btnSave         = view.findViewById<MaterialButton>(R.id.btn_save_split)
+        val cardSplitEqual  = view.findViewById<MaterialCardView>(R.id.card_split_equal)
+        val tvSplitEqual    = view.findViewById<TextView>(R.id.tv_split_equal)
+        val cardSplitCustom = view.findViewById<MaterialCardView>(R.id.card_split_custom)
+        val tvSplitCustom   = view.findViewById<TextView>(R.id.tv_split_custom)
 
         val currencyFormat = CurrencyHelper.getCurrencyFormat(requireContext())
 
-        tvInfo.text = "$expenseCategory expense"
+        tvInfo.text  = "$expenseCategory expense"
         tvTotal.text = currencyFormat.format(expenseAmount)
 
         memberAdapter = MemberAdapter(members, isEqualSplit) {
@@ -75,42 +80,83 @@ class SplitExpenseFragment : Fragment() {
         rvMembers.layoutManager = LinearLayoutManager(context)
         rvMembers.adapter = memberAdapter
 
-        chipEqual.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                isEqualSplit = true
-                memberAdapter.isEqualSplit = true
+        // Back button
+        btnBack.setOnClickListener {
+            it.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            findNavController().popBackStack()
+        }
+
+        // Segmented mode switcher
+        fun setSplitMode(equalSplit: Boolean) {
+            isEqualSplit = equalSplit
+            memberAdapter.isEqualSplit = equalSplit
+            val density = resources.displayMetrics.density
+
+            if (equalSplit) {
+                cardSplitEqual.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.bg_surface))
+                cardSplitEqual.cardElevation = 2f * density
+                tvSplitEqual.setTextColor(ContextCompat.getColor(requireContext(), R.color.brand_primary))
+                tvSplitEqual.typeface = Typeface.create("sans-serif-medium", Typeface.BOLD)
+
+                cardSplitCustom.setCardBackgroundColor(Color.TRANSPARENT)
+                cardSplitCustom.cardElevation = 0f
+                tvSplitCustom.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_secondary))
+                tvSplitCustom.typeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
+
                 recalculateEqualSplits()
-                memberAdapter.notifyDataSetChanged()
+            } else {
+                cardSplitCustom.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.bg_surface))
+                cardSplitCustom.cardElevation = 2f * density
+                tvSplitCustom.setTextColor(ContextCompat.getColor(requireContext(), R.color.brand_primary))
+                tvSplitCustom.typeface = Typeface.create("sans-serif-medium", Typeface.BOLD)
+
+                cardSplitEqual.setCardBackgroundColor(Color.TRANSPARENT)
+                cardSplitEqual.cardElevation = 0f
+                tvSplitEqual.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_secondary))
+                tvSplitEqual.typeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
+            }
+            memberAdapter.notifyDataSetChanged()
+        }
+
+        // Initialize default state (Equal active)
+        setSplitMode(true)
+
+        cardSplitEqual.setOnClickListener {
+            if (!isEqualSplit) {
+                it.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                setSplitMode(true)
+            }
+        }
+        cardSplitCustom.setOnClickListener {
+            if (isEqualSplit) {
+                it.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                setSplitMode(false)
             }
         }
 
-        chipCustom.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                isEqualSplit = false
-                memberAdapter.isEqualSplit = false
-                memberAdapter.notifyDataSetChanged()
-            }
-        }
-
+        // Add member
         btnAddMember.setOnClickListener {
             val name = etMemberName.text.toString().trim()
             if (name.isBlank()) {
                 Toast.makeText(context, "Enter a member name", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            it.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             members.add(MemberEntry(name))
             recalculateEqualSplits()
             memberAdapter.notifyItemInserted(members.size - 1)
             etMemberName.text?.clear()
         }
 
+        // Save Split
         btnSave.setOnClickListener {
             if (members.isEmpty()) {
                 Toast.makeText(context, "Add at least one member", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            it.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
 
-            val description = etDescription.text.toString().ifBlank { "$expenseCategory split" }
+            val description = etDescription.text.toString().trim().ifBlank { "$expenseCategory split" }
 
             val group = SplitGroup(
                 expenseId = expenseId,
@@ -131,7 +177,7 @@ class SplitExpenseFragment : Fragment() {
                     )
                 }
                 requireActivity().runOnUiThread {
-                    Toast.makeText(context, "Split saved \u2713", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Split saved ✓", Toast.LENGTH_SHORT).show()
                     findNavController().popBackStack()
                 }
             }
@@ -153,16 +199,16 @@ class SplitExpenseFragment : Fragment() {
     ) : RecyclerView.Adapter<MemberAdapter.VH>() {
 
         class VH(view: View) : RecyclerView.ViewHolder(view) {
-            val tvName: TextView = view.findViewById(R.id.tv_member_name)
+            val tvName: TextView         = view.findViewById(R.id.tv_member_name)
+            val tvShare: TextView        = view.findViewById(R.id.tv_member_share)
             val etAmount: TextInputEditText = view.findViewById(R.id.et_member_amount)
-            val cbPaid: MaterialCheckBox = view.findViewById(R.id.cb_paid)
-            val btnDelete: ImageButton = view.findViewById(R.id.btn_delete_member)
+            val btnDelete: ImageButton   = view.findViewById(R.id.btn_delete_member)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-            val view = LayoutInflater.from(parent.context)
+            val v = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_split_member, parent, false)
-            return VH(view)
+            return VH(v)
         }
 
         override fun getItemCount() = members.size
@@ -173,25 +219,21 @@ class SplitExpenseFragment : Fragment() {
 
             if (isEqualSplit) {
                 val fmt = CurrencyHelper.getCurrencyFormat(holder.itemView.context)
-                holder.etAmount.setText(fmt.format(member.shareAmount))
-                holder.etAmount.isEnabled = false
+                holder.tvShare.text = fmt.format(member.shareAmount)
+                holder.tvShare.visibility  = View.VISIBLE
+                holder.etAmount.visibility = View.GONE
             } else {
-                holder.etAmount.isEnabled = true
+                holder.tvShare.visibility  = View.GONE
+                holder.etAmount.visibility = View.VISIBLE
                 if (member.shareAmount > 0) {
-                    holder.etAmount.setText(String.format("%.2f", member.shareAmount))
+                    holder.etAmount.setText(String.format(java.util.Locale.US, "%.2f", member.shareAmount))
                 } else {
                     holder.etAmount.text?.clear()
                 }
-            }
-
-            holder.cbPaid.isChecked = member.isPaid
-            holder.cbPaid.setOnCheckedChangeListener { _, isChecked ->
-                member.isPaid = isChecked
-            }
-
-            holder.etAmount.setOnFocusChangeListener { _, hasFocus ->
-                if (!hasFocus && !isEqualSplit) {
-                    member.shareAmount = holder.etAmount.text.toString().toDoubleOrNull() ?: 0.0
+                holder.etAmount.setOnFocusChangeListener { _, hasFocus ->
+                    if (!hasFocus) {
+                        member.shareAmount = holder.etAmount.text.toString().toDoubleOrNull() ?: 0.0
+                    }
                 }
             }
 

@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.EditText
+import android.widget.HorizontalScrollView
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -25,13 +26,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.spendwise.R
+import com.example.spendwise.data.Category
 import com.example.spendwise.data.Expense
 import com.example.spendwise.data.RecurringExpense
+import com.example.spendwise.ui.dialogs.DeleteTransactionBottomSheet
 import com.example.spendwise.ui.viewmodel.MainViewModel
 import com.example.spendwise.utils.CurrencyHelper
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.materialswitch.MaterialSwitch
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -49,6 +51,9 @@ class AddExpenseFragment : Fragment() {
     private var isEditMode: Boolean = false
     private var isIncome: Boolean = false
     private var receiptPath: String? = null
+
+    private var selectedCategory: String = ""
+    private var categoryList: List<Category> = emptyList()
 
     // Receipt photo picker
     private val pickImageLauncher = registerForActivityResult(
@@ -80,8 +85,10 @@ class AddExpenseFragment : Fragment() {
         val chipAdd1000 = view.findViewById<TextView>(R.id.chip_add_1000)
         val chipAdd5000 = view.findViewById<TextView>(R.id.chip_add_5000)
 
-        val tilCategory = view.findViewById<TextInputLayout>(R.id.til_category)
-        val actvCategory = view.findViewById<AutoCompleteTextView>(R.id.actv_category)
+        val layoutCategorySection = view.findViewById<View>(R.id.layout_category_section)
+        val hsvCategories = view.findViewById<HorizontalScrollView>(R.id.hsv_categories)
+        val layoutCategoryPills = view.findViewById<LinearLayout>(R.id.layout_category_pills)
+
         val tilDate = view.findViewById<TextInputLayout>(R.id.til_date)
         val etDate = view.findViewById<TextInputEditText>(R.id.et_date)
         val tilNote = view.findViewById<TextInputLayout>(R.id.til_note)
@@ -103,6 +110,8 @@ class AddExpenseFragment : Fragment() {
         val btnSave = view.findViewById<MaterialButton>(R.id.btn_save)
         val btnSplit = view.findViewById<MaterialButton>(R.id.btn_split)
         val btnDelete = view.findViewById<MaterialButton>(R.id.btn_delete)
+
+        val density = resources.displayMetrics.density
 
         // Back button
         btnBack.setOnClickListener {
@@ -134,10 +143,72 @@ class AddExpenseFragment : Fragment() {
         chipAdd1000.setOnClickListener { addQuickAmount(1000.0) }
         chipAdd5000.setOnClickListener { addQuickAmount(5000.0) }
 
+        // Category Pills rendering logic
+        fun renderCategoryPills(categories: List<Category>) {
+            categoryList = categories
+            layoutCategoryPills.removeAllViews()
+
+            if (selectedCategory.isBlank() && categories.isNotEmpty()) {
+                selectedCategory = categories.first().name
+            }
+
+            var selectedView: View? = null
+
+            for (cat in categories) {
+                val pillView = layoutInflater.inflate(R.layout.item_category_pill, layoutCategoryPills, false)
+                val cardPill = pillView.findViewById<MaterialCardView>(R.id.card_category_pill)
+                val viewDot = pillView.findViewById<View>(R.id.view_category_dot)
+                val tvName = pillView.findViewById<TextView>(R.id.tv_category_name)
+
+                tvName.text = cat.name
+
+                val dotColor = try {
+                    Color.parseColor(cat.colorHex)
+                } catch (e: Exception) {
+                    ContextCompat.getColor(requireContext(), R.color.brand_primary)
+                }
+                viewDot.background?.mutate()?.setTint(dotColor)
+
+                val isSelected = cat.name.equals(selectedCategory, ignoreCase = true)
+                if (isSelected) {
+                    selectedView = cardPill
+                    cardPill.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.brand_primary_container))
+                    cardPill.strokeColor = ContextCompat.getColor(requireContext(), R.color.brand_primary)
+                    cardPill.strokeWidth = (1.5f * density).toInt()
+                    tvName.setTextColor(ContextCompat.getColor(requireContext(), R.color.brand_primary))
+                    tvName.typeface = Typeface.create("sans-serif-medium", Typeface.BOLD)
+                } else {
+                    cardPill.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.bg_surface_subtle))
+                    cardPill.strokeColor = ContextCompat.getColor(requireContext(), R.color.stroke_subtle)
+                    cardPill.strokeWidth = (1f * density).toInt()
+                    tvName.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_primary))
+                    tvName.typeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
+                }
+
+                cardPill.setOnClickListener {
+                    it.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    selectedCategory = cat.name
+                    renderCategoryPills(categoryList)
+                    hsvCategories.post {
+                        val scrollX = cardPill.left - (hsvCategories.width - cardPill.width) / 2
+                        hsvCategories.smoothScrollTo(scrollX.coerceAtLeast(0), 0)
+                    }
+                }
+
+                layoutCategoryPills.addView(pillView)
+            }
+
+            selectedView?.let { v ->
+                hsvCategories.post {
+                    val scrollX = v.left - (hsvCategories.width - v.width) / 2
+                    hsvCategories.smoothScrollTo(scrollX.coerceAtLeast(0), 0)
+                }
+            }
+        }
+
         // Mode switching logic
         fun updateMode(income: Boolean) {
             isIncome = income
-            val density = resources.displayMetrics.density
             if (!isIncome) {
                 cardTypeExpense.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.bg_surface))
                 cardTypeExpense.cardElevation = 2f * density
@@ -149,11 +220,10 @@ class AddExpenseFragment : Fragment() {
                 tvTypeIncome.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_secondary))
                 tvTypeIncome.typeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
 
-                tilCategory.visibility = View.VISIBLE
+                layoutCategorySection.visibility = View.VISIBLE
                 tilTags.visibility = View.VISIBLE
                 layoutReceipt.visibility = View.VISIBLE
                 layoutRecurring.visibility = if (isEditMode) View.GONE else View.VISIBLE
-                (tilDate.layoutParams as? ViewGroup.MarginLayoutParams)?.topMargin = (12 * density).toInt()
 
                 btnSave.text = if (isEditMode) "Update Expense" else "Save Expense"
                 btnSave.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.brand_primary)
@@ -172,11 +242,10 @@ class AddExpenseFragment : Fragment() {
                 tvTypeExpense.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_secondary))
                 tvTypeExpense.typeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
 
-                tilCategory.visibility = View.GONE
+                layoutCategorySection.visibility = View.GONE
                 tilTags.visibility = View.GONE
                 layoutReceipt.visibility = View.GONE
                 layoutRecurring.visibility = View.GONE
-                (tilDate.layoutParams as? ViewGroup.MarginLayoutParams)?.topMargin = 0
 
                 btnSave.text = if (isEditMode) "Update Income" else "Save Income"
                 btnSave.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.success_primary)
@@ -185,7 +254,6 @@ class AddExpenseFragment : Fragment() {
                     btnSplit.visibility = View.GONE
                 }
             }
-            tilDate.requestLayout()
         }
 
         cardTypeExpense.setOnClickListener {
@@ -241,7 +309,10 @@ class AddExpenseFragment : Fragment() {
                     } else {
                         etAmount.setText(String.format(Locale.US, "%.2f", exp.amount))
                     }
-                    actvCategory.setText(exp.category, false)
+                    selectedCategory = exp.category
+                    if (categoryList.isNotEmpty()) {
+                        renderCategoryPills(categoryList)
+                    }
                     etNote.setText(exp.note)
                     etTags.setText(exp.tags ?: "")
                     calendar.timeInMillis = exp.date
@@ -287,26 +358,21 @@ class AddExpenseFragment : Fragment() {
         }
         updateDateLabel(etDate)
 
-        // Categories list
+        // Observe Categories
         viewModel.allCategories.observe(viewLifecycleOwner) { categories ->
-            val categoryAdapter = ArrayAdapter(
-                requireContext(),
-                android.R.layout.simple_dropdown_item_1line,
-                categories.map { it.name }
-            )
-            actvCategory.setAdapter(categoryAdapter)
+            renderCategoryPills(categories)
         }
 
         // Save Button
         btnSave.setOnClickListener {
             val amountStr = etAmount.text.toString().trim()
-            val category = if (isIncome) "Income" else actvCategory.text.toString().trim()
+            val category = if (isIncome) "Income" else selectedCategory.trim()
             val note = etNote.text.toString().trim()
             val tags = if (isIncome) null else etTags.text.toString().trim().takeIf { it.isNotBlank() }
             val finalReceiptPath = if (isIncome) null else receiptPath
 
             if (amountStr.isBlank() || (!isIncome && category.isBlank())) {
-                Toast.makeText(context, if (isIncome) "Please enter an amount" else "Please enter amount and category", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, if (isIncome) "Please enter an amount" else "Please select a category and enter amount", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -369,20 +435,14 @@ class AddExpenseFragment : Fragment() {
         // Delete Button
         btnDelete.setOnClickListener {
             it.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
-
-            val itemType = if (isIncome) "Income" else "Expense"
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Delete $itemType")
-                .setMessage("Are you sure you want to delete this $itemType?")
-                .setPositiveButton("Delete") { _, _ ->
-                    viewModel.getExpenseById(editExpenseId) { expense ->
-                        expense?.let { viewModel.deleteExpense(it) }
-                    }
-                    Toast.makeText(context, "$itemType deleted", Toast.LENGTH_SHORT).show()
-                    findNavController().popBackStack()
+            DeleteTransactionBottomSheet.newInstance(isIncome) {
+                viewModel.getExpenseById(editExpenseId) { expense ->
+                    expense?.let { viewModel.deleteExpense(it) }
                 }
-                .setNegativeButton("Cancel", null)
-                .show()
+                val itemType = if (isIncome) "Income" else "Expense"
+                Toast.makeText(context, "$itemType deleted", Toast.LENGTH_SHORT).show()
+                findNavController().popBackStack()
+            }.show(parentFragmentManager, DeleteTransactionBottomSheet.TAG)
         }
     }
 

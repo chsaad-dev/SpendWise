@@ -247,27 +247,41 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <!-- Category Dropdown (Expense only) -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til_category"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                <!-- Category Section (Expense only) -->
+                <LinearLayout
+                    android:id="@+id/layout_category_section"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Category"
-                    app:boxCornerRadiusBottomEnd="14dp"
-                    app:boxCornerRadiusBottomStart="14dp"
-                    app:boxCornerRadiusTopEnd="14dp"
-                    app:boxCornerRadiusTopStart="14dp"
-                    app:boxStrokeColor="@color/stroke_subtle">
+                    android:orientation="vertical"
+                    android:layout_marginBottom="14dp">
 
-                    <AutoCompleteTextView
-                        android:id="@+id/actv_category"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:letterSpacing="0.08"
+                        android:text="CATEGORY"
+                        android:textAllCaps="true"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="11.5sp"
+                        android:textStyle="bold" />
+
+                    <HorizontalScrollView
+                        android:id="@+id/hsv_categories"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="none"
-                        android:textColor="@color/text_primary"
-                        android:textSize="14.5sp" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:clipToPadding="false"
+                        android:overScrollMode="never"
+                        android:scrollbars="none">
+
+                        <LinearLayout
+                            android:id="@+id/layout_category_pills"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal" />
+                    </HorizontalScrollView>
+                </LinearLayout>
 
                 <!-- Date Picker Field -->
                 <com.google.android.material.textfield.TextInputLayout
@@ -275,7 +289,7 @@
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="0dp"
                     android:hint="Date"
                     app:boxCornerRadiusBottomEnd="14dp"
                     app:boxCornerRadiusBottomStart="14dp"
