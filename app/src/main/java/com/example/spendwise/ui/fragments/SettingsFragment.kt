@@ -100,7 +100,6 @@ class SettingsFragment : Fragment() {
         ActivityResultContracts.OpenDocument()
     ) { uri -> uri?.let { restoreDatabaseFrom(it) } }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -112,7 +111,6 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val prefs = requireActivity().getSharedPreferences("SpendWisePrefs", Context.MODE_PRIVATE)
 
-        // Trailing value labels
         tvBudgetValue = view.findViewById(R.id.tv_budget_value)
         tvCurrencyValue = view.findViewById(R.id.tv_currency_value)
         tvAboutVersion = view.findViewById(R.id.tv_about_version)
@@ -127,17 +125,14 @@ class SettingsFragment : Fragment() {
         updateBudgetValue()
         updateCurrencyValue()
 
-        // ── 2. Monthly Budget ──
         view.findViewById<View>(R.id.btn_budget).setOnClickListener {
             showBudgetDialog()
         }
 
-        // ── 3. Default Currency ──
         view.findViewById<View>(R.id.btn_currency).setOnClickListener {
             showCurrencyDialog()
         }
 
-        // ── 4. Theme Selector (System | Light | Dark) ──
         val cardThemeSystem = view.findViewById<MaterialCardView>(R.id.card_theme_system)
         val tvThemeSystem = view.findViewById<TextView>(R.id.tv_theme_system)
         val cardThemeLight = view.findViewById<MaterialCardView>(R.id.card_theme_light)
@@ -155,7 +150,6 @@ class SettingsFragment : Fragment() {
             val boldTypeface = Typeface.create("sans-serif-medium", Typeface.BOLD)
             val normalTypeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
 
-            // System
             if (mode == SpendWiseApp.THEME_SYSTEM) {
                 cardThemeSystem.setCardBackgroundColor(colorSurface)
                 cardThemeSystem.cardElevation = elevationActive
@@ -168,7 +162,6 @@ class SettingsFragment : Fragment() {
                 tvThemeSystem.typeface = normalTypeface
             }
 
-            // Light
             if (mode == SpendWiseApp.THEME_LIGHT) {
                 cardThemeLight.setCardBackgroundColor(colorSurface)
                 cardThemeLight.cardElevation = elevationActive
@@ -181,7 +174,6 @@ class SettingsFragment : Fragment() {
                 tvThemeLight.typeface = normalTypeface
             }
 
-            // Dark
             if (mode == SpendWiseApp.THEME_DARK) {
                 cardThemeDark.setCardBackgroundColor(colorSurface)
                 cardThemeDark.cardElevation = elevationActive
@@ -224,12 +216,10 @@ class SettingsFragment : Fragment() {
             setTheme(SpendWiseApp.THEME_DARK)
         }
 
-        // ── 5. App Language ──
         view.findViewById<View>(R.id.btn_language).setOnClickListener {
             showLanguageDialog()
         }
 
-        // ── 5.5. Notifications ──
         switchDailyReminder = view.findViewById(R.id.switch_daily_reminder)
         switchWeeklySummary = view.findViewById(R.id.switch_weekly_summary)
         tvReminderTime = view.findViewById(R.id.tv_reminder_time)
@@ -287,24 +277,19 @@ class SettingsFragment : Fragment() {
             picker.show(parentFragmentManager, "reminder_time_picker")
         }
 
-
-        // ── 6.5. Export PDF ──
         view.findViewById<View>(R.id.btn_export_pdf).setOnClickListener {
             showMonthPickerForPdf()
         }
 
-        // ── 7. Export CSV ──
         view.findViewById<View>(R.id.btn_export_csv).setOnClickListener {
             exportCsv()
         }
 
-        // ── 8. Backup ──
         view.findViewById<View>(R.id.btn_backup).setOnClickListener {
             val timestamp = SimpleDateFormat("yyyyMMdd_HHmm", Locale.getDefault()).format(Date())
             backupLauncher.launch("SpendWise_Backup_$timestamp.db")
         }
 
-        // ── 9. Restore ──
         view.findViewById<View>(R.id.btn_restore).setOnClickListener {
             showDestructiveConfirmDialog(
                 title = "Restore Database",
@@ -315,7 +300,6 @@ class SettingsFragment : Fragment() {
             }
         }
 
-        // ── 10. Clear Categories ──
         view.findViewById<View>(R.id.btn_clear_categories).setOnClickListener {
             showDestructiveConfirmDialog(
                 title = "Clear All Categories",
@@ -327,7 +311,6 @@ class SettingsFragment : Fragment() {
             }
         }
 
-        // ── 11. Clear All Data ──
         view.findViewById<View>(R.id.btn_clear_data).setOnClickListener {
             showDestructiveConfirmDialog(
                 title = "Clear All Expenses",
@@ -339,17 +322,14 @@ class SettingsFragment : Fragment() {
             }
         }
 
-        // ── 12. About ──
         view.findViewById<View>(R.id.btn_about).setOnClickListener {
             showAboutDialog()
         }
 
-        // ── 13. Privacy Policy ──
         view.findViewById<View>(R.id.btn_privacy).setOnClickListener {
             showPrivacyPolicyDialog()
         }
 
-        // ── 14. Rate App ──
         view.findViewById<View>(R.id.btn_rate).setOnClickListener {
             try {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${requireContext().packageName}")))
@@ -359,8 +339,6 @@ class SettingsFragment : Fragment() {
         }
     }
 
-
-    // ── Budget Dialog (Modern Bottom Sheet) ──
     private fun showBudgetDialog() {
         val prefs = requireActivity().getSharedPreferences("SpendWisePrefs", Context.MODE_PRIVATE)
         MonthlyBudgetBottomSheet.newInstance(
@@ -382,7 +360,6 @@ class SettingsFragment : Fragment() {
         ).show(childFragmentManager, MonthlyBudgetBottomSheet.TAG)
     }
 
-    // ── Currency Dialog (Modern Bottom Sheet) ──
     private fun showCurrencyDialog() {
         val prefs = requireActivity().getSharedPreferences("SpendWisePrefs", Context.MODE_PRIVATE)
         val currentCode = prefs.getString("currency_code", "default") ?: "default"
@@ -394,13 +371,10 @@ class SettingsFragment : Fragment() {
         }.show(childFragmentManager, CurrencyPickerBottomSheet.TAG)
     }
 
-    // ── Language Dialog (Modern Bottom Sheet) ──
     private fun showLanguageDialog() {
         AppLanguageBottomSheet.newInstance().show(childFragmentManager, AppLanguageBottomSheet.TAG)
     }
 
-
-    // ── About Dialog (Rich Bottom Sheet) ──
     private fun showAboutDialog() {
         val dialog = BottomSheetDialog(requireContext())
         val dialogView = layoutInflater.inflate(R.layout.bottom_sheet_about, null)
@@ -441,7 +415,6 @@ class SettingsFragment : Fragment() {
         dialog.show()
     }
 
-    // ── Privacy Policy Dialog (Rich Bottom Sheet) ──
     private fun showPrivacyPolicyDialog() {
         val dialog = BottomSheetDialog(requireContext())
         val dialogView = layoutInflater.inflate(R.layout.bottom_sheet_privacy, null)
@@ -465,13 +438,11 @@ class SettingsFragment : Fragment() {
 
         dialog.show()
     }
-    // ── Month Picker for PDF ──
     private fun showMonthPickerForPdf() {
         val format = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
         val cal = Calendar.getInstance()
         val months = Array(12) {
             val title = format.format(cal.time)
-            // Save time properties attached to this index
             val _year = cal.get(Calendar.YEAR)
             val _month = cal.get(Calendar.MONTH)
             cal.add(Calendar.MONTH, -1)
@@ -552,8 +523,6 @@ class SettingsFragment : Fragment() {
         }
     }
 
-
-    // ── Export CSV ──
     private fun exportCsv() {
         CoroutineScope(Dispatchers.IO).launch {
             val db = AppDatabase.getDatabase(requireContext(), CoroutineScope(Dispatchers.IO))
@@ -601,7 +570,6 @@ class SettingsFragment : Fragment() {
             return
         }
 
-        // Revert switch until granted
         isUpdatingNotificationSwitches = true
         targetSwitch?.isChecked = false
         isUpdatingNotificationSwitches = false
@@ -743,7 +711,6 @@ class SettingsFragment : Fragment() {
         return SimpleDateFormat("hh:mm a", Locale.getDefault()).format(cal.time)
     }
 
-    // ── Backup Database ──
     private fun backupDatabaseTo(uri: Uri) {
         try {
             val dbFile = requireContext().getDatabasePath("spendwise_database")
@@ -762,7 +729,6 @@ class SettingsFragment : Fragment() {
         }
     }
 
-    // ── Restore Database ──
     private fun restoreDatabaseFrom(uri: Uri) {
         val ctx = requireContext().applicationContext
         viewLifecycleOwner.lifecycleScope.launch {

@@ -29,6 +29,5 @@ class GuidePagerAdapter(private val items: List<GuideItem>? = null) :
     }
 
     override fun onBindViewHolder(holder: SlideViewHolder, position: Int) {
-        // Each slide features rich, dedicated XML mini-UI cards and theme tokens
     }
 }

@@ -12,7 +12,6 @@
     android:paddingTop="12dp"
     android:paddingBottom="24dp">
 
-    <!-- Drag Handle Pill -->
     <View
         android:layout_width="36dp"
         android:layout_height="4dp"
@@ -20,7 +19,6 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/bg_drag_handle"/>
 
-    <!-- Header Section -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,7 +36,6 @@
         android:textColor="@color/text_secondary"
         android:textSize="13sp"/>
 
-    <!-- Input 1: Goal Name -->
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
@@ -64,7 +61,6 @@
             android:textSize="15sp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Input 2: Target Amount (Zero overlap) -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_goal_target"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
@@ -95,7 +91,6 @@
             android:textStyle="bold"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Input 3: Deadline Date Picker -->
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
@@ -125,7 +120,6 @@
             android:textSize="15sp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Action Buttons -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_create_goal"
         android:layout_width="match_parent"

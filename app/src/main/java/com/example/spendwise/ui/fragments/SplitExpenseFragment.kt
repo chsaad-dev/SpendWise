@@ -80,13 +80,11 @@ class SplitExpenseFragment : Fragment() {
         rvMembers.layoutManager = LinearLayoutManager(context)
         rvMembers.adapter = memberAdapter
 
-        // Back button
         btnBack.setOnClickListener {
             it.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             findNavController().popBackStack()
         }
 
-        // Segmented mode switcher
         fun setSplitMode(equalSplit: Boolean) {
             isEqualSplit = equalSplit
             memberAdapter.isEqualSplit = equalSplit
@@ -118,7 +116,6 @@ class SplitExpenseFragment : Fragment() {
             memberAdapter.notifyDataSetChanged()
         }
 
-        // Initialize default state (Equal active)
         setSplitMode(true)
 
         cardSplitEqual.setOnClickListener {
@@ -134,7 +131,6 @@ class SplitExpenseFragment : Fragment() {
             }
         }
 
-        // Add member
         btnAddMember.setOnClickListener {
             val name = etMemberName.text.toString().trim()
             if (name.isBlank()) {
@@ -148,7 +144,6 @@ class SplitExpenseFragment : Fragment() {
             etMemberName.text?.clear()
         }
 
-        // Save Split
         btnSave.setOnClickListener {
             if (members.isEmpty()) {
                 Toast.makeText(context, "Add at least one member", Toast.LENGTH_SHORT).show()
@@ -191,7 +186,6 @@ class SplitExpenseFragment : Fragment() {
         }
     }
 
-    // ── Inner Adapter ──
     class MemberAdapter(
         private val members: MutableList<MemberEntry>,
         var isEqualSplit: Boolean,

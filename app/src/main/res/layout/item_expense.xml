@@ -19,7 +19,6 @@
         android:gravity="center_vertical"
         android:padding="14dp">
 
-        <!-- 4dp x 34dp Vertical rounded color accent pill -->
         <View
             android:id="@+id/view_category_dot"
             android:layout_width="4dp"

@@ -119,7 +119,6 @@ class SavingsGoalFragment : Fragment() {
         }.show(childFragmentManager, DeleteGoalBottomSheet.TAG)
     }
 
-    // ── Adapter ──
     class GoalAdapter(
         private val onAddSavings: (SavingsGoal) -> Unit,
         private val onDelete: (SavingsGoal) -> Unit

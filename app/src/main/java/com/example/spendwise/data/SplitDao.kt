@@ -10,7 +10,6 @@ import androidx.room.Update
 
 @Dao
 interface SplitDao {
-    // ── Groups ──
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertGroup(group: SplitGroup): Long
 
@@ -29,7 +28,6 @@ interface SplitDao {
     @Query("SELECT * FROM split_groups WHERE id = :groupId")
     suspend fun getGroupById(groupId: Int): SplitGroup?
 
-    // ── Members ──
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMember(member: SplitMember)
 
@@ -48,7 +46,6 @@ interface SplitDao {
     @Query("DELETE FROM split_members WHERE groupId = :groupId")
     suspend fun deleteAllMembersForGroup(groupId: Int)
 
-    // ── Aggregates ──
     @Query("SELECT COUNT(*) FROM split_members WHERE groupId = :groupId AND isPaid = 0")
     suspend fun getUnpaidCount(groupId: Int): Int
 }

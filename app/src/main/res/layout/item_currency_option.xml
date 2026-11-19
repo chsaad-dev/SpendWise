@@ -23,7 +23,6 @@
         android:paddingHorizontal="14dp"
         android:paddingVertical="12dp">
 
-        <!-- Left Currency Symbol Badge -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/badge_symbol"
             android:layout_width="38dp"
@@ -44,7 +43,6 @@
                 tools:text="Rs"/>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Center Text: Code and Name -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -71,7 +69,6 @@
                 tools:text="Rupee (Rs)"/>
         </LinearLayout>
 
-        <!-- Right Checkmark Icon -->
         <ImageView
             android:id="@+id/iv_currency_check"
             android:layout_width="22dp"

@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/bg_screen">
 
-    <!-- Scrollable content -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll_content"
         android:layout_width="match_parent"
@@ -19,7 +18,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- 1. Minimalist Top Header & Year Switcher Row -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -29,7 +27,6 @@
                 android:paddingTop="12dp"
                 android:paddingBottom="4dp">
 
-                <!-- Left: Bold History Title -->
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -40,7 +37,6 @@
                     android:textSize="26sp"
                     android:textStyle="bold" />
 
-                <!-- Right: Clean Year Pill -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -84,7 +80,6 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- 2. Clean "Yearly Balance" Hero Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -102,7 +97,6 @@
                     android:background="@drawable/bg_hero_card_gradient"
                     android:padding="18dp">
 
-                    <!-- Top Label -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -111,7 +105,6 @@
                         android:textColor="@color/hero_card_text_secondary"
                         android:textSize="13sp" />
 
-                    <!-- Hero Figure -->
                     <TextView
                         android:id="@+id/tv_yearly_total"
                         android:layout_width="wrap_content"
@@ -123,7 +116,6 @@
                         android:textStyle="bold"
                         tools:text="Rs 50,500.00" />
 
-                    <!-- Minimal Breakdown Row -->
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
@@ -136,7 +128,6 @@
                         android:orientation="horizontal"
                         android:paddingTop="12dp">
 
-                        <!-- Left: Income Column -->
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -163,7 +154,6 @@
                                 tools:text="Rs 100,000" />
                         </LinearLayout>
 
-                        <!-- Right: Spent Column -->
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -194,7 +184,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- 3. Polished "Spending Trends" Chart Card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_trend_chart"
                 android:layout_width="match_parent"
@@ -231,7 +220,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- 4. Monthly Cards List -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_months"
                 android:layout_width="match_parent"
@@ -243,7 +231,6 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Empty State -->
     <LinearLayout
         android:id="@+id/layout_empty"
         android:layout_width="match_parent"

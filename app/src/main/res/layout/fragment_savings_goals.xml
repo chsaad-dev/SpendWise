@@ -8,7 +8,6 @@
     android:orientation="vertical"
     android:background="@color/bg_screen">
 
-    <!-- Top Header -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,7 +57,6 @@
             android:insetBottom="0dp"/>
     </LinearLayout>
 
-    <!-- Upgraded Empty State Card -->
     <LinearLayout
         android:id="@+id/layout_empty"
         android:layout_width="match_parent"
@@ -85,7 +83,6 @@
                 android:paddingVertical="28dp"
                 android:paddingHorizontal="20dp">
 
-                <!-- Vector Icon Halo -->
                 <FrameLayout
                     android:layout_width="64dp"
                     android:layout_height="64dp"
@@ -137,7 +134,6 @@
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 
-    <!-- Goals RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_goals"
         android:layout_width="match_parent"

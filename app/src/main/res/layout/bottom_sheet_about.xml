@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Top Bar with Centered Drag Handle and Quick Close X Button -->
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,7 +46,6 @@
                 android:contentDescription="Close"/>
         </FrameLayout>
 
-        <!-- Hero Header -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -57,7 +55,6 @@
             android:paddingTop="8dp"
             android:paddingBottom="16dp">
 
-            <!-- App Logo with Shadow Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="84dp"
                 android:layout_height="84dp"
@@ -96,7 +93,6 @@
                 android:textColor="@color/brand_primary"
                 android:textStyle="bold" />
 
-            <!-- Version Badge -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -119,14 +115,12 @@
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
 
-        <!-- Divider -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginHorizontal="20dp"
             android:background="@color/stroke_subtle" />
 
-        <!-- Mission / Overview Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -178,7 +172,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Section: Key Capabilities -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -197,7 +190,6 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="10dp">
 
-            <!-- Feature 1: Quick Tracking & Receipts -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -259,7 +251,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Feature 2: Smart Budgeting -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -321,7 +312,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Feature 3: Visual Analytics -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -383,7 +373,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Feature 4: Split Bills & Savings -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -445,7 +434,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Feature 5: Exports & Backups -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -508,7 +496,6 @@
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
 
-        <!-- Section: Speed & Privacy Highlights -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -571,7 +558,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Section: Developer & Open Source -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -672,7 +658,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Bottom Action Buttons -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

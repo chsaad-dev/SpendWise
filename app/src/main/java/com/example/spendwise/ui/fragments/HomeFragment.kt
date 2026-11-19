@@ -91,7 +91,6 @@ class HomeFragment : Fragment() {
         val cardInsight = view.findViewById<MaterialCardView>(R.id.card_insight)
         val tvTopCategory = view.findViewById<TextView>(R.id.tv_top_category)
 
-        // Sync with ViewModel or FragmentResultListener
         val savedCal = viewModel.selectedMonthCalendar.value
         if (savedCal != null) {
             currentMonth.timeInMillis = savedCal.timeInMillis
@@ -139,7 +138,6 @@ class HomeFragment : Fragment() {
             updateMonthLabel()
         }
 
-        // Search
         etSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -207,7 +205,6 @@ class HomeFragment : Fragment() {
         }
         ItemTouchHelper(swipeCallback).attachToRecyclerView(rvExpenses)
 
-        // Observe filtered expenses
         fun updateEmptyState(expenses: List<com.example.spendwise.data.Expense>?) {
             val isLoaded = viewModel.isInitialDataLoaded.value == true
             val isEmpty = expenses.isNullOrEmpty()
@@ -230,7 +227,6 @@ class HomeFragment : Fragment() {
             updateEmptyState(expenses)
         }
 
-        // Observe balances
         viewModel.filteredBalance.observe(viewLifecycleOwner) { balance ->
             if (balance != null) {
                 tvTotalBalance.text = viewModel.formatCurrency(balance)
@@ -248,7 +244,6 @@ class HomeFragment : Fragment() {
                 tvTotalExpense.text = viewModel.formatCurrency(expense)
             }
 
-            // Budget progress
             val budget = viewModel.getBudgetLimit()
             if (budget > 0f) {
                 layoutBudget.visibility = View.VISIBLE
@@ -268,7 +263,6 @@ class HomeFragment : Fragment() {
             }
         }
 
-        // Category filter chips
         viewModel.allCategories.observe(viewLifecycleOwner) { categories ->
             currentCategories = categories
             updateBudgetEnvelopes()
@@ -311,7 +305,6 @@ class HomeFragment : Fragment() {
             }
         }
 
-        // Category Breakdown Donut Card
         val pieChart = view.findViewById<PieChart>(R.id.chart_pie)
         val cardPieChart = view.findViewById<MaterialCardView>(R.id.card_pie_chart)
         setupPieChart(pieChart)
@@ -327,7 +320,6 @@ class HomeFragment : Fragment() {
                 cardPieChart.visibility = View.VISIBLE
                 updatePieChart(pieChart, totals.map { it.category }, totals.map { it.total.toFloat() })
 
-                // Top category insight
                 val top = totals.maxByOrNull { it.total }
                 val totalSpend = totals.sumOf { it.total }
                 if (top != null && totalSpend > 0) {
@@ -436,7 +428,6 @@ class HomeFragment : Fragment() {
 
         chart.data = PieData(dataSet)
 
-        // Center text: "Total Spent\nRs 22,500.00" styled
         val total = values.sum()
         val totalText = viewModel.formatCurrency(total.toDouble())
         val centerStr = "Total Spent\n$totalText"
@@ -473,7 +464,6 @@ class HomeFragment : Fragment() {
         chart.centerText = spannable
         chart.invalidate()
 
-        // Clean side-by-side / vertical legend list
         val containerLegend = view?.findViewById<LinearLayout>(R.id.container_pie_legend)
         containerLegend?.removeAllViews()
         val totalSpend = values.sum()

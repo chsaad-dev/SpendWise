@@ -26,7 +26,6 @@ class WelcomeFragment : Fragment() {
         val prefs = requireActivity().getSharedPreferences("SpendWisePrefs", Context.MODE_PRIVATE)
         val isFirstLaunch = prefs.getBoolean("is_first_launch", true)
         
-        // Immediately bypass if not first launch
         if (!isFirstLaunch) {
             findNavController().navigate(R.id.action_welcome_to_home)
             return View(requireContext())

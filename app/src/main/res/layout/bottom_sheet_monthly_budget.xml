@@ -10,7 +10,6 @@
     android:paddingTop="12dp"
     android:paddingBottom="24dp">
 
-    <!-- Centered Drag Handle -->
     <View
         android:layout_width="36dp"
         android:layout_height="4dp"
@@ -18,7 +17,6 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/bg_drag_handle"/>
 
-    <!-- Header Section with Wallet Icon Badge -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -68,7 +66,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Outlined Currency Input -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_monthly_budget"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
@@ -97,7 +94,6 @@
             android:textStyle="bold"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Quick Preset Chips -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -195,7 +191,6 @@
             app:autoSizeStepGranularity="0.5sp"/>
     </LinearLayout>
 
-    <!-- Save Limit CTA -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_save_budget"
         android:layout_width="match_parent"
@@ -211,7 +206,6 @@
         android:insetBottom="0dp"
         app:elevation="0dp"/>
 
-    <!-- Secondary Row (Remove Limit + Cancel) -->
     <LinearLayout
         android:id="@+id/layout_secondary_buttons"
         android:layout_width="match_parent"

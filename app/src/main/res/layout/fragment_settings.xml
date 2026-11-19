@@ -17,7 +17,6 @@
         android:paddingEnd="16dp"
         android:paddingBottom="16dp">
 
-        <!-- Page Header -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,7 +28,6 @@
             android:textSize="26sp"
             android:textStyle="bold" />
 
-        <!-- ── Section 1: FINANCE ── -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,7 +54,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- Monthly Budget Limit Row -->
                 <LinearLayout
                     android:id="@+id/btn_budget"
                     android:layout_width="match_parent"
@@ -102,7 +99,6 @@
                     android:layout_marginStart="16dp"
                     android:background="@color/stroke_subtle" />
 
-                <!-- Default Currency Row -->
                 <LinearLayout
                     android:id="@+id/btn_currency"
                     android:layout_width="match_parent"
@@ -145,7 +141,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- ── Section 2: APPEARANCE ── -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -172,7 +167,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- Theme Row -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -192,7 +186,6 @@
                         android:textSize="15sp"
                         android:layout_marginEnd="12dp" />
 
-                    <!-- 3-Segment Pill Switcher -->
                     <LinearLayout
                         android:id="@+id/layout_theme_segmented"
                         android:layout_width="210dp"
@@ -202,7 +195,6 @@
                         android:padding="3dp"
                         android:weightSum="3">
 
-                        <!-- System Segment -->
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/card_theme_system"
                             android:layout_width="0dp"
@@ -227,7 +219,6 @@
                                 android:textStyle="bold" />
                         </com.google.android.material.card.MaterialCardView>
 
-                        <!-- Light Segment -->
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/card_theme_light"
                             android:layout_width="0dp"
@@ -251,7 +242,6 @@
                                 android:textSize="12.5sp" />
                         </com.google.android.material.card.MaterialCardView>
 
-                        <!-- Dark Segment -->
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/card_theme_dark"
                             android:layout_width="0dp"
@@ -284,7 +274,6 @@
                     android:layout_marginStart="16dp"
                     android:background="@color/stroke_subtle" />
 
-                <!-- App Language Row -->
                 <LinearLayout
                     android:id="@+id/btn_language"
                     android:layout_width="match_parent"
@@ -327,7 +316,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- ── Section 3: NOTIFICATIONS ── -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -354,7 +342,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- Daily Reminder Switch Row -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -388,7 +375,6 @@
                     android:layout_marginStart="16dp"
                     android:background="@color/stroke_subtle" />
 
-                <!-- Reminder Time Row -->
                 <LinearLayout
                     android:id="@+id/row_reminder_time"
                     android:layout_width="match_parent"
@@ -436,7 +422,6 @@
                     android:layout_marginStart="16dp"
                     android:background="@color/stroke_subtle" />
 
-                <!-- Weekly Summary Switch Row -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -467,7 +452,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- ── Section 4: DATA ── -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -494,7 +478,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- Export Monthly PDF Row -->
                 <LinearLayout
                     android:id="@+id/btn_export_pdf"
                     android:layout_width="match_parent"
@@ -532,7 +515,6 @@
                     android:layout_marginStart="16dp"
                     android:background="@color/stroke_subtle" />
 
-                <!-- Export All as CSV Row -->
                 <LinearLayout
                     android:id="@+id/btn_export_csv"
                     android:layout_width="match_parent"
@@ -570,7 +552,6 @@
                     android:layout_marginStart="16dp"
                     android:background="@color/stroke_subtle" />
 
-                <!-- Backup Database Row -->
                 <LinearLayout
                     android:id="@+id/btn_backup"
                     android:layout_width="match_parent"
@@ -608,7 +589,6 @@
                     android:layout_marginStart="16dp"
                     android:background="@color/stroke_subtle" />
 
-                <!-- Restore Database Row -->
                 <LinearLayout
                     android:id="@+id/btn_restore"
                     android:layout_width="match_parent"
@@ -643,7 +623,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- ── Section 5: DANGER ZONE ── -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -670,7 +649,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- Clear All Categories Row -->
                 <LinearLayout
                     android:id="@+id/btn_clear_categories"
                     android:layout_width="match_parent"
@@ -708,7 +686,6 @@
                     android:layout_marginStart="16dp"
                     android:background="@color/stroke_subtle" />
 
-                <!-- Clear All Expenses Row -->
                 <LinearLayout
                     android:id="@+id/btn_clear_data"
                     android:layout_width="match_parent"
@@ -743,7 +720,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- ── Section 6: INFO ── -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -770,7 +746,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- About Row -->
                 <LinearLayout
                     android:id="@+id/btn_about"
                     android:layout_width="match_parent"
@@ -816,7 +791,6 @@
                     android:layout_marginStart="16dp"
                     android:background="@color/stroke_subtle" />
 
-                <!-- Privacy Policy Row -->
                 <LinearLayout
                     android:id="@+id/btn_privacy"
                     android:layout_width="match_parent"
@@ -854,7 +828,6 @@
                     android:layout_marginStart="16dp"
                     android:background="@color/stroke_subtle" />
 
-                <!-- Rate App Row -->
                 <LinearLayout
                     android:id="@+id/btn_rate"
                     android:layout_width="match_parent"

@@ -57,13 +57,11 @@ class MonthlyBudgetBottomSheet : BottomSheetDialogFragment() {
         val symbol = CurrencyHelper.getCurrencyFormat(requireContext()).currency?.symbol?.trim() ?: "Rs"
         tilBudget.prefixText = "$symbol "
 
-        // Format preset chips
         val numFmt = NumberFormat.getIntegerInstance(Locale.getDefault())
         chip1.text = "$symbol ${numFmt.format(10000)}"
         chip2.text = "$symbol ${numFmt.format(25000)}"
         chip3.text = "$symbol ${numFmt.format(50000)}"
 
-        // Pre-fill current budget if set
         if (currentBudget > 0f) {
             val displayValue = if (currentBudget % 1.0f == 0f) {
                 currentBudget.toInt().toString()

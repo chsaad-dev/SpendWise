@@ -282,7 +282,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         return prefs.getFloat("monthly_budget", 0f)
     }
 
-    // ── Savings Goals ──
     fun insertGoal(goal: SavingsGoal) = viewModelScope.launch {
         repository.insertGoal(goal)
     }
@@ -295,7 +294,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         repository.deleteGoal(goal)
     }
 
-    // ── Split Expenses ──
     fun insertSplitGroup(group: SplitGroup, callback: (Long) -> Unit) {
         viewModelScope.launch {
             val id = repository.insertSplitGroup(group)
@@ -330,7 +328,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         repository.deleteSplitMember(member)
     }
 
-    // ── Duplicate Expense ──
     fun duplicateExpense(expense: Expense) = viewModelScope.launch {
         repository.insertExpense(
             expense.copy(

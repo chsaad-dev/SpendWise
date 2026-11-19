@@ -12,7 +12,6 @@
     android:paddingTop="12dp"
     android:paddingBottom="24dp">
 
-    <!-- Drag Handle Pill -->
     <View
         android:layout_width="36dp"
         android:layout_height="4dp"
@@ -20,14 +19,12 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/bg_drag_handle"/>
 
-    <!-- Header Row -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
-        <!-- Category color badge -->
         <FrameLayout
             android:id="@+id/badge_budget_category"
             android:layout_width="44dp"
@@ -43,7 +40,6 @@
                 tools:src="@drawable/ic_cat_entertainment"/>
         </FrameLayout>
 
-        <!-- Title & Subtitle -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -71,7 +67,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Currency Input Field -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_budget_amount"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
@@ -101,7 +96,6 @@
             android:textStyle="bold"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Quick Preset Chips -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -181,7 +175,6 @@
             app:ensureMinTouchTargetSize="false"/>
     </LinearLayout>
 
-    <!-- Primary CTA: Save Budget -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_save_budget"
         android:layout_width="match_parent"
@@ -196,7 +189,6 @@
         android:insetTop="0dp"
         android:insetBottom="0dp"/>
 
-    <!-- Secondary Row: Remove Limit & Cancel -->
     <LinearLayout
         android:id="@+id/layout_budget_secondary_actions"
         android:layout_width="match_parent"

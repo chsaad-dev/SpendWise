@@ -82,7 +82,6 @@ class ExpenseRepository(
         categoryDao.deleteAllCategories()
     }
 
-    // Recurring expenses
     suspend fun insertRecurring(r: RecurringExpense) {
         recurringExpenseDao.insert(r)
     }
@@ -99,7 +98,6 @@ class ExpenseRepository(
         return recurringExpenseDao.getAllActiveSync()
     }
 
-    // Savings goals
     suspend fun insertGoal(goal: SavingsGoal) {
         savingsGoalDao.insert(goal)
     }
@@ -112,7 +110,6 @@ class ExpenseRepository(
         savingsGoalDao.delete(goal)
     }
 
-    // Split expenses
     suspend fun insertSplitGroup(group: SplitGroup): Long {
         return splitDao.insertGroup(group)
     }

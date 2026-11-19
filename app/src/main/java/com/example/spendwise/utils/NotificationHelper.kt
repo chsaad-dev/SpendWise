@@ -144,9 +144,7 @@ object NotificationHelper {
 
             NotificationManagerCompat.from(context).notify(NOTIF_ID_WEEKLY, notification)
         } catch (e: SecurityException) {
-            // Silently skip
         } catch (e: Exception) {
-            // Silently handle any DB/formatting issues
         }
     }
 }

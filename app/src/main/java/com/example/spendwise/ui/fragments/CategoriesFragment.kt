@@ -134,7 +134,6 @@ class CategoriesFragment : Fragment() {
             fun bind(category: Category) {
                 tvName.text = category.name
 
-                // Category color
                 val color = if (category.colorHex != "#000000" && category.colorHex.isNotBlank()) category.colorHex
                 else categoryColors[category.name] ?: "#64748B"
                 val parsedColor = try {
@@ -143,7 +142,6 @@ class CategoriesFragment : Fragment() {
                     Color.parseColor("#64748B")
                 }
 
-                // 15% opacity rounded square badge (40dp x 40dp, 12dp corner radius)
                 val badgeBg = GradientDrawable().apply {
                     shape = GradientDrawable.RECTANGLE
                     cornerRadius = itemView.context.resources.displayMetrics.density * 12f
@@ -158,7 +156,6 @@ class CategoriesFragment : Fragment() {
                 }
                 badgeLayout.background = badgeBg
 
-                // Crisp category vector icon
                 val iconRes = when (category.name.lowercase().trim()) {
                     "food" -> R.drawable.ic_cat_food
                     "transport" -> R.drawable.ic_cat_transport
@@ -170,10 +167,8 @@ class CategoriesFragment : Fragment() {
                 ivIcon.setImageResource(iconRes)
                 ivIcon.setColorFilter(parsedColor)
 
-                // Optional legacy dot compatibility
                 colorDot?.visibility = View.GONE
 
-                // Interactive Budget Pill Badge
                 if (category.monthlyBudget > 0) {
                     val fmt = CurrencyHelper.getCurrencyFormat(itemView.context)
                     val formatted = if (category.monthlyBudget % 1.0 == 0.0) {

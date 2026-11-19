@@ -56,7 +56,6 @@ class AddExpenseFragment : Fragment() {
     private var selectedCategory: String = ""
     private var categoryList: List<Category> = emptyList()
 
-    // Receipt photo picker
     private val pickImageLauncher = registerForActivityResult(
         ActivityResultContracts.GetContent()
     ) { uri: Uri? ->
@@ -115,13 +114,11 @@ class AddExpenseFragment : Fragment() {
 
         val density = resources.displayMetrics.density
 
-        // Back button
         btnBack.setOnClickListener {
             it.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             findNavController().popBackStack()
         }
 
-        // Live Currency Prefix
         val symbol = try {
             CurrencyHelper.getCurrencyFormat(requireContext()).currency?.symbol?.trim() ?: "Rs"
         } catch (e: Exception) {
@@ -129,7 +126,6 @@ class AddExpenseFragment : Fragment() {
         }
         tvCurrencyPrefix.text = symbol
 
-        // Quick Amount Chips
         fun addQuickAmount(delta: Double) {
             val current = etAmount.text.toString().trim().toDoubleOrNull() ?: 0.0
             val updated = current + delta
@@ -145,7 +141,6 @@ class AddExpenseFragment : Fragment() {
         chipAdd1000.setOnClickListener { addQuickAmount(1000.0) }
         chipAdd5000.setOnClickListener { addQuickAmount(5000.0) }
 
-        // Category Pills rendering logic
         fun renderCategoryPills(categories: List<Category>) {
             categoryList = categories
             layoutCategoryPills.removeAllViews()
@@ -208,7 +203,6 @@ class AddExpenseFragment : Fragment() {
             }
         }
 
-        // Mode switching logic
         fun updateMode(income: Boolean) {
             isIncome = income
             if (!isIncome) {
@@ -272,7 +266,6 @@ class AddExpenseFragment : Fragment() {
             }
         }
 
-        // Receipt attachment
         rowAttachReceipt.setOnClickListener {
             it.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             pickImageLauncher.launch("image/*")
@@ -300,7 +293,6 @@ class AddExpenseFragment : Fragment() {
             rowAttachReceipt.visibility = View.VISIBLE
         }
 
-        // Recurrence type dropdown
         val recurrenceOptions = listOf("Daily", "Weekly", "Monthly")
         actvRecurrence.setAdapter(
             ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, recurrenceOptions)
@@ -311,7 +303,6 @@ class AddExpenseFragment : Fragment() {
             tilRecurrence.visibility = if (isChecked) View.VISIBLE else View.GONE
         }
 
-        // Check Edit Mode
         editExpenseId = arguments?.getInt("expenseId", -1) ?: -1
         isEditMode = editExpenseId != -1
 
@@ -356,7 +347,6 @@ class AddExpenseFragment : Fragment() {
             updateMode(false)
         }
 
-        // Date Picker
         val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, day ->
             calendar.set(Calendar.YEAR, year)
             calendar.set(Calendar.MONTH, month)
@@ -375,12 +365,10 @@ class AddExpenseFragment : Fragment() {
         }
         updateDateLabel(etDate)
 
-        // Observe Categories
         viewModel.allCategories.observe(viewLifecycleOwner) { categories ->
             renderCategoryPills(categories)
         }
 
-        // Save Button
         btnSave.setOnClickListener {
             val amountStr = etAmount.text.toString().trim()
             val category = if (isIncome) "Income" else selectedCategory.trim()
@@ -449,7 +437,6 @@ class AddExpenseFragment : Fragment() {
             findNavController().popBackStack()
         }
 
-        // Delete Button
         btnDelete.setOnClickListener {
             it.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
             DeleteTransactionBottomSheet.newInstance(isIncome) {

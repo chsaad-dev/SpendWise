@@ -18,14 +18,12 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Row 1: Icon + Title/Deadline + Percentage Pill -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-            <!-- Rounded-square icon badge -->
             <FrameLayout
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -41,7 +39,6 @@
                     android:contentDescription="@null"/>
             </FrameLayout>
 
-            <!-- Title & Deadline -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -86,7 +83,6 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Compact percentage badge pill -->
             <TextView
                 android:id="@+id/tv_goal_percent"
                 android:layout_width="wrap_content"
@@ -100,7 +96,6 @@
                 tools:text="0%"/>
         </LinearLayout>
 
-        <!-- Row 2: Progress Bar & Amounts -->
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/progress_goal"
             android:layout_width="match_parent"
@@ -136,7 +131,6 @@
                 tools:text="of Rs 5,000"/>
         </LinearLayout>
 
-        <!-- Row 3: Action Footer with subtle divider -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

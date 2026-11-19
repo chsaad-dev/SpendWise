@@ -12,7 +12,6 @@
     android:paddingTop="12dp"
     android:paddingBottom="24dp">
 
-    <!-- Drag Handle Pill -->
     <View
         android:layout_width="36dp"
         android:layout_height="4dp"
@@ -20,7 +19,6 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/bg_drag_handle" />
 
-    <!-- Dynamic Title -->
     <TextView
         android:id="@+id/tv_delete_transaction_title"
         android:layout_width="match_parent"
@@ -32,7 +30,6 @@
         android:textSize="19sp"
         android:textStyle="bold" />
 
-    <!-- Subtitle -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,7 +40,6 @@
         android:textColor="@color/text_secondary"
         android:textSize="13.5sp" />
 
-    <!-- Primary Destructive CTA -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_confirm_delete_transaction"
         android:layout_width="match_parent"
@@ -59,7 +55,6 @@
         app:backgroundTint="@color/danger_primary"
         app:cornerRadius="14dp" />
 
-    <!-- Secondary Cancel CTA -->
     <com.google.android.material.button.MaterialButton
         style="@style/Widget.Material3.Button.TonalButton"
         android:id="@+id/btn_cancel_delete_transaction"

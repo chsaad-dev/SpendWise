@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- 1. Top Bar -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -48,7 +47,6 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- 2. Expense Summary Hero Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -89,7 +87,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- 3. Split Mode Segmented Pill -->
         <LinearLayout
             android:id="@+id/layout_segmented_split"
             android:layout_width="match_parent"
@@ -101,7 +98,6 @@
             android:padding="4dp"
             android:weightSum="2">
 
-            <!-- Equal Split Segment (active by default) -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_split_equal"
                 android:layout_width="0dp"
@@ -126,7 +122,6 @@
                     android:textStyle="bold" />
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Custom Split Segment -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_split_custom"
                 android:layout_width="0dp"
@@ -151,7 +146,6 @@
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
 
-        <!-- 4. Description Field -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -174,7 +168,6 @@
                 android:textSize="14.5sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- 5. Inline Add Member Row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -222,7 +215,6 @@
                 app:cornerRadius="14dp" />
         </LinearLayout>
 
-        <!-- 6. Members RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_members"
             android:layout_width="match_parent"
@@ -231,7 +223,6 @@
             android:layout_marginTop="8dp"
             android:nestedScrollingEnabled="false" />
 
-        <!-- 7. Save Split CTA -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_save_split"
             android:layout_width="match_parent"

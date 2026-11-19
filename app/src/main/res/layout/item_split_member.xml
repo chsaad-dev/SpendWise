@@ -19,7 +19,6 @@
         android:paddingHorizontal="14dp"
         android:paddingVertical="12dp">
 
-        <!-- Member Name -->
         <TextView
             android:id="@+id/tv_member_name"
             android:layout_width="0dp"
@@ -32,7 +31,6 @@
             android:textColor="@color/text_primary"
             android:textSize="15sp" />
 
-        <!-- Equal split: read-only label; Custom split: editable input -->
         <TextView
             android:id="@+id/tv_member_share"
             android:layout_width="wrap_content"
@@ -60,7 +58,6 @@
             android:textStyle="bold"
             android:visibility="gone" />
 
-        <!-- Remove Button -->
         <ImageButton
             android:id="@+id/btn_delete_member"
             android:layout_width="30dp"

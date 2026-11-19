@@ -13,7 +13,6 @@
     android:paddingTop="12dp"
     android:paddingBottom="24dp">
 
-    <!-- Drag Handle Pill -->
     <View
         android:layout_width="36dp"
         android:layout_height="4dp"
@@ -21,7 +20,6 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/bg_drag_handle"/>
 
-    <!-- Centered Warning Halo -->
     <FrameLayout
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -36,7 +34,6 @@
             android:contentDescription="@null"/>
     </FrameLayout>
 
-    <!-- Title -->
     <TextView
         android:id="@+id/tv_delete_goal_title"
         android:layout_width="wrap_content"
@@ -48,7 +45,6 @@
         android:gravity="center"
         tools:text="Delete &quot;New Car&quot;?"/>
 
-    <!-- Copy / Description -->
     <TextView
         android:id="@+id/tv_delete_goal_desc"
         android:layout_width="wrap_content"
@@ -61,7 +57,6 @@
         android:lineSpacingMultiplier="1.4"
         android:text="This goal and its saved progress record will be permanently removed."/>
 
-    <!-- Action Buttons -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_confirm_delete_goal"
         android:layout_width="match_parent"

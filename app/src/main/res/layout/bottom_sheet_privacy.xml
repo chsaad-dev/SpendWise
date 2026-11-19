@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Top Bar with Centered Drag Handle and Quick Close X Button -->
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,7 +46,6 @@
                 android:contentDescription="Close"/>
         </FrameLayout>
 
-        <!-- Hero Header -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -57,7 +55,6 @@
             android:paddingTop="8dp"
             android:paddingBottom="16dp">
 
-            <!-- Privacy Shield Icon -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="76dp"
                 android:layout_height="76dp"
@@ -96,7 +93,6 @@
                 android:textColor="@color/brand_primary"
                 android:textStyle="bold" />
 
-            <!-- Last Updated Badge -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -118,14 +114,12 @@
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
 
-        <!-- Divider -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginHorizontal="20dp"
             android:background="@color/stroke_subtle" />
 
-        <!-- Core Commitment Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -177,7 +171,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Section: Policy Breakdown -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -196,7 +189,6 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="10dp">
 
-            <!-- Item 1: Local Storage -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -257,7 +249,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Item 2: Zero Data Collection -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -318,7 +309,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Item 3: Zero Telemetry & Analytics -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -379,7 +369,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Item 4: Zero Ads -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -440,7 +429,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Item 5: Offline Operation -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -501,7 +489,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Item 6: Receipt Photos Security -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -562,7 +549,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Item 7: Data Ownership, Backups & Exports -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -623,7 +609,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Item 8: Total Data Deletion -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -685,7 +670,6 @@
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
 
-        <!-- Section: Compliance & Contact -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -758,7 +742,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Bottom Action Button -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

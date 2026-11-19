@@ -14,7 +14,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- 1. Single-Line Top Bar -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -50,7 +49,6 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- 2. Full-Width Segmented Mode Switcher -->
         <LinearLayout
             android:id="@+id/layout_segmented_switcher"
             android:layout_width="match_parent"
@@ -62,7 +60,6 @@
             android:padding="3dp"
             android:weightSum="2">
 
-            <!-- Expense Segment -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_type_expense"
                 android:layout_width="0dp"
@@ -87,7 +84,6 @@
                     android:textStyle="bold" />
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Income Segment -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_type_income"
                 android:layout_width="0dp"
@@ -112,7 +108,6 @@
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
 
-        <!-- 3. Hero Amount Input Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -141,7 +136,6 @@
                     android:textSize="11.5sp"
                     android:textStyle="bold" />
 
-                <!-- Large Currency Input Row -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -175,7 +169,6 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Subtle Quick-Amount Pills -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -229,7 +222,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- 4. Grouped Details Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -247,7 +239,6 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <!-- Category Section (Expense only) -->
                 <LinearLayout
                     android:id="@+id/layout_category_section"
                     android:layout_width="match_parent"
@@ -283,7 +274,6 @@
                     </HorizontalScrollView>
                 </LinearLayout>
 
-                <!-- Date Picker Field -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_date"
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
@@ -310,7 +300,6 @@
                         android:textSize="14.5sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Note Field -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_note"
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
@@ -334,7 +323,6 @@
                         android:textSize="14.5sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Tags Field (Expense only) -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_tags"
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
@@ -361,7 +349,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- 5. Attach Receipt Card (Expense only) -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/layout_receipt"
             android:layout_width="match_parent"
@@ -381,7 +368,6 @@
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="14dp">
 
-                <!-- Tap row to attach photo -->
                 <LinearLayout
                     android:id="@+id/row_attach_receipt"
                     android:layout_width="match_parent"
@@ -417,7 +403,6 @@
                         android:textSize="12.5sp" />
                 </LinearLayout>
 
-                <!-- Attached Preview Container -->
                 <LinearLayout
                     android:id="@+id/layout_receipt_attached"
                     android:layout_width="match_parent"
@@ -495,7 +480,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- 6. Recurring Expense Card (Expense only, not edit mode) -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/layout_recurring"
             android:layout_width="match_parent"
@@ -553,7 +537,6 @@
                         app:trackTint="@color/switch_track_selector" />
                 </LinearLayout>
 
-                <!-- Recurrence dropdown -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_recurrence"
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
@@ -579,7 +562,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- 7. Primary Action Button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_save"
             android:layout_width="match_parent"
@@ -594,7 +576,6 @@
             app:backgroundTint="@color/brand_primary"
             app:cornerRadius="16dp" />
 
-        <!-- Split Expense Button (edit mode only) -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_split"
             style="@style/Widget.Material3.Button.TonalButton"
@@ -613,7 +594,6 @@
             app:backgroundTint="@color/brand_primary_container"
             app:cornerRadius="16dp" />
 
-        <!-- Delete Expense Button (edit mode only) -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_delete"
             style="@style/Widget.Material3.Button.TextButton"

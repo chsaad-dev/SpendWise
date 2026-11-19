@@ -22,7 +22,6 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Top Header Row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,7 +54,6 @@
                     tools:text="6 transactions" />
             </LinearLayout>
 
-            <!-- Net Balance Pill -->
             <TextView
                 android:id="@+id/tv_month_total"
                 android:layout_width="wrap_content"
@@ -70,14 +68,12 @@
                 tools:text="+Rs 27,500.00" />
         </LinearLayout>
 
-        <!-- Inset Divider -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="12dp"
             android:background="@color/stroke_subtle" />
 
-        <!-- Clean Category Breakdown List -->
         <LinearLayout
             android:id="@+id/layout_categories"
             android:layout_width="match_parent"
@@ -85,7 +81,6 @@
             android:orientation="vertical"
             android:paddingTop="10dp" />
 
-        <!-- Subtle Tappable Footer -->
         <TextView
             android:id="@+id/tv_view_details"
             android:layout_width="wrap_content"

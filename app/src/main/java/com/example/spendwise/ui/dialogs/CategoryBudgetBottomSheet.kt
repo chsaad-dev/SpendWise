@@ -68,7 +68,6 @@ class CategoryBudgetBottomSheet : BottomSheetDialogFragment() {
 
         tvTitle.text = "Budget for ${cat.name}"
 
-        // Dynamic Category Icon & Color
         val categoryColors = mapOf(
             "Food" to "#FF6B35",
             "Transport" to "#1B98E0",
@@ -110,7 +109,6 @@ class CategoryBudgetBottomSheet : BottomSheetDialogFragment() {
         ivCategoryIcon.setImageResource(iconRes)
         ivCategoryIcon.setColorFilter(parsedColor)
 
-        // Dynamic Currency
         val fmt = CurrencyHelper.getCurrencyFormat(requireContext())
         val symbol = fmt.currency?.getSymbol(Locale.getDefault()) ?: fmt.currency?.symbol ?: ""
         val prefix = if (symbol.isNotBlank()) "$symbol " else "Rs "
@@ -134,7 +132,6 @@ class CategoryBudgetBottomSheet : BottomSheetDialogFragment() {
             etAmount.setSelection(etAmount.text?.length ?: 0)
         }
 
-        // Pre-fill existing budget if any
         if (cat.monthlyBudget > 0) {
             val budgetFormatted = if (cat.monthlyBudget % 1.0 == 0.0) {
                 cat.monthlyBudget.toLong().toString()

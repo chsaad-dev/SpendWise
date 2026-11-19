@@ -67,13 +67,11 @@ object PdfExportHelper {
 
         var yPos = MARGIN + 20f
 
-        // Draw Title
         canvas.drawText("SpendWise Monthly Report", MARGIN, yPos, titlePaint)
         yPos += 30f
         canvas.drawText(monthYearTitle, MARGIN, yPos, headerPaint)
         yPos += 40f
 
-        // Draw Summary
         canvas.drawText("Summary", MARGIN, yPos, headerPaint)
         yPos += 20f
         
@@ -94,7 +92,6 @@ object PdfExportHelper {
 
         valPaint.color = Color.BLACK // Reset
 
-        // Draw Category Breakdown
         if (categoryTotals.isNotEmpty()) {
             canvas.drawText("Category Breakdown (Expenses)", MARGIN, yPos, headerPaint)
             yPos += 20f
@@ -113,12 +110,10 @@ object PdfExportHelper {
             yPos += 20f
         }
 
-        // Draw Transactions
         if (expenses.isNotEmpty()) {
             canvas.drawText("Transactions", MARGIN, yPos, headerPaint)
             yPos += 20f
 
-            // Table Header
             canvas.drawText("Date", MARGIN, yPos, textPaint)
             canvas.drawText("Category", MARGIN + 80f, yPos, textPaint)
             // Limit note width, we'll draw amount at right edge

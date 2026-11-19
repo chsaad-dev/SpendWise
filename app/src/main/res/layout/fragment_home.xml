@@ -18,7 +18,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Single-Row Top Header & Month Switcher -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -28,7 +27,6 @@
                 android:paddingTop="12dp"
                 android:paddingBottom="4dp">
 
-                <!-- Left Title -->
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -39,7 +37,6 @@
                     android:textStyle="bold"
                     android:textColor="@color/text_primary" />
 
-                <!-- Clean Month Pill -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -81,7 +78,6 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Slim Search Pill -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
@@ -115,7 +111,6 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
-            <!-- Upgraded Total Balance Hero Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -133,7 +128,6 @@
                     android:background="@drawable/bg_hero_card_gradient"
                     android:padding="18dp">
 
-                    <!-- Top Row -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -148,7 +142,6 @@
                             android:textSize="13sp"
                             android:textColor="@color/hero_card_text_secondary" />
 
-                        <!-- Translucent pill for transaction count -->
                         <TextView
                             android:id="@+id/tv_transaction_count"
                             android:layout_width="wrap_content"
@@ -162,7 +155,6 @@
                             tools:text="6 transactions" />
                     </LinearLayout>
 
-                    <!-- Hero Balance -->
                     <TextView
                         android:id="@+id/tv_total_balance"
                         android:layout_width="wrap_content"
@@ -175,7 +167,6 @@
                         android:fontFeatureSettings="tnum"
                         tools:text="Rs 27,500.00" />
 
-                    <!-- Bottom Mini Summary Strip -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -186,7 +177,6 @@
                         android:orientation="horizontal"
                         android:weightSum="2">
 
-                        <!-- Income -->
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -213,7 +203,6 @@
                                 tools:text="Rs 50,000.00" />
                         </LinearLayout>
 
-                        <!-- Expenses -->
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -241,7 +230,6 @@
                         </LinearLayout>
                     </LinearLayout>
 
-                    <!-- Monthly Budget Limit Progress Bar (shown if limit set) -->
                     <LinearLayout
                         android:id="@+id/layout_budget"
                         android:layout_width="match_parent"
@@ -271,7 +259,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Budget Envelopes Section -->
             <LinearLayout
                 android:id="@+id/layout_category_budgets"
                 android:layout_width="match_parent"
@@ -309,7 +296,6 @@
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
 
-            <!-- Biggest Spend Insight Banner -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_insight"
                 android:layout_width="match_parent"
@@ -334,7 +320,6 @@
                     tools:text="💡 Biggest spend this month: Health (44%)" />
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Category Breakdown Donut Card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_pie_chart"
                 android:layout_width="match_parent"
@@ -369,7 +354,6 @@
                         android:layout_height="220dp"
                         android:layout_marginTop="8dp" />
 
-                    <!-- Legend list -->
                     <LinearLayout
                         android:id="@+id/container_pie_legend"
                         android:layout_width="match_parent"
@@ -379,7 +363,6 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Single-Line Horizontal Category Filter -->
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -399,7 +382,6 @@
                     app:chipSpacingHorizontal="8dp" />
             </HorizontalScrollView>
 
-            <!-- Recent Transactions Header -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -412,7 +394,6 @@
                 android:textStyle="bold"
                 android:textColor="@color/text_primary" />
 
-            <!-- Transactions RecyclerView -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_expenses"
                 android:layout_width="match_parent"
@@ -421,7 +402,6 @@
                 android:paddingHorizontal="16dp"
                 android:clipToPadding="false" />
 
-            <!-- Empty state for transactions -->
             <LinearLayout
                 android:id="@+id/layout_empty"
                 android:layout_width="match_parent"
@@ -460,7 +440,6 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Floating Action Button -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add"
         android:layout_width="wrap_content"

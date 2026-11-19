@@ -8,7 +8,6 @@
     android:fitsSystemWindows="false"
     android:background="#090A0D">
 
-    <!-- Center Interactive Image View -->
     <ImageView
         android:id="@+id/iv_full_receipt"
         android:layout_width="match_parent"
@@ -16,7 +15,6 @@
         android:scaleType="matrix"
         android:contentDescription="Full Receipt" />
 
-    <!-- Top Overlay Bar (status-bar safe) -->
     <LinearLayout
         android:id="@+id/top_overlay_bar"
         android:layout_width="match_parent"
@@ -28,7 +26,6 @@
         android:paddingBottom="12dp"
         android:background="#66000000">
 
-        <!-- Circular translucent close button -->
         <ImageButton
             android:id="@+id/btn_close_viewer"
             android:layout_width="40dp"
@@ -41,7 +38,6 @@
             android:contentDescription="Close"
             app:tint="#FFFFFF" />
 
-        <!-- Title -->
         <TextView
             android:id="@+id/tv_viewer_title"
             android:layout_width="0dp"
