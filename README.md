@@ -3,13 +3,13 @@
 **Smart. Secure. Simple.**
 Your personal finance companion for Android.
 
-![Kotlin](https://img.shields.io/badge/Kotlin-1.9.0-purple?style=flat&logo=kotlin) ![Android](https://img.shields.io/badge/Android-SDK%2036-green?style=flat&logo=android) [![Download APK](https://img.shields.io/badge/Download-APK%20v1.1.0-brightgreen?style=flat&logo=android)](https://github.com/chsaad-dev/SpendWise/raw/main/apk/SpendWise-v1.1.0-debug.apk) ![License](https://img.shields.io/badge/License-MIT-blue?style=flat)
+![Kotlin](https://img.shields.io/badge/Kotlin-1.9.0-purple?style=flat&logo=kotlin) ![Android](https://img.shields.io/badge/Android-SDK%2036-green?style=flat&logo=android) [![Download APK](https://img.shields.io/badge/Download-APK%20v1.1.1-brightgreen?style=flat&logo=android)](https://github.com/chsaad-dev/SpendWise/raw/main/apk/SpendWise-v1.1.1-debug.apk) ![License](https://img.shields.io/badge/License-MIT-blue?style=flat)
 
 ## Download and Install
 
 Download the latest debug build directly on any Android device running Android 7.0 or higher.
 
-**[Download SpendWise v1.1.0 Debug APK](https://github.com/chsaad-dev/SpendWise/raw/main/apk/SpendWise-v1.1.0-debug.apk)** (~7.5 MB)
+**[Download SpendWise v1.1.1 Debug APK](https://github.com/chsaad-dev/SpendWise/raw/main/apk/SpendWise-v1.1.1-debug.apk)** (~7.6 MB)
 
 ## Overview
 
@@ -22,6 +22,22 @@ SpendWise is a modern, offline-first Android expense tracker built with Material
 | ![Dashboard](docs/screenshots/dashboard.png) | ![Add Expense](docs/screenshots/add_expense.png) | ![Spending Trends](docs/screenshots/analysis.png) |
 | **Reports and Export** | **Reminders and Settings** | **Light and Dark Themes** |
 | ![Reports and Export](docs/screenshots/report.png) | ![Reminders and Settings](docs/screenshots/settings.png) | ![Light and Dark Themes](docs/screenshots/light_dark.png) |
+
+## What is New in v1.1.1
+
+This update introduces a three-widget home screen suite built with XML RemoteViews, Room, and Coroutines, along with tablet layout refinements across all primary screens.
+
+**Home Screen Widgets**
+
+Three resizable widgets let users track and log finances directly from the Android home screen: Quick Add (displays today's total spending with one-tap Add Expense and Add Income shortcuts), Balance and Budget Pulse (displays net balance, monthly income and expenses, and a color-coded monthly budget progress bar), and Recent Transactions (shows the latest three transactions with relative dates and signed amounts).
+
+**Theme Sync and Live Refresh**
+
+All widgets read the user's saved theme preference (System, Light, or Dark) and render matching v1.1.0 surfaces and emerald accents. A centralized update helper automatically refreshes every active widget whenever transactions, monthly budgets, currency settings, theme selection, or restored backups change.
+
+**Deep Link Routing**
+
+Widget buttons route directly into Add Transaction (pre-selecting Expense or Income mode) or open the Monthly Budget sheet cleanly without disrupting the cached five-tab navigation state.
 
 ## What is New in v1.1.0
 
@@ -73,6 +89,10 @@ Monthly spending limits can be set per category and tracked visually through pro
 
 Monthly PDF export with a full category breakdown. CSV export for all transactions. Expense splitting among friends or groups with equal and custom split modes. Savings goals with progress tracking. Recurring transactions for automating regular payments. Database backup and restore with WAL checkpointing.
 
+**Home Screen Widgets**
+
+Three home screen widgets (Quick Add, Balance and Budget Pulse, and Recent Transactions) provide instant access to today's spending, net balance, budget progress, recent entries, and one-tap transaction logging.
+
 **Notifications**
 
 Daily reminders at a user-configured time and a weekly spending summary delivered via WorkManager-scheduled notifications.
@@ -117,8 +137,12 @@ com.example.spendwise
         fragments             Home, History, Categories, Goals, Settings, AddExpense, Split
         viewmodel             MainViewModel
     utils                     CurrencyHelper, NotificationHelper, PdfExportHelper
+    BudgetPulseWidgetProvider.kt
     MainActivity.kt
+    QuickAddWidgetProvider.kt
+    RecentActivityWidgetProvider.kt
     SpendWiseApp.kt
+    WidgetUpdateHelper.kt
 ```
 
 ## Database Schema
@@ -165,6 +189,10 @@ Connect an Android device via USB or start an AVD, then click Run or press Shift
 | JDK | 21 (JetBrains Runtime recommended) |
 
 ## Changelog
+
+**v1.1.1 (November 2026)**
+
+Added three-widget home screen suite (Quick Add, Balance and Budget Pulse, Recent Transactions) with Light and Dark theme sync, automatic Room and preference refresh triggers, and deep-link routing. Added tablet layout responsiveness across all main tabs. Version code 7.
 
 **v1.1.0 (November 2026)**
 

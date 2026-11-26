@@ -46,6 +46,21 @@ interface ExpenseDao {
     @Query("SELECT category, SUM(amount) as total FROM expenses WHERE isIncome = 0 AND date BETWEEN :startDate AND :endDate GROUP BY category")
     suspend fun getCategoryTotals(startDate: Long, endDate: Long): List<CategoryTotal>
 
+    @Query("SELECT COALESCE(SUM(amount), 0.0) FROM expenses WHERE isIncome = 0 AND date >= :startDate AND date <= :endDate")
+    suspend fun getExpenseSumInRange(startDate: Long, endDate: Long): Double
+
+    @Query("SELECT COALESCE(SUM(amount), 0.0) FROM expenses WHERE isIncome = 1 AND date >= :startDate AND date <= :endDate")
+    suspend fun getIncomeSumInRange(startDate: Long, endDate: Long): Double
+
+    @Query("SELECT COALESCE(SUM(amount), 0.0) FROM expenses WHERE isIncome = 0")
+    suspend fun getTotalExpenseSync(): Double
+
+    @Query("SELECT COALESCE(SUM(amount), 0.0) FROM expenses WHERE isIncome = 1")
+    suspend fun getTotalIncomeSync(): Double
+
+    @Query("SELECT * FROM expenses ORDER BY date DESC, id DESC LIMIT :limit")
+    suspend fun getRecentExpensesSync(limit: Int): List<Expense>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertExpense(expense: Expense)
 

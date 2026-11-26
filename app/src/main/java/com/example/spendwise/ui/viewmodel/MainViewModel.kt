@@ -157,14 +157,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun insertExpense(expense: Expense) = viewModelScope.launch {
         repository.insertExpense(expense)
+        com.example.spendwise.WidgetUpdateHelper.updateAllWidgets(getApplication())
     }
 
     fun updateExpense(expense: Expense) = viewModelScope.launch {
         repository.updateExpense(expense)
+        com.example.spendwise.WidgetUpdateHelper.updateAllWidgets(getApplication())
     }
 
     fun deleteExpense(expense: Expense) = viewModelScope.launch {
         repository.deleteExpense(expense)
+        com.example.spendwise.WidgetUpdateHelper.updateAllWidgets(getApplication())
     }
 
     fun insertCategory(category: Category) = viewModelScope.launch {
@@ -181,6 +184,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun clearAllData() = viewModelScope.launch {
         repository.deleteAllExpenses()
+        com.example.spendwise.WidgetUpdateHelper.updateAllWidgets(getApplication())
     }
 
     fun clearAllCategories() = viewModelScope.launch {
@@ -205,6 +209,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             val activeRecurrings = repository.getAllActiveRecurringSync()
             val now = System.currentTimeMillis()
+            var anyGenerated = false
 
             for (r in activeRecurrings) {
                 val lastCal = Calendar.getInstance().apply { timeInMillis = r.lastProcessedDate }
@@ -236,7 +241,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                         )
                     )
                     repository.updateRecurring(r.copy(lastProcessedDate = now))
+                    anyGenerated = true
                 }
+            }
+
+            if (anyGenerated) {
+                com.example.spendwise.WidgetUpdateHelper.updateAllWidgets(getApplication())
             }
         }
     }
@@ -328,6 +338,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         repository.deleteSplitMember(member)
     }
 
+    fun refreshMonthFilter() {
+        val currentCal = _selectedMonthCalendar.value ?: Calendar.getInstance()
+        setMonthFilter(currentCal)
+    }
+
     fun duplicateExpense(expense: Expense) = viewModelScope.launch {
         repository.insertExpense(
             expense.copy(
@@ -335,5 +350,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 date = System.currentTimeMillis()
             )
         )
+        com.example.spendwise.WidgetUpdateHelper.updateAllWidgets(getApplication())
     }
 }

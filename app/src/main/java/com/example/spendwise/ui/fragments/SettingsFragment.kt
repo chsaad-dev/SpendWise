@@ -198,6 +198,7 @@ class SettingsFragment : Fragment() {
 
             updateThemeSelectorUi(mode)
             SpendWiseApp.applyThemeMode(mode)
+            com.example.spendwise.WidgetUpdateHelper.updateAllWidgets(requireContext())
         }
 
         val initialMode = SpendWiseApp.getSavedThemeMode(requireContext())
@@ -351,11 +352,15 @@ class SettingsFragment : Fragment() {
                 }
                 Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
                 updateBudgetValue()
+                viewModel.refreshMonthFilter()
+                com.example.spendwise.WidgetUpdateHelper.updateAllWidgets(requireContext())
             },
             onRemove = {
                 prefs.edit().putFloat("monthly_budget", 0f).apply()
                 Toast.makeText(context, "Budget limit removed", Toast.LENGTH_SHORT).show()
                 updateBudgetValue()
+                viewModel.refreshMonthFilter()
+                com.example.spendwise.WidgetUpdateHelper.updateAllWidgets(requireContext())
             }
         ).show(childFragmentManager, MonthlyBudgetBottomSheet.TAG)
     }
@@ -368,6 +373,7 @@ class SettingsFragment : Fragment() {
             Toast.makeText(context, "Currency set to $displayName", Toast.LENGTH_SHORT).show()
             updateCurrencyValue()
             updateBudgetValue()
+            com.example.spendwise.WidgetUpdateHelper.updateAllWidgets(requireContext())
         }.show(childFragmentManager, CurrencyPickerBottomSheet.TAG)
     }
 
@@ -748,6 +754,9 @@ class SettingsFragment : Fragment() {
                     ctx.contentResolver.openInputStream(uri)?.use { input ->
                         FileOutputStream(dbFile).use { output -> input.copyTo(output) }
                     } ?: throw IllegalStateException("Cannot open backup file")
+
+                    // 4. Refresh widgets with restored database before restarting
+                    com.example.spendwise.WidgetUpdateHelper.updateAllWidgetsSync(ctx)
                 }
 
                 Toast.makeText(ctx, "Database restored. Restarting…", Toast.LENGTH_SHORT).show()

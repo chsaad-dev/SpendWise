@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">SpendWise</string>
+    <string name="widget_quick_add_label">Quick Add Expense &amp; Income</string>
+    <string name="widget_quick_add_desc">See today\'s spending and log an expense or income in one tap.</string>
+    <string name="widget_budget_pulse_label">Balance &amp; Monthly Budget</string>
+    <string name="widget_budget_pulse_desc">Track your net balance, monthly income/expense, and budget progress.</string>
+    <string name="widget_recent_activity_label">Recent Transactions</string>
+    <string name="widget_recent_activity_desc">View your latest three transactions and quickly add new ones.</string>
 </resources>

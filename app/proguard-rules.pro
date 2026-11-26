@@ -17,9 +17,13 @@
     public void set*(...);
 }
 
-# --- SpendWise Application & App Widget ---
+# --- SpendWise Application & App Widgets ---
 -keep class com.example.spendwise.SpendWiseApp { *; }
 -keep class com.example.spendwise.QuickAddWidgetProvider { *; }
+-keep class com.example.spendwise.BudgetPulseWidgetProvider { *; }
+-keep class com.example.spendwise.RecentActivityWidgetProvider { *; }
+-keep class com.example.spendwise.WidgetUpdateHelper { *; }
+-keep class com.example.spendwise.WidgetUpdateHelper$* { *; }
 
 # --- Android Room (Keep all Entities, DAOs, Database & Models intact) ---
 -keep class androidx.room.** { *; }

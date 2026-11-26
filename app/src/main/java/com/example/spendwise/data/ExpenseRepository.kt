@@ -42,6 +42,26 @@ class ExpenseRepository(
         return expenseDao.getCategoryTotals(start, end)
     }
 
+    suspend fun getExpenseSumInRange(startDate: Long, endDate: Long): Double {
+        return expenseDao.getExpenseSumInRange(startDate, endDate)
+    }
+
+    suspend fun getIncomeSumInRange(startDate: Long, endDate: Long): Double {
+        return expenseDao.getIncomeSumInRange(startDate, endDate)
+    }
+
+    suspend fun getTotalExpenseSync(): Double {
+        return expenseDao.getTotalExpenseSync()
+    }
+
+    suspend fun getTotalIncomeSync(): Double {
+        return expenseDao.getTotalIncomeSync()
+    }
+
+    suspend fun getRecentExpensesSync(limit: Int): List<Expense> {
+        return expenseDao.getRecentExpensesSync(limit)
+    }
+
     fun searchExpenses(query: String): LiveData<List<Expense>> {
         return expenseDao.searchExpenses(query)
     }

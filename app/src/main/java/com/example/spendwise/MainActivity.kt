@@ -12,9 +12,11 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
@@ -25,11 +27,14 @@ import androidx.core.view.updatePadding
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
+import com.example.spendwise.ui.dialogs.MonthlyBudgetBottomSheet
 import com.example.spendwise.ui.fragments.CategoriesFragment
 import com.example.spendwise.ui.fragments.HistoryFragment
 import com.example.spendwise.ui.fragments.HomeFragment
 import com.example.spendwise.ui.fragments.SavingsGoalFragment
 import com.example.spendwise.ui.fragments.SettingsFragment
+import com.example.spendwise.ui.viewmodel.MainViewModel
+import com.example.spendwise.utils.CurrencyHelper
 import com.example.spendwise.utils.NotificationScheduler
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -44,8 +49,11 @@ class MainActivity : AppCompatActivity() {
         private const val KEY_ACTIVE_TAB = "key_active_tab"
     }
 
+    private val viewModel: MainViewModel by viewModels()
     private lateinit var navController: NavController
     private var pendingAddExpense = false
+    private var pendingPresetIsIncome = false
+    private var pendingOpenBudgetSheet = false
     private var activeTabTag = TAG_HOME
 
     private val requestNotificationPermissionLauncher = registerForActivityResult(
@@ -285,6 +293,8 @@ class MainActivity : AppCompatActivity() {
                 .start()
         }
 
+        checkWidgetIntent()
+
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.welcomeFragment -> {
@@ -305,14 +315,14 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            if (destination.id == R.id.homeFragment && pendingAddExpense) {
-                pendingAddExpense = false
-                bottomNav.selectedItemId = R.id.homeFragment
-                navController.navigate(R.id.action_home_to_addExpense)
+            if (destination.id == R.id.homeFragment) {
+                handlePendingWidgetNavigation(bottomNav)
             }
         }
 
-        checkWidgetIntent()
+        if (navController.currentDestination?.id == R.id.homeFragment) {
+            handlePendingWidgetNavigation(bottomNav)
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -347,17 +357,71 @@ class MainActivity : AppCompatActivity() {
         setIntent(intent)
         checkWidgetIntent()
 
-        if (pendingAddExpense && navController.currentDestination?.id == R.id.homeFragment) {
-            pendingAddExpense = false
-            findViewById<BottomNavigationView>(R.id.bottom_navigation)?.selectedItemId = R.id.homeFragment
-            navController.navigate(R.id.action_home_to_addExpense)
+        if (!pendingAddExpense && !pendingOpenBudgetSheet) return
+
+        val currentDestId = navController.currentDestination?.id
+        if (currentDestId == R.id.addExpenseFragment || currentDestId == R.id.splitExpenseFragment) {
+            navController.popBackStack(R.id.homeFragment, false)
+        }
+
+        if (navController.currentDestination?.id == R.id.homeFragment) {
+            findViewById<BottomNavigationView>(R.id.bottom_navigation)?.let { bottomNav ->
+                handlePendingWidgetNavigation(bottomNav)
+            }
         }
     }
 
     private fun checkWidgetIntent() {
-        if (intent?.getBooleanExtra("open_add_expense", false) == true) {
-            intent.removeExtra("open_add_expense")
+        if (intent?.getBooleanExtra(WidgetUpdateHelper.EXTRA_OPEN_ADD_EXPENSE, false) == true) {
             pendingAddExpense = true
+            pendingPresetIsIncome = intent.getBooleanExtra(WidgetUpdateHelper.EXTRA_PRESET_IS_INCOME, false)
+            intent.removeExtra(WidgetUpdateHelper.EXTRA_OPEN_ADD_EXPENSE)
+            intent.removeExtra(WidgetUpdateHelper.EXTRA_PRESET_IS_INCOME)
         }
+        if (intent?.getBooleanExtra(WidgetUpdateHelper.EXTRA_OPEN_BUDGET_SHEET, false) == true) {
+            pendingOpenBudgetSheet = true
+            intent.removeExtra(WidgetUpdateHelper.EXTRA_OPEN_BUDGET_SHEET)
+        }
+    }
+
+    private fun handlePendingWidgetNavigation(bottomNav: BottomNavigationView) {
+        if (pendingAddExpense) {
+            pendingAddExpense = false
+            val presetIncome = pendingPresetIsIncome
+            pendingPresetIsIncome = false
+            bottomNav.selectedItemId = R.id.homeFragment
+            val args = Bundle().apply {
+                putBoolean(WidgetUpdateHelper.EXTRA_PRESET_IS_INCOME, presetIncome)
+            }
+            navController.navigate(R.id.action_home_to_addExpense, args)
+        } else if (pendingOpenBudgetSheet) {
+            pendingOpenBudgetSheet = false
+            bottomNav.selectedItemId = R.id.homeFragment
+            showMonthlyBudgetSheet()
+        }
+    }
+
+    private fun showMonthlyBudgetSheet() {
+        if (supportFragmentManager.findFragmentByTag(MonthlyBudgetBottomSheet.TAG) != null) return
+        val prefs = getSharedPreferences(SpendWiseApp.PREFS_NAME, Context.MODE_PRIVATE)
+        MonthlyBudgetBottomSheet.newInstance(
+            onSave = { value ->
+                prefs.edit { putFloat("monthly_budget", value) }
+                val msg = if (value > 0f) {
+                    "Budget set to ${CurrencyHelper.format(this, value.toDouble())}"
+                } else {
+                    "Budget limit removed"
+                }
+                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+                viewModel.refreshMonthFilter()
+                WidgetUpdateHelper.updateAllWidgets(this)
+            },
+            onRemove = {
+                prefs.edit { putFloat("monthly_budget", 0f) }
+                Toast.makeText(this, "Budget limit removed", Toast.LENGTH_SHORT).show()
+                viewModel.refreshMonthFilter()
+                WidgetUpdateHelper.updateAllWidgets(this)
+            }
+        ).show(supportFragmentManager, MonthlyBudgetBottomSheet.TAG)
     }
 }

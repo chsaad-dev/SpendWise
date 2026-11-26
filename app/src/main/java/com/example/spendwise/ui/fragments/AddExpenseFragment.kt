@@ -344,7 +344,8 @@ class AddExpenseFragment : Fragment() {
                 }
             }
         } else {
-            updateMode(false)
+            val presetIsIncome = arguments?.getBoolean("preset_is_income", false) ?: false
+            updateMode(presetIsIncome)
         }
 
         val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, day ->

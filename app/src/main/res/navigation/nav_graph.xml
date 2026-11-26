@@ -45,6 +45,10 @@
             android:name="expenseId"
             app:argType="integer"
             android:defaultValue="-1" />
+        <argument
+            android:name="preset_is_income"
+            app:argType="boolean"
+            android:defaultValue="false" />
         <action
             android:id="@+id/action_addExpense_to_split"
             app:destination="@id/splitExpenseFragment"

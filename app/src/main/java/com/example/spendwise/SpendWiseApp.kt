@@ -2,6 +2,7 @@ package com.example.spendwise
 
 import android.app.Application
 import android.content.Context
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.spendwise.utils.NotificationHelper
 import com.google.android.material.color.DynamicColors
@@ -15,6 +16,15 @@ class SpendWiseApp : Application() {
 
         val themeMode = getSavedThemeMode(this)
         applyThemeMode(themeMode)
+
+        WidgetUpdateHelper.updateAllWidgets(this)
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        if (getSavedThemeMode(this) == THEME_SYSTEM) {
+            WidgetUpdateHelper.updateAllWidgets(this)
+        }
     }
 
     companion object {
